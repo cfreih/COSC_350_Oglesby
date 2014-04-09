@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>280</x>
+      <y>119</y>
+      <w>434</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>_Calculation Utility class &lt;control class&gt;_
+--
+--
++&lt;static&gt; calcSimilarity(painting:Painting, paintings:BinarySearchTree): double
++&lt;static&gt; findMostSimilarPainting(painting:Painting, paintings:BinarySearchTree): AuctionRecord
++&lt;static&gt; calcMaxPrice(auctionRed:AuctionRecord, paintings:BinarySearchTree): double
+-&lt;static&gt; calcMaxMasterpiece(auctionRed:AuctionRecord, paintings:BinarySearchTree): double
+-&lt;static&gt; calcMaxMasterwork(auctionRed:AuctionRecord, paintings:BinarySearchTree): double
+-&lt;static&gt; calcMaxOther(auctionRed:AuctionRecord, paintings:BinarySearchTree): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>350</y>
+      <w>301</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>_Handle Inventory class &lt;control class&gt;_
+--
+--
++&lt;static&gt; createInventory(record:InventoryRecord): void
++&lt;static&gt; retrieveInventory(sqlStatement: String): BinarySearchTree
++&lt;static&gt; updateInventory(record:InventoryRecord): void
++&lt;static&gt; deleteInventory(record:InventoryRecord): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>637</x>
+      <y>350</y>
+      <w>294</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>_Handle Auction Records &lt;control class&gt;_
+--
+--
++&lt;static&gt; createAuction(record:AuctionRecord): void
++&lt;static&gt; retrieveAuction(sqlStatement: String): BinarySearchTree
++&lt;static&gt; updateAuction(record:AuctionRecord): void
++&lt;static&gt; deleteAuction(record:AuctionRecord): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>434</x>
+      <y>21</y>
+      <w>77</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Control Classes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>448</x>
+      <y>0</y>
+      <w>48</w>
+      <h>34</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>21;21;35;21</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>322</x>
+      <y>350</y>
+      <w>287</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
+--
+--
++&lt;static&gt; createArtist(artist:Artist): void
++&lt;static&gt; retrieveArtist(sqlStatement: String): BinarySearchTree
++&lt;static&gt; updateArtist(artist:Artist): void
++&lt;static&gt; deleteArtist(artist:Artist): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

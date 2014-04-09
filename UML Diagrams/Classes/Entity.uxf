@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>240</x>
+      <y>160</y>
+      <w>272</w>
+      <h>384</h>
+    </coordinates>
+    <panel_attributes>_Paintings class &lt;entity class&gt;_
+--
+-artistFirstName: String
+-artistLastName: String
+-titleOfWork: String
+-dateOfWork: int
+-classification: int
+-heightCM: double
+-widthCM: double
+-medium: int/String ???????????????
+-subject: int/String ???????????????
+--
++setArtistFirstName(a: String): void
++getArtistFirstName(): String
++setArtistLastName(a: String):void
++getArtistLastName(): String
++setTitleOfWork(a: String): void
++getTitleOfWork(): String
++setDateOfWork(date: int): void
++getDateOfWork(): int
++setClassification(classID: int): void
++getClassification(): int
++setHeightCM(height: double): void
++getHeightCM(): double
++setWidthCM(width: double): void
++getWidthCM(): double
++setMedium(med: int/String????): void
++getMedium(): int/String?????
++setSubject(subj: int/String????): void
++getSubject(): int/String?????</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>576</x>
+      <y>184</y>
+      <w>208</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>_Artist class &lt;entity class&gt;_
+--
+-artistFirstName: String
+-artistLastName: String
+-fashionabilityConstant: int
+--
++setArtistFirstName(first: String): void
++getArtistFirstName(): String
++setArtistLastName(last: String): void
++getArtistLastName(): String
++setFashionabilityConstant(fashConst: int): void
++getFashionabilityConstant(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>112</x>
+      <y>648</y>
+      <w>232</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>_Auction Painting class &lt;entity class&gt;_
+--
+-salePriceAuction: double
+-dateOfSaleAuction: Date
+--
++setSalePriceAuction(price: double): void
++getSalePriceAcution(): double
++setDateOfSaleAuction(dateSale: Date): void
++getDateOfSaleAuction(): Date
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>464</x>
+      <y>632</y>
+      <w>264</w>
+      <h>456</h>
+    </coordinates>
+    <panel_attributes>_Inventory Painting class &lt;entity class&gt;_
+--
+-sellerName: String
+-sellerAddress: String
+-dateOfPurchase: Date
+-maxPurchasePrice: double
+-actualPurchasePrice: double
+-targetSellPrice: double
+-soldYesOrNo: boolean
+-dateOfSale:Date
+-buyerName: String
+-buyerAddress: String
+-actualSellingPrice: double
+--
++setSellerName(name: String): void
++getSellerName(): String
++setSellerAddress(address: String): void
++getSellerAddress(): String
++setDateOfPurchase(datePurch: Date): void
++getDateOfPurchase(): Date
++getMaxPurchasePrice(): double
++setActualPurchasePrice(purchPrice: double): void
++getActualPurchasePrice(): double
+#calcTargetSellPrice(): void
++getTargetSellPrice(): double
++setSoldYesOrNo(sold: boolean): void
++getSoldYesOrNo(): boolean
++setDateOfSale(date: Date): void
++getDateOfSale(): date
++setBuyerName(name: String): void
++getBuyerName(): String
++setBuyerAddress(address: String): void
++getBuyerAddress(): String
++setActualSellingPrice(price: double): void
++getActualSellingPrice(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>344</x>
+      <y>520</y>
+      <w>224</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;24;80;208;80;208;112</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>152</x>
+      <y>576</y>
+      <w>232</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>24;72;24;24;216;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>504</x>
+      <y>0</y>
+      <w>88</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Entity Classes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>56</y>
+      <w>128</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>24;24;112;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>120</x>
+      <y>1280</y>
+      <w>256</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>_Bought in Last Year Painting class &lt;entity class&gt;_
+--
+-maxAndActualRatio: double
+//flag is for if it should be flagged in report
+-flag: boolean 
+--
++getMaxAndActualRatio(): double
+-calcMaxAndActualRatio(): void
++getFlag(): boolean
+-calcFlag(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>464</x>
+      <y>1280</y>
+      <w>248</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>_Sold in Last Year Painting class &lt;entity class&gt;_
+--
+-targetAndActualRatio: double
+//flag is for if it should be flagged in repor
+-flag: boolean
+--
++getTargetAndAtualRatio(): double
+-calcTargetAndActualRatio(): void
++getFlag(): boolean
+-calcFlag(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>520</x>
+      <y>1064</y>
+      <w>40</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;24;216</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>264</x>
+      <y>1184</y>
+      <w>296</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>280;24;24;24;24;96</additional_attributes>
+  </element>
+</diagram>
