@@ -18,8 +18,8 @@
 -classification: int
 -heightCM: double
 -widthCM: double
--medium: int/String ???????????????
--subject: int/String ???????????????
+-medium: String
+-subject: String
 --
 +setArtistFirstName(a: String): void
 +getArtistFirstName(): String
@@ -35,10 +35,10 @@
 +getHeightCM(): double
 +setWidthCM(width: double): void
 +getWidthCM(): double
-+setMedium(med: int/String????): void
-+getMedium(): int/String?????
-+setSubject(subj: int/String????): void
-+getSubject(): int/String?????</panel_attributes>
++setMedium(med: String): void
++getMedium(): String
++setSubject(subj: String): void
++getSubject(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -46,7 +46,7 @@
     <coordinates>
       <x>576</x>
       <y>184</y>
-      <w>208</w>
+      <w>256</w>
       <h>144</h>
     </coordinates>
     <panel_attributes>_Artist class &lt;entity class&gt;_
