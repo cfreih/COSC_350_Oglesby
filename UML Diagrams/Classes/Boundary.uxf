@@ -58,28 +58,31 @@
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>320</x>
-      <y>152</y>
-      <w>336</w>
-      <h>232</h>
+      <y>120</y>
+      <w>400</w>
+      <h>272</h>
     </coordinates>
     <panel_attributes>_GUI class &lt;boundary class&gt;_
 --
--mainMenu: JFrame
+-mainMenu: JPanel
 -updateAuctionRecordsMenuButton: JButton
--updateAuctionRecordsMenuFrame: JFrame
+-updateAuctionRecordsMenuFrame: JPanel
 -sellAndUpdateLOOMenuButton: JButton
--sellAndUpdateLOOMenuFrame: JFrame
+-sellAndUpdateLOOMenuFrame: JPanel
 -buyLOOMenuButton: JButton
--buyLOOMenuFrame: JFrame
--updateArtistFashionabilityMenu: JButton
--reportsMenu: JFrame
--buyOption: JOptionPain
+-buyLOOMenuFrame: JPanel
+-updateArtistFashionabilityMenuButton: JButton
+-updateArtistFashionabilityMenuFrame: JPanel
+-reportsMenuButton: JButton
+-reportsMenuFrame: JPanel
+-buyOption: JOptionPane
 --
-+actionPerformer(e: ActionEvent): void
++setUpMenu(): void
++actionPerformed(e: ActionEvent): void
 +registerListenrs(): void
-+getBuyLOOMenu(): JFrame
-+popUpBoughtReport(boughtPaintings: BinarySearchTree): void
-+popUpSoldReport(soldPaintings: BinarySearchTree): void
++getBuyLOOMenu(): JPanel
++popUpBoughtReport(boughtPaintings: BinarySearchTree, ratio: double): void
++popUpSoldReport(soldPaintings: BinarySearchTree, ratio: double): void
 +popUpTrendsReport(trendingPaintings: BinarySearchTree): void
 
 </panel_attributes>
