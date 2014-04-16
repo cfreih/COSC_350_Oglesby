@@ -5,9 +5,9 @@
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>256</x>
-      <y>160</y>
+      <y>128</y>
       <w>272</w>
-      <h>384</h>
+      <h>416</h>
     </coordinates>
     <panel_attributes>_Paintings class &lt;entity class&gt;_
 --
@@ -38,7 +38,9 @@
 +setMedium(med: String): void
 +getMedium(): String
 +setSubject(subj: String): void
-+getSubject(): String</panel_attributes>
++getSubject(): String
++toString(): String
++equals(p: Painting): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
