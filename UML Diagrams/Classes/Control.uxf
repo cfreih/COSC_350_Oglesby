@@ -4,7 +4,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
+      <x>315</x>
       <y>119</y>
       <w>434</w>
       <h>98</h>
@@ -23,41 +23,43 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
+      <x>35</x>
       <y>350</y>
       <w>301</w>
       <h>77</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
+_&lt;abstract&gt;_
 --
 --
-+&lt;static&gt; createInventory(record:InventoryRecord): void
-+&lt;static&gt; retrieveInventory(sqlStatement: String): BinarySearchTree
-+&lt;static&gt; updateInventory(record:InventoryRecord): void
-+&lt;static&gt; deleteInventory(record:InventoryRecord): void</panel_attributes>
++&lt;static&gt; createInventoryRecord(record:InventoryRecord): void
++&lt;static&gt; retrieveInventoryRecords(searchTerm: String): InventoryRecord[]
++&lt;static&gt; updateInventoryRecord(record:InventoryRecord): void
++&lt;static&gt; deleteInventoryRecord(record:InventoryRecord): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>637</x>
+      <x>672</x>
       <y>350</y>
-      <w>294</w>
+      <w>315</w>
       <h>77</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
+_&lt;abstract&gt;_
 --
 --
-+&lt;static&gt; createAuction(record:AuctionRecord): void
-+&lt;static&gt; retrieveAuction(sqlStatement: String): BinarySearchTree
-+&lt;static&gt; updateAuction(record:AuctionRecord): void
-+&lt;static&gt; deleteAuction(record:AuctionRecord): void</panel_attributes>
++&lt;static&gt; createAuctionRecord(record:AuctionRecord): void
++&lt;static&gt; retrieveAuctionRecords(searchTerm: String): AuctionRecord[]
++&lt;static&gt; updateAuctionRecord(record:AuctionRecord): void
++&lt;static&gt; deleteAuctionRecords(record:AuctionRecord): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>434</x>
+      <x>469</x>
       <y>21</y>
       <w>77</w>
       <h>70</h>
@@ -68,7 +70,7 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>448</x>
+      <x>483</x>
       <y>0</y>
       <w>48</w>
       <h>34</h>
@@ -79,16 +81,17 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>322</x>
+      <x>357</x>
       <y>350</y>
       <w>287</w>
       <h>77</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
+_&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; createArtist(artist:Artist): void
-+&lt;static&gt; retrieveArtist(sqlStatement: String): BinarySearchTree
++&lt;static&gt; retrieveArtists(searchTerm: String): Artist[]
 +&lt;static&gt; updateArtist(artist:Artist): void
 +&lt;static&gt; deleteArtist(artist:Artist): void</panel_attributes>
     <additional_attributes/>
