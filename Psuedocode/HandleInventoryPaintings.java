@@ -4,9 +4,19 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is created in the database
   public static void createInventoryPainting(InventoryPainting inventory)
   {
-    String statement = "SQL CREATE statement" //actual SQL statement will be completed in next step
-    statement += inventory.toString()
+    int painterID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1)) 
+    String statement = "INSERT INTO inventory_paintings(painterID, titleOfWork, dateOfWork, classification, "
+     + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
+     + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale,"
+      +" buyerName, buyerAddress, actualSellingPrice) VALUES('" + painterID
+      + "','" + inventory.getTitleOfWork() + "','" + inventory.getDateOfWork() + "','" + inventory.getHeightCM() + 
+      "','" + inventory.getWidthCM() + "','" + inventory.getMedium() + "','" + inventory.getSubject()
+      + "','" + inventory.getSellerName() + "','" + inventory.getSellerAddress + "','" + inventory.getDateOfPurchase().toString() 
+      + "','" + inventory.getMaxPurchasePrice() + "','" + inventory.getActualPurchasePrice() + "','" + inventory.getTargetSellPrice()
+      + "','" + inventory.getSoldYesOrNo() + "','" + inventory.getDateOfSale.toString() + "','" + inventory.getBuyerName()
+      + "','" + inventory.getBuyerAddress() + "','" + inventory.getActualSellingPrice() +  "')"
     SQLConnector connection = new SQLConnector(1, statement)
+    connection.executeSQLQuery()
   }
   //Desc: method searches the database and retrieves any matching records. 
   // Search terms only a Date object
@@ -18,10 +28,10 @@ public abstract class HandleInventoryPaintings
     String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID 
+     + " FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID"
      + " WHERE sold=1 and dateOfSale > " + date + " Order by lastName" 
     SQLConnector connection = new SQLConnector(0, statement)
-    Vector result = connector.executeSQLQuery()
+    Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
     loadResults(inventoryPaintings, result)
     return inventoryPaintings.toArray()
@@ -43,7 +53,7 @@ public abstract class HandleInventoryPaintings
     }
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
-    Vector result = connector.executeSQLQuery()
+    Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
     loadResults(inventoryPaintings, result)
     return inventoryPaintings.toArray()
@@ -60,7 +70,7 @@ public abstract class HandleInventoryPaintings
     statement += stringify(auction)
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
-    Vector result = connector.executeSQLQuery()
+    Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
     loadResults(inventoryPaintings, result)
     return inventoryPaintings.toArray()
@@ -239,8 +249,9 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is deleted in the database
   public static void deleteInventoryPainting(InventoryPainting inventory)
   {
-    String statement = "SQL DELETE statement" //actual SQL statement will be completed in next step
-    statement += inventory.toString() 
+    String statement = "DELETE FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID"
+    statement += stringify(inventory)
     SQLConnector connection = new SQLConnector(1, statement)
+    connection.executeSQLQuery()
   }
 }

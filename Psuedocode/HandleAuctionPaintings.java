@@ -4,9 +4,14 @@ public abstract class HandleAuctionPaintings
   //Post: an AuctionPainting is created in the database
   public static void createAuctionPainting(AuctionPainting auction)
   {
-    String statement = "SQL CREATE statement" //actual SQL statement will be completed in next step
-    statement += auction.toString()
+    int painterID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1)) 
+    String statement = "INSERT INTO auction_paintings(painterID, titleOfWork, dateOfWork, classification, "
+     + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale) VALUES('" + painterID
+      + "','" + auction.getTitleOfWork() + "','" + auction.getDateOfWork() + "','" + 
+      auction.getHeightCM() + "','" + auction.getWidthCM() + "','" + auction.getMedium() + "','" + auction.getSubject()
+      + "','" + auction.getAuctionSalePrice() + "','" + auction.getAuctionDateOfSale.toString() + "')"
     SQLConnector connection = new SQLConnector(1, statement)
+    connection.executeSQLQuery()
   }
   //Desc: method searches the database and retrieves any matching records.
   // Search terms are passed in as an AuctionPainting with fields intialized if they are search terms
@@ -19,7 +24,7 @@ public abstract class HandleAuctionPaintings
     statement += stringify(auction)
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
-    Vector result = connector.executeSQLQuery()
+    Vector result = connection.executeSQLQuery()
     ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>()
     loadResults(auctionPaintings, result)
     return auctionPaintings.toArray()
@@ -124,8 +129,9 @@ public abstract class HandleAuctionPaintings
   //Post: an AuctionPainting is deleted in the database
   public static void deleteAuctionPainting(AuctionPainting auction)
   {
-    String statement = "SQL DELETE statement" //actual SQL statement will be completed in next step
-    statement += auction.toString()
+    String statement = "DELETE FROM painters INNER JOIN auction_paintings ON painters.painterID= auction_paintings.painterID"
+    statement += stringify(auction)
     SQLConnector connection = new SQLConnector(1, statement)
+    connection.executeSQLQuery()
   }
 }
