@@ -11,7 +11,6 @@ public class Painting {
 	private String artistLastName
 	private String titleOfWork
 	private int dateOfWOrk
-	private int classification
 	private double heightCM
 	private double widthCM
 	private String medium
@@ -27,26 +26,25 @@ public class Painting {
 		artistFirstName = ""
 		artistLastName = ""
 		titleOfWork = ""
-		dateOfWOrk = -1
-		classification = -1
+		dateOfWork = -1
 		heightCM = -1.0
 		widthCM = -1.0
 		medium = ""
 		subject = ""
 	}
+	
 	/**
 	 * Desc:  All arg constructor for painting
 	 * Post:  Painting is initalized with the fields
 	 * 		  being set with the proper parameters
 	 */
-	public Painting(String firstName, String lastName, String title, int date, int classif,
+	public Painting(String firstName, String lastName, String title, int date,
 			double height, double width, String med, String subj)
 	{
 		artistFirstName = firstName
 		artistLastName = lastName
 		titleOfWork = title
-		dateOfWOrk = date
-		classification = classif
+		dateOfWork = date
 		heightCM = height
 		widthCM = width
 		medium = med
@@ -145,25 +143,6 @@ public class Painting {
 	public int getDateOfWork()
 	{
 		return dateOfWork
-	}
-	
-	/**
-	 * Desc:  sets the painting's classification to classID
-	 * Pre:	  the classification has been converted to an int
-	 * Post:  classification is set to classID
-	 */
-	public void setClassification(int classID)
-	{
-		classification = classID
-	}
-	
-	/**
-	 * Desc:  returns the painting's classification
-	 * Return:the painting's classification
-	 */
-	public int getClassification()
-	{
-		return classification
 	}
 	
 	/**
