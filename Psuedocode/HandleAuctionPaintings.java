@@ -1,16 +1,16 @@
-public abstract class HandleAuctionRecords
+public abstract class HandleAuctionPaintings
 {
-  //Desc: method creates an AuctionRecord in the database
-  //Post: an AuctionRecord is created in the database
-  public static void createAuctionRecord(AuctionRecord auction)
+  //Desc: method creates an AuctionPainting in the database
+  //Post: an AuctionPainting is created in the database
+  public static void createAuctionPainting(AuctionPainting auction)
   {
     String statement = "SQL CREATE statement" //actual SQL statement will be completed in next step
     statement += auction.toString()
     SQLConnector connection = new SQLConnector(1, statement)
   }
   //Desc: method searches the database and retrieves any matching records. Search terms are passed in as a String
-  //Return: returns an AuctionRecord array, with elements matching search terms
-  public static AuctionRecord[] retrieveAuctionRecords(AuctionRecord auction) //if string is empty, will bring all
+  //Return: returns an AuctionPainting array, with elements matching search terms
+  public static AuctionPainting[] retrieveAuctionPaintings(AuctionPainting auction) //if string is empty, will bring all
   {
     String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale FROM painters INNER"
@@ -19,7 +19,7 @@ public abstract class HandleAuctionRecords
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connector.executeSQLQuery()
-    ArrayList<AuctionRecord> auctionRecords = new ArrayList<AuctionRecord>()
+    ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>()
     for(int i = 0; i < result.size(); i++)
     {
       String firstName = result.get(i++)
@@ -32,15 +32,16 @@ public abstract class HandleAuctionRecords
       String subject = result.get(i++)
       double auctionSalePrice = Double.parseDouble(result.get(i++))
       Date auctionDateOfSale = Date.parse(result.get(i))
-      auctionRecords.add(firstName, lastName, titleOfWork, dateOfWork, classification, heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale)
+      auctionPaintings.add(firstName, lastName, titleOfWork, dateOfWork, classification, heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale)
     }
-    return auctionRecords.toArray()
+    return auctionPaintings.toArray()
   }  
-  //Desc: method converts an AuctionRecord into a String
+  //Desc: method converts an AuctionPainting into a String
   //Return: returns a String for the SQL statement
-  private static String stringify(AuctionRecord auction)
+  private static String stringify(AuctionPainting auction)
   {
     String result = ""
+    int i = 0
     boolean[] flags = new boolean[9]
     int painterID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1))
     String titleOfWork = auction.getTitleOfWork()
@@ -51,54 +52,54 @@ public abstract class HandleAuctionRecords
     String subject = auction.getSubject()
     double auctionSalePrice = auction.getAuctionSalePrice()
     Date auctionDateOfSale = auction.getAuctionDateOfSale()                                       
-    if(painterID == -1) flags[0] = true
+    if(painterID == -1) flags[i++] = true
     else result += "WHERE painterID ='" + painterID + "'"
-    if(titleOfWork == null || titleOfWork.equals("")) flags[1] = true
+    if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
+      if(checkArray(flags, i++)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
       else result += "AND titleOfWork ='" + titleOfWork + "'"
     }
-    if(dateOfWork == -1) flags[2] = true
+    if(dateOfWork == -1) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
+      if(checkArray(flags, i++)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
       else result += "AND dateOfWork ='" + dateOfWork + "'"
     }
-    if(classification == null || classification.equals("")) flags[3] = true
+    if(classification == null || classification.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE classification ='" + classification + "'"
+      if(checkArray(flags, i++)) result += "WHERE classification ='" + classification + "'"
       else result += "AND classification ='" + classification + "'"
     }
-    if(widthCM < 0) flags[4] = true
+    if(widthCM < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE widthCM ='" + widthCM + "'"
+      if(checkArray(flags, i++)) result += "WHERE widthCM ='" + widthCM + "'"
       else result += "AND widthCM ='" + widthCM + "'"
     }
-    if(medium == null || medium.equals("")) flags[5] = true
+    if(medium == null || medium.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE medium ='" + medium + "'"
+      if(checkArray(flags, i++)) result += "WHERE medium ='" + medium + "'"
       else result += "AND medium ='" + medium + "'"
     }
-    if(subject == null || subject.equals("")) flags[6] = true
+    if(subject == null || subject.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE subject ='" + subject + "'"
+      if(checkArray(flags, i++)) result += "WHERE subject ='" + subject + "'"
       else result += "AND subject ='" + subject + "'"
     }
-    if(auctionSalePrice < 0) flags[7] = true
+    if(auctionSalePrice < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE auctionSalePrice ='" + auctionSalePrice + "'"
+      if(checkArray(flags, i++)) result += "WHERE auctionSalePrice ='" + auctionSalePrice + "'"
       else result += "AND auctionSalePrice ='" + auctionSalePrice + "'"
     }
-    if(auctionDateOfSale == null) flags[8] = true
+    if(auctionDateOfSale == null) flags[i] = true
     else
     {
-      if(checkArray(flags, i)) result += "WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
+      if(checkArray(flags, i++)) result += "WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
       else result += "AND auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
     }
     return result
@@ -114,17 +115,17 @@ public abstract class HandleAuctionRecords
     }
     return true
   }
-  //Desc: method updates an AuctionRecord in the database
-  //Post: an AuctionRecord is updated in the database
-  public static void updateAuctionRecord(AuctionRecord auction)
+  //Desc: method updates an AuctionPainting in the database
+  //Post: an AuctionPainting is updated in the database
+  public static void updateAuctionPainting(AuctionPainting auction)
   {
     String statement = "SQL UPDATE statement" //actual SQL statement will be completed in next step
     statement += auction.toString()
     SQLConnector connection = new SQLConnector(1, statement)
   }
-  //Desc: method deletes an AuctionRecord in the database
-  //Post: an AuctionRecord is deleted in the database
-  public static void deleteAuctionRecord(AuctionRecord auction)
+  //Desc: method deletes an AuctionPainting in the database
+  //Post: an AuctionPainting is deleted in the database
+  public static void deleteAuctionPainting(AuctionPainting auction)
   {
     String statement = "SQL DELETE statement" //actual SQL statement will be completed in next step
     statement += auction.toString()
