@@ -53,6 +53,16 @@ public abstract class HandleArtist
     }
     return result
   }
+  //Desc: method finds and returns the PainterID of an Artist
+  //Return: returns the PainterID as an int
+  public static int getArtistID(Artist artist)
+  {
+    String statement = "SELECT painterID FROM painters "
+    statement += stringify(artist)
+    SQLConnector connection = new SQLConnector(0, statement)
+    Vector result = connector.executeSQLQuery()
+    return result.get(i)
+  }
   //Desc: method updates an Artist in the database
   //Post: an artist is updated in the database
   public static void updateArtist(Artist artist)
