@@ -235,9 +235,9 @@
         <text>Exit</text>
       </controlProperties>
     </control>
-    <control controlID="84" controlTypeID="com.balsamiq.mockups::Button" x="63" y="379" w="180" h="27" measuredW="115" measuredH="27" zOrder="47" locked="false" isInGroup="-1">
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::Button" x="63" y="379" w="180" h="27" measuredW="107" measuredH="27" zOrder="47" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Thrends%20Report</text>
+        <text>Trends%20Report</text>
       </controlProperties>
     </control>
   </controls>

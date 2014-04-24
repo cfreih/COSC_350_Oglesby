@@ -1,6 +1,6 @@
 <mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="3861" measuredH="1138" mockupW="3822" mockupH="1097">
   <controls>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="477" w="604" h="238" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="477" w="604" h="193" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Manage%20Auction%20Records</text>
       </controlProperties>
@@ -10,9 +10,9 @@
         <text>See%20All%20Paintings%20in%20Auction%20Records</text>
       </controlProperties>
     </control>
-    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="63" y="560" w="328" h="27" measuredW="279" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="63" y="560" w="328" h="27" measuredW="323" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Modify%20Existing%20Painting%20in%20Auction%20Records</text>
+        <text>Modify/Delete%20Existing%20Painting%20in%20Auction%20Records</text>
       </controlProperties>
     </control>
     <control controlID="12" controlTypeID="com.balsamiq.mockups::Paragraph" x="391" y="545" w="196" h="57" measuredW="275" measuredH="80" zOrder="3" locked="false" isInGroup="-1">
@@ -326,7 +326,7 @@
         <text>Save%20Changes</text>
       </controlProperties>
     </control>
-    <control controlID="75" controlTypeID="com.balsamiq.mockups::Button" x="2891" y="1066" w="105" h="27" measuredW="64" measuredH="27" zOrder="66" locked="false" isInGroup="-1">
+    <control controlID="75" controlTypeID="com.balsamiq.mockups::Button" x="2922" y="1066" w="105" h="27" measuredW="64" measuredH="27" zOrder="66" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Cancel</text>
       </controlProperties>
@@ -356,114 +356,59 @@
         <text>%20%20%20Auction%20Painting%20New%20Info%20%28Values%20left%20blanck%20will%20not%20be%20modified%29</text>
       </controlProperties>
     </control>
-    <control controlID="81" controlTypeID="com.balsamiq.mockups::Button" x="63" y="643" w="328" h="27" measuredW="226" measuredH="27" zOrder="72" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Delete%20Painting%20in%20Auction%20Records</text>
-      </controlProperties>
-    </control>
-    <control controlID="82" controlTypeID="com.balsamiq.mockups::Paragraph" x="391" y="628" w="196" h="57" measuredW="275" measuredH="80" zOrder="73" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>%20%0A%20%20%28Requieres%20Artist%20First%20Name%2C%20%0A%20%20%20Last%20Name%20%26%20Title%20of%20Work%29</text>
-      </controlProperties>
-    </control>
-    <control controlID="83" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="744" w="480" h="273" measuredW="450" measuredH="400" zOrder="74" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Delete%20Painting%20to%20Auction%20Records</text>
-      </controlProperties>
-    </control>
-    <control controlID="84" controlTypeID="com.balsamiq.mockups::TextInput" x="55" y="817" w="428" h="-1" measuredW="79" measuredH="26" zOrder="75" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="85" controlTypeID="com.balsamiq.mockups::Label" x="55" y="796" w="90" h="-1" measuredW="77" measuredH="21" zOrder="76" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>%20%20%20Last%20Name</text>
-      </controlProperties>
-    </control>
-    <control controlID="86" controlTypeID="com.balsamiq.mockups::Label" x="40" y="772" w="120" h="-1" measuredW="71" measuredH="21" zOrder="77" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>%20%20%20Artist%20Info</text>
-      </controlProperties>
-    </control>
-    <control controlID="87" controlTypeID="com.balsamiq.mockups::Label" x="55" y="846" w="90" h="-1" measuredW="72" measuredH="21" zOrder="78" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>%20%20First%20Name</text>
-      </controlProperties>
-    </control>
-    <control controlID="88" controlTypeID="com.balsamiq.mockups::TextInput" x="55" y="870" w="428" h="-1" measuredW="79" measuredH="26" zOrder="79" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="89" controlTypeID="com.balsamiq.mockups::Button" x="55" y="953" w="136" h="27" measuredW="112" measuredH="27" zOrder="80" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Delete%20Painting</text>
-      </controlProperties>
-    </control>
-    <control controlID="90" controlTypeID="com.balsamiq.mockups::Button" x="329" y="953" w="105" h="27" measuredW="64" measuredH="27" zOrder="81" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Cancel</text>
-      </controlProperties>
-    </control>
-    <control controlID="91" controlTypeID="com.balsamiq.mockups::Label" x="48" y="896" w="90" h="-1" measuredW="83" measuredH="21" zOrder="82" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>%20%20Title%20of%20Work</text>
-      </controlProperties>
-    </control>
-    <control controlID="92" controlTypeID="com.balsamiq.mockups::TextInput" x="55" y="917" w="428" h="-1" measuredW="79" measuredH="26" zOrder="83" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text/>
-      </controlProperties>
-    </control>
-    <control controlID="93" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="41" w="-1" h="-1" measuredW="450" measuredH="400" zOrder="84" locked="false" isInGroup="-1">
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="41" w="-1" h="-1" measuredW="450" measuredH="400" zOrder="72" locked="false" isInGroup="-1">
       <controlProperties>
         <text>LOO%20</text>
       </controlProperties>
     </control>
-    <control controlID="94" controlTypeID="com.balsamiq.mockups::Button" x="63" y="82" w="180" h="27" measuredW="96" measuredH="27" zOrder="85" locked="false" isInGroup="-1">
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::Button" x="63" y="82" w="180" h="27" measuredW="96" measuredH="27" zOrder="73" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Buy%20Painting</text>
       </controlProperties>
     </control>
-    <control controlID="95" controlTypeID="com.balsamiq.mockups::Button" x="63" y="124" w="180" h="27" measuredW="95" measuredH="27" zOrder="86" locked="false" isInGroup="-1">
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::Button" x="63" y="124" w="180" h="27" measuredW="95" measuredH="27" zOrder="74" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Sell%20Painting</text>
       </controlProperties>
     </control>
-    <control controlID="96" controlTypeID="com.balsamiq.mockups::Button" x="63" y="166" w="180" h="27" measuredW="113" measuredH="27" zOrder="87" locked="false" isInGroup="-1">
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::Button" x="63" y="166" w="180" h="27" measuredW="113" measuredH="27" zOrder="75" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Manage%20Artists</text>
       </controlProperties>
     </control>
-    <control controlID="97" controlTypeID="com.balsamiq.mockups::Button" x="63" y="295" w="180" h="27" measuredW="124" measuredH="27" zOrder="88" locked="false" isInGroup="-1">
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::Button" x="63" y="295" w="180" h="27" measuredW="124" measuredH="27" zOrder="76" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Sold%20in%20Last%20Year</text>
       </controlProperties>
     </control>
-    <control controlID="98" controlTypeID="com.balsamiq.mockups::Button" x="63" y="337" w="180" h="27" measuredW="140" measuredH="27" zOrder="89" locked="false" isInGroup="-1">
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::Button" x="63" y="337" w="180" h="27" measuredW="140" measuredH="27" zOrder="77" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Bought%20in%20Last%20Year</text>
       </controlProperties>
     </control>
-    <control controlID="99" controlTypeID="com.balsamiq.mockups::Button" x="63" y="208" w="181" h="27" measuredW="170" measuredH="27" zOrder="90" locked="false" isInGroup="-1">
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::Button" x="63" y="208" w="181" h="27" measuredW="170" measuredH="27" zOrder="78" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Manage%20Auction%20Records</text>
       </controlProperties>
     </control>
-    <control controlID="100" controlTypeID="com.balsamiq.mockups::Button" x="63" y="250" w="181" h="27" measuredW="128" measuredH="27" zOrder="91" locked="false" isInGroup="-1">
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::Button" x="63" y="250" w="181" h="27" measuredW="128" measuredH="27" zOrder="79" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Manage%20Inventory</text>
       </controlProperties>
     </control>
-    <control controlID="101" controlTypeID="com.balsamiq.mockups::Button" x="353" y="352" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="92" locked="false" isInGroup="-1">
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::Button" x="353" y="352" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="80" locked="false" isInGroup="-1">
       <controlProperties>
         <text>Exit</text>
       </controlProperties>
     </control>
-    <control controlID="102" controlTypeID="com.balsamiq.mockups::Button" x="63" y="379" w="180" h="27" measuredW="115" measuredH="27" zOrder="93" locked="false" isInGroup="-1">
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::Button" x="63" y="379" w="180" h="27" measuredW="107" measuredH="27" zOrder="81" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Thrends%20Report</text>
+        <text>Trends%20Report</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Button" x="2786" y="1066" w="114" h="27" measuredW="112" measuredH="27" zOrder="82" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete%20Painting</text>
       </controlProperties>
     </control>
   </controls>
