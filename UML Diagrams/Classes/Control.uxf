@@ -96,4 +96,30 @@ _&lt;abstract&gt;_
 +&lt;static&gt; deleteArtist(artist:Artist): void</panel_attributes>
     <additional_attributes/>
   </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>357</x>
+      <y>469</y>
+      <w>294</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_SQLConnector class &lt;control class&gt;_
+--
+-DATABASE_URL: String
+-connection: Connection
+-statement: Statement
+-resultSet: ResultSet
+-sqlStatement: String
+-query: int
+-update: int
+
+
+
+--
++executeSQL_Query(a:String): Vector
++executeSQL_Query(a:String): int
++processQuerryResult(r:ResultSet):Vector </panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>
