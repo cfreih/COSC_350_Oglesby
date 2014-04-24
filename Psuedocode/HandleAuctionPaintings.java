@@ -58,63 +58,52 @@ public abstract class HandleAuctionPaintings
     if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
       else result += "AND titleOfWork ='" + titleOfWork + "'"
     }
     if(dateOfWork == -1) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
       else result += "AND dateOfWork ='" + dateOfWork + "'"
     }
     if(classification == null || classification.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE classification ='" + classification + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE classification ='" + classification + "'"
       else result += "AND classification ='" + classification + "'"
     }
     if(widthCM < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE widthCM ='" + widthCM + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE widthCM ='" + widthCM + "'"
       else result += "AND widthCM ='" + widthCM + "'"
     }
     if(medium == null || medium.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE medium ='" + medium + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE medium ='" + medium + "'"
       else result += "AND medium ='" + medium + "'"
     }
     if(subject == null || subject.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE subject ='" + subject + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE subject ='" + subject + "'"
       else result += "AND subject ='" + subject + "'"
     }
     if(auctionSalePrice < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE auctionSalePrice ='" + auctionSalePrice + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE auctionSalePrice ='" + auctionSalePrice + "'"
       else result += "AND auctionSalePrice ='" + auctionSalePrice + "'"
     }
     if(auctionDateOfSale == null) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
       else result += "AND auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
     }
     return result
-  }
-  //Desc: method to interate through flags and return boolean value
-  //Return: returns true if all are true, false if any are false
-  private static boolean checkArray(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
-  {
-    if(count > flags.length - 1 || count < 0) throw ArrayIndexOutOfBoundsException
-    for(int i = 0; i <= count; i++)
-    {
-      if(!flags[i]) return false
-    }
-    return true
   }
   //Desc: method updates an AuctionPainting in the database
   //Post: an AuctionPainting is updated in the database

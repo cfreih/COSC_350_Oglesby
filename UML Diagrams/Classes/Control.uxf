@@ -37,7 +37,6 @@ _&lt;abstract&gt;_
 +&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting): InventoryPainting[]
 +&lt;static&gt; loadResults(paintings: ArrayList&lt;InventoryPainting&gt;, result: Vector): void
 +&lt;static&gt; stringify(inventory: InventoryPainting): String
-+&lt;static&gt; cheackFlags(flags: boolean[]): boolean
 +&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting): void
 +&lt;static&gt; deleteInventoryPainting(inventory:InventoryPainting): void</panel_attributes>
     <additional_attributes/>
@@ -57,7 +56,6 @@ _&lt;abstract&gt;_
 +&lt;static&gt; createAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; retrieveAuctionPaintings(searchTerm: AuctionPainting): AuctionPainting[]
 +&lt;static&gt; stringify(auction: AuctionPainting): String
-+&lt;static&gt; cheackFlags(flags: boolean[]): boolean
 +&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; deleteAuctionPainting(auction:AuctionPainting): void</panel_attributes>
     <additional_attributes/>
@@ -128,6 +126,22 @@ _&lt;abstract&gt;_
 +executeSQL_Query(a:String): Vector
 +executeSQL_Query(a:String): int
 +processQuerryResult(r:ResultSet):Vector </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>714</x>
+      <y>553</y>
+      <w>343</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_Handler Utility&lt;control class&gt;_
+_&lt;abstract&gt;_
+--
+--
++&lt;static&gt; dateToInt(d:Date): int
++&lt;static&gt; cheackFlags(flags: boolean[]): boolean</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

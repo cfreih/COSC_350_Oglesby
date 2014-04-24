@@ -14,11 +14,7 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintingsInLastYear(InventoryPainting inventory)
   {
-    Date d = inventory.getDateOfSale()
-    int date = 0
-    date += d.getYear() * 10000
-    date += d.getMonth() * 100
-    date += d.getDay()
+    int date = HandlerUtility.dateToInt(inventory.getDateOfSale())
     String statement = "SELECT lastName, firstName, sold, dateOfSale FROM painters INNER JOIN inventory_paintings ON"
       + " painters.painterID = inventory_paintings.painterID WHERE sold=1 and dateOfSale > " + date + " Order by lastName" 
     SQLConnector connection = new SQLConnector(0, statement)
@@ -105,117 +101,106 @@ public abstract class HandleInventoryPaintings
     if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
       else result += "AND titleOfWork ='" + titleOfWork + "'"
     }
     if(dateOfWork == -1) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
       else result += "AND dateOfWork ='" + dateOfWork + "'"
     }
     if(classification == null || classification.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE classification ='" + classification + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE classification ='" + classification + "'"
       else result += "AND classification ='" + classification + "'"
     }
     if(heightCM < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE classification ='" + classification + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE classification ='" + classification + "'"
       else result += "AND classification ='" + classification + "'"
     }
     if(widthCM < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE widthCM ='" + widthCM + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE widthCM ='" + widthCM + "'"
       else result += "AND widthCM ='" + widthCM + "'"
     }
     if(medium == null || medium.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE medium ='" + medium + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE medium ='" + medium + "'"
       else result += "AND medium ='" + medium + "'"
     }
     if(subject == null || subject.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE subject ='" + subject + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE subject ='" + subject + "'"
       else result += "AND subject ='" + subject + "'"
     }
     if(sellerName == null ||  sellerName.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE sellerName ='" + sellerName + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE sellerName ='" + sellerName + "'"
       else result += "AND sellerName ='" + sellerName + "'"
     }
     if(sellerAddresseOfSale == null || sellerAddress.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE sellerAddress ='" + sellerAddress + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE sellerAddress ='" + sellerAddress + "'"
       else result += "AND sellerAddress ='" + sellerAddress + "'"
     }
     if(dateOfPurchase == null) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE dateOfPurchase ='" + dateOfPurchase.toString() + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE dateOfPurchase ='" + dateOfPurchase.toString() + "'"
       else result += "AND dateOfPurchase ='" + dateOfPurchase.toString() + "'"
     }
     if(maxPurchasePrice < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE maxPurchasePrice ='" + maxPurchasePrice + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE maxPurchasePrice ='" + maxPurchasePrice + "'"
       else result += "AND maxPurchasePrice ='" + maxPurchasePrice + "'"
     }
     if(actualPurchasePrice < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE actualPurchasePrice ='" + actualPurchasePrice + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE actualPurchasePrice ='" + actualPurchasePrice + "'"
       else result += "AND actualPurchasePrice ='" + actualPurchasePrice + "'"
     }
     if(targetSellPrice < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE targetSellPrice ='" + targetSellPrice + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE targetSellPrice ='" + targetSellPrice + "'"
       else result += "AND targetSellPrice ='" + targetSellPrice + "'"
     }
     if(dateOfSale == null) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE dateOfSale ='" + dateOfSale + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE dateOfSale ='" + dateOfSale + "'"
       else result += "AND dateOfSale ='" + dateOfSale + "'"
     }
     if(buyerName == null || buyerName.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE buyerName ='" + buyerName + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE buyerName ='" + buyerName + "'"
       else result += "AND buyerName ='" + buyerName + "'"
     }
     if(buyerAddress == null || buyerAddress.equals("")) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE buyerAddress ='" + buyerAddress + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE buyerAddress ='" + buyerAddress + "'"
       else result += "AND buyerAddress ='" + buyerAddress + "'"
     }
     if(actualSellingPrice < 0) flags[i] = true
     else
     {
-      if(checkArray(flags, i++)) result += "WHERE actualSellingPrice ='" + actualSellingPrice + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE actualSellingPrice ='" + actualSellingPrice + "'"
       else result += "AND actualSellingPrice ='" + actualSellingPrice + "'"
     }
     return result
-  }
-  //Desc: method to interate through flags and return boolean value
-  //Return: returns true if all are true, false if any are false
-  private static boolean checkArray(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
-  {
-    if(count > flags.length - 1 || count < 0) throw ArrayIndexOutOfBoundsException
-    for(int i = 0; i <= count; i++)
-    {
-      if(!flags[i]) return false
-    }
-    return true
   }
   //Desc: method updates an InventoryPainting in the database
   //Post: an InventoryPainting is updated in the database
