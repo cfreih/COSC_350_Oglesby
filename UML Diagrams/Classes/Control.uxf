@@ -4,7 +4,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>315</x>
+      <x>280</x>
       <y>119</y>
       <w>434</w>
       <h>98</h>
@@ -23,10 +23,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>35</x>
+      <x>0</x>
       <y>350</y>
       <w>476</w>
-      <h>154</h>
+      <h>133</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -45,10 +45,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>959</x>
+      <x>924</x>
       <y>350</y>
       <w>399</w>
-      <h>154</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -65,7 +65,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>469</x>
+      <x>434</x>
       <y>21</y>
       <w>77</w>
       <h>70</h>
@@ -76,7 +76,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>483</x>
+      <x>448</x>
       <y>0</y>
       <w>48</w>
       <h>34</h>
@@ -87,10 +87,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>532</x>
+      <x>497</x>
       <y>350</y>
       <w>413</w>
-      <h>154</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -108,7 +108,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>357</x>
+      <x>322</x>
       <y>553</y>
       <w>294</w>
       <h>140</h>
@@ -134,7 +134,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>714</x>
+      <x>679</x>
       <y>553</y>
       <w>343</w>
       <h>140</h>

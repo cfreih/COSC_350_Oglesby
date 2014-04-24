@@ -77,21 +77,52 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			setUpUpdateAuctionRecordsMenuPanel()
 			changePanelToUpdateAuctionRecordsMenuPanel()
+			selectAuctionPainting()
+			if(Update Selected)
+				updateChangedAttributes()
+			if(Delete Selected)
+				deletedAuctionPainting()
 		}
 		if(e.getSource() == sellAndUpdateLOOMenuButton)
 		{
 			setUpSellAndUpdateLOOMenuPanel()
 			changePanelToSellAndUpdateLOOMenuPanel()
+			selectInventoryPainting()
+			if(Fields Changed && UpdateButton Pressed)
+			{
+				updateInventoryPainting()
+				updateDatabaseWhenConfirmed()
+			}
+			if(Delete Painting Pressed)
+				deleteInventoryPainting
+			if(Sell Painting Pressed)
+			{
+				getReleventInfoForSale()
+				updateInventoryPaintingForSale()
+			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
 		{
 			setUpBuyLOOMenuPanel()
 			changePanelToBuyLOOMenuPanel()
+			InventoryPainting p = getReleventPaintingInfo()
+			calcMaxPrice(p)
+			displayMaxPriceWithBuyOption()
+			if(Bought selected)
+			{
+				getReleventInfo()
+				setRemaingFieldsForInventoryPainting()
+			}
 		}
 		if(e.getSource() == updateArtistFashionabilityMenuButton)
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
 			changePanleToUpdateArtistFashionabilityMenuPanel()
+			selectAnArtist()
+			if(fields changed)
+				updateArtist()
+			if(delete pressed)
+				deleteArtist()
 		}
 		if(e.getSource() == reportsMenuButton)
 		{
@@ -120,7 +151,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	 * @param boughtPaintings
 	 * @param ratio
 	 */
-	public void popUpBoughtReport(BinarySearchTree<InventoryPainting> boughtPaintings, double ratio)
+	public void popUpBoughtReport(InventoryPainting[] boughtPaintings, double ratio)
 	{
 		double pages = (double)boughtPaintings.size() / 20.0
 		if(pages%1 != 0)
@@ -131,6 +162,7 @@ public class OOGUI extends JPanel implements ActionListener{
 			tabbedPane.addTab(Page i+1 of boughtReport)  
 		}
 		displayAvgRatioAtEnd(ratio)
+		print20BoughtPaintingsPerTab()
 	}
 	
 	/**
@@ -139,7 +171,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	 * @param soldPaintings
 	 * @param ratio
 	 */
-	public void popUpBoughtReport(BinarySearchTree<InventoryPainting> soldPaintings, double ratio)
+	public void popUpSoldReport(InventoryPainting[] soldPaintings, double ratio)
 	{
 		double pages = (double)soldPaintings.size() / 20.0
 		if(pages%1 != 0)
@@ -150,15 +182,15 @@ public class OOGUI extends JPanel implements ActionListener{
 			tabbedPane.addTab(Page i+1 of soldReport)  
 		}
 		displayAvgRatioAtEnd(ratio)
+		print20SoldReportPaintingsPerTab()
 	}
 	
 	/**
 	 * Desc:  Pops up the Trending Artist Reports
 	 * Post:  sold Paintings report is pops up in a window
 	 * @param soldPaintings
-	 * @param ratio
 	 */
-	public void popUpBoughtReport(BinarySearchTree<InventoryPainting> trendingPaintings)
+	public void popUpBoughtReport(InventoryPainting[] trendingPaintings)
 	{
 		double pages = (double)trendingPaintings.size() / 20.0
 		if(pages%1 != 0)
@@ -168,5 +200,6 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			tabbedPane.addTab(Page i+1 of trendReport)  
 		}
+		print20TrendingPaintingsPerTab()
 	}
 }
