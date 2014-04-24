@@ -8,7 +8,8 @@ public abstract class HandleArtist
     statement += artist.toString()
     SQLConnector connection = new SQLConnector(1, statement)
   }
-  //Desc: method searches the database and retrieves any matching records. Search terms are passed in as a String
+  //Desc: method searches the database and retrieves any matching records.
+  // Search terms are passed in as an Artist with fields intialized if they are search terms
   //Return: returns an Artist array, with elements matching search terms
   public static Artist[] retrieveArtists(Artist artist) //if string is empty, will bring all
   {

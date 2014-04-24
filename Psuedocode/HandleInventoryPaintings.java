@@ -8,7 +8,27 @@ public abstract class HandleInventoryPaintings
     statement += inventory.toString()
     SQLConnector connection = new SQLConnector(1, statement)
   }
-  //Desc: method searches the database and retrieves any matching records. Search terms are passed in as a String
+  //Desc: method searches the database and retrieves any matching records. 
+  // Search terms are passed in as an InventoryPainting with fields intialized if they are search terms
+  // Is a special case for the FindSoldPaintings class.
+  //Return: returns an InventoryPainting array, with elements matching search terms
+  public static InventoryPainting[] retrieveInventoryPaintingsInLastYear(InventoryPainting inventory)
+  {
+    Date d = inventory.getDateOfSale()
+    int date = 0
+    date += d.getYear() * 10000
+    date += d.getMonth() * 100
+    date += d.getDay()
+    String statement = "SELECT lastName, firstName, sold, dateOfSale FROM painters INNER JOIN inventory_paintings ON"
+      + " painters.painterID = inventory_paintings.painterID WHERE sold=1 and dateOfSale > " + date + " Order by lastName" 
+    SQLConnector connection = new SQLConnector(0, statement)
+    Vector result = connector.executeSQLQuery()
+    ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
+    loadResults(inventoryPaintings, result)
+    return inventoryPaintings.toArray()
+  }
+  //Desc: method searches the database and retrieves any matching records. 
+  // Search terms are passed in as an InventoryPainting with fields intialized if they are search terms
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
   {
@@ -21,6 +41,13 @@ public abstract class HandleInventoryPaintings
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connector.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
+    loadResults(inventoryPaintings, result)
+    return inventoryPaintings.toArray()
+  }
+  //Desc: method to parse results from SQL database back into InventoryPaintings
+  //Post: ArrayList is loaded with results from SQL database
+  public static void loadResults(ArrayList<InventoryPainting> inventoryPaintings, Vector result)
+  {
     for(int i = 0; i < result.size(); i++)
     {
       String firstName = result.get(i++)
@@ -47,7 +74,6 @@ public abstract class HandleInventoryPaintings
                            subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice, actualPurchasePrice, 
                            targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice)
     }
-    return inventoryPaintings.toArray()
   }
   //Desc: method converts an InventoryPainting into a String. Flags are set to true if the value is uninitialized.
   //Return: returns a String for the SQL statement

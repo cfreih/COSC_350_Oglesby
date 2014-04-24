@@ -8,7 +8,8 @@ public abstract class HandleAuctionPaintings
     statement += auction.toString()
     SQLConnector connection = new SQLConnector(1, statement)
   }
-  //Desc: method searches the database and retrieves any matching records. Search terms are passed in as a String
+  //Desc: method searches the database and retrieves any matching records.
+  // Search terms are passed in as an AuctionPainting with fields intialized if they are search terms
   //Return: returns an AuctionPainting array, with elements matching search terms
   public static AuctionPainting[] retrieveAuctionPaintings(AuctionPainting auction) //if string is empty, will bring all
   {

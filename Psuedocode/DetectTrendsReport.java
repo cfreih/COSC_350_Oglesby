@@ -5,7 +5,7 @@ public class DetectTrendsReport extends FindSoldPaintings
   //Return: returns a String array with the artists names from the last year as elements
   public String[] findTrendingArtists()
   {
-    HashMap<String, int> artistHash = new HashMap<String, int>()
+    HashMap<String, Integer> artistHash = new HashMap<String, Integer>()
     for(int i in this.soldPaintings)
     {
       String key = this.soldPaintings.getLastName()+'\n'+this.soldPaintings.getFirstName()
@@ -33,6 +33,6 @@ public class DetectTrendsReport extends FindSoldPaintings
       temp.setLastName(names[0])
       temp.setFirstName(names[1])
     }
-    return handleInventoryPaintings.retrieveInventoryPaintings(trendingArtists.toString())
+    return handleInventoryPaintings.retrieveInventoryPaintings(paintings.toArray()) //needs to be able to get before
   }
 }
