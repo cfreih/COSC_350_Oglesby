@@ -25,35 +25,39 @@
     <coordinates>
       <x>35</x>
       <y>350</y>
-      <w>301</w>
-      <h>77</h>
+      <w>392</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
-+&lt;static&gt; createInventoryRecord(record:InventoryRecord): void
-+&lt;static&gt; retrieveInventoryRecords(searchTerm: String): InventoryRecord[]
-+&lt;static&gt; updateInventoryRecord(record:InventoryRecord): void
-+&lt;static&gt; deleteInventoryRecord(record:InventoryRecord): void</panel_attributes>
++&lt;static&gt; createInventoryRecord(inventory:InventoryRecord): void
++&lt;static&gt; retrieveInventoryRecords(inventory: InventoryRecord): InventoryRecord[]
++&lt;static&gt; stringify(inventory: InventoryRecord): String
++&lt;static&gt; cheackFlags(flags: boolean[]): boolean
++&lt;static&gt; updateInventoryRecord(inventory:InventoryRecord): void
++&lt;static&gt; deleteInventoryRecord(inventory:InventoryRecord): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>672</x>
+      <x>826</x>
       <y>350</y>
       <w>315</w>
-      <h>77</h>
+      <h>154</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
-+&lt;static&gt; createAuctionRecord(record:AuctionRecord): void
-+&lt;static&gt; retrieveAuctionRecords(searchTerm: String): AuctionRecord[]
-+&lt;static&gt; updateAuctionRecord(record:AuctionRecord): void
-+&lt;static&gt; deleteAuctionRecords(record:AuctionRecord): void</panel_attributes>
++&lt;static&gt; createAuctionRecord(auction:AuctionRecord): void
++&lt;static&gt; retrieveAuctionRecords(searchTerm: AuctionRecord): AuctionRecord[]
++&lt;static&gt; stringify(auction: AuctionRecord): String
++&lt;static&gt; cheackFlags(flags: boolean[]): boolean
++&lt;static&gt; updateAuctionRecord(auction:AuctionRecord): void
++&lt;static&gt; deleteAuctionRecords(auction:AuctionRecord): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -81,10 +85,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>357</x>
+      <x>476</x>
       <y>350</y>
       <w>287</w>
-      <h>77</h>
+      <h>154</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -92,6 +96,8 @@ _&lt;abstract&gt;_
 --
 +&lt;static&gt; createArtist(artist:Artist): void
 +&lt;static&gt; retrieveArtists(searchTerm: String): Artist[]
++&lt;static&gt; stringify(inventory: InventoryRecord): String
++&lt;static&gt; getArtistID(artist: Artist): int
 +&lt;static&gt; updateArtist(artist:Artist): void
 +&lt;static&gt; deleteArtist(artist:Artist): void</panel_attributes>
     <additional_attributes/>
@@ -100,7 +106,7 @@ _&lt;abstract&gt;_
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>357</x>
-      <y>469</y>
+      <y>553</y>
       <w>294</w>
       <h>140</h>
     </coordinates>
