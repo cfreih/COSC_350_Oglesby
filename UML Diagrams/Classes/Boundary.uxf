@@ -32,8 +32,8 @@
 --
 -targetAndActualRatioSum: double
 --
-+getTargetAndActualRatioSum(): double
--calcTargetAndActualRatioSum(): void</panel_attributes>
++getTargetAndActualRatio(): double
+-calcTargetAndActualRatio(): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -48,7 +48,7 @@
 --
 --
 +findTrendingArtists(): String[]
-+getFullTrendsReport(trendingArtists: String[]): AuctionRecord[]</panel_attributes>
++getFullTrendsReport(trendingArtists: String[]): InventoryPainting[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -130,9 +130,9 @@ Classes</panel_attributes>
     <panel_attributes>_Find Sold Paintings Class &lt;boundary class&gt;_
 _&lt;abstract&gt;_
 --
--soldPaintings: AuctionRecord[]
+-soldPaintings: InventoryPainting[]
 --
-+findSoldInLastYear(): AuctionRecord[]</panel_attributes>
++findSoldInLastYear(): InventoryPainting[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -32,12 +32,12 @@
 _&lt;abstract&gt;_
 --
 --
-+&lt;static&gt; createInventoryRecord(inventory:InventoryRecord): void
-+&lt;static&gt; retrieveInventoryRecords(inventory: InventoryRecord): InventoryRecord[]
-+&lt;static&gt; stringify(inventory: InventoryRecord): String
++&lt;static&gt; createInventoryPainting(inventory:InventoryPainting): void
++&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting): InventoryPainting[]
++&lt;static&gt; stringify(inventory: InventoryPainting): String
 +&lt;static&gt; cheackFlags(flags: boolean[]): boolean
-+&lt;static&gt; updateInventoryRecord(inventory:InventoryRecord): void
-+&lt;static&gt; deleteInventoryRecord(inventory:InventoryRecord): void</panel_attributes>
++&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting): void
++&lt;static&gt; deleteInventoryPainting(inventory:InventoryPainting): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -52,12 +52,12 @@ _&lt;abstract&gt;_
 _&lt;abstract&gt;_
 --
 --
-+&lt;static&gt; createAuctionRecord(auction:AuctionRecord): void
-+&lt;static&gt; retrieveAuctionRecords(searchTerm: AuctionRecord): AuctionRecord[]
-+&lt;static&gt; stringify(auction: AuctionRecord): String
++&lt;static&gt; createAuctionPainting(auction:AuctionPainting): void
++&lt;static&gt; retrieveAuctionPaintings(searchTerm: AuctionPainting): AuctionPainting[]
++&lt;static&gt; stringify(auction: AuctionPainting): String
 +&lt;static&gt; cheackFlags(flags: boolean[]): boolean
-+&lt;static&gt; updateAuctionRecord(auction:AuctionRecord): void
-+&lt;static&gt; deleteAuctionRecords(auction:AuctionRecord): void</panel_attributes>
++&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
++&lt;static&gt; deleteAuctionPainting(auction:AuctionPainting): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

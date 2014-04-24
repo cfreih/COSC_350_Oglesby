@@ -1,14 +1,14 @@
 public class SoldPaintingsReport extends FindSoldPaintings
 {
   private double targetAndActualRatio
-  //Desc: method to get the value of the targetAndActualRatioSum
-  //Return: returns the targetAndActualRatioSum as a double
+  //Desc: method to get the value of the targetAndActualRatio
+  //Return: returns the targetAndActualRatio as a double
   public double getTargetAndActualRatio()
   {
     return targetAndActualRatio
   }
-  //Desc: method to calculate the value of the targetAndActualRatioSum
-  //Post: the targetAndActualRatioSum is calculated and stored
+  //Desc: method to calculate the value of the targetAndActualRatio
+  //Post: the targetAndActualRatio is calculated and stored
   private void calcTargetAndActualRatio()
   {
     double sum = 0

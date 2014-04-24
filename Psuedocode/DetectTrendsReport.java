@@ -8,7 +8,7 @@ public class DetectTrendsReport extends FindSoldPaintings
     HashMap<String, int> artistHash = new HashMap<String, int>()
     for(int i in this.soldPaintings)
     {
-      String key = this.soldPaintings.getLastName()+this.soldPaintings.getFirstName()
+      String key = this.soldPaintings.getLastName()+'\n'+this.soldPaintings.getFirstName()
       artistHash.put(key, artistHash.get(key) + 1)
     }
     String[] keySet = artistHash.keySet().toArray()
@@ -21,10 +21,18 @@ public class DetectTrendsReport extends FindSoldPaintings
     return trendingArtists.toArray()
   }
   //Desc: method uses the handler to get the information needed for the trend report.
-  //Return: returns an IntentoryRecord array loaded with the information matching the artists
+  //Return: returns an IntentoryPainting array loaded with the information matching the artists
   // names passed to the database
-  public InventoryRecord[] getFullTrendsReport(String[] trendingArtists)
+  public InventoryPainting[] getFullTrendsReport(String[] trendingArtists)
   {
-    return handleInventoryRecords.retrieveInventoryRecords(trendingArtists.toString())
+    ArrayList<InventoryPainting> paintings = new ArrayList<InventoryPainting>()
+    for(int i = 0; i < trendingArtists.length; i++)
+    {
+      InventoryPainting temp = new InventoryPainting()
+      String[] names = trendingArtists[i].split("\n")
+      temp.setLastName(names[0])
+      temp.setFirstName(names[1])
+    }
+    return handleInventoryPaintings.retrieveInventoryPaintings(trendingArtists.toString())
   }
 }
