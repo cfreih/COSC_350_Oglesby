@@ -6,7 +6,6 @@
 
 public class Artist{
 	
-	private int artistID
 	private String firstName
 	private String lastName
 	private int fashionabilityCoeff
@@ -18,7 +17,9 @@ public class Artist{
 	public Artist(){
 		firstName=""
 		lastName=""
-		fashionabilityCoeff = 0
+		fashionabilityCoeff = -1
+	}
+	
 	/* Desc: All arg constructor initializing an Artist
 	   Pre:  Values are provied for each attribute 
 	   Post: All atributes is initialized firstName, lastName to the given values
@@ -28,11 +29,6 @@ public class Artist{
 		lastName=lName
 		fashionabilityCoeff = fCoeff
 	}	
-	/* Desc: Returns the ArtistID
-	   Return: ArtistID*/		
-	public int getArtistID(){
-		return artistID
-	}
 	
 	/* Desc: Returns the Artist First Name
 	   Return: Artist First Name*/		
@@ -50,12 +46,6 @@ public class Artist{
 	   Return: Artist Coefficient of Fashionability*/		
 	public int getFashionabilityCoeff(){
 		return f1ashionabilityCoeff
-	}
-	
-	/* Desc: Modifies the Artist ArtistID
-	   Post: Artist ArtistID is modified*/	
-		public void setArtistID(int id){
-		artistID=id
 	}
 	
 	/* Desc: Modifies the Artist First Name
