@@ -25,7 +25,7 @@
     <coordinates>
       <x>35</x>
       <y>350</y>
-      <w>434</w>
+      <w>476</w>
       <h>154</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
@@ -33,9 +33,10 @@ _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; createInventoryPainting(inventory:InventoryPainting): void
-+&lt;static&gt; retrieveInventoryPaintingsInLastYear(inventory: InventoryPainting): InventoryPainting[]
++&lt;static&gt; retrieveInventoryPaintings(d: Date): InventoryPainting[]
 +&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting): InventoryPainting[]
-+&lt;static&gt; loadResults(paintings: ArrayList&lt;InventoryPainting&gt;, result: Vector): void
++&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting[]): InventoryPainting[]
++&lt;static&gt; loadResults(inventoryPaintings: ArrayList&lt;InventoryPainting&gt;, result: Vector): void
 +&lt;static&gt; stringify(inventory: InventoryPainting): String
 +&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting): void
 +&lt;static&gt; deleteInventoryPainting(inventory:InventoryPainting): void</panel_attributes>
@@ -44,9 +45,9 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>826</x>
+      <x>959</x>
       <y>350</y>
-      <w>315</w>
+      <w>399</w>
       <h>154</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
@@ -55,6 +56,7 @@ _&lt;abstract&gt;_
 --
 +&lt;static&gt; createAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; retrieveAuctionPaintings(searchTerm: AuctionPainting): AuctionPainting[]
++&lt;static&gt; loadResults(auctionPaintings: ArrayList&lt;AuctionRecord&gt;, result: Vector): void
 +&lt;static&gt; stringify(auction: AuctionPainting): String
 +&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; deleteAuctionPainting(auction:AuctionPainting): void</panel_attributes>
@@ -85,9 +87,9 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>476</x>
+      <x>532</x>
       <y>350</y>
-      <w>343</w>
+      <w>413</w>
       <h>154</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
@@ -96,6 +98,7 @@ _&lt;abstract&gt;_
 --
 +&lt;static&gt; createArtist(artist:Artist): void
 +&lt;static&gt; retrieveArtists(searchTerm: String): Artist[]
++&lt;static&gt; loadResults(artists: ArrayList&lt;Artist&gt;, result: Vector): void
 +&lt;static&gt; stringify(inventory: InventoryRecord): String
 +&lt;static&gt; getArtistID(artist: Artist): int
 +&lt;static&gt; updateArtist(artist:Artist): void

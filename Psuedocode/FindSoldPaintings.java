@@ -6,9 +6,7 @@ public abstract class FindSoldPaintings
   public static void findSoldInLastYear()
   {
     Date d = new Date()
-    d.setYear(d.getYear - 1)
-    InventoryPainting temp = new InventoryPainting()
-    temp.setDateOfSale(d)
-    soldPaintings = HandleInventoryPaintings.retrieveInventoryPaintingsInLastYear(temp)
+    d.setYear(d.getYear() - 1)
+    soldPaintings = HandleInventoryPaintings.retrieveInventoryPaintingsInLastYear(d)
   }
 }

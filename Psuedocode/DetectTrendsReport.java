@@ -33,6 +33,6 @@ public class DetectTrendsReport extends FindSoldPaintings
       temp.setLastName(names[0])
       temp.setFirstName(names[1])
     }
-    return handleInventoryPaintings.retrieveInventoryPaintings(paintings.toArray()) //needs to be able to get before
+    return handleInventoryPaintings.retrieveInventoryPaintings(paintings.toArray())
   }
 }

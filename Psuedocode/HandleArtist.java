@@ -20,6 +20,13 @@ public abstract class HandleArtist
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connector.executeSQLQuery()
     ArrayList<Artist> artists = new ArrayList<Artist>()
+    loadResults(artists, result)
+    return artists.toArray()
+  }
+  //Desc: method to parse results from SQL database back into Artists
+  //Post: ArrayList is loaded with results from SQL database
+  public static void loadResults(ArrayList<Artist> artists, Vector result)
+  {
     for(int i = 0; i < result.size(); i++)
     {
       String firstName = result.get(i++)
@@ -27,7 +34,6 @@ public abstract class HandleArtist
       int fashionabilityConstant = Integer.parseInt(result.get(i))
       artists.add(lastName, firstName, fashionabilityConstant)
     }
-    return artists.toArray()
   }
   //Desc: method converts an Artist into a String
   //Return: returns a String for the SQL statement
@@ -39,18 +45,18 @@ public abstract class HandleArtist
     String firstName = artist.firstName
     int fashionability = artist.fashionabilityConstant
     if(lastName == null || lastName.equals("")) flags[0] = true
-    else result += "WHERE lastName ='" + lastName + "'"
+    else result += " WHERE lastName ='" + lastName + "'"
     if(firstName == null || firstName.equals("")) flags[1] = true
     else
     {
-      if(flags[0]) result += "WHERE firstName ='" + firstName + "'"
-      else result += "AND firstName ='" + firstName + "'"
+      if(flags[0]) result += " WHERE firstName ='" + firstName + "'"
+      else result += " AND firstName ='" + firstName + "'"
     }
     if(fashionability == -1) flags[2] = true
     else
     {
-      if(flags[0] && flags[1]) result += "WHERE fashionability ='" + fashionability + "'"
-      else result += "AND fashionability ='" + fashionability + "'"
+      if(flags[0] && flags[1]) result += " WHERE fashionability ='" + fashionability + "'"
+      else result += " AND fashionability ='" + fashionability + "'"
     }
     return result
   }

@@ -12,7 +12,7 @@ public abstract class HandlerUtility
   }
   //Desc: method to interate through flags and return boolean value
   //Return: returns true if all are true, false if any are false
-  private static boolean checkFlags(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
+  public static boolean checkFlags(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
   {
     if(count > flags.length - 1 || count < 0) throw ArrayIndexOutOfBoundsException
     for(int i = 0; i <= count; i++)

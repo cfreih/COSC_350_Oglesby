@@ -21,6 +21,13 @@ public abstract class HandleAuctionPaintings
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connector.executeSQLQuery()
     ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>()
+    loadResults(auctionPaintings, result)
+    return auctionPaintings.toArray()
+  }
+  //Desc: method to parse results from SQL database back into AuctionPaintings
+  //Post: ArrayList is loaded with results from SQL database
+  public static void loadResults(ArrayList<AuctionPainting> auctionPaintings, Vector result)
+  {
     for(int i = 0; i < result.size(); i++)
     {
       String firstName = result.get(i++)
@@ -33,10 +40,10 @@ public abstract class HandleAuctionPaintings
       String subject = result.get(i++)
       double auctionSalePrice = Double.parseDouble(result.get(i++))
       Date auctionDateOfSale = Date.parse(result.get(i))
-      auctionPaintings.add(firstName, lastName, titleOfWork, dateOfWork, classification, heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale)
+      auctionPaintings.add(firstName, lastName, titleOfWork, dateOfWork, classification,
+                           heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale)
     }
-    return auctionPaintings.toArray()
-  }  
+  }
   //Desc: method converts an AuctionPainting into a String
   //Return: returns a String for the SQL statement
   private static String stringify(AuctionPainting auction)
@@ -54,54 +61,54 @@ public abstract class HandleAuctionPaintings
     double auctionSalePrice = auction.getAuctionSalePrice()
     Date auctionDateOfSale = auction.getAuctionDateOfSale()                                       
     if(painterID == -1) flags[i++] = true
-    else result += "WHERE painterID ='" + painterID + "'"
+    else result += " WHERE painterID ='" + painterID + "'"
     if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE titleOfWork ='" + titleOfWork + "'"
-      else result += "AND titleOfWork ='" + titleOfWork + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE titleOfWork ='" + titleOfWork + "'"
+      else result += " AND titleOfWork ='" + titleOfWork + "'"
     }
     if(dateOfWork == -1) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE dateOfWork ='" + dateOfWork + "'"
-      else result += "AND dateOfWork ='" + dateOfWork + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfWork ='" + dateOfWork + "'"
+      else result += " AND dateOfWork ='" + dateOfWork + "'"
     }
     if(classification == null || classification.equals("")) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE classification ='" + classification + "'"
-      else result += "AND classification ='" + classification + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE classification ='" + classification + "'"
+      else result += " AND classification ='" + classification + "'"
     }
     if(widthCM < 0) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE widthCM ='" + widthCM + "'"
-      else result += "AND widthCM ='" + widthCM + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE widthCM ='" + widthCM + "'"
+      else result += " AND widthCM ='" + widthCM + "'"
     }
     if(medium == null || medium.equals("")) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE medium ='" + medium + "'"
-      else result += "AND medium ='" + medium + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE medium ='" + medium + "'"
+      else result += " AND medium ='" + medium + "'"
     }
     if(subject == null || subject.equals("")) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE subject ='" + subject + "'"
-      else result += "AND subject ='" + subject + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE subject ='" + subject + "'"
+      else result += " AND subject ='" + subject + "'"
     }
     if(auctionSalePrice < 0) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE auctionSalePrice ='" + auctionSalePrice + "'"
-      else result += "AND auctionSalePrice ='" + auctionSalePrice + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE auctionSalePrice ='" + auctionSalePrice + "'"
+      else result += " AND auctionSalePrice ='" + auctionSalePrice + "'"
     }
     if(auctionDateOfSale == null) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += "WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
-      else result += "AND auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
+      else result += " AND auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
     }
     return result
   }
