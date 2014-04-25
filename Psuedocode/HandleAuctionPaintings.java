@@ -122,8 +122,9 @@ public abstract class HandleAuctionPaintings
   public static void updateAuctionPainting(AuctionPainting auction, String titleOfWork)
   {
     String statement = "UPDATE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID "
-      + "SET firstName='" + artist.getFirstName() + "',lastName='" + artist.getLastName() + "'fashionability=,'" + artist.getFashionabilityCoeff()
-      + "' WHERE artistID = '" + artistID +"'"
+      + "SET artistID='" + HandleArtist.getArtistID(auction.getFirstName(), auction.getLastName(), -1) +
+      "',titleOfWork='" + auction.getTitleOfWork() + "'dateOfWork=,'" + artist.getDateOfWork()
+      + "' WHERE titleOfWork = '" + titleOfWork +"'"
     statement += artist.toString()
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()

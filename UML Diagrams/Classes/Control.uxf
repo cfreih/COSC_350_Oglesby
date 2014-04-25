@@ -55,7 +55,7 @@ _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; createAuctionPainting(auction:AuctionPainting): void
-+&lt;static&gt; retrieveAuctionPaintings(searchTerm: AuctionPainting): AuctionPainting[]
++&lt;static&gt; retrieveAuctionPaintings(auction: AuctionPainting): AuctionPainting[]
 +&lt;static&gt; loadResults(auctionPaintings: ArrayList&lt;AuctionRecord&gt;, result: Vector): void
 +&lt;static&gt; stringify(auction: AuctionPainting): String
 +&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
@@ -97,7 +97,7 @@ _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; createArtist(artist:Artist): void
-+&lt;static&gt; retrieveArtists(searchTerm: String): Artist[]
++&lt;static&gt; retrieveArtists(artist: Artist): Artist[]
 +&lt;static&gt; loadResults(artists: ArrayList&lt;Artist&gt;, result: Vector): void
 +&lt;static&gt; stringify(inventory: InventoryRecord): String
 +&lt;static&gt; getArtistID(artist: Artist): int
