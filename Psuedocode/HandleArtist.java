@@ -4,7 +4,7 @@ public abstract class HandleArtist
   //Post: an artist is created in the database
   public static void createArtist(Artist artist)
   {
-    String statement = "INSERT INTO painters(firstName, lastName, fashionability) VALUES('" + artist.getFirstName() + 
+    String statement = "INSERT INTO artists(firstName, lastName, fashionability) VALUES('" + artist.getFirstName() + 
       "','" + artist.getLastName() + "','" + artist.getFashionabilityCoeff() + "')"
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
@@ -14,8 +14,8 @@ public abstract class HandleArtist
   //Return: returns an Artist array, with elements matching search terms
   public static Artist[] retrieveArtists(Artist artist) //if string is empty, will bring all
   {
-    String statement = "SELECT firstName, lastName, fashionability FROM painters INNER"
-     + " JOIN auction_paintings ON painters.painterID= auction_paintings.painterID"
+    String statement = "SELECT firstName, lastName, fashionability FROM artists INNER"
+     + " JOIN auction_paintings ON artists.painterID= auction_paintings.painterID"
     statement += " " + stringify(artist)
     statement += " ORDER BY lastName, firstName"
     SQLConnector connection = new SQLConnector(0, statement)
@@ -65,7 +65,7 @@ public abstract class HandleArtist
   //Return: returns the PainterID as an int
   public static int getArtistID(Artist artist)
   {
-    String statement = "SELECT painterID FROM painters "
+    String statement = "SELECT painterID FROM artists "
     statement += stringify(artist)
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
@@ -75,10 +75,9 @@ public abstract class HandleArtist
   //Post: an artist is updated in the database
   public static void updateArtist(Artist artist, int painterID)
   {
-    String statement = "UPDATE painters SET firstName='" + artist.getFirstName() + 
+    String statement = "UPDATE artists SET firstName='" + artist.getFirstName() + 
       "',lastName='" + artist.getLastName() + "'fashionability=,'" + artist.getFashionabilityCoeff() + 
       "' WHERE painterID = '" + painterID +"'"
-    statement += artist.toString()
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
   }
@@ -86,7 +85,7 @@ public abstract class HandleArtist
   //Post: an artist is deleted in the database
   public static void deleteArtist(Artist artist)
   {
-    String statement = "DELETE FROM painters"
+    String statement = "DELETE FROM artists"
     statement += stringify(artist)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()

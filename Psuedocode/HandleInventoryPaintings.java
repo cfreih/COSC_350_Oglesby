@@ -28,7 +28,7 @@ public abstract class HandleInventoryPaintings
     String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID"
+     + " FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
      + " WHERE sold=1 and dateOfSale > " + date + " Order by lastName" 
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
@@ -45,7 +45,7 @@ public abstract class HandleInventoryPaintings
     String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID"
+     + " FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
     for(int i = 0; i < inventory.length; i++)
     {
       if(i != 0) statement += " OR"
@@ -66,7 +66,7 @@ public abstract class HandleInventoryPaintings
     String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID"
+     + " FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
     statement += stringify(auction)
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
@@ -249,7 +249,7 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is deleted in the database
   public static void deleteInventoryPainting(InventoryPainting inventory)
   {
-    String statement = "DELETE FROM painters INNER JOIN inventory_paintings ON painters.painterID= inventory_paintings.painterID"
+    String statement = "DELETE FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
     statement += stringify(inventory)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()

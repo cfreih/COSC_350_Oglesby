@@ -4,9 +4,9 @@ public abstract class HandleAuctionPaintings
   //Post: an AuctionPainting is created in the database
   public static void createAuctionPainting(AuctionPainting auction)
   {
-    int painterID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1)) 
-    String statement = "INSERT INTO auction_paintings(painterID, titleOfWork, dateOfWork, classification, "
-     + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale) VALUES('" + painterID
+    int artistID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1)) 
+    String statement = "INSERT INTO auction_paintings(artistID, titleOfWork, dateOfWork, classification, "
+     + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale) VALUES('" + artistID
       + "','" + auction.getTitleOfWork() + "','" + auction.getDateOfWork() + "','" + 
       auction.getHeightCM() + "','" + auction.getWidthCM() + "','" + auction.getMedium() + "','" + auction.getSubject()
       + "','" + auction.getAuctionSalePrice() + "','" + auction.getAuctionDateOfSale.toString() + "')"
@@ -18,9 +18,9 @@ public abstract class HandleAuctionPaintings
   //Return: returns an AuctionPainting array, with elements matching search terms
   public static AuctionPainting[] retrieveAuctionPaintings(AuctionPainting auction) //if string is empty, will bring all
   {
-    String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
-     + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale FROM painters INNER"
-     + " JOIN auction_paintings ON painters.painterID= auction_paintings.painterID"
+    String statement = "SELECT artistID, titleOfWork, dateOfWork, classification, "
+     + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale FROM artists INNER"
+     + " JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += stringify(auction)
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
@@ -56,7 +56,7 @@ public abstract class HandleAuctionPaintings
     String result = ""
     int i = 0
     boolean[] flags = new boolean[9]
-    int painterID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1))
+    int artistID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1))
     String titleOfWork = auction.getTitleOfWork()
     int dateOfWork = auction.getDateOfWork()
     double heightCM = auction.getHeightCM()
@@ -65,8 +65,8 @@ public abstract class HandleAuctionPaintings
     String subject = auction.getSubject()
     double auctionSalePrice = auction.getAuctionSalePrice()
     Date auctionDateOfSale = auction.getAuctionDateOfSale()                                       
-    if(painterID == -1) flags[i++] = true
-    else result += " WHERE painterID ='" + painterID + "'"
+    if(artistID == -1) flags[i++] = true
+    else result += " WHERE artistID ='" + artistID + "'"
     if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
     else
     {
@@ -119,17 +119,20 @@ public abstract class HandleAuctionPaintings
   }
   //Desc: method updates an AuctionPainting in the database
   //Post: an AuctionPainting is updated in the database
-  public static void updateAuctionPainting(AuctionPainting auction)
+  public static void updateAuctionPainting(AuctionPainting auction, String titleOfWork)
   {
-    String statement = "SQL UPDATE statement" //actual SQL statement will be completed in next step
-    statement += auction.toString()
+    String statement = "UPDATE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID "
+      + "SET firstName='" + artist.getFirstName() + "',lastName='" + artist.getLastName() + "'fashionability=,'" + artist.getFashionabilityCoeff()
+      + "' WHERE artistID = '" + artistID +"'"
+    statement += artist.toString()
     SQLConnector connection = new SQLConnector(1, statement)
+    connection.executeSQLQuery()
   }
   //Desc: method deletes an AuctionPainting in the database
   //Post: an AuctionPainting is deleted in the database
   public static void deleteAuctionPainting(AuctionPainting auction)
   {
-    String statement = "DELETE FROM painters INNER JOIN auction_paintings ON painters.painterID= auction_paintings.painterID"
+    String statement = "DELETE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += stringify(auction)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
