@@ -12,12 +12,12 @@
     <panel_attributes>_Calculation Utility class &lt;control class&gt;_
 --
 --
-+&lt;static&gt; calcSimilarity(painting:Painting, paintings:BinarySearchTree): double
-+&lt;static&gt; findMostSimilarPainting(painting:Painting, paintings:BinarySearchTree): AuctionPainting
-+&lt;static&gt; calcMaxPrice(auctionRed:AuctionRecord, paintings:BinarySearchTree): double
--&lt;static&gt; calcMaxMasterpiece(auctionRed:AuctionRecord, paintings:BinarySearchTree): double
--&lt;static&gt; calcMaxMasterwork(auctionRed:AuctionRecord, paintings:BinarySearchTree): double
--&lt;static&gt; calcMaxOther(auctionRed:AuctionRecord, paintings:BinarySearchTree): double</panel_attributes>
+-&lt;static&gt; calcSimilarity(painting:AuctionPainting, record:AuctionPainting): double
+-&lt;static&gt; findMostSimilarPainting(painting:InventoryPainting, records:AuctionPainting[]): AuctionPainting
++&lt;static&gt; calcMaxPrice(painting:InventoryPainting): double
+-&lt;static&gt; calcMaxMasterpiece(painting:InventoryPainting, records:AuctionPainting[]): double
+-&lt;static&gt; calcMaxMasterwork(painting:InventoryPainting, records:AuctionPainting[]): double
+-&lt;static&gt; calcMaxOther(painting:InventoryPainting, records:AuctionPainting[]): double</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
