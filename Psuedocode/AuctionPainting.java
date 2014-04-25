@@ -27,9 +27,9 @@ public class AuctionPainting extends Painting{
 	 * 		  being set with the proper parameters
 	 */
 	public Painting(String firstName, String lastName, String title, int date, int classif,
-			double height, double width, String med, String subj, double salePrice, Date date)
+			double height, double width, String med, String subj, int id double salePrice, Date date)
 	{
-		super(firstName, lastName, title, date, classif, height, width, med, subj)
+		super(firstName, lastName, title, date, classif, height, width, med, subj, id)
 		salePriceAuction = salePrice
 		dateOfSaleAuction = date
 	}
