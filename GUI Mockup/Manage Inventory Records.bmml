@@ -23,7 +23,7 @@
     </control>
     <control controlID="43" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="731" w="480" h="273" measuredW="450" measuredH="400" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Select%20Painting%20to%20Modify</text>
+        <text>Select%20Painting%20to%20Modify/Delete</text>
       </controlProperties>
     </control>
     <control controlID="44" controlTypeID="com.balsamiq.mockups::TextInput" x="55" y="804" w="428" h="-1" measuredW="79" measuredH="26" zOrder="6" locked="false" isInGroup="-1">
@@ -73,7 +73,7 @@
     </control>
     <control controlID="53" controlTypeID="com.balsamiq.mockups::TitleWindow" x="721" y="577" w="2704" h="1046" measuredW="450" measuredH="400" zOrder="15" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Add%20New%20Painting%20to%20Inventory%20Records</text>
+        <text>Modify/Delete%20Painting%20in%20Inventory%20Records</text>
       </controlProperties>
     </control>
     <control controlID="54" controlTypeID="com.balsamiq.mockups::TextInput" x="765" y="761" w="892" h="-1" measuredW="79" measuredH="26" zOrder="16" locked="false" isInGroup="-1">

@@ -168,7 +168,7 @@
     </control>
     <control controlID="43" controlTypeID="com.balsamiq.mockups::TitleWindow" x="2560" y="41" w="480" h="273" measuredW="450" measuredH="400" zOrder="34" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Select%20Painting%20to%20Modify</text>
+        <text>Select%20Painting%20to%20Modify/Delete</text>
       </controlProperties>
     </control>
     <control controlID="44" controlTypeID="com.balsamiq.mockups::TextInput" x="2576" y="114" w="428" h="-1" measuredW="79" measuredH="26" zOrder="35" locked="false" isInGroup="-1">

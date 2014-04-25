@@ -27,7 +27,7 @@
     </control>
     <control controlID="14" controlTypeID="com.balsamiq.mockups::TitleWindow" x="518" y="41" w="493" h="499" measuredW="450" measuredH="400" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>All%20Artist</text>
+        <text>All%20Artists</text>
       </controlProperties>
     </control>
     <control controlID="15" controlTypeID="com.balsamiq.mockups::DataGrid" x="536" y="84" w="449" h="381" measuredW="316" measuredH="381" zOrder="6" locked="false" isInGroup="-1">
@@ -43,7 +43,7 @@
     <control controlID="17" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="980" y="84" w="-1" h="381" measuredW="16" measuredH="100" zOrder="8" locked="false" isInGroup="-1"/>
     <control controlID="18" controlTypeID="com.balsamiq.mockups::TitleWindow" x="1040" y="41" w="480" h="236" measuredW="450" measuredH="400" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Select%20Artist</text>
+        <text>Select%20Artist%20to%20Modify/Delete</text>
       </controlProperties>
     </control>
     <control controlID="19" controlTypeID="com.balsamiq.mockups::TextInput" x="1056" y="114" w="428" h="-1" measuredW="79" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
