@@ -4,7 +4,7 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is created in the database
   public static void createInventoryPainting(InventoryPainting inventory)
   {
-    int artistID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1)) 
+    int artistID = HandleArtist.getArtistID(new Artist(inventory.getArtistFirstName(), inventory.getArtistLastName(), -1)) 
     String statement = "INSERT INTO inventory_paintings(artistID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale,"
@@ -29,7 +29,7 @@ public abstract class HandleInventoryPaintings
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
      + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
-     + " WHERE sold=1 and dateOfSale > " + date + " Order by lastName" 
+     + " WHERE sold=1 and dateOfSale > " + date + " Order by artistLastName" 
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
@@ -51,7 +51,7 @@ public abstract class HandleInventoryPaintings
       if(i != 0) statement += " OR"
       statement += stringify(inventory[i])
     }
-    statement += " ORDER BY lastName, firstName" //probably needs to be changed
+    statement += " ORDER BY artistLastName, artistArtistFirstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
@@ -68,7 +68,7 @@ public abstract class HandleInventoryPaintings
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
      + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
     statement += stringify(auction)
-    statement += " ORDER BY lastName, firstName" //probably needs to be changed
+    statement += " ORDER BY artistLastName, artistArtistFirstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
@@ -81,8 +81,8 @@ public abstract class HandleInventoryPaintings
   {
     for(int i = 0; i < result.size(); i++)
     {
-      String firstName = result.get(i++)
-      String lastName = result.get(i++)
+      String artistArtistFirstName = result.get(i++)
+      String artistLastName = result.get(i++)
       String titleOfWork = result.get(i++)
       int dateOfWork = Integer.parseInt(result.get(i++))
       int classification = Integer.parseInt(result.get(i++))
@@ -101,7 +101,7 @@ public abstract class HandleInventoryPaintings
       String buyerName = result.get(i++)
       String buyerAddress = result.get(i++)
       double actualSellingPrice = result.get(i)
-      inventoryPaintings.add(firstName, lastName, titleOfWork, dateOfWork, classification, heightCM, widthCM, medium,
+      inventoryPaintings.add(artistArtistFirstName, artistLastName, titleOfWork, dateOfWork, classification, heightCM, widthCM, medium,
                            subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice, actualPurchasePrice, 
                            targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice)
     }
@@ -112,7 +112,7 @@ public abstract class HandleInventoryPaintings
   private static HashMap<String,Object> loadMap(InventoryPainting inventory)
   {
     HashMap<String,Object> objects = new HashMap<String,Object>()
-    objects.put("artistID", HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1)))
+    objects.put("artistID", HandleArtist.getArtistID(new Artist(inventory.getArtistFirstName(), inventory.getArtistLastName(), -1)))
     objects.put("titleOfWork", inventory.getTitleOfWork())
     objects.put("dateOfWork", inventory.getDateOfWork())
     objects.put("classification", inventory.getClassification())
@@ -156,7 +156,7 @@ public abstract class HandleInventoryPaintings
   public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
   {
     String statement = "UPDATE FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID "
-      + "SET artistID='" + HandleArtist.getArtistID(inventory.getFirstName(), inventory.getLastName(), -1)
+      + "SET artistID='" + HandleArtist.getArtistID(inventory.getArtistFirstName(), inventory.getArtistLastName(), -1)
       + "',titleOfWork='" + inventory.getTitleOfWork() + "',dateOfWork='" + inventory.getDateOfWork() 
       + "',classification='" + inventory.getClassification() + "',heightCM='" + inventory.getHeightCM()
       + "',widthCM='" + inventory.getWidthCM() + "',medium='" + inventory.getMedium() + "',subject='" + inventory.getSubject()

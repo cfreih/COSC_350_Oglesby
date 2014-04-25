@@ -4,7 +4,7 @@ public abstract class HandleAuctionPaintings
   //Post: an AuctionPainting is created in the database
   public static void createAuctionPainting(AuctionPainting auction)
   {
-    int artistID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1)) 
+    int artistID = HandleArtist.getArtistID(new Artist(auction.getArtistFirstName(), auction.getArtistLastName(), -1)) 
     String statement = "INSERT INTO auction_paintings(artistID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale) VALUES('" + artistID
       + "','" + auction.getTitleOfWork() + "','" + auction.getDateOfWork() + "','" + 
@@ -22,7 +22,7 @@ public abstract class HandleAuctionPaintings
      + "heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale FROM artists INNER"
      + " JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += stringify(auction)
-    statement += " ORDER BY lastName, firstName" //probably needs to be changed
+    statement += " ORDER BY artistLastName, artistArtistFirstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>()
@@ -35,8 +35,8 @@ public abstract class HandleAuctionPaintings
   {
     for(int i = 0; i < result.size(); i++)
     {
-      String firstName = result.get(i++)
-      String lastName = result.get(i++)
+      String artistArtistFirstName = result.get(i++)
+      String artistLastName = result.get(i++)
       String titleOfWork = result.get(i++)
       int dateOfWork = Integer.parseInt(result.get(i++))
       double heightCM = Double.parseDouble(result.get(i++))
@@ -45,7 +45,7 @@ public abstract class HandleAuctionPaintings
       String subject = result.get(i++)
       double auctionSalePrice = Double.parseDouble(result.get(i++))
       Date auctionDateOfSale = Date.parse(result.get(i))
-      auctionPaintings.add(firstName, lastName, titleOfWork, dateOfWork, classification,
+      auctionPaintings.add(artistArtistFirstName, artistLastName, titleOfWork, dateOfWork, classification,
                            heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale)
     }
   }
@@ -55,7 +55,7 @@ public abstract class HandleAuctionPaintings
   private static HashMap<String,Object> loadMap(AuctionPainting auction)
   {
     HashMap<String,Object> objects = new HashMap<String,Object>()
-    objects.put("artistID", HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1)))
+    objects.put("artistID", HandleArtist.getArtistID(new Artist(auction.getArtistFirstName(), auction.getArtistLastName(), -1)))
     objects.put("titleOfWork", auction.getTitleOfWork())
     objects.put("dateOfWork", auction.getDateOfWork())
     objects.put("heightCM", auction.getHeightCM())
@@ -90,7 +90,7 @@ public abstract class HandleAuctionPaintings
   public static void updateAuctionPainting(AuctionPainting auction, AuctionPainting searchKey)
   {
     String statement = "UPDATE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID "
-      + "SET artistID='" + HandleArtist.getArtistID(auction.getFirstName(), auction.getLastName(), -1) +
+      + "SET artistID='" + HandleArtist.getArtistID(auction.getArtistFirstName(), auction.getArtistLastName(), -1) +
       "',titleOfWork='" + auction.getTitleOfWork() + "',dateOfWork='" + auction.getDateOfWork() + "',heightCM='" + auction.getHeightCM()
       + "',widthCM='" + auction.getWidthCM() + "',medium='" + auction.getMedium() + "',subject='" + auction.getSubject()
       + "',auctionSalePrice='" auction.getAuctionSalePrice() + "',auctionDateOfSale='" + auction.getAuctionDateOfSale()

@@ -4,8 +4,8 @@ public abstract class HandleArtist
   //Post: an artist is created in the database
   public static void createArtist(Artist artist)
   {
-    String statement = "INSERT INTO artists(firstName, lastName, fashionability) VALUES('" + artist.getFirstName() + 
-      "','" + artist.getLastName() + "','" + artist.getFashionabilityCoeff() + "')"
+    String statement = "INSERT INTO artists(artistArtistFirstName, artistLastName, fashionability) VALUES('" + artist.getArtistFirstName() + 
+      "','" + artist.getArtistLastName() + "','" + artist.getFashionabilityCoeff() + "')"
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
   }
@@ -14,10 +14,10 @@ public abstract class HandleArtist
   //Return: returns an Artist array, with elements matching search terms
   public static Artist[] retrieveArtists(Artist artist) //if string is empty, will bring all
   {
-    String statement = "SELECT firstName, lastName, fashionability FROM artists INNER"
+    String statement = "SELECT artistArtistFirstName, artistLastName, fashionability FROM artists INNER"
      + " JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += " " + stringify(artist)
-    statement += " ORDER BY lastName, firstName"
+    statement += " ORDER BY artistLastName, artistArtistFirstName"
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<Artist> artists = new ArrayList<Artist>()
@@ -30,10 +30,10 @@ public abstract class HandleArtist
   {
     for(int i = 0; i < result.size(); i++)
     {
-      String firstName = result.get(i++)
-      String lastName = result.get(i++)
+      String artistArtistFirstName = result.get(i++)
+      String artistLastName = result.get(i++)
       int fashionabilityConstant = Integer.parseInt(result.get(i))
-      artists.add(lastName, firstName, fashionabilityConstant)
+      artists.add(artistLastName, artistArtistFirstName, fashionabilityConstant)
     }
   }
   //Desc: method to load a HashMap with values to assist in the automation of SQL statements
@@ -42,8 +42,8 @@ public abstract class HandleArtist
   private static HashMap<String,Object> loadMap(Artist artist)
   {
     HashMap<String,Object> objects = new HashMap<String,Object>()
-    objects.put("lastName", auction.getLastName())
-    objects.put("firstName", auction.getFirstName())
+    objects.put("artistLastName", auction.getArtistLastName())
+    objects.put("artistArtistFirstName", auction.getArtistFirstName())
     objects.put("fashionability", artist.getFashionabilityCoeff())
     return objects
   }
@@ -80,8 +80,8 @@ public abstract class HandleArtist
   //Post: an artist is updated in the database
   public static void updateArtist(Artist artist, Artist searchKey)
   {
-    String statement = "UPDATE artists SET firstName='" + artist.getFirstName() + 
-      "',lastName='" + artist.getLastName() + "',fashionability='" + artist.getFashionabilityCoeff() + 
+    String statement = "UPDATE artists SET artistArtistFirstName='" + artist.getArtistFirstName() + 
+      "',artistLastName='" + artist.getArtistLastName() + "',fashionability='" + artist.getFashionabilityCoeff() + 
       stringify(searchKey)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
