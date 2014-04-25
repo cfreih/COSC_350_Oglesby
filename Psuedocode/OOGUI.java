@@ -97,7 +97,7 @@ public class OOGUI extends JPanel implements ActionListener{
 				displayPaintingInfo()
 				if(Field x is changed)
 					selectedIP.setX(value changed)
-					HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+				HandleInventoryPaintings.updateInventoryPainting(selectedIP)
 			}
 			if(Delete Painting Pressed)
 				HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
