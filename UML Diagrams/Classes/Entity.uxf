@@ -16,11 +16,11 @@
 -artistID: int
 -titleOfWork: String
 -dateOfWork: int
-
 -heightCM: double
 -widthCM: double
 -medium: String
 -subject: String
+-artistID
 --
 +setArtistFirstName(firstName: String): void
 +getArtistFirstName(): String
@@ -40,6 +40,7 @@
 +getMedium(): String
 +setSubject(subj: String): void
 +getSubject(): String
++getArtistID(): int
 +toString(): String
 +equals(p: Painting): boolean</panel_attributes>
     <additional_attributes/>
@@ -63,7 +64,6 @@
 +getArtistFirstName(): String
 +setArtistLastName(last: String): void
 +getArtistLastName(): String
-+setArtistID(id: int): void
 +getArtistID(): int
 +setFashionabilityConstant(fashConst: int): void
 +getFashionabilityConstant(): int</panel_attributes>
