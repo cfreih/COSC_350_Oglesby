@@ -66,8 +66,8 @@ public abstract class HandleArtist
     }
     return result
   }
-  //Desc: method finds and returns the PainterID of an Artist
-  //Return: returns the PainterID as an int
+  //Desc: method finds and returns the ArtistID of an Artist
+  //Return: returns the ArtistID as an int
   public static int getArtistID(Artist artist)
   {
     String statement = "SELECT artistID FROM artists "
