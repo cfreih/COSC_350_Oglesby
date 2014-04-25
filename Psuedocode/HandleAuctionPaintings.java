@@ -79,11 +79,11 @@ public abstract class HandleAuctionPaintings
       if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfWork ='" + dateOfWork + "'"
       else result += " AND dateOfWork ='" + dateOfWork + "'"
     }
-    if(classification == null || classification.equals("")) flags[i] = true
+    if(heightCM < 0) flags[i] = true
     else
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE classification ='" + classification + "'"
-      else result += " AND classification ='" + classification + "'"
+      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE heightCM ='" + heightCM + "'"
+      else result += " AND heightCM ='" + heightCM + "'"
     }
     if(widthCM < 0) flags[i] = true
     else
@@ -117,15 +117,16 @@ public abstract class HandleAuctionPaintings
     }
     return result
   }
-  //Desc: method updates an AuctionPainting in the database
+  //Desc: method updates an AuctionPainting in the database. Compares to titleOfWork as key.
   //Post: an AuctionPainting is updated in the database
   public static void updateAuctionPainting(AuctionPainting auction, String titleOfWork)
   {
     String statement = "UPDATE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID "
       + "SET artistID='" + HandleArtist.getArtistID(auction.getFirstName(), auction.getLastName(), -1) +
-      "',titleOfWork='" + auction.getTitleOfWork() + "'dateOfWork=,'" + artist.getDateOfWork()
+      "',titleOfWork='" + auction.getTitleOfWork() + "',dateOfWork='" + auction.getDateOfWork() + "',heightCM='" + auction.getHeightCM()
+      + "',widthCM='" + auction.getWidthCM() + "',medium='" + auction.getMedium() + "',subject='" + auction.getSubject()
+      + "',auctionSalePrice='" auction.getAuctionSalePrice() + "',auctionDateOfSale='" + auction.getAuctionDateOfSale()
       + "' WHERE titleOfWork = '" + titleOfWork +"'"
-    statement += artist.toString()
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
   }

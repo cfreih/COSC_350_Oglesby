@@ -1,6 +1,13 @@
 public class SoldPaintingsReport extends FindSoldPaintings
 {
   private double targetAndActualRatio
+  //Desc: constructor for SoldPaintingsReport
+  //Post: targetAndActualRatio is initialized
+  public SoldPaintingsReport()
+  {
+    super()
+    calcTargetAndActualRatio()
+  }
   //Desc: method to get the value of the targetAndActualRatio
   //Return: returns the targetAndActualRatio as a double
   public double getTargetAndActualRatio()

@@ -1,9 +1,18 @@
 public class DetectTrendsReport extends FindSoldPaintings
 {
+  private InventoryPainting[] reportPaintings
+  //Desc: constructor for DetectTrendReports
+  //Post: reportPaintings is initialized to correct values
+  public DetectTrendsReport()
+  {
+    super()
+    String[] artist = findTrendingArtists()
+    reportPaintings= getFullTrendsReport(artist)
+  }
   //Desc: method finds all artists who have sold more than one painting in the last year. 
   //Pre: soldPaintings must be loaded from the Handler
   //Return: returns a String array with the artists names from the last year as elements
-  public String[] findTrendingArtists()
+  private String[] findTrendingArtists()
   {
     HashMap<String, Integer> artistHash = new HashMap<String, Integer>()
     for(int i in this.soldPaintings)
@@ -23,7 +32,7 @@ public class DetectTrendsReport extends FindSoldPaintings
   //Desc: method uses the handler to get the information needed for the trend report.
   //Return: returns an IntentoryPainting array loaded with the information matching the artists
   // names passed to the database
-  public InventoryPainting[] getFullTrendsReport(String[] trendingArtists)
+  private InventoryPainting[] getFullTrendsReport(String[] trendingArtists)
   {
     ArrayList<InventoryPainting> paintings = new ArrayList<InventoryPainting>()
     for(int i = 0; i < trendingArtists.length; i++)

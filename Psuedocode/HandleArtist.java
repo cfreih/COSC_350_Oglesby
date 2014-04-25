@@ -15,7 +15,7 @@ public abstract class HandleArtist
   public static Artist[] retrieveArtists(Artist artist) //if string is empty, will bring all
   {
     String statement = "SELECT firstName, lastName, fashionability FROM artists INNER"
-     + " JOIN auction_paintings ON artists.painterID= auction_paintings.painterID"
+     + " JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += " " + stringify(artist)
     statement += " ORDER BY lastName, firstName"
     SQLConnector connection = new SQLConnector(0, statement)
@@ -65,19 +65,19 @@ public abstract class HandleArtist
   //Return: returns the PainterID as an int
   public static int getArtistID(Artist artist)
   {
-    String statement = "SELECT painterID FROM artists "
+    String statement = "SELECT artistID FROM artists "
     statement += stringify(artist)
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
     return result.get(i)
   }
-  //Desc: method updates an Artist in the database
+  //Desc: method updates an Artist in the database. Compares to artistID as key
   //Post: an artist is updated in the database
-  public static void updateArtist(Artist artist, int painterID)
+  public static void updateArtist(Artist artist, int artistID)
   {
     String statement = "UPDATE artists SET firstName='" + artist.getFirstName() + 
-      "',lastName='" + artist.getLastName() + "'fashionability=,'" + artist.getFashionabilityCoeff() + 
-      "' WHERE painterID = '" + painterID +"'"
+      "',lastName='" + artist.getLastName() + "',fashionability='" + artist.getFashionabilityCoeff() + 
+      "' WHERE artistID = '" + artistID +"'"
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
   }

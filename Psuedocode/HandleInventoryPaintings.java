@@ -4,11 +4,11 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is created in the database
   public static void createInventoryPainting(InventoryPainting inventory)
   {
-    int painterID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1)) 
-    String statement = "INSERT INTO inventory_paintings(painterID, titleOfWork, dateOfWork, classification, "
+    int artistID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1)) 
+    String statement = "INSERT INTO inventory_paintings(artistID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale,"
-      +" buyerName, buyerAddress, actualSellingPrice) VALUES('" + painterID
+      +" buyerName, buyerAddress, actualSellingPrice) VALUES('" + artistID
       + "','" + inventory.getTitleOfWork() + "','" + inventory.getDateOfWork() + "','" + inventory.getHeightCM() + 
       "','" + inventory.getWidthCM() + "','" + inventory.getMedium() + "','" + inventory.getSubject()
       + "','" + inventory.getSellerName() + "','" + inventory.getSellerAddress + "','" + inventory.getDateOfPurchase().toString() 
@@ -25,10 +25,10 @@ public abstract class HandleInventoryPaintings
   public static InventoryPainting[] retrieveInventoryPaintings(Date d)
   {
     int date = HandlerUtility.dateToInt(d)
-    String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
+    String statement = "SELECT artistID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
+     + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
      + " WHERE sold=1 and dateOfSale > " + date + " Order by lastName" 
     SQLConnector connection = new SQLConnector(0, statement)
     Vector result = connection.executeSQLQuery()
@@ -42,10 +42,10 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
   {
-    String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
+    String statement = "SELECT artistID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
+     + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
     for(int i = 0; i < inventory.length; i++)
     {
       if(i != 0) statement += " OR"
@@ -63,10 +63,10 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
   {
-    String statement = "SELECT painterID, titleOfWork, dateOfWork, classification, "
+    String statement = "SELECT artistID, titleOfWork, dateOfWork, classification, "
      + "heightCM, widthCM, medium, subject, sellerName, sellerAddress, dateOfPurchase, maxPurchasePrice,"
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
-     + " FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
+     + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
     statement += stringify(auction)
     statement += " ORDER BY lastName, firstName" //probably needs to be changed
     SQLConnector connection = new SQLConnector(0, statement)
@@ -113,7 +113,7 @@ public abstract class HandleInventoryPaintings
     String result = ""
     int i = 0
     boolean[] flags = new boolean[18]
-    int painterID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1))
+    int artistID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1))
     String titleOfWork = inventory.getTitleOfWork()
     int dateOfWork = inventory.getDateOfWork()
     int classification = inventory.getClassification()
@@ -131,8 +131,8 @@ public abstract class HandleInventoryPaintings
     String buyerName = inventory.getBuyerName()
     String buyerAddress = inventory.getBuyerAddress()
     double actualSellingPrice = inventory.getActualSellingPrice()                                   
-    if(painterID == -1) flags[i++] = true
-    else result += " WHERE painterID ='" + painterID + "'"
+    if(artistID == -1) flags[i++] = true
+    else result += " WHERE artistID ='" + artistID + "'"
     if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
     else
     {
@@ -237,19 +237,28 @@ public abstract class HandleInventoryPaintings
     }
     return result
   }
-  //Desc: method updates an InventoryPainting in the database
+  //Desc: method updates an InventoryPainting in the database. Compares to titleOfWork as key.
   //Post: an InventoryPainting is updated in the database
-  public static void updateInventoryPainting(InventoryPainting inventory)
+  public static void updateInventoryPainting(InventoryPainting inventory, String titleOfWork)
   {
-    String statement = "SQL UPDATE statement" //actual SQL statement will be completed in next step
-    statement += inventory.toString()
+    String statement = "UPDATE FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID "
+      + "SET artistID='" + HandleArtist.getArtistID(inventory.getFirstName(), inventory.getLastName(), -1)
+      + "',titleOfWork='" + inventory.getTitleOfWork() + "',dateOfWork='" + inventory.getDateOfWork() 
+      + "',classification='" + inventory.getClassification() + "',heightCM='" + inventory.getHeightCM()
+      + "',widthCM='" + inventory.getWidthCM() + "',medium='" + inventory.getMedium() + "',subject='" + inventory.getSubject()
+      + "',sellerName='" inventory.getSellerName() + "',sellerAddress='" + inventory.getSellerAddress() + "',dateOfPurchase='"
+      + inventory.getDateOfPurchase() + "',maxPurchasePrice='" + inventory.getMaxPurchasePrice() + "',actualPurchasePrice='"
+      + inventory.getActualPurchasePrice() + "',targetSellPrice='" + inventory.getTargetSellPrice() + "',dateOfSale='"
+      + inventory.getDateOfSale() + "',buyerName='" + inventory.getBuyerName() + "',buyerAddress='" + inventory.getBuyerAddress()
+      + "',actualSellingPrice='" + inventory.getActualSellingPrice() + "' WHERE titleOfWork = '" + titleOfWork +"'"
     SQLConnector connection = new SQLConnector(1, statement)
+    connection.executeSQLQuery()
   }
   //Desc: method deletes an InventoryPainting in the database
   //Post: an InventoryPainting is deleted in the database
   public static void deleteInventoryPainting(InventoryPainting inventory)
   {
-    String statement = "DELETE FROM artists INNER JOIN inventory_paintings ON artists.painterID= inventory_paintings.painterID"
+    String statement = "DELETE FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
     statement += stringify(inventory)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
