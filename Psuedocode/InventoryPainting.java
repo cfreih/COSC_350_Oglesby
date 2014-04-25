@@ -21,11 +21,12 @@ public class InventoryPainting extends Painting{
 	private double targetAndActualRatio
 	private boolean flagBoughtReport
 	private boolean flagSoldReport
+	private int classification
 	
 	/**
 	 * Desc:  no arg constructor initializing an InventoryPainting
-	 * Post:  eveything is given an initial value same as with
-	 * 		  Painting, date will be intialized with a no-arg constructor
+	 * Post:  everything is given an initial value same as with
+	 * 		  Painting, date will be initialized with a no-arg constructor
 	 */
 	public AuctionPainting()
 	{
@@ -49,10 +50,10 @@ public class InventoryPainting extends Painting{
 	
 	/**
 	 * Desc:  All arg constructor for Inventory
-	 * Post:  InventoryPainting is initalized with the fields
+	 * Post:  InventoryPainting is initialized with the fields
 	 * 		  being set with the proper parameters
 	 */
-	public Painting(String firstName, String lastName, String title, int date, int classif,
+	public AuctionPainting(String firstName, String lastName, String title, int date, int classif,
 			double height, double width, String med, String subj, int id, String sName, String sAddress,
 			Date dateP, double maxPurch, double actualPurch, boolean soldYN, Date dateS,
 			string bName, String bAddress, double actualSell)
@@ -458,6 +459,24 @@ public class InventoryPainting extends Painting{
 	public double getflagSoldReport()
 	{
 		return flagSoldReport
+	}
+	
+	/**
+	 * Desc:  sets the InventoryPainting's classification to classID
+	 * Post:  classification is changed to classID
+	 */
+	public void setClassification(int classID)
+	{
+		classification = classID
+	}
+	
+	/**
+	 * Desc:  gets the InventoryPainting's classification
+	 * Return:the classification of the InventoryPainting
+	 */
+	public int getClassification()
+	{
+		return classification
 	}
 	
 }

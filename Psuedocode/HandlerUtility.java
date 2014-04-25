@@ -10,7 +10,7 @@ public abstract class HandlerUtility
     date += d.getDay()
     return date
   }
-  //Desc: method to interate through flags and return boolean value
+  //Desc: method to iterate through flags and return boolean value
   //Return: returns true if all are true, false if any are false
   public static boolean checkFlags(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
   {

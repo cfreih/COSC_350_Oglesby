@@ -21,7 +21,9 @@ public class OOGUI extends JPanel implements ActionListener{
 	private JButton updateArtistFashionabilityMenuButton = new JButton()
 	private JPanel updateArtistFashionabilityMenuPanel = new JPanel()
 	private JButton reportsMenuButton = new JButton()
-	private JPanel reportsMenuPanel = new JPanel()
+	private JButton buyReportButton = new JButton()
+	private JButton sellReportButton = new JButton()
+	private JButton trendReportButton = new JButton()
 	private JOptionPane buyOption = new JOptionPane()
 	
 	/**
@@ -106,9 +108,6 @@ public class OOGUI extends JPanel implements ActionListener{
 			{
 				show_All_Paintings_in_Auction_Records()
 			}
-			if(SeeAllNotSold){
-				show_All_Paintings_not_Sold()
-			}
 		}
 		if(e.getSource() == manageInventoryLOOMenuButton)
 		{
@@ -129,13 +128,6 @@ public class OOGUI extends JPanel implements ActionListener{
 				}
 				if(Delete Painting Pressed)
 					HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
-				if(Sell Painting Pressed)
-				{
-					setupSellPaintingInputPanel()
-					changeToSellPaintingInputPanel()
-					getReleventInfoForSale(modifyIP)
-					HandleInventoryPaintings.updateInventoryPainting(modifyIP, selectedIP)
-				}
 			}
 			if(Add Selected)
 			{
@@ -146,9 +138,21 @@ public class OOGUI extends JPanel implements ActionListener{
 				if(Add Confirmed)
 					HandleInventoryPaintings.createInventoryPainting(addedPainting)
 			}
+			if(Sell Painting Pressed)
+			{
+				setupSellPaintingInputPanel()
+				changeToSellPaintingInputPanel()
+				InventoryPainting selectedIP = selectInventoryPainting()
+				InventoryPainting modifyIP = new InventoryPainting()
+				getReleventInfoForSale(modifyIP)
+				HandleInventoryPaintings.updateInventoryPainting(modifyIP, selectedIP)
+			}
 			if(SeeAll Selected)
 			{
 				show_All_Paintings_in_Inventory_Records()
+			}
+			if(SeeAllNotSold){
+				show_All_Paintings_not_Sold()
 			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
@@ -172,7 +176,7 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
 			changePanelToUpdateArtistFashionabilityMenuPanel()
-			Artist selectedArtist = selectAnArtist()
+			Artist selectedArtist = selectArtist()
 			Artist modifyArtist = new Artist()
 			if(Field X is changed)
 				modifyArtist.setX(changed value)
@@ -259,7 +263,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that InventoryPainting
-	 * Return:The InventoryPainting that is inputted by the user
+	 * Return:The InventoryPainting that is in-putted by the user
 	 */
 	public InventoryPainting selectInventoryPainting()
 	{
@@ -275,7 +279,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that AuctionPainting
-	 * Return:The AuctionPainting that is inputted by the user
+	 * Return:The AuctionPainting that is in-putted by the user
 	 */
 	public AuctionPainting selectAuctionPainting()
 	{
@@ -291,9 +295,9 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets the artistFirstName, artistLastName and returns the user the Artist
-	 * Return:The Artist that is inputted by the user
+	 * Return:The Artist that is in-putted by the user
 	 */
-	public Artist selectAnArtist()
+	public Artist selectArtist()
 	{
 		String fName = getFNameFromUser()
 		String lName = getLNameFromUser()

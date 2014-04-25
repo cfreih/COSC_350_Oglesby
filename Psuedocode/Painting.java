@@ -19,7 +19,7 @@ public class Painting {
 	
 	/**
 	 * Desc:  No arg constructor for a painting
-	 * Post:  Painting is intialized. Strings will be blank strings,
+	 * Post:  Painting is initialized. Strings will be blank strings,
 	 * 		  double and int will be -1.0 and -1.
 	 */
 	public Painting()
@@ -37,7 +37,7 @@ public class Painting {
 	
 	/**
 	 * Desc:  All arg constructor for painting
-	 * Post:  Painting is initalized with the fields
+	 * Post:  Painting is initialized with the fields
 	 * 		  being set with the proper parameters
 	 */
 	public Painting(String firstName, String lastName, String title, int date,
@@ -150,7 +150,7 @@ public class Painting {
 	
 	/**
 	 * Desc:  sets the painting's heightCM to height
-	 * pre:	  height is given in centimeters
+	 * pre:	  height is given in centimetres
 	 * Post:  heightCM is set to height
 	 */
 	public void setHeightCM(double height)
@@ -169,7 +169,7 @@ public class Painting {
 	
 	/**
 	 * Desc:  sets the painting's widhtCM to width
-	 * pre:	  width is given in centimeters
+	 * pre:	  width is given in centimetres
 	 * Post:  widthCM is set to width
 	 */
 	public void setWidthCM(double width)

@@ -4,10 +4,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>344</x>
+      <x>320</x>
       <y>136</y>
-      <w>496</w>
-      <h>112</h>
+      <w>528</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>_Calculation Utility class &lt;control class&gt;_
 -&lt;abstract&gt;
@@ -24,10 +24,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>24</x>
+      <x>0</x>
       <y>400</y>
       <w>544</w>
-      <h>152</h>
+      <h>168</h>
     </coordinates>
     <panel_attributes>_Handle Inventory Paintings &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -46,7 +46,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1080</x>
+      <x>1056</x>
       <y>400</y>
       <w>456</w>
       <h>144</h>
@@ -66,7 +66,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>520</x>
+      <x>496</x>
       <y>24</y>
       <w>88</w>
       <h>80</h>
@@ -77,7 +77,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>536</x>
+      <x>512</x>
       <y>0</y>
       <w>56</w>
       <h>40</h>
@@ -88,10 +88,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>592</x>
+      <x>568</x>
       <y>400</y>
       <w>472</w>
-      <h>144</h>
+      <h>152</h>
     </coordinates>
     <panel_attributes>_Handle Artists &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -109,7 +109,7 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>392</x>
+      <x>368</x>
       <y>632</y>
       <w>336</w>
       <h>160</h>
@@ -121,21 +121,17 @@ _&lt;abstract&gt;_
 -statement: Statement
 -resultSet: ResultSet
 -sqlStatement: String
--query: int
--update: int
-
-
 
 --
-+executeSQL_Query(a:String): Vector
-+executeSQL_Update(a:String): int
-+processQuerryResult(r:ResultSet):Vector </panel_attributes>
++executeSQL_Query(): Vector
++executeSQL_Update(): int
++processQuerryResult(resultSet:ResultSet):Vector </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>800</x>
+      <x>776</x>
       <y>632</y>
       <w>392</w>
       <h>160</h>
@@ -145,7 +141,11 @@ _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; dateToInt(d:Date): int
-+&lt;static&gt; cheackFlags(flags: boolean[]): boolean</panel_attributes>
++&lt;static&gt; cheackFlags(flags: boolean[]): boolean
++&lt;static&gt; checkInitialization(n: Number): boolean
++&lt;static&gt; checkInitialization(s: String): boolean
++&lt;static&gt; checkInitialization(d: Date): boolean
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

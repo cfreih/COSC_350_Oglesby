@@ -59,7 +59,7 @@ public abstract class HandleInventoryPaintings
     return inventoryPaintings.toArray()
   }
   //Desc: method searches the database and retrieves any matching records. 
-  // Search terms are passed in as an InventoryPainting with fields intialized if they are search terms
+  // Search terms are passed in as an InventoryPainting with fields initialized if they are search terms
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
   {

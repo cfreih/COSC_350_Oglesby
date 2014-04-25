@@ -1,0 +1,70 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1807" measuredH="540" mockupW="1768" mockupH="499">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="554" y="41" w="1253" h="499" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Trends%20Report</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::DataGrid" x="571" y="81" w="1206" h="381" measuredW="645" measuredH="381" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Last%20Name%2C%20First%20Name%2C%20Date%20of%20Sale%2C%20%20Classification%2C%20Title%2C%20Target%20Selling%20Price%2C%20Actual%20Selling%20price%0ALName1%2C%20FName1%2C%20%2C%20%2C%20%20%2C%20%2C%20%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class1%2C%20%20Title1%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class2%2C%20%20Title2%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class2%2C%20%20Title3%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0ALName2%2C%20FName2%2C%20%2C%20%2C%20%20%2C%20%2C%20%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class1%2C%20%20Title4%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class2%2C%20%20Title5%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class3%2C%20%20Title6%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0ALName3%2C%20FName3%2C%20%2C%20%2C%20%20%2C%20%2C%20%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class1%2C%20%20Title7%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class2%2C%20%20Title8%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%2C%20%2C%20mm/dd/yyyy%2C%20%20Class2%2C%20%20Title9%2C%20%20%24%24%24%24%24%2C%20%24%24%24%24%24%0A%7B65L%2C%2065L%2C%2065L%2C%2040L%2C%2045L%2C%2040L%2C%2040L%7D</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="581" y="477" w="173" h="27" measuredW="51" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Back</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="1776" y="81" w="-1" h="381" measuredW="16" measuredH="100" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::TitleWindow" x="39" y="41" w="-1" h="-1" measuredW="450" measuredH="400" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>LOO%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="63" y="82" w="180" h="27" measuredW="96" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Buy%20Painting</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="63" y="124" w="180" h="27" measuredW="95" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sell%20Painting</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="63" y="166" w="180" h="27" measuredW="113" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Artists</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="63" y="295" w="180" h="27" measuredW="124" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sold%20in%20Last%20Year</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="63" y="337" w="180" h="27" measuredW="140" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Bought%20in%20Last%20Year</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="63" y="208" w="181" h="27" measuredW="170" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Auction%20Records</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="63" y="250" w="181" h="27" measuredW="128" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Inventory</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Button" x="353" y="352" w="-1" h="-1" measuredW="45" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Exit</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="63" y="379" w="180" h="27" measuredW="107" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Trends%20Report</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

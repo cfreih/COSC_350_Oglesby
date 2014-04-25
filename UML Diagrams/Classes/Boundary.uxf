@@ -4,17 +4,16 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
-      <y>400</y>
+      <x>32</x>
+      <y>464</y>
       <w>272</w>
-      <h>120</h>
+      <h>128</h>
     </coordinates>
     <panel_attributes>_Purchased Paintings Report &lt;boundary class&gt;_
 --
--boughtPaintings: InventoryPainting[]
--maxAndActualRatioSum: double
+-paintingsBoughtInLastYear: InventoryPainting[]
+-maxAndActualRatio: double
 --
-+purchasedPaintingReport() void
 +getBoughtPaintings(): InventoryPainting[]
 +getMaxAndActualRatio(): double
 -calcMaxAndActualRatio(): void
@@ -24,8 +23,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>296</x>
-      <y>624</y>
+      <x>344</x>
+      <y>656</y>
       <w>216</w>
       <h>104</h>
     </coordinates>
@@ -41,10 +40,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>592</x>
-      <y>624</y>
+      <x>640</x>
+      <y>664</y>
       <w>392</w>
-      <h>96</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>_Detect Trends Report &lt;boundary class&gt;_
 --
@@ -59,41 +58,44 @@ InventoryPainting[] reportPaintings
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>320</x>
-      <y>120</y>
+      <x>368</x>
+      <y>96</y>
       <w>400</w>
-      <h>272</h>
+      <h>352</h>
     </coordinates>
     <panel_attributes>_GUI class &lt;boundary class&gt;_
 --
 -mainMenu: JPanel
 -updateAuctionRecordsMenuButton: JButton
--updateAuctionRecordsMenuFrame: JPanel
+-updateAuctionRecordsMenuPanel: JPanel
 -sellAndUpdateLOOMenuButton: JButton
--sellAndUpdateLOOMenuFrame: JPanel
+-sellAndUpdateLOOMenuPanel: JPanel
 -buyLOOMenuButton: JButton
--buyLOOMenuFrame: JPanel
+-buyLOOMenuPanel: JPanel
 -updateArtistFashionabilityMenuButton: JButton
--updateArtistFashionabilityMenuFrame: JPanel
--reportsMenuButton: JButton
--reportsMenuFrame: JPanel
+-updateArtistFashionabilityMenuPanel: JPanel
+-buyReportButton: JButton
+-sellReportButton: JButton
+-trendReportButton: JButton
 -buyOption: JOptionPane
 --
 +setUpMenu(): void
-+actionPerformed(e: ActionEvent): void
 +registerListenrs(): void
++actionPerformed(e: ActionEvent): void
 +getBuyLOOMenu(): JPanel
 +popUpBoughtReport(boughtPaintings: BinarySearchTree, ratio: double): void
 +popUpSoldReport(soldPaintings: BinarySearchTree, ratio: double): void
 +popUpTrendsReport(trendingPaintings: BinarySearchTree): void
-
++selectInventoryPainting(): InventoryPainting
++selectAuctionPainting(): AuctionPainting
++selectArrtist(): Artist
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>352</x>
+      <x>400</x>
       <y>0</y>
       <w>88</w>
       <h>80</h>
@@ -105,7 +107,7 @@ Classes</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>304</x>
+      <x>352</x>
       <y>16</y>
       <w>64</w>
       <h>40</h>
@@ -116,7 +118,7 @@ Classes</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>304</x>
+      <x>352</x>
       <y>0</y>
       <w>40</w>
       <h>72</h>
@@ -127,10 +129,10 @@ Classes</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>432</x>
-      <y>432</y>
-      <w>248</w>
-      <h>80</h>
+      <x>480</x>
+      <y>488</y>
+      <w>264</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>_Find Sold Paintings Class &lt;boundary class&gt;_
 _&lt;abstract&gt;_
@@ -138,29 +140,29 @@ _&lt;abstract&gt;_
 -soldPaintings: InventoryPainting[]
 --
 +findSoldPaintings(): void
-+findSoldInLastYear(): InventoryPainting[]</panel_attributes>
++&lt;static&gt; findSoldInLastYear(): InventoryPainting[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>536</x>
-      <y>488</y>
+      <x>584</x>
+      <y>552</y>
       <w>168</w>
-      <h>152</h>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;80;152;80;152;136</additional_attributes>
+    <additional_attributes>24;24;24;56;152;56;152;112</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>368</x>
-      <y>544</y>
+      <x>416</x>
+      <y>584</y>
       <w>208</w>
-      <h>96</h>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>192;24;24;24;24;80</additional_attributes>
+    <additional_attributes>192;24;24;24;24;72</additional_attributes>
   </element>
 </diagram>

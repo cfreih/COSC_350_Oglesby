@@ -10,7 +10,7 @@ public abstract class HandleArtist
     connection.executeSQLQuery()
   }
   //Desc: method searches the database and retrieves any matching records.
-  // Search terms are passed in as an Artist with fields intialized if they are search terms
+  // Search terms are passed in as an Artist with fields initialized if they are search terms
   //Return: returns an Artist array, with elements matching search terms
   public static Artist[] retrieveArtists(Artist artist) //if string is empty, will bring all
   {
