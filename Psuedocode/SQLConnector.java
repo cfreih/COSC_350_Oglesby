@@ -1,4 +1,5 @@
-
+//This class has the attributes to perform operation in a SQL Database
+//As well as methods to establish a connection to the SQL Database
 public class SQLConnector{
 	
 	private static final String DATABASE_URL = "jdbc:mysql://localhost/LOO_database"; //Database URL
