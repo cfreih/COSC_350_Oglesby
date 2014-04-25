@@ -4,10 +4,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>256</x>
+      <x>288</x>
       <y>128</y>
       <w>272</w>
-      <h>416</h>
+      <h>368</h>
     </coordinates>
     <panel_attributes>_Paintings class &lt;entity class&gt;_
 --
@@ -15,7 +15,7 @@
 -artistLastName: String
 -titleOfWork: String
 -dateOfWork: int
--classification: int
+
 -heightCM: double
 -widthCM: double
 -medium: String
@@ -29,8 +29,6 @@
 +getTitleOfWork(): String
 +setDateOfWork(date: int): void
 +getDateOfWork(): int
-+setClassification(classID: int): void
-+getClassification(): int
 +setHeightCM(height: double): void
 +getHeightCM(): double
 +setWidthCM(width: double): void
@@ -46,7 +44,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>592</x>
+      <x>624</x>
       <y>184</y>
       <w>256</w>
       <h>144</h>
@@ -68,7 +66,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>128</x>
+      <x>160</x>
       <y>648</y>
       <w>296</w>
       <h>136</h>
@@ -89,10 +87,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>480</x>
+      <x>512</x>
       <y>632</y>
       <w>296</w>
-      <h>456</h>
+      <h>656</h>
     </coordinates>
     <panel_attributes>_Inventory Painting class &lt;entity class&gt;_
 --
@@ -107,6 +105,13 @@
 -buyerName: String
 -buyerAddress: String
 -actualSellPrice: double
+-maxAndAcutalRatio: double
+//flag is for if it should be flagged in report
+-flagBought: boolean
+-targetAndActualRatio: double
+//flag is for if it should be flagged in report
+-flagSold: boolean
+-classification: int
 --
 +setSellerName(name: String): void
 +getSellerName(): String
@@ -123,30 +128,41 @@
 +setSoldYesOrNo(sold: boolean): void
 +getSoldYesOrNo(): boolean
 +setDateOfSale(date: Date): void
++setDateOfSale(int year, int month, int day): void
 +getDateOfSale(): date
 +setBuyerName(name: String): void
 +getBuyerName(): String
 +setBuyerAddress(address: String): void
 +getBuyerAddress(): String
 +setActualSellPrice(price: double): void
-+getActualSellPrice(): double</panel_attributes>
++getActualSellPrice(): double
++getMaxAndActualRatio(): double
+-calcMaxAndActualRatio(): void
++getFlagBought(): boolean
+-calcFlagBought(): void
++getTargetAndAtualRatio(): double
+-calcTargetAndActualRatio(): void
++getFlagSold(): boolean
+-calcFlagSold(): void
++setClassification(classID: int): void
++getClassification(): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>360</x>
-      <y>520</y>
+      <x>392</x>
+      <y>472</y>
       <w>224</w>
-      <h>128</h>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;80;208;80;208;112</additional_attributes>
+    <additional_attributes>24;24;24;128;208;128;208;160</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>168</x>
+      <x>200</x>
       <y>576</y>
       <w>232</w>
       <h>88</h>
@@ -157,7 +173,7 @@
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>520</x>
+      <x>552</x>
       <y>0</y>
       <w>88</w>
       <h>80</h>
@@ -168,74 +184,12 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
+      <x>528</x>
       <y>56</y>
       <w>128</w>
       <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>24;24;112;24</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>136</x>
-      <y>1280</y>
-      <w>256</w>
-      <h>104</h>
-    </coordinates>
-    <panel_attributes>_Bought in Last Year Painting class &lt;entity class&gt;_
---
--maxAndActualRatio: double
-//flag is for if it should be flagged in report
--flag: boolean 
---
-+getMaxAndActualRatio(): double
--calcMaxAndActualRatio(): void
-+getFlag(): boolean
--calcFlag(): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>480</x>
-      <y>1280</y>
-      <w>248</w>
-      <h>104</h>
-    </coordinates>
-    <panel_attributes>_Sold in Last Year Painting class &lt;entity class&gt;_
---
--targetAndActualRatio: double
-//flag is for if it should be flagged in repor
--flag: boolean
---
-+getTargetAndAtualRatio(): double
--calcTargetAndActualRatio(): void
-+getFlag(): boolean
--calcFlag(): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>536</x>
-      <y>1064</y>
-      <w>40</w>
-      <h>232</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;216</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>280</x>
-      <y>1184</y>
-      <w>296</w>
-      <h>112</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>280;24;24;24;24;96</additional_attributes>
   </element>
 </diagram>

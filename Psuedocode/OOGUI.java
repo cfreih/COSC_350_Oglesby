@@ -77,21 +77,60 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			setUpUpdateAuctionRecordsMenuPanel()
 			changePanelToUpdateAuctionRecordsMenuPanel()
+			if(Update Selected)
+				AuctionPainging selectedAP = selectAuctionPainting()
+				updateChangedAttributes()
+			if(Delete Selected)
+				AuctionPainging selectedAP = selectAuctionPainting()
+				deletedAuctionPainting()
+			if(Add AuctionPainting Selected)
+				Auction Painting newP = makeNewAuctionPaintingObj()
+				HandleAuctionPaintings.createAuctionPainting(newP)
 		}
 		if(e.getSource() == sellAndUpdateLOOMenuButton)
 		{
 			setUpSellAndUpdateLOOMenuPanel()
 			changePanelToSellAndUpdateLOOMenuPanel()
+			InventoryPainting selectedIP = selectInventoryPainting()
+			if(Fields Changed && UpdateButton Pressed)
+			{
+				displayPaintingInfo()
+				if(Field x is changed)
+					selectedIP.setX(value changed)
+				HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+			}
+			if(Delete Painting Pressed)
+				HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
+			if(Sell Painting Pressed)
+			{
+				getReleventInfoForSale()
+				HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
 		{
 			setUpBuyLOOMenuPanel()
 			changePanelToBuyLOOMenuPanel()
+			InventoryPainting p = getReleventPaintingInfo()
+			calcMaxPrice(p)
+			displayMaxPriceWithBuyOption()
+			if(Bought selected)
+			{
+				getReleventInfo()
+				setRemaingFieldsForInventoryPainting()
+				if(confirmed bought)
+					HandleInventory.createInventoryPainting(p)
+			}
 		}
 		if(e.getSource() == updateArtistFashionabilityMenuButton)
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
-			changePanleToUpdateArtistFashionabilityMenuPanel()
+			changePanelToUpdateArtistFashionabilityMenuPanel()
+			Artist selectedArtist = selectAnArtist()
+			if(fields changed)
+				HandleArtist.updateArtist(selectedArtist, HandleArtist.getArtistID(selectedArtist))
+			if(delete pressed)
+				HandleArtist.deleteArtist(selectedArtist)
 		}
 		if(e.getSource() == reportsMenuButton)
 		{
@@ -120,7 +159,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	 * @param boughtPaintings
 	 * @param ratio
 	 */
-	public void popUpBoughtReport(BinarySearchTree<InventoryPainting> boughtPaintings, double ratio)
+	public void popUpBoughtReport(InventoryPainting[] boughtPaintings, double ratio)
 	{
 		double pages = (double)boughtPaintings.size() / 20.0
 		if(pages%1 != 0)
@@ -131,6 +170,7 @@ public class OOGUI extends JPanel implements ActionListener{
 			tabbedPane.addTab(Page i+1 of boughtReport)  
 		}
 		displayAvgRatioAtEnd(ratio)
+		print20BoughtPaintingsPerTab()
 	}
 	
 	/**
@@ -139,7 +179,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	 * @param soldPaintings
 	 * @param ratio
 	 */
-	public void popUpBoughtReport(BinarySearchTree<InventoryPainting> soldPaintings, double ratio)
+	public void popUpSoldReport(InventoryPainting[] soldPaintings, double ratio)
 	{
 		double pages = (double)soldPaintings.size() / 20.0
 		if(pages%1 != 0)
@@ -150,15 +190,15 @@ public class OOGUI extends JPanel implements ActionListener{
 			tabbedPane.addTab(Page i+1 of soldReport)  
 		}
 		displayAvgRatioAtEnd(ratio)
+		print20SoldReportPaintingsPerTab()
 	}
 	
 	/**
 	 * Desc:  Pops up the Trending Artist Reports
 	 * Post:  sold Paintings report is pops up in a window
 	 * @param soldPaintings
-	 * @param ratio
 	 */
-	public void popUpBoughtReport(BinarySearchTree<InventoryPainting> trendingPaintings)
+	public void popUpBoughtReport(InventoryPainting[] trendingPaintings)
 	{
 		double pages = (double)trendingPaintings.size() / 20.0
 		if(pages%1 != 0)
@@ -168,5 +208,50 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			tabbedPane.addTab(Page i+1 of trendReport)  
 		}
+		print20TrendingPaintingsPerTab()
+	}
+	
+	/*
+	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that InventoryPainting
+	 * Return:The InventoryPainting that is inputted by the user
+	 */
+	public InventoryPainting selectInventoryPainting()
+	{
+		String fName = getFNameFromUser()
+		String lName = getLNameFromUser()
+		String pTitle = getPaintingTitleFromUser()
+		InventoryPainting selectedIP = new InventoryPainting()
+		selectedIP.setArtistFirstName(fName)
+		selectedIP.setArtistLastName(lName)
+		selectedIP.setTitleOfWork(pTitle)
+		return selectedIP
+	}
+	
+	/*
+	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that AuctionPainting
+	 * Return:The AuctionPainting that is inputted by the user
+	 */
+	public AuctionPainting selectAuctionPainting()
+	{
+		String fName = getFNameFromUser()
+		String lName = getLNameFromUser()
+		String pTitle = getPaintingTitleFromUser()
+		InventoryPainting selectedAP = new InventoryPainting()
+		selectedAP.setArtistFirstName(fName)
+		selectedAP.setArtistLastName(lName)
+		selectedAP.setTitleOfWork(pTitle)
+		return selectedIP
+	}
+	
+	/*
+	 * Desc:  Gets the artistFirstName, artistLastName and returns the user the Artist
+	 * Return:The Artist that is inputted by the user
+	 */
+	public Artist selectAnArtist()
+	{
+		String fName = getFNameFromUser()
+		String lName = getLNameFromUser()
+		Artist selectedArtist = HandleArtist.retrieveArtists(new Artist(fName, lName, -1))
+		return selectedArtist
 	}
 }

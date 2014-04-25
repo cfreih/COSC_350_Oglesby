@@ -19,8 +19,8 @@ public class InventoryPainting extends Painting{
 	private String buyerAddress
 	private double actualSellPrice
 	private double targetAndActualRatio
-	private boolean flagBought
-	private boolean flagSold
+	private boolean flagBoughtReport
+	private boolean flagSoldReport
 	
 	/**
 	 * Desc:  no arg constructor initializing an InventoryPainting
@@ -43,8 +43,8 @@ public class InventoryPainting extends Painting{
 		
 		maxAndActualRatio = -1.0
 		targetAndActualRatio = -1.0
-		flagBought = false
-		flagSold = false
+		flagBoughtReport = false
+		flagSoldReport = false
 	}
 	
 	/**
@@ -71,8 +71,8 @@ public class InventoryPainting extends Painting{
 		
 		calcMaxAndActualRatio()
 		calcTargetAndActualRatio
-		calcFlagBought()
-		calcFlagSold()
+		calcflagBoughtReport()
+		calcflagSoldReport()
 	}
 	
 	/**
@@ -174,7 +174,7 @@ public class InventoryPainting extends Painting{
 	/**
 	 * Desc:  sets the painting's actualPurchasePrice to price.
 	 *		  updates the maxAndActualRatio and targetSellPrice.
-	 *		  sets the flagBought to its proper status
+	 *		  sets the flagBoughtReport to its proper status
 	 * Post:  actualPurchasePrice is set to price and maxAndActualRatio
 	 * 		  and targetSellPrice is properly adjusted
 	 */
@@ -183,7 +183,7 @@ public class InventoryPainting extends Painting{
 		actualPurchasePrice = price
 	    calcMaxAndActualRatio()
 		calcTargetSellPrice()
-		calcFlagBought()
+		calcflagBoughtReport()
 	}
 	
 	/**
@@ -360,7 +360,7 @@ public class InventoryPainting extends Painting{
 	
 	/**
 	 * Desc:  sets the painting's ActualSellPrice to price and calculates
-	 * 		  targetAndActualRatio. Updates the flagSold status
+	 * 		  targetAndActualRatio. Updates the flagSoldReport status
 	 * Pre:	  soldYesOrNo must be set to true to set actualSellPrice
 	 * Post:  actualSellPrice is set to price and targetAndActualRatio
 	 * 		  is properly adjusted
@@ -371,7 +371,7 @@ public class InventoryPainting extends Painting{
 		{
 			actualSellPrice = price
 			calcTargetAndActualRatio()
-			calcFlagSold()
+			calcflagSoldReport()
 		}
 		else
 			System.out.println("Painting has not be sold. Cannot set buyerAddress")
@@ -410,54 +410,54 @@ public class InventoryPainting extends Painting{
 	}
 	
 	/**
-	 * Desc:  Calculates whether the flagBought should be set or not.
+	 * Desc:  Calculates whether the flagBoughtReport should be set or not.
 	 * 		  It will be set for true if a painting was bought by
 	 * 		  Osbert for more than the maxPurcahsePrice
-	 * Post:  The flagBought is properly set
+	 * Post:  The flagBoughtReport is properly set
 	 */
-	private void calcFlagBought()
+	private void calcflagBoughtReport()
 	{
 		if(actualPurchasePrice > maxPurchasePrice)
 		{
-			flagBought = true
+			flagBoughtReport = true
 		}
 		else
-			flagBought = false
+			flagBoughtReport = false
 	}
 	
 	/**
-	 * Desc:  returns the painting's flagBought status
-	 * Return:the painting's flagBought status
+	 * Desc:  returns the painting's flagBoughtReport status
+	 * Return:the painting's flagBoughtReport status
 	 */
-	public double getFlagBought()
+	public double getflagBoughtReport()
 	{
-		return flagBought
+		return flagBoughtReport
 	}
 	
 	/**
-	 * Desc:  Calculates whether the flagSold should be set or not.
+	 * Desc:  Calculates whether the flagSoldReport should be set or not.
 	 * 		  It will be set for true if a painting was sold by
 	 * 		  Osbert for 5% or more less than targetSellPrice
-	 * Post:  The flagSold is properly set
+	 * Post:  The flagSoldReport is properly set
 	 */
-	private void calcFlagSold()
+	private void calcflagSoldReport()
 	{
 		fivePercentOffTarget = targetSellPrice - targetSellPrice*0.05
 		if(actualSellPrice <= fivePercentOffTarget)
 		{
-			flagSold = true
+			flagSoldReport = true
 		}
 		else
-			flagSold = false
+			flagSoldReport = false
 	}
 	
 	/**
-	 * Desc:  returns the painting's flagSold status
-	 * Return:the painting's flagSold status
+	 * Desc:  returns the painting's flagSoldReport status
+	 * Return:the painting's flagSoldReport status
 	 */
-	public double getFlagSold()
+	public double getflagSoldReport()
 	{
-		return flagSold
+		return flagSoldReport
 	}
 	
 }
