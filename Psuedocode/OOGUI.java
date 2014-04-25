@@ -78,50 +78,85 @@ public class OOGUI extends JPanel implements ActionListener{
 			setUpUpdateAuctionRecordsMenuPanel()
 			changePanelToUpdateAuctionRecordsMenuPanel()
 			if(Update Selected)
-				AuctionPainging selectedAP = selectAuctionPainting()
-				updateChangedAttributes()
-			if(Delete Selected)
-				AuctionPainging selectedAP = selectAuctionPainting()
-				deletedAuctionPainting()
+			{
+				AuctionPainting selectedAP = selectAuctionPainting() //234
+				AuctionPaintings aucPaintings[] = HandleAuctionPaintings.retrieveAuctionPaintings(selectedAP)
+				selectedAP = aucPaintings[0]
+				//Error check that paintings exist in DB
+				AuctionPainting modifyAP = new AuctionPainting()
+				setupUpdateInputPanel()
+				changePanelToUpdateInputPanel()
+				if(Field X is changed)
+					modifyAP.setX(value changed)
+				if(update selected
+					HandleAuctionPaintings.updateAuctionPainting(selectedAP, modifyAP)
+				if(Delete Selected)
+					HandleAuctionPaintings.deleteAuctionPainting(selectedAP)
+			}
 			if(Add AuctionPainting Selected)
-				Auction Painting newP = makeNewAuctionPaintingObj()
-				HandleAuctionPaintings.createAuctionPainting(newP)
+			{
+				AuctionPainting addingAP = new AuctionPainting()
+				setUpCreateInputPanel()
+				changePanelToCreateInputPanel()
+				addingAP = getInputtedFields()
+				if(Add confirm selected)
+					HandleAuctionPaintings.createAuctionPainting(addingAP)
+			}
 		}
 		if(e.getSource() == sellAndUpdateLOOMenuButton)
 		{
 			setUpSellAndUpdateLOOMenuPanel()
 			changePanelToSellAndUpdateLOOMenuPanel()
-			InventoryPainting selectedIP = selectInventoryPainting()
-			if(Fields Changed && UpdateButton Pressed)
+			if(Update selected)
 			{
-				displayPaintingInfo()
-				if(Field x is changed)
-					selectedIP.setX(value changed)
-				HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+				setupUpdateInputPanel()
+				changeToUpdateInputPanel()
+				InventoryPainting selectedIP = selectInventoryPainting()
+				if(Fields Changed && UpdateButton Pressed)
+				{
+					displayPaintingInfo()
+					if(Field x is changed)
+						selectedIP.setX(value changed)
+					HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+				}
+				if(Delete Painting Pressed)
+					HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
+				if(Sell Painting Pressed)
+				{
+					setupSellPaintingInputPanel()
+					changeToSellPaintingInputPanel()
+					getReleventInfoForSale(selectedIP)
+					HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+				}
 			}
-			if(Delete Painting Pressed)
-				HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
-			if(Sell Painting Pressed)
+			if(Add Selected)
 			{
-				getReleventInfoForSale()
-				HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+				setupAddInputPanel()
+				changeToAddInputPanel()
+				InventoryPainting addedPainting = getAddedPaintingInfo()    //returns an InventoryPainting
+											    //with what fields have been filled in
+				if(Add Confirmed)
+					HandleInventoryPaintings.createInventoryPainting(addedPainting)
 			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
 		{
 			setUpBuyLOOMenuPanel()
 			changePanelToBuyLOOMenuPanel()
-			InventoryPainting p = getReleventPaintingInfo()
-			calcMaxPrice(p)
-			displayMaxPriceWithBuyOption()
+			InventoryPainting p = getReleventPaintingInfo() //Takes info from input text boxes and sets up
+															//An Inventory Painting
+			p.setMaxPrice(Calculation.calcMaxPrice(p))			
+			displayMaxPriceWithBuyOption(p.getMaxPrice())   //Screen showing max price and option to buy painting
 			if(Bought selected)
 			{
 				getReleventInfo()
-				setRemaingFieldsForInventoryPainting()
+				setRemaingFieldsForInventoryPainting(p)
 				if(confirmed bought)
 					HandleInventory.createInventoryPainting(p)
 			}
+			else backToMainScreen()
 		}
+		else backToMainScreen()
 		if(e.getSource() == updateArtistFashionabilityMenuButton)
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
@@ -236,11 +271,11 @@ public class OOGUI extends JPanel implements ActionListener{
 		String fName = getFNameFromUser()
 		String lName = getLNameFromUser()
 		String pTitle = getPaintingTitleFromUser()
-		InventoryPainting selectedAP = new InventoryPainting()
+		AuctionPainting selectedAP = new AuctionPainting()
 		selectedAP.setArtistFirstName(fName)
 		selectedAP.setArtistLastName(lName)
 		selectedAP.setTitleOfWork(pTitle)
-		return selectedIP
+		return selectedAP
 	}
 	
 	/*
