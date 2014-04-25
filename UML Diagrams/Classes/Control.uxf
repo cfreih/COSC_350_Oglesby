@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>7</zoom_level>
+  <zoom_level>11</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>119</y>
-      <w>434</w>
-      <h>98</h>
+      <x>440</x>
+      <y>187</y>
+      <w>682</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>_Calculation Utility class &lt;control class&gt;_
 --
@@ -24,9 +24,9 @@
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>0</x>
-      <y>350</y>
-      <w>476</w>
-      <h>140</h>
+      <y>550</y>
+      <w>748</w>
+      <h>209</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -37,40 +37,38 @@ _&lt;abstract&gt;_
 +&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting): InventoryPainting[]
 +&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting[]): InventoryPainting[]
 +&lt;static&gt; loadResults(inventoryPaintings: ArrayList&lt;InventoryPainting&gt;, result: Vector): void
-+&lt;static&gt; loadMap(inventory: InventoryPainting): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(inventory: InventoryPainting): String
-+&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting, searchKey: InventoryPainting): void
++&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting): void
 +&lt;static&gt; deleteInventoryPainting(inventory:InventoryPainting): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>924</x>
-      <y>350</y>
-      <w>399</w>
-      <h>140</h>
+      <x>1452</x>
+      <y>550</y>
+      <w>627</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; createAuctionPainting(auction:AuctionPainting): void
-+&lt;static&gt; retrieveAuctionPaintings(auction: AuctionPainting): AuctionPainting[]
++&lt;static&gt; retrieveAuctionPaintings(searchTerm: AuctionPainting): AuctionPainting[]
 +&lt;static&gt; loadResults(auctionPaintings: ArrayList&lt;AuctionRecord&gt;, result: Vector): void
-+&lt;static&gt; loadMap(auction: AuctionPainting): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(auction: AuctionPainting): String
-+&lt;static&gt; updateAuctionPainting(auction:AuctionPainting, searchKey: AuctionPainting): void
++&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; deleteAuctionPainting(auction:AuctionPainting): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>434</x>
-      <y>21</y>
-      <w>77</w>
-      <h>70</h>
+      <x>682</x>
+      <y>33</y>
+      <w>121</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>Control Classes</panel_attributes>
     <additional_attributes/>
@@ -78,43 +76,42 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>448</x>
+      <x>704</x>
       <y>0</y>
-      <w>48</w>
-      <h>34</h>
+      <w>76</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>21;21;35;21</additional_attributes>
+    <additional_attributes>33;33;55;33</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>497</x>
-      <y>350</y>
-      <w>413</w>
-      <h>140</h>
+      <x>781</x>
+      <y>550</y>
+      <w>649</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; createArtist(artist:Artist): void
-+&lt;static&gt; retrieveArtists(artist: Artist): Artist[]
++&lt;static&gt; retrieveArtists(searchTerm: String): Artist[]
 +&lt;static&gt; loadResults(artists: ArrayList&lt;Artist&gt;, result: Vector): void
-+&lt;static&gt; loadMap(artist: Artist): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(inventory: InventoryRecord): String
 +&lt;static&gt; getArtistID(artist: Artist): int
-+&lt;static&gt; updateArtist(artist:Artist, searchKey: Artist): void
++&lt;static&gt; updateArtist(artist:Artist): void
 +&lt;static&gt; deleteArtist(artist:Artist): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>322</x>
-      <y>553</y>
-      <w>294</w>
-      <h>140</h>
+      <x>506</x>
+      <y>869</y>
+      <w>462</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>_SQLConnector class &lt;control class&gt;_
 --
@@ -130,27 +127,24 @@ _&lt;abstract&gt;_
 
 --
 +executeSQL_Query(a:String): Vector
-+executeSQL_Query(a:String): int
++executeSQL_Update(a:String): int
 +processQuerryResult(r:ResultSet):Vector </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>679</x>
-      <y>553</y>
-      <w>343</w>
-      <h>140</h>
+      <x>1067</x>
+      <y>869</y>
+      <w>539</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>_Handler Utility&lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; dateToInt(d:Date): int
-+&lt;static&gt; checkFlags(flags: boolean[]): boolean
-+&lt;static&gt; checkInitialization(n: Number): boolean
-+&lt;static&gt; checkInitialization(d: Date): boolean
-+&lt;static&gt; checkInitialization(s: String): boolean</panel_attributes>
++&lt;static&gt; cheackFlags(flags: boolean[]): boolean</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
