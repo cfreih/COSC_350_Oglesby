@@ -44,13 +44,14 @@
       <x>592</x>
       <y>624</y>
       <w>392</w>
-      <h>80</h>
+      <h>96</h>
     </coordinates>
     <panel_attributes>_Detect Trends Report &lt;boundary class&gt;_
 --
 InventoryPainting[] reportPaintings
 --
 +detectTrendsReport(): void
++getReportPaintings(): InventoryPainting[]
 -findTrendingArtists(): String[]
 -getFullTrendsReport(trendingArtists: String[]): InventoryPainting[]</panel_attributes>
     <additional_attributes/>

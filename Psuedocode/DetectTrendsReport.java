@@ -9,6 +9,12 @@ public class DetectTrendsReport extends FindSoldPaintings
     String[] artist = findTrendingArtists()
     reportPaintings= getFullTrendsReport(artist)
   }
+  //Desc: method gets the reportPaintings field
+  //Return: returns a InventoryPainting[]
+  public InventoryPainting[] getReportPaintings()
+  {
+    return reportPaintings;
+  }
   //Desc: method finds all artists who have sold more than one painting in the last year. 
   //Pre: soldPaintings must be loaded from the Handler
   //Return: returns a String array with the artists names from the last year as elements
