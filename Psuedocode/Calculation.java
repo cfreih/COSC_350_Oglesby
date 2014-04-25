@@ -3,7 +3,7 @@ class Calculation
  //Desc: Calculates the similarity between this painting and the auction record provided.
  //Input: An auction record of a painting by the same artist.
  //Return: The similarity between the two paintings.
- private static double calcSimilarity(InventoryRecord painting, AuctionPainting record)
+ private static double calcSimilarity(InventoryPainting painting, AuctionPainting record)
  {
 	double similarity=0
 	double areaPainting=painting.getHeightCM()*painting.getWidthCM()
@@ -17,7 +17,7 @@ class Calculation
  //Desc: Finds the painting that is most similary to the provided painting from an array of auction records.
  //Input: An array of auction records by the same artist.
  //Return: The auction record for the painting that is most similar to this painting.
- private static AuctionPainting findMostSimilarPainting(InventoryRecord painting, AuctionPainting[] records)
+ private static AuctionPainting findMostSimilarPainting(InventoryPainting painting, AuctionPainting[] records)
  {
 	double max=0
 	AuctionPainting mostSimilar=new AuctionPainting()
