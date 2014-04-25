@@ -39,7 +39,7 @@ _&lt;abstract&gt;_
 +&lt;static&gt; loadResults(inventoryPaintings: ArrayList&lt;InventoryPainting&gt;, result: Vector): void
 +&lt;static&gt; loadMap(inventory: InventoryPainting): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(inventory: InventoryPainting): String
-+&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting): void
++&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting, titleOfWork: String): void
 +&lt;static&gt; deleteInventoryPainting(inventory:InventoryPainting): void</panel_attributes>
     <additional_attributes/>
   </element>
@@ -60,7 +60,7 @@ _&lt;abstract&gt;_
 +&lt;static&gt; loadResults(auctionPaintings: ArrayList&lt;AuctionRecord&gt;, result: Vector): void
 +&lt;static&gt; loadMap(auction: AuctionPainting): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(auction: AuctionPainting): String
-+&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
++&lt;static&gt; updateAuctionPainting(auction:AuctionPainting, titleOfWork: String): void
 +&lt;static&gt; deleteAuctionPainting(auction:AuctionPainting): void</panel_attributes>
     <additional_attributes/>
   </element>
@@ -104,7 +104,7 @@ _&lt;abstract&gt;_
 +&lt;static&gt; loadMap(artist: Artist): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(inventory: InventoryRecord): String
 +&lt;static&gt; getArtistID(artist: Artist): int
-+&lt;static&gt; updateArtist(artist:Artist): void
++&lt;static&gt; updateArtist(artist:Artist, artistID: int): void
 +&lt;static&gt; deleteArtist(artist:Artist): void</panel_attributes>
     <additional_attributes/>
   </element>
