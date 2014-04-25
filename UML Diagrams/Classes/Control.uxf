@@ -121,15 +121,11 @@ _&lt;abstract&gt;_
 -statement: Statement
 -resultSet: ResultSet
 -sqlStatement: String
--query: int
--update: int
-
-
 
 --
-+executeSQL_Query(a:String): Vector
-+executeSQL_Update(a:String): int
-+processQuerryResult(r:ResultSet):Vector </panel_attributes>
++executeSQL_Query(): Vector
++executeSQL_Update(): int
++processQuerryResult(resultSet:ResultSet):Vector </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
