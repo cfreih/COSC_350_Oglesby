@@ -153,7 +153,7 @@ public abstract class HandleInventoryPaintings
   }
   //Desc: method updates an InventoryPainting in the database. Compares to titleOfWork as key.
   //Post: an InventoryPainting is updated in the database
-  public static void updateInventoryPainting(InventoryPainting inventory, String titleOfWork)
+  public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
   {
     String statement = "UPDATE FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID "
       + "SET artistID='" + HandleArtist.getArtistID(inventory.getFirstName(), inventory.getLastName(), -1)
@@ -164,7 +164,7 @@ public abstract class HandleInventoryPaintings
       + inventory.getDateOfPurchase() + "',maxPurchasePrice='" + inventory.getMaxPurchasePrice() + "',actualPurchasePrice='"
       + inventory.getActualPurchasePrice() + "',targetSellPrice='" + inventory.getTargetSellPrice() + "',dateOfSale='"
       + inventory.getDateOfSale() + "',buyerName='" + inventory.getBuyerName() + "',buyerAddress='" + inventory.getBuyerAddress()
-      + "',actualSellingPrice='" + inventory.getActualSellingPrice() + "' WHERE titleOfWork = '" + titleOfWork +"'"
+      + "',actualSellingPrice='" + inventory.getActualSellingPrice() + stringify(searchKey)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
   }

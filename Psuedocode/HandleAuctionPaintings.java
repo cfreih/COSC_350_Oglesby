@@ -87,14 +87,14 @@ public abstract class HandleAuctionPaintings
   }
   //Desc: method updates an AuctionPainting in the database. Compares to titleOfWork as key.
   //Post: an AuctionPainting is updated in the database
-  public static void updateAuctionPainting(AuctionPainting auction, String titleOfWork)
+  public static void updateAuctionPainting(AuctionPainting auction, AuctionPainting searchKey)
   {
     String statement = "UPDATE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID "
       + "SET artistID='" + HandleArtist.getArtistID(auction.getFirstName(), auction.getLastName(), -1) +
       "',titleOfWork='" + auction.getTitleOfWork() + "',dateOfWork='" + auction.getDateOfWork() + "',heightCM='" + auction.getHeightCM()
       + "',widthCM='" + auction.getWidthCM() + "',medium='" + auction.getMedium() + "',subject='" + auction.getSubject()
       + "',auctionSalePrice='" auction.getAuctionSalePrice() + "',auctionDateOfSale='" + auction.getAuctionDateOfSale()
-      + "' WHERE titleOfWork = '" + titleOfWork +"'"
+      + stringify(searchKey)
     SQLConnector connection = new SQLConnector(1, statement)
     connection.executeSQLQuery()
   }
