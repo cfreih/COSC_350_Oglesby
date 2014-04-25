@@ -107,21 +107,36 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			setUpSellAndUpdateLOOMenuPanel()
 			changePanelToSellAndUpdateLOOMenuPanel()
-			if(
-			InventoryPainting selectedIP = selectInventoryPainting()
-			if(Fields Changed && UpdateButton Pressed)
+			if(Update selected)
 			{
-				displayPaintingInfo()
-				if(Field x is changed)
-					selectedIP.setX(value changed)
-				HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+				setupUpdateInputPanel()
+				changeToUpdateInputPanel()
+				InventoryPainting selectedIP = selectInventoryPainting()
+				if(Fields Changed && UpdateButton Pressed)
+				{
+					displayPaintingInfo()
+					if(Field x is changed)
+						selectedIP.setX(value changed)
+					HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+				}
+				if(Delete Painting Pressed)
+					HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
+				if(Sell Painting Pressed)
+				{
+					setupSellPaintingInputPanel()
+					changeToSellPaintingInputPanel()
+					getReleventInfoForSale(selectedIP)
+					HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+				}
 			}
-			if(Delete Painting Pressed)
-				HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
-			if(Sell Painting Pressed)
+			if(Add Selected)
 			{
-				getReleventInfoForSale()
-				HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+				setupAddInputPanel()
+				changeToAddInputPanel()
+				InventoryPainting addedPainting = getAddedPaintingInfo()    //returns an InventoryPainting
+											    //with what fields have been filled in
+				if(Add Confirmed)
+					HandleInventoryPaintings.createInventoryPainting(addedPainting)
 			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
