@@ -14,8 +14,8 @@ public class OOGUI extends JPanel implements ActionListener{
 	private JPanel mainMenu = new JPanel()
 	private JButton updateAuctionRecordsMenuButton = new JButton()
 	private JPanel updateAuctionRecordsMenuPanel = new JPanel()
-	private JButton sellAndUpdateLOOMenuButton = new JButton()
-	private JPanel sellAndUpdateLOOMenuPanel = new JPanel()
+	private JButton manageInventoryLOOMenuButton = new JButton()
+	private JPanel manageInventoryLOOMenuPanel = new JPanel()
 	private JButton buyLOOMenuButton = new JButton()
 	private JPanel buyLOOMenuPanel = new JPanel()
 	private JButton updateArtistFashionabilityMenuButton = new JButton()
@@ -46,7 +46,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	{
 		mainMenu.setLayout(new FlowLayout())
 		mainMenu.add(updateAuctionRecordsMenuButton)
-		mainMenu.add(sellAndUpdateLOOMenuButton)
+		mainMenu.add(manageInventoryLOOMenuButton)
 		mainMenu.add(buyLOOMenuButton)
 		mainMenu.add(updateArtistFashionabilityMenuButton)
 		mainMenu.add(reportsMenuButton)
@@ -59,7 +59,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	public void registerListeners()
 	{
 		updateAuctionRecordsMenuButton.addActionListener(this)
-		sellAndUpdateLOOMenuButton.addActionListener(this)
+		manageInventoryLOOMenuButton.addActionListener(this)
 		buyLOOMenuButton.addActionListener(this)
 		updateArtistFashionabilityMenuButton.addActionListener(this)
 		reportsMenuButton.addActionListener(this)
@@ -102,22 +102,30 @@ public class OOGUI extends JPanel implements ActionListener{
 				if(Add confirm selected)
 					HandleAuctionPaintings.createAuctionPainting(addingAP)
 			}
+			if(SeeAll Selected)
+			{
+				show_All_Paintings_in_Auction_Records()
+			}
+			if(SeeAllNotSold){
+				show_All_Paintings_not_Sold()
+			}
 		}
-		if(e.getSource() == sellAndUpdateLOOMenuButton)
+		if(e.getSource() == manageInventoryLOOMenuButton)
 		{
-			setUpSellAndUpdateLOOMenuPanel()
-			changePanelToSellAndUpdateLOOMenuPanel()
+			setUpmanageInventoryLOOMenuPanel()
+			changePanelTomanageInventoryLOOMenuPanel()
 			if(Update selected)
 			{
 				setupUpdateInputPanel()
 				changeToUpdateInputPanel()
 				InventoryPainting selectedIP = selectInventoryPainting()
+				InventoryPainting modifyIP = new InventoryPainting()
+				if(Field x is changed)
+						modifyIP.setX(value changed)
 				if(Fields Changed && UpdateButton Pressed)
 				{
 					displayPaintingInfo()
-					if(Field x is changed)
-						selectedIP.setX(value changed)
-					HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+					HandleInventoryPaintings.updateInventoryPainting(modifyAP, selectedIP)
 				}
 				if(Delete Painting Pressed)
 					HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
@@ -125,8 +133,8 @@ public class OOGUI extends JPanel implements ActionListener{
 				{
 					setupSellPaintingInputPanel()
 					changeToSellPaintingInputPanel()
-					getReleventInfoForSale(selectedIP)
-					HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+					getReleventInfoForSale(modifyIP)
+					HandleInventoryPaintings.updateInventoryPainting(modifyIP, selectedIP)
 				}
 			}
 			if(Add Selected)
@@ -137,6 +145,10 @@ public class OOGUI extends JPanel implements ActionListener{
 											    //with what fields have been filled in
 				if(Add Confirmed)
 					HandleInventoryPaintings.createInventoryPainting(addedPainting)
+			}
+			if(SeeAll Selected)
+			{
+				show_All_Paintings_in_Inventory_Records()
 			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
@@ -156,36 +168,35 @@ public class OOGUI extends JPanel implements ActionListener{
 			}
 			else backToMainScreen()
 		}
-		else backToMainScreen()
 		if(e.getSource() == updateArtistFashionabilityMenuButton)
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
 			changePanelToUpdateArtistFashionabilityMenuPanel()
 			Artist selectedArtist = selectAnArtist()
-			if(fields changed)
-				HandleArtist.updateArtist(selectedArtist, HandleArtist.getArtistID(selectedArtist))
+			Artist modifyArtist = new Artist()
+			if(Field X is changed)
+				modifyArtist.setX(changed value)
+			if(update confirmed)
+				HandleArtist.updateArtist(modifyArtist, selectedArtist)
 			if(delete pressed)
 				HandleArtist.deleteArtist(selectedArtist)
 		}
-		if(e.getSource() == reportsMenuButton)
+		if(e.getSource() == buyReportButton)
 		{
-			popUpreportsMenuFrame()
-			if(e.getSource() == buyReportButton)
-			{
-				purchPaintingsRep = new PurchasedPaintingsReport()
-				popUpBoughtReport(purchPaintingsRep.getBoughtPaintings(), purchPaintingsRep.getMaxANdActualRatioSum())
-			}
-			if(e.getSource() == sellReportButton)
-			{
-				soldPaintingsRep = new soldPaintingsReport()
-				popUpSoldReport(soldPaintingsRep.getSoldPaintings(), soldPaintingsRep.getTargetAndActualRatioAvg())
-			}
-			if(e.getSource() == trendReportButton)
-			{
-				trendRep = new DetectTrendsReport
-				popUpTrendsReport(detectTrendsReport.getFullTrendsReport())
-			}
+			PurhasedPaintingsReport purchPaintingsRep = new PurchasedPaintingsReport()
+			popUpBoughtReport(purchPaintingsRep.getBoughtPaintings(), purchPaintingsRep.getMaxANdActualRatioSum())
 		}
+		if(e.getSource() == sellReportButton)
+		{
+			SoldPaintingsReport soldPaintingsRep = new soldPaintingsReport()
+			popUpSoldReport(soldPaintingsRep.getSoldPaintings(), soldPaintingsRep.getTargetAndActualRatioAvg())
+		}
+		if(e.getSource() == trendReportButton)
+		{
+			DetectTrendsReport trendRep = new DetectTrendsReport()
+			popUpTrendsReport(trendRep.getReportPaintings())
+		}
+		
 	}
 	
 	/**
