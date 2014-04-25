@@ -77,28 +77,34 @@ public class OOGUI extends JPanel implements ActionListener{
 		{
 			setUpUpdateAuctionRecordsMenuPanel()
 			changePanelToUpdateAuctionRecordsMenuPanel()
-			selectAuctionPainting()
 			if(Update Selected)
+				AuctionPainging selectedAP = selectAuctionPainting()
 				updateChangedAttributes()
 			if(Delete Selected)
+				AuctionPainging selectedAP = selectAuctionPainting()
 				deletedAuctionPainting()
+			if(Add AuctionPainting Selected)
+				Auction Painting newP = makeNewAuctionPaintingObj()
+				HandleAuctionPaintings.createAuctionPainting(newP)
 		}
 		if(e.getSource() == sellAndUpdateLOOMenuButton)
 		{
 			setUpSellAndUpdateLOOMenuPanel()
 			changePanelToSellAndUpdateLOOMenuPanel()
-			selectInventoryPainting()
+			InventoryPainting selectedIP = selectInventoryPainting()
 			if(Fields Changed && UpdateButton Pressed)
 			{
-				updateInventoryPainting()
-				updateDatabaseWhenConfirmed()
+				displayPaintingInfo()
+				if(Field x is changed)
+					selectedIP.setX(value changed)
+					HandleInventoryPaintings.updateInventoryPainting(selectedIP)
 			}
 			if(Delete Painting Pressed)
-				deleteInventoryPainting
+				HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
 			if(Sell Painting Pressed)
 			{
 				getReleventInfoForSale()
-				updateInventoryPaintingForSale()
+				HandleInventoryPaintings.updateInventoryPainting(slectedIP)
 			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
@@ -112,17 +118,19 @@ public class OOGUI extends JPanel implements ActionListener{
 			{
 				getReleventInfo()
 				setRemaingFieldsForInventoryPainting()
+				if(confirmed bought)
+					HandleInventory.createInventoryPainting(p)
 			}
 		}
 		if(e.getSource() == updateArtistFashionabilityMenuButton)
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
-			changePanleToUpdateArtistFashionabilityMenuPanel()
-			selectAnArtist()
+			changePanelToUpdateArtistFashionabilityMenuPanel()
+			Artist selectedArtist = selectAnArtist()
 			if(fields changed)
-				updateArtist()
+				HandleArtist.updateArtist(selectedArtist, HandleArtist.getArtistID(selectedArtist))
 			if(delete pressed)
-				deleteArtist()
+				HandleArtist.deleteArtist(selectedArtist)
 		}
 		if(e.getSource() == reportsMenuButton)
 		{
@@ -201,5 +209,49 @@ public class OOGUI extends JPanel implements ActionListener{
 			tabbedPane.addTab(Page i+1 of trendReport)  
 		}
 		print20TrendingPaintingsPerTab()
+	}
+	
+	/*
+	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that InventoryPainting
+	 * Return:The InventoryPainting that is inputted by the user
+	 */
+	public InventoryPainting selectInventoryPainting()
+	{
+		String fName = getFNameFromUser()
+		String lName = getLNameFromUser()
+		String pTitle = getPaintingTitleFromUser()
+		InventoryPainting selectedIP = new InventoryPainting()
+		selectedIP.setArtistFirstName(fName)
+		selectedIP.setArtistLastName(lName)
+		selectedIP.setTitleOfWork(pTitle)
+		return selectedIP
+	}
+	
+	/*
+	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that AuctionPainting
+	 * Return:The AuctionPainting that is inputted by the user
+	 */
+	public AuctionPainting selectAuctionPainting()
+	{
+		String fName = getFNameFromUser()
+		String lName = getLNameFromUser()
+		String pTitle = getPaintingTitleFromUser()
+		InventoryPainting selectedAP = new InventoryPainting()
+		selectedAP.setArtistFirstName(fName)
+		selectedAP.setArtistLastName(lName)
+		selectedAP.setTitleOfWork(pTitle)
+		return selectedIP
+	}
+	
+	/*
+	 * Desc:  Gets the artistFirstName, artistLastName and returns the user the Artist
+	 * Return:The Artist that is inputted by the user
+	 */
+	public Artist selectAnArtist()
+	{
+		String fName = getFNameFromUser()
+		String lName = getLNameFromUser()
+		Artist selectedArtist = HandleArtist.retrieveArtists(new Artist(fName, lName, -1))
+		return selectedArtist
 	}
 }
