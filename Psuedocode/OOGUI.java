@@ -263,7 +263,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that InventoryPainting
-	 * Return:The InventoryPainting that is inputted by the user
+	 * Return:The InventoryPainting that is in-putted by the user
 	 */
 	public InventoryPainting selectInventoryPainting()
 	{
@@ -279,7 +279,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that AuctionPainting
-	 * Return:The AuctionPainting that is inputted by the user
+	 * Return:The AuctionPainting that is in-putted by the user
 	 */
 	public AuctionPainting selectAuctionPainting()
 	{
@@ -295,7 +295,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets the artistFirstName, artistLastName and returns the user the Artist
-	 * Return:The Artist that is inputted by the user
+	 * Return:The Artist that is in-putted by the user
 	 */
 	public Artist selectArtist()
 	{

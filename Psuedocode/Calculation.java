@@ -16,7 +16,7 @@ class Calculation
 	return similarity
  }
  
- //Desc: Finds the painting that is most similary to the provided painting from an array of auction records.
+ //Desc: Finds the painting that is most similarity to the provided painting from an array of auction records.
  //Input: An array of auction records by the same artist.
  //Return: The auction record for the painting that is most similar to this painting.
  private static AuctionPainting findMostSimilarPainting(InventoryPainting painting, AuctionPainting[] records)

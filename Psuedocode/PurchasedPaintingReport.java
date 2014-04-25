@@ -6,7 +6,7 @@ public class PurchasedPaintingReport
   //Desc: Creates an object of type PurchasedPaintingReport
   //Post: paintingsBoughtInLastYear initialized with the paintings purchased one year
   //	  back from today. calcMaxAndActualRatio is set to the ratio of maximum purchase
-  //	  price to acutal purchase price. (max/actual)
+  //	  price to actual purchase price. (max/actual)
   public PurchasedPaintingReport()
   {
 	paintingsBoughtInLastYear=getPaintingsBoughtInLastYear()

@@ -1,7 +1,7 @@
 //This class provides the required attributes for an Artist
 //First Name
 //Last Name
-//Fashionability Coeffieicent 
+//Fashionability Coefficient 
 
 
 public class Artist{
@@ -12,7 +12,7 @@ public class Artist{
 	private int artistID
 	
 	/* Desc: no arg constructor initializing an Artist
-	   Post: All atributes is initialized firstName, lastName to empty string
+	   Post: All attributes is initialized firstName, lastName to empty string
 		     fashionabilityCoeff to -1 */	
 	public Artist(){
 		firstName=""
@@ -22,8 +22,8 @@ public class Artist{
 	}
 	
 	/* Desc: All arg constructor initializing an Artist
-	   Pre:  Values are provied for each attribute 
-	   Post: All atributes is initialized firstName, lastName to the given values
+	   Pre:  Values are provided for each attribute 
+	   Post: All attributes is initialized firstName, lastName to the given values
 		     fashionabilityCoeff to -1 */	
 	public Artist(String fName, String lName, int fCoeff, int id){
 		firstName=fName
