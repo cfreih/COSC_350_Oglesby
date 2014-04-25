@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.2">
-  <zoom_level>11</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>440</x>
-      <y>187</y>
-      <w>682</w>
-      <h>154</h>
+      <x>344</x>
+      <y>136</y>
+      <w>496</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>_Calculation Utility class &lt;control class&gt;_
+-&lt;abstract&gt;
 --
 --
 -&lt;static&gt; calcSimilarity(painting:AuctionPainting, record:AuctionPainting): double
@@ -23,10 +24,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
-      <y>550</y>
-      <w>748</w>
-      <h>209</h>
+      <x>24</x>
+      <y>400</y>
+      <w>544</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -45,10 +46,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1452</x>
-      <y>550</y>
-      <w>627</w>
-      <h>198</h>
+      <x>1080</x>
+      <y>400</y>
+      <w>456</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -65,10 +66,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>682</x>
-      <y>33</y>
-      <w>121</w>
-      <h>110</h>
+      <x>520</x>
+      <y>24</y>
+      <w>88</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>Control Classes</panel_attributes>
     <additional_attributes/>
@@ -76,21 +77,21 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>704</x>
+      <x>536</x>
       <y>0</y>
-      <w>76</w>
-      <h>54</h>
+      <w>56</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>33;33;55;33</additional_attributes>
+    <additional_attributes>24;24;40;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>781</x>
-      <y>550</y>
-      <w>649</w>
-      <h>198</h>
+      <x>592</x>
+      <y>400</y>
+      <w>472</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -108,10 +109,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>506</x>
-      <y>869</y>
-      <w>462</w>
-      <h>220</h>
+      <x>392</x>
+      <y>632</y>
+      <w>336</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>_SQLConnector class &lt;control class&gt;_
 --
@@ -134,10 +135,10 @@ _&lt;abstract&gt;_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1067</x>
-      <y>869</y>
-      <w>539</w>
-      <h>220</h>
+      <x>800</x>
+      <y>632</y>
+      <w>392</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>_Handler Utility&lt;control class&gt;_
 _&lt;abstract&gt;_
