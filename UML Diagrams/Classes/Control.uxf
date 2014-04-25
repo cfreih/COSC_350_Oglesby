@@ -29,7 +29,7 @@
       <w>544</w>
       <h>152</h>
     </coordinates>
-    <panel_attributes>_Handle Inventory class &lt;control class&gt;_
+    <panel_attributes>_Handle Inventory Paintings &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
@@ -51,7 +51,7 @@ _&lt;abstract&gt;_
       <w>456</w>
       <h>144</h>
     </coordinates>
-    <panel_attributes>_Handle Auction Records &lt;control class&gt;_
+    <panel_attributes>_Handle Auction Paintings &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --
@@ -93,7 +93,7 @@ _&lt;abstract&gt;_
       <w>472</w>
       <h>144</h>
     </coordinates>
-    <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
+    <panel_attributes>_Handle Artists &lt;control class&gt;_
 _&lt;abstract&gt;_
 --
 --

@@ -31,7 +31,7 @@
     </coordinates>
     <panel_attributes>_Sold Paintings Report &lt;boundary class&gt;_
 --
--targetAndActualRatioSum: double
+-targetAndActualRatio: double
 --
 +soldPaintingsReport(): void
 +getTargetAndActualRatio(): double
