@@ -76,8 +76,9 @@ class Calculation
  private static double calcMaxOther(InventoryPainting painting, AuctionPainting[] records)
  {
 	double area=painting.getHeightCM()*painting.getWidthCM()
-	Artist artist=
-	int fashionablityConstant=artist.getFashionablityConstant()
+	Artist artist=new artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1)
+	Artist[] artists=HandleArtist.retrieveArtist(artist)
+	int fashionablityConstant=artists[0].getFashionablityConstant()
 	return area * fashionabilityConstant
  }
 }

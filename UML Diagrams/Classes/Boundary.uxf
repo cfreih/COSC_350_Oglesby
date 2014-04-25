@@ -4,26 +4,27 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>8</x>
+      <x>0</x>
       <y>400</y>
       <w>272</w>
-      <h>104</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>_Purchased Paintings Report &lt;boundary class&gt;_
 --
--boughtPaintings: BinarySearchTree
+-boughtPaintings: InventoryPainting[]
 -maxAndActualRatioSum: double
 --
-+getBoughtPaintings(): BinarySearchTree
-+getMaxAndActualRatioSum(): double
--calcMaxAndActualRatioSum(): void
--getPaintingsBoughtInLastYear(): BinarySearchTree</panel_attributes>
++purchasedPaintingReport() void
++getBoughtPaintings(): InventoryPainting[]
++getMaxAndActualRatio(): double
+-calcMaxAndActualRatio(): void
+-getPaintingsBoughtInLastYear(): InventoryPainting[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>304</x>
+      <x>296</x>
       <y>624</y>
       <w>216</w>
       <h>104</h>
@@ -32,6 +33,7 @@
 --
 -targetAndActualRatioSum: double
 --
++soldPaintingsReport(): void
 +getTargetAndActualRatio(): double
 -calcTargetAndActualRatio(): void</panel_attributes>
     <additional_attributes/>
@@ -39,22 +41,24 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>600</x>
+      <x>592</x>
       <y>624</y>
       <w>392</w>
-      <h>64</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>_Detect Trends Report &lt;boundary class&gt;_
 --
+InventoryPainting[] reportPaintings
 --
-+findTrendingArtists(): String[]
-+getFullTrendsReport(trendingArtists: String[]): InventoryPainting[]</panel_attributes>
++detectTrendsReport(): void
+-findTrendingArtists(): String[]
+-getFullTrendsReport(trendingArtists: String[]): InventoryPainting[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>328</x>
+      <x>320</x>
       <y>120</y>
       <w>400</w>
       <h>272</h>
@@ -88,7 +92,7 @@
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>360</x>
+      <x>352</x>
       <y>0</y>
       <w>88</w>
       <h>80</h>
@@ -100,7 +104,7 @@ Classes</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>312</x>
+      <x>304</x>
       <y>16</y>
       <w>64</w>
       <h>40</h>
@@ -111,7 +115,7 @@ Classes</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>312</x>
+      <x>304</x>
       <y>0</y>
       <w>40</w>
       <h>72</h>
@@ -122,34 +126,35 @@ Classes</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>440</x>
+      <x>432</x>
       <y>432</y>
       <w>248</w>
-      <h>64</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>_Find Sold Paintings Class &lt;boundary class&gt;_
 _&lt;abstract&gt;_
 --
 -soldPaintings: InventoryPainting[]
 --
++findSoldPaintings(): void
 +findSoldInLastYear(): InventoryPainting[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>544</x>
-      <y>472</y>
+      <x>536</x>
+      <y>488</y>
       <w>168</w>
-      <h>168</h>
+      <h>152</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;96;152;96;152;152</additional_attributes>
+    <additional_attributes>24;24;24;80;152;80;152;136</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>376</x>
+      <x>368</x>
       <y>544</y>
       <w>208</w>
       <h>96</h>
