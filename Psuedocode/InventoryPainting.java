@@ -19,8 +19,8 @@ public class InventoryPainting extends Painting{
 	private String buyerAddress
 	private double actualSellPrice
 	private double targetAndActualRatio
-	private boolean flagBoughtReportReport
-	private boolean flagSoldReportReport
+	private boolean flagBoughtReport
+	private boolean flagSoldReport
 	
 	/**
 	 * Desc:  no arg constructor initializing an InventoryPainting
