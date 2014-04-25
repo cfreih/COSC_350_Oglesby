@@ -26,7 +26,7 @@
       <x>0</x>
       <y>350</y>
       <w>476</w>
-      <h>133</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -37,6 +37,7 @@ _&lt;abstract&gt;_
 +&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting): InventoryPainting[]
 +&lt;static&gt; retrieveInventoryPaintings(inventory: InventoryPainting[]): InventoryPainting[]
 +&lt;static&gt; loadResults(inventoryPaintings: ArrayList&lt;InventoryPainting&gt;, result: Vector): void
++&lt;static&gt; loadMap(inventory: InventoryPainting): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(inventory: InventoryPainting): String
 +&lt;static&gt; updateInventoryPainting(inventory:InventoryPainting): void
 +&lt;static&gt; deleteInventoryPainting(inventory:InventoryPainting): void</panel_attributes>
@@ -48,7 +49,7 @@ _&lt;abstract&gt;_
       <x>924</x>
       <y>350</y>
       <w>399</w>
-      <h>126</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>_Handle Auction Records &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -57,6 +58,7 @@ _&lt;abstract&gt;_
 +&lt;static&gt; createAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; retrieveAuctionPaintings(auction: AuctionPainting): AuctionPainting[]
 +&lt;static&gt; loadResults(auctionPaintings: ArrayList&lt;AuctionRecord&gt;, result: Vector): void
++&lt;static&gt; loadMap(auction: AuctionPainting): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(auction: AuctionPainting): String
 +&lt;static&gt; updateAuctionPainting(auction:AuctionPainting): void
 +&lt;static&gt; deleteAuctionPainting(auction:AuctionPainting): void</panel_attributes>
@@ -90,7 +92,7 @@ _&lt;abstract&gt;_
       <x>497</x>
       <y>350</y>
       <w>413</w>
-      <h>126</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -99,6 +101,7 @@ _&lt;abstract&gt;_
 +&lt;static&gt; createArtist(artist:Artist): void
 +&lt;static&gt; retrieveArtists(artist: Artist): Artist[]
 +&lt;static&gt; loadResults(artists: ArrayList&lt;Artist&gt;, result: Vector): void
++&lt;static&gt; loadMap(artist: Artist): HashMap&lt;String,Object&gt;
 +&lt;static&gt; stringify(inventory: InventoryRecord): String
 +&lt;static&gt; getArtistID(artist: Artist): int
 +&lt;static&gt; updateArtist(artist:Artist): void
@@ -144,7 +147,10 @@ _&lt;abstract&gt;_
 --
 --
 +&lt;static&gt; dateToInt(d:Date): int
-+&lt;static&gt; cheackFlags(flags: boolean[]): boolean</panel_attributes>
++&lt;static&gt; checkFlags(flags: boolean[]): boolean
++&lt;static&gt; checkInitialization(n: Number): boolean
++&lt;static&gt; checkInitialization(d: Date): boolean
++&lt;static&gt; checkInitialization(s: String): boolean</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -217,7 +217,7 @@ public abstract class HandleInventoryPaintings
       if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfSale ='" + dateOfSale + "'"
       else result += " AND dateOfSale ='" + dateOfSale + "'"
     }
-    if(buyerName == null || buyerName.equals("")) flags[i] = true
+    if(HandlerUtility.checkInitialization(buyerName)) flags[i] = true
     else
     {
       if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE buyerName ='" + buyerName + "'"

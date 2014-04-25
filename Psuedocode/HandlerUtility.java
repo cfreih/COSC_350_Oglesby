@@ -21,4 +21,25 @@ public abstract class HandlerUtility
     }
     return true
   }
+  //Desc: method to check if a Number is initialized
+  //Return: returns true if uninitialized, false if initialized
+  public static boolean checkInitialization(Number n)
+  {
+    if(n < 0) return true;
+    return false;
+  }
+  //Desc: method to check if a String is initialized
+  //Return: returns true if uninitialized, false if initialized
+  public static boolean checkInitialization(String s)
+  {
+    if(s == null || s.equals("")) return true;
+    return false;
+  }
+  //Desc: method to check if a Date is initialized
+  //Return: returns true if uninitialized, false if initialized
+  public static boolean checkInitialization(Date d)
+  {
+    if(d == null) return true;
+    return false;
+  }
 }

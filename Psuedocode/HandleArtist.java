@@ -36,28 +36,33 @@ public abstract class HandleArtist
       artists.add(lastName, firstName, fashionabilityConstant)
     }
   }
+  //Desc: method to load a HashMap with values to assist in the automation of SQL statements
+  // In particular, this method assists with limiting the amount of hardcoding in the stringify
+  //Return: the fully loaded HashMap is returned
+  private static HashMap<String,Object> loadMap(Artist artist)
+  {
+    HashMap<String,Object> objects = new HashMap<String,Object>()
+    objects.put("lastName", auction.getLastName())
+    objects.put("firstName", auction.getFirstName())
+    objects.put("fashionability", artist.getFashionabilityCoeff())
+    return objects
+  }
   //Desc: method converts an Artist into a String
   //Return: returns a String for the SQL statement
   private static String stringify(Artist artist)
   {
     String result = ""
     boolean[] flags = new boolean[3]
-    String lastName = artist.lastName
-    String firstName = artist.firstName
-    int fashionability = artist.fashionabilityConstant
-    if(lastName == null || lastName.equals("")) flags[0] = true
-    else result += " WHERE lastName ='" + lastName + "'"
-    if(firstName == null || firstName.equals("")) flags[1] = true
-    else
+    HashMap<String,Object> objects = loadMap(artist)
+    String[] keys = objects.keySet().toArray()
+    for(int i = 0; i < keys.length; i++)
     {
-      if(flags[0]) result += " WHERE firstName ='" + firstName + "'"
-      else result += " AND firstName ='" + firstName + "'"
-    }
-    if(fashionability == -1) flags[2] = true
-    else
-    {
-      if(flags[0] && flags[1]) result += " WHERE fashionability ='" + fashionability + "'"
-      else result += " AND fashionability ='" + fashionability + "'"
+      if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true
+      else
+      {
+        if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + keys[i] + "='" + objects.get(keys[i]) + "'"
+        else result += " AND " + keys[i] + "='" + objects.get(keys[i]) + "'"
+      }
     }
     return result
   }

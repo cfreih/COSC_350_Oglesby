@@ -49,71 +49,39 @@ public abstract class HandleAuctionPaintings
                            heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale)
     }
   }
+  //Desc: method to load a HashMap with values to assist in the automation of SQL statements
+  // In particular, this method assists with limiting the amount of hardcoding in the stringify
+  //Return: the fully loaded HashMap is returned
+  private static HashMap<String,Object> loadMap(AuctionPainting auction)
+  {
+    HashMap<String,Object> objects = new HashMap<String,Object>()
+    objects.put("artistID", HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1)))
+    objects.put("titleOfWork", auction.getTitleOfWork())
+    objects.put("dateOfWork", auction.getDateOfWork())
+    objects.put("heightCM", auction.getHeightCM())
+    objects.put("widthCM", auction.getWidthCM())
+    objects.put("medium", auction.getMedium())
+    objects.put("subject", auction.getSubject())
+    objects.put("auctionSalePrice", auction.getAuctionSalePrice())
+    objects.put("auctionDateOfSale", auction.getAuctionDateOfSale())
+    return objects
+  }
   //Desc: method converts an AuctionPainting into a String
   //Return: returns a String for the SQL statement
   private static String stringify(AuctionPainting auction)
   {
     String result = ""
-    int i = 0
     boolean[] flags = new boolean[9]
-    int artistID = HandleArtist.getArtistID(new Artist(auction.getFirstName(), auction.getLastName(), -1))
-    String titleOfWork = auction.getTitleOfWork()
-    int dateOfWork = auction.getDateOfWork()
-    double heightCM = auction.getHeightCM()
-    double widthCM = auction.getWidthCM()
-    String medium = auction.getMedium()
-    String subject = auction.getSubject()
-    double auctionSalePrice = auction.getAuctionSalePrice()
-    Date auctionDateOfSale = auction.getAuctionDateOfSale()                                       
-    if(artistID == -1) flags[i++] = true
-    else result += " WHERE artistID ='" + artistID + "'"
-    if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
-    else
+    HashMap<String,Object> objects = loadMap(auction)
+    String[] keys = objects.keySet().toArray()
+    for(int i = 0; i < keys.length; i++)
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE titleOfWork ='" + titleOfWork + "'"
-      else result += " AND titleOfWork ='" + titleOfWork + "'"
-    }
-    if(dateOfWork == -1) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfWork ='" + dateOfWork + "'"
-      else result += " AND dateOfWork ='" + dateOfWork + "'"
-    }
-    if(heightCM < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE heightCM ='" + heightCM + "'"
-      else result += " AND heightCM ='" + heightCM + "'"
-    }
-    if(widthCM < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE widthCM ='" + widthCM + "'"
-      else result += " AND widthCM ='" + widthCM + "'"
-    }
-    if(medium == null || medium.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE medium ='" + medium + "'"
-      else result += " AND medium ='" + medium + "'"
-    }
-    if(subject == null || subject.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE subject ='" + subject + "'"
-      else result += " AND subject ='" + subject + "'"
-    }
-    if(auctionSalePrice < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE auctionSalePrice ='" + auctionSalePrice + "'"
-      else result += " AND auctionSalePrice ='" + auctionSalePrice + "'"
-    }
-    if(auctionDateOfSale == null) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
-      else result += " AND auctionDateOfSale ='" + auctionDateOfSale.toString() + "'"
+      if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true
+      else
+      {
+        if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + keys[i] + "='" + objects.get(keys[i]) + "'"
+        else result += " AND " + keys[i] + "='" + objects.get(keys[i]) + "'"
+      }
     }
     return result
   }
