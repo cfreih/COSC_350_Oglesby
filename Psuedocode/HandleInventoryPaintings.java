@@ -106,134 +106,48 @@ public abstract class HandleInventoryPaintings
                            targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice)
     }
   }
+  //Desc: method to load a HashMap with values to assist in the automation of SQL statements
+  // In particular, this method assists with limiting the amount of hardcoding in the stringify
+  //Return: the fully loaded HashMap is returned
+  private static HashMap<String,Object> loadMap(InventoryPainting inventory)
+  {
+    HashMap<String,Object> objects = new HashMap<String,Object>()
+    objects.put("artistID", HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1)))
+    objects.put("titleOfWork", inventory.getTitleOfWork())
+    objects.put("dateOfWork", inventory.getDateOfWork())
+    objects.put("classification", inventory.getClassification())
+    objects.put("heightCM", inventory.getHeightCM())
+    objects.put("widthCM", inventory.getWidthCM())
+    objects.put("medium", inventory.getMedium())
+    objects.put("subject", inventory.getSubject())
+    objects.put("sellerName", inventory.getSellerName())
+    objects.put("sellerAddress", inventory.getSellerAddress())
+    objects.put("dateOfPurchase", inventory.getDateOfPurchase())
+    objects.put("maxPurchasePrice", inventory.getMaxPurchasePrice())
+    objects.put("actualPurchasePrice", inventory.getActualPurchasePrice())
+    objects.put("targetSellPrice", inventory.getTargetSellPrice())
+    objects.put("dateOfSale", inventory.getDateOfSale())
+    objects.put("buyerName", inventory.getBuyerName())
+    objects.put("buyerAddress", inventory.getBuyerAddress())
+    objects.put("actualSellingPrice", inventory.getActualSellingPrice())
+    return objects
+  }
   //Desc: method converts an InventoryPainting into a String. Flags are set to true if the value is uninitialized.
   //Return: returns a String for the SQL statement
   private static String stringify(InventoryPainting inventory)
   {
     String result = ""
-    int i = 0
-    boolean[] flags = new boolean[18]
-    int artistID = HandleArtist.getArtistID(new Artist(inventory.getFirstName(), inventory.getLastName(), -1))
-    String titleOfWork = inventory.getTitleOfWork()
-    int dateOfWork = inventory.getDateOfWork()
-    int classification = inventory.getClassification()
-    double heightCM = inventory.getHeightCM()
-    double widthCM = inventory.getWidthCM()
-    String medium = inventory.getMedium()
-    String subject = inventory.getSubject()
-    String sellerName = inventory.getSellerName()
-    String sellerAddress = inventory.getSellerAddress()
-    Date dateOfPurchase = inventory.getDateOfPurchase()
-    double maxPurchasePrice = inventory.getMaxPurchasePrice()
-    double actualPurchasePrice = inventory.getActualPurchasePrice()
-    double targetSellPrice = inventory.getTargetSellPrice()
-    Date dateOfSale = inventory.getDateOfSale()
-    String buyerName = inventory.getBuyerName()
-    String buyerAddress = inventory.getBuyerAddress()
-    double actualSellingPrice = inventory.getActualSellingPrice()                                   
-    if(artistID == -1) flags[i++] = true
-    else result += " WHERE artistID ='" + artistID + "'"
-    if(titleOfWork == null || titleOfWork.equals("")) flags[i] = true
-    else
+    boolean[] flags = new boolean[9]
+    HashMap<String,Object> objects = loadMap(inventory)
+    String[] keys = objects.keySet().toArray()
+    for(int i = 0; i < keys.length; i++)
     {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE titleOfWork ='" + titleOfWork + "'"
-      else result += " AND titleOfWork ='" + titleOfWork + "'"
-    }
-    if(dateOfWork == -1) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfWork ='" + dateOfWork + "'"
-      else result += " AND dateOfWork ='" + dateOfWork + "'"
-    }
-    if(classification == null || classification.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE classification ='" + classification + "'"
-      else result += " AND classification ='" + classification + "'"
-    }
-    if(heightCM < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE classification ='" + classification + "'"
-      else result += " AND classification ='" + classification + "'"
-    }
-    if(widthCM < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE widthCM ='" + widthCM + "'"
-      else result += " AND widthCM ='" + widthCM + "'"
-    }
-    if(medium == null || medium.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE medium ='" + medium + "'"
-      else result += " AND medium ='" + medium + "'"
-    }
-    if(subject == null || subject.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE subject ='" + subject + "'"
-      else result += " AND subject ='" + subject + "'"
-    }
-    if(sellerName == null ||  sellerName.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE sellerName ='" + sellerName + "'"
-      else result += " AND sellerName ='" + sellerName + "'"
-    }
-    if(sellerAddresseOfSale == null || sellerAddress.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE sellerAddress ='" + sellerAddress + "'"
-      else result += " AND sellerAddress ='" + sellerAddress + "'"
-    }
-    if(dateOfPurchase == null) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfPurchase ='" + dateOfPurchase.toString() + "'"
-      else result += " AND dateOfPurchase ='" + dateOfPurchase.toString() + "'"
-    }
-    if(maxPurchasePrice < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE maxPurchasePrice ='" + maxPurchasePrice + "'"
-      else result += " AND maxPurchasePrice ='" + maxPurchasePrice + "'"
-    }
-    if(actualPurchasePrice < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE actualPurchasePrice ='" + actualPurchasePrice + "'"
-      else result += " AND actualPurchasePrice ='" + actualPurchasePrice + "'"
-    }
-    if(targetSellPrice < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE targetSellPrice ='" + targetSellPrice + "'"
-      else result += " AND targetSellPrice ='" + targetSellPrice + "'"
-    }
-    if(dateOfSale == null) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE dateOfSale ='" + dateOfSale + "'"
-      else result += " AND dateOfSale ='" + dateOfSale + "'"
-    }
-    if(HandlerUtility.checkInitialization(buyerName)) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE buyerName ='" + buyerName + "'"
-      else result += " AND buyerName ='" + buyerName + "'"
-    }
-    if(buyerAddress == null || buyerAddress.equals("")) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE buyerAddress ='" + buyerAddress + "'"
-      else result += " AND buyerAddress ='" + buyerAddress + "'"
-    }
-    if(actualSellingPrice < 0) flags[i] = true
-    else
-    {
-      if(HandlerUtility.checkFlags(flags, i++)) result += " WHERE actualSellingPrice ='" + actualSellingPrice + "'"
-      else result += " AND actualSellingPrice ='" + actualSellingPrice + "'"
+      if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true
+      else
+      {
+        if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + keys[i] + "='" + objects.get(keys[i]) + "'"
+        else result += " AND " + keys[i] + "='" + objects.get(keys[i]) + "'"
+      }
     }
     return result
   }
