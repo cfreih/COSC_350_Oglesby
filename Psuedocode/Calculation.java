@@ -1,5 +1,6 @@
 class Calculation
 {
+	
  //Desc: Calculates the similarity between this painting and the auction record provided.
  //Input: An auction record of a painting by the same artist.
  //Return: The similarity between the two paintings.
@@ -14,6 +15,7 @@ class Calculation
 	else similarity= (similarity * areaRecord)/areaPainting
 	return similarity
  }
+ 
  //Desc: Finds the painting that is most similary to the provided painting from an array of auction records.
  //Input: An array of auction records by the same artist.
  //Return: The auction record for the painting that is most similar to this painting.
@@ -32,6 +34,7 @@ class Calculation
 	}
 	return mostSimilar
  }
+ 
  //Desc: Calculates the maximum price the user should pay for the painting entered.
  //Input: The painting that the user wishes to know the maxium purchase price for.
  //Return: The max price the user should pay for the painting.
@@ -47,6 +50,7 @@ class Calculation
 	else price = calcMaxOther(painting)
 	return price
  }
+ 
  //Desc: Calculates the max buy price if the painting is a masterpiece.
  //Input: The painting of interest and an array of paintings by the same artist.
  //Return: The max price the painting should be bought for.
@@ -59,6 +63,7 @@ class Calculation
 	maxBuyPrice=maxBuyPrice*1.085*yearsBetween
 	return maxBuyPrice
  }
+ 
  //Desc: Calculates the max buy price if the painting is a masterwork.
  //Input: The painting of interest and an array of paintings by the same artist.
  //Return: The max price the painting should be bought for.
@@ -70,6 +75,7 @@ class Calculation
 	else maxBuyPrice=maxBuyPrice*((21-dateOfWork)/(22-dateOfWork))
 	return maxBuyPrice
  }
+ 
  //Desc: Calculates the max buy price if the painting is neither a masterpiece or a masterwork.
  //Input: The painting of interest and an array of paintings by the same artist.
  //Return: The max price the painting should be bought for.
@@ -81,4 +87,5 @@ class Calculation
 	int fashionablityConstant=artists[0].getFashionablityCoeff()
 	return area * fashionabilityConstant
  }
+ 
 }

@@ -4,7 +4,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>128</x>
+      <x>240</x>
       <y>128</y>
       <w>272</w>
       <h>400</h>
@@ -13,14 +13,13 @@
 --
 -artistFirstName: String
 -artistLastName: String
--artistID: int
 -titleOfWork: String
 -dateOfWork: int
 -heightCM: double
 -widthCM: double
 -medium: String
 -subject: String
--artistID
+-artistID: int
 --
 +setArtistFirstName(firstName: String): void
 +getArtistFirstName(): String
@@ -48,7 +47,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>464</x>
+      <x>576</x>
       <y>184</y>
       <w>256</w>
       <h>184</h>
@@ -65,14 +64,14 @@
 +setArtistLastName(last: String): void
 +getArtistLastName(): String
 +getArtistID(): int
-+setFashionabilityConstant(fashConst: int): void
-+getFashionabilityConstant(): int</panel_attributes>
++setFashionabilityCoeff(fashConst: int): void
++getFashionabilityCoeff(): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
+      <x>112</x>
       <y>648</y>
       <w>296</w>
       <h>136</h>
@@ -93,10 +92,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>352</x>
+      <x>464</x>
       <y>632</y>
       <w>296</w>
-      <h>656</h>
+      <h>664</h>
     </coordinates>
     <panel_attributes>_Inventory Painting class &lt;entity class&gt;_
 --
@@ -129,7 +128,7 @@
 +getMaxPurchasePrice(): double
 +setActualPurchasePrice(purchPrice: double): void
 +getActualPurchasePrice(): double
-#calcTargetSellPrice(): void
+-calcTargetSellPrice(): void
 +getTargetSellPrice(): double
 +setSoldYesOrNo(sold: boolean): void
 +getSoldYesOrNo(): boolean
@@ -157,7 +156,7 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>232</x>
+      <x>344</x>
       <y>504</y>
       <w>224</w>
       <h>144</h>
@@ -168,7 +167,7 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>40</x>
+      <x>152</x>
       <y>576</y>
       <w>232</w>
       <h>88</h>
@@ -179,7 +178,7 @@
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>392</x>
+      <x>504</x>
       <y>0</y>
       <w>88</w>
       <h>80</h>
@@ -190,7 +189,7 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>368</x>
+      <x>480</x>
       <y>56</y>
       <w>128</w>
       <h>40</h>
