@@ -6,7 +6,7 @@ public abstract class HandleArtist
   {
     String statement = "INSERT INTO artists(artistArtistFirstName, artistLastName, fashionability) VALUES('" + artist.getArtistFirstName() + 
       "','" + artist.getArtistLastName() + "','" + artist.getFashionabilityCoeff() + "')"
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
   //Desc: method searches the database and retrieves any matching records.
@@ -18,7 +18,7 @@ public abstract class HandleArtist
      + " JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += " " + stringify(artist)
     statement += " ORDER BY artistLastName, artistArtistFirstName"
-    SQLConnector connection = new SQLConnector(0, statement)
+    SQLConnector connection = new SQLConnector(statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<Artist> artists = new ArrayList<Artist>()
     loadResults(artists, result)
@@ -72,7 +72,7 @@ public abstract class HandleArtist
   {
     String statement = "SELECT artistID FROM artists "
     statement += stringify(artist)
-    SQLConnector connection = new SQLConnector(0, statement)
+    SQLConnector connection = new SQLConnector(statement)
     Vector result = connection.executeSQLQuery()
     return result.get(i)
   }
@@ -83,7 +83,7 @@ public abstract class HandleArtist
     String statement = "UPDATE artists SET artistArtistFirstName='" + artist.getArtistFirstName() + 
       "',artistLastName='" + artist.getArtistLastName() + "',fashionability='" + artist.getFashionabilityCoeff() + 
       stringify(searchKey)
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
   //Desc: method deletes an Artist in the database
@@ -92,7 +92,7 @@ public abstract class HandleArtist
   {
     String statement = "DELETE FROM artists"
     statement += stringify(artist)
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
 }

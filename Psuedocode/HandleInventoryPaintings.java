@@ -15,7 +15,7 @@ public abstract class HandleInventoryPaintings
       + "','" + inventory.getMaxPurchasePrice() + "','" + inventory.getActualPurchasePrice() + "','" + inventory.getTargetSellPrice()
       + "','" + inventory.getSoldYesOrNo() + "','" + inventory.getDateOfSale.toString() + "','" + inventory.getBuyerName()
       + "','" + inventory.getBuyerAddress() + "','" + inventory.getActualSellingPrice() +  "')"
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
   //Desc: method searches the database and retrieves any matching records. 
@@ -30,7 +30,7 @@ public abstract class HandleInventoryPaintings
      + " actualPurchasePrice, targetSellPrice, soldYesOrNo, dateOfSale, buyerName, buyerAddress, actualSellingPrice"
      + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
      + " WHERE sold=1 and dateOfSale > " + date + " Order by artistLastName" 
-    SQLConnector connection = new SQLConnector(0, statement)
+    SQLConnector connection = new SQLConnector(statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
     loadResults(inventoryPaintings, result)
@@ -52,7 +52,7 @@ public abstract class HandleInventoryPaintings
       statement += stringify(inventory[i])
     }
     statement += " ORDER BY artistLastName, artistArtistFirstName" //probably needs to be changed
-    SQLConnector connection = new SQLConnector(0, statement)
+    SQLConnector connection = new SQLConnector(statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
     loadResults(inventoryPaintings, result)
@@ -69,7 +69,7 @@ public abstract class HandleInventoryPaintings
      + " FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
     statement += stringify(auction)
     statement += " ORDER BY artistLastName, artistArtistFirstName" //probably needs to be changed
-    SQLConnector connection = new SQLConnector(0, statement)
+    SQLConnector connection = new SQLConnector(statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>()
     loadResults(inventoryPaintings, result)
@@ -165,7 +165,7 @@ public abstract class HandleInventoryPaintings
       + inventory.getActualPurchasePrice() + "',targetSellPrice='" + inventory.getTargetSellPrice() + "',dateOfSale='"
       + inventory.getDateOfSale() + "',buyerName='" + inventory.getBuyerName() + "',buyerAddress='" + inventory.getBuyerAddress()
       + "',actualSellingPrice='" + inventory.getActualSellingPrice() + stringify(searchKey)
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
   //Desc: method deletes an InventoryPainting in the database
@@ -174,7 +174,7 @@ public abstract class HandleInventoryPaintings
   {
     String statement = "DELETE FROM artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID"
     statement += stringify(inventory)
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
 }

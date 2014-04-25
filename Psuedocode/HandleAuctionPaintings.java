@@ -10,7 +10,7 @@ public abstract class HandleAuctionPaintings
       + "','" + auction.getTitleOfWork() + "','" + auction.getDateOfWork() + "','" + 
       auction.getHeightCM() + "','" + auction.getWidthCM() + "','" + auction.getMedium() + "','" + auction.getSubject()
       + "','" + auction.getAuctionSalePrice() + "','" + auction.getAuctionDateOfSale.toString() + "')"
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
   //Desc: method searches the database and retrieves any matching records.
@@ -23,7 +23,7 @@ public abstract class HandleAuctionPaintings
      + " JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += stringify(auction)
     statement += " ORDER BY artistLastName, artistArtistFirstName" //probably needs to be changed
-    SQLConnector connection = new SQLConnector(0, statement)
+    SQLConnector connection = new SQLConnector(statement)
     Vector result = connection.executeSQLQuery()
     ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>()
     loadResults(auctionPaintings, result)
@@ -95,7 +95,7 @@ public abstract class HandleAuctionPaintings
       + "',widthCM='" + auction.getWidthCM() + "',medium='" + auction.getMedium() + "',subject='" + auction.getSubject()
       + "',auctionSalePrice='" auction.getAuctionSalePrice() + "',auctionDateOfSale='" + auction.getAuctionDateOfSale()
       + stringify(searchKey)
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
   //Desc: method deletes an AuctionPainting in the database
@@ -104,7 +104,7 @@ public abstract class HandleAuctionPaintings
   {
     String statement = "DELETE FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID"
     statement += stringify(auction)
-    SQLConnector connection = new SQLConnector(1, statement)
+    SQLConnector connection = new SQLConnector(statement)
     connection.executeSQLQuery()
   }
 }
