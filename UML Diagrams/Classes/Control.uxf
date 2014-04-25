@@ -7,7 +7,7 @@
       <x>320</x>
       <y>136</y>
       <w>528</w>
-      <h>128</h>
+      <h>144</h>
     </coordinates>
     <panel_attributes>_Calculation Utility class &lt;control class&gt;_
 -&lt;abstract&gt;
@@ -27,7 +27,7 @@
       <x>0</x>
       <y>400</y>
       <w>544</w>
-      <h>152</h>
+      <h>168</h>
     </coordinates>
     <panel_attributes>_Handle Inventory class &lt;control class&gt;_
 _&lt;abstract&gt;_
@@ -91,7 +91,7 @@ _&lt;abstract&gt;_
       <x>568</x>
       <y>400</y>
       <w>472</w>
-      <h>144</h>
+      <h>152</h>
     </coordinates>
     <panel_attributes>_Handle Artist Fashionability &lt;control class&gt;_
 _&lt;abstract&gt;_
