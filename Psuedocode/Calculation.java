@@ -20,7 +20,7 @@ class Calculation
  private static AuctionPainting findMostSimilarPainting(InventoryPainting painting, AuctionPainting[] records)
  {
 	double max=0
-	AuctionPainting mostSimilar=new AuctionPainting()
+	AuctionPainting mostSimilar
 	for(int i=0; i<records.length;i++)
 	{
 		double temp=calcSimiliarity(painting, records[i])
@@ -37,11 +37,14 @@ class Calculation
  //Return: The max price the user should pay for the painting.
  public static double calcMaxPrice(InventoryPainting painting)
  {
-	AuctionPainting[] records = HandleInventory.retriveAuctionPainting(painting.getLastName())
-	double price = 0;
+	AuctionPainting tempAP = new AuctionPainting()
+	tempAP.setArtistFirstName(painting.getArtistFirstName())
+	tempAP.setArtistLastName(painting.getArtistLastName())
+	AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(tempAP)
+	double price = 0
 	if(painting.getClassification().toLowerCase.equals("masterpiece") price=calcMaxMasterpiece(painting, records)
 	else if (painting.getClassification().toLowerCase.equals("masterwork") price=calcMaxMasterwork(painting, records)
-	else price = calcMaxOther(painting, records)
+	else price = calcMaxOther(painting)
 	return price
  }
  //Desc: Calculates the max buy price if the painting is a masterpiece.
@@ -53,10 +56,7 @@ class Calculation
 	double maxBuyPrice=mostSimilar.getSalePriceAuction()
 	Date currentDate= new Date()
 	int yearsBetween= mostSimilar.getDateOfSaleAuction().getYear()-currentDate.getYear()
-	for(int i=0;i<=yearsBetween;i++)
-	{
-		maxBuyPrice=maxBuyPrice*1.085
-	}
+	maxBuyPrice=maxBuyPrice*1.085*yearsBetween
 	return maxBuyPrice
  }
  //Desc: Calculates the max buy price if the painting is a masterwork.
@@ -64,21 +64,21 @@ class Calculation
  //Return: The max price the painting should be bought for.
  private static double calcMaxMasterwork(InventoryPainting painting, AuctionPainting[] records)
  {
-	double maxBuyPrice=calcMaxMasterpiece(InventoryPainting painting,  records)
-	int dateOfWork = painting.getDateOfWork()
-	if(dateOfWork>20) maxBuyPrice=maxBuyPrice*0.25
+	double maxBuyPrice=calcMaxMasterpiece(painting,  records)
+	int dateOfWork = painting.getDateOfWork()/100
+	if(dateOfWork >= 20) maxBuyPrice=maxBuyPrice*0.25
 	else maxBuyPrice=maxBuyPrice*((21-dateOfWork)/(22-dateOfWork))
 	return maxBuyPrice
  }
  //Desc: Calculates the max buy price if the painting is neither a masterpiece or a masterwork.
  //Input: The painting of interest and an array of paintings by the same artist.
  //Return: The max price the painting should be bought for.
- private static double calcMaxOther(InventoryPainting painting, AuctionPainting[] records)
+ private static double calcMaxOther(InventoryPainting painting)
  {
 	double area=painting.getHeightCM()*painting.getWidthCM()
-	Artist artist=new artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1)
+	Artist artist=new Artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1)
 	Artist[] artists=HandleArtist.retrieveArtist(artist)
-	int fashionablityConstant=artists[0].getFashionablityConstant()
+	int fashionablityConstant=artists[0].getFashionablityCoeff()
 	return area * fashionabilityConstant
  }
 }
