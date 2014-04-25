@@ -15,6 +15,7 @@ public class Painting {
 	private double widthCM
 	private String medium
 	private String subject
+	private int artistID
 	
 	/**
 	 * Desc:  No arg constructor for a painting
@@ -31,6 +32,7 @@ public class Painting {
 		widthCM = -1.0
 		medium = ""
 		subject = ""
+		artistID = -1
 	}
 	
 	/**
@@ -39,7 +41,7 @@ public class Painting {
 	 * 		  being set with the proper parameters
 	 */
 	public Painting(String firstName, String lastName, String title, int date,
-			double height, double width, String med, String subj)
+			double height, double width, String med, String subj, int id)
 	{
 		artistFirstName = firstName
 		artistLastName = lastName
@@ -49,6 +51,7 @@ public class Painting {
 		widthCM = width
 		medium = med
 		subject = subj
+		artistID = id
 	}
 	
 	/**
@@ -217,6 +220,15 @@ public class Painting {
 	public String getSubject()
 	{
 		return subject
+	}
+	
+	/**
+	 * Desc:  Gets the artistID value of this object
+	 * Return:The artistID is returned
+	*/
+	public int getArtistID()
+	{
+		return artistID
 	}
 	
 	/**

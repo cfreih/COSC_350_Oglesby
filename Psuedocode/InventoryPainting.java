@@ -53,11 +53,11 @@ public class InventoryPainting extends Painting{
 	 * 		  being set with the proper parameters
 	 */
 	public Painting(String firstName, String lastName, String title, int date, int classif,
-			double height, double width, String med, String subj, String sName, String sAddress,
+			double height, double width, String med, String subj, int id, String sName, String sAddress,
 			Date dateP, double maxPurch, double actualPurch, boolean soldYN, Date dateS,
 			string bName, String bAddress, double actualSell)
 	{
-		super(firstName, lastName, title, date, classif, height, width, med, subj)
+		super(firstName, lastName, title, date, classif, height, width, med, subj, id)
 		sellerName = sName
 		sellerAddress = sAddress
 		dateOfPurchase = dateP
