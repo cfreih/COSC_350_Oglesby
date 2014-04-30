@@ -1,4 +1,4 @@
-class Calculation
+public abstract class Calculation
 {
  //Desc: Calculates the similarity between this painting and the auction record provided.
  //Input: An auction record of a painting by the same artist.
