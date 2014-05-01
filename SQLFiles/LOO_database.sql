@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS LOO_database;
 
 USE LOO_Database;
 
-DROP TABLE IF EXISTS painters;
+DROP TABLE IF EXISTS artists;
 DROP TABLE IF EXISTS auction_paintings;
 DROP TABLE IF EXISTS inventory_paintings;
 
@@ -28,7 +28,7 @@ CREATE TABLE auction_paintings (
 	subject varchar (25),
 	INDEX(medium),
 	INDEX(subject),
-	FOREIGN KEY(artistID) REFERENCES painters(artistID)
+	FOREIGN KEY(artistID) REFERENCES artists(artistID)
 ) ENGINE=InnoDB
 ;
 
@@ -56,14 +56,20 @@ CREATE TABLE inventory_paintings (
 	flagSoldReport BOOLEAN DEFAULT FALSE,
 	INDEX(dateOfPurchase),
 	INDEX(dateOfSale),
-	FOREIGN KEY(artistID) REFERENCES painters(artistID)
+	FOREIGN KEY(artistID) REFERENCES artists(artistID)
 ) ENGINE=InnoDB
 ;
-/* 
-insert into painters (firstName, lastName, fashionability) values ('Sam','Bock','10');
-insert into painters (firstName, lastName, fashionability) values ('Claudio','Arce','11');
-insert into painters (firstName, lastName, fashionability) values ('Tim','Burwitz','20');
-insert into painters (firstName, lastName, fashionability) values ('Clint','Freiheit','15');
+ 
+insert into artists (firstName, lastName, fashionability) values ('Sam','Bock','5522');
+insert into artists (firstName, lastName, fashionability) values ('Claudio','Arce','4000');
+insert into artists (firstName, lastName, fashionability) values ('Tim','Burwitz','6000');
+insert into artists (firstName, lastName, fashionability) values ('Clint','Freiheit','8900');
+insert into artists (firstName, lastName, fashionability) values ('Jessica','Spalding','4250');
+insert into artists (firstName, lastName, fashionability) values ('Heidi','Engebrestsen','7500');
+insert into artists (firstName, lastName, fashionability) values ('Katie','Jesperson','9500');
+insert into artists (firstName, lastName, fashionability) values ('Steve','Shum','9999');
+
+
 
 insert into auction_paintings (artistID, title, dateOfWork, dateOfAuction, salePrice, height, width, medium, subject)
 values (1, 'Painting1-1', 1995, '20100322', 200000.55, 12.10, 15.10, 'Oil', 'Lunar');
@@ -104,18 +110,18 @@ values (4, 'Painting1-3', 1985, '20020322', 5000000.55, 23.10, 75.10, 'Water', '
 insert into inventory_paintings (artistID, title, dateOfWork, clasification, height, width, medium, subject, dateOfPurchase, 
 			nameOfSeller, addressOfSeller, maximunPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting1', 2001, 'Masterpiece', 12.0, 34.0, 
-			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, 1, '20140128', 'Jessica Spalding',
+			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, true, '20140128', 'Jessica Spalding',
 			'Costelo', 400000.54);
 			
 			
 insert into inventory_paintings (artistID, title, dateOfWork, clasification, height, width, medium, subject, dateOfPurchase, 
 			nameOfSeller, addressOfSeller, maximunPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting2', 2001, 'Masterpiece', 12.0, 34.0, 
-			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, 1, '20110128', 'Jessica Spalding',
-			'Costelo', 400000.73);
+			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, false, NULL, '',
+			'', 0);
 
 insert into inventory_paintings (artistID, title, dateOfWork, clasification, height, width, medium, subject, dateOfPurchase, 
 			nameOfSeller, addressOfSeller, maximunPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting3', 1981, 'Masterpiece', 110.0, 34.0, 
-			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, 1, '20110128', 'Jessica Spalding',
-			'Costelo', 400000.99); */
+			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, true, '20110128', 'Jessica Spalding',
+			'Costelo', 400000.99);
