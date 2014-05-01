@@ -4,7 +4,7 @@
 //Fashionability Coefficient 
 
 
-public class Artist{
+public class Artist implements Cloneable{
 	
 	private String artistFirstName;
 	private String artistLastName;
@@ -85,6 +85,16 @@ public class Artist{
 	public String toString()
 	{
 		return artistLastName + ", " + artistFirstName + "; Fashionability: " + fashionabilityCoeff;
+	}
+	
+	/**
+	 * Desc: Clones this' properties to a different object
+	 * Return: The newly cloned Object
+	 */
+	@Override
+	protected Artist clone() throws CloneNotSupportedException
+	{
+		return (Artist) super.clone();
 	}
 	
 	/**
