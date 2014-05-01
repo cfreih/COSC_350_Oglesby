@@ -23,7 +23,7 @@ public class InventoryPainting extends Painting{
  private double targetAndActualRatio;
  private boolean flagBoughtReport;
  private boolean flagSoldReport;
- private int classification;
+ private String classification;
  
  /**
   * Desc:  no arg constructor initializing an InventoryPainting
@@ -48,6 +48,7 @@ public class InventoryPainting extends Painting{
   targetAndActualRatio = -1.0;
   flagBoughtReport = false;
   flagSoldReport = false;
+  classification = "";
  }
  
  /**
@@ -58,7 +59,7 @@ public class InventoryPainting extends Painting{
  public InventoryPainting(String firstName, String lastName, String title, int date,
    double height, double width, String med, String subj, int id, String sName, String sAddress,
    Date dateP, double maxPurch, double actualPurch, boolean soldYN, Date dateS,
-   String bName, String bAddress, double actualSell, int classif)
+   String bName, String bAddress, double actualSell, String classif)
  {
   super(firstName, lastName, title, date, height, width, med, subj, id);
   sellerName = sName;
@@ -71,6 +72,7 @@ public class InventoryPainting extends Painting{
   buyerName = bName;
   buyerAddress = bAddress;
   actualSellPrice = actualSell;
+  classification = classif;
   
   calcMaxAndActualRatio();
   calcTargetAndActualRatio();
@@ -469,18 +471,18 @@ public class InventoryPainting extends Painting{
  
  /**
   * Desc:  sets the InventoryPainting's classification to classID
-  * Post:  classification is changed to classID
+  * Post:  classification is changed to classif
   */
- public void setClassification(int classID)
+ public void setClassification(String classif)
  {
-  classification = classID;
+  classification = classif;
  }
  
  /**
   * Desc:  gets the InventoryPainting's classification
   * Return:the classification of the InventoryPainting
   */
- public int getClassification()
+ public String getClassification()
  {
   return classification;
  }
