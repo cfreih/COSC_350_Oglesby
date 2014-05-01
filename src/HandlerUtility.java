@@ -26,40 +26,16 @@ public abstract class HandlerUtility
   //Return: returns true if uninitialized, false if initialized
   public static boolean checkInitialization(Object o)
   {
-    try
-    {
-      Date d = (Date) o;
-      return checkInitialization(d);
-    }
-    catch(Exception e)
-    {
-      ;
-    }
-    try
-    {
-      String s = (String) o;
-      return checkInitialization(s);
-    }
-    catch(Exception e)
-    {
-      Number n = (Number) o;
-      return checkInitialization(n);
-    }
+    if(o instanceof Number) return checkInitialization((Number) o);
+    if(o instanceof Date) return checkInitialization((Date) o);
+    if(o instanceof String) return checkInitialization((String) o);
   }
   //Desc: method to check if a Number is initialized
   //Return: returns true if uninitialized, false if initialized
   public static boolean checkInitialization(Number n)
   {
-    try
-    {
-      int i = (Integer) n;
-      return i < 0;
-    }
-    catch(Exception e)
-    {
-      double d = (Double) n;
-      return d < 0;
-    }
+    if(n instanceof Double) return ((Double) n) < 0;
+    if(n instanceof Integer) return ((Integer) n) < 0;
   }
   //Desc: method to check if a String is initialized
   //Return: returns true if uninitialized, false if initialized
