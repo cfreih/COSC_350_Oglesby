@@ -1,3 +1,4 @@
+import java.util.*;
 public class PurchasedPaintingReport
 {
   private InventoryPainting[] paintingsBoughtInLastYear;
@@ -31,25 +32,26 @@ public class PurchasedPaintingReport
   //Desc: Calculates the ratio of maximum purchase price to actual purchase price 
   //   for all paintings bought in the last year.
   //Post: The ratio saved into maxAndaActualRatio of this object.
-  private static void calcMaxAndActualRatio()
+  private void calcMaxAndActualRatio()
   {
     int count=0;
-    for(int i=0;i<paintingsBoughtInLastYear; i++)
+    int total=0;
+    int length=paintingsBoughtInLastYear.length;
+    for(int i=0;i<length; i++)
     {
-      InventoryPainting painting=iter.next();
-      maxAndActualRatio+=paintingsBoughtInLast[i].getMaxAndActualRatio();
+      total+=paintingsBoughtInLastYear[i].getMaxAndActualRatio();
       count++;
     }
-    maxAndActualRatio=maxAndActualRatio/count;
+    maxAndActualRatio=total/count;
   }
   
   //Desc: Finds all paintings that have been bought in the last year. 
   //Return: An array of InventoryPainting Objects that were bought in the last year.
-  private static InventoryPainting[] getPaintingsBoughtInLastYear()
+  private InventoryPainting[] getPaintingsBoughtInLastYear()
   {
     Date d=new Date();
     d.setYear(d.getYear()-1);
-    return handleInventoryRecords.retrieveInventoryPaintings(d);
+    return HandleInventoryRecords.retrieveInventoryPaintings(d);
   }
   
 }
