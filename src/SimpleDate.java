@@ -22,9 +22,132 @@ public class SimpleDate {
 	/**
 	 * Desc: All-arg contructor for SimpleDate. Initializes month to m,
 	 * 		 day to d, and year to y.
+	 * 		 If the date is invalid, month, day, year is initialized to -1
 	 */
-	public SimpleDate(int m, int d, int y)
+	public SimpleDate(int y, int m, int d)
 	{
+		if(m > 12 || m < 1)
+		{
+			System.out.println("Invlaid date: Month");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		if(d < 1)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 1 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		//leap year
+		else if(m == 2 && y%4 == 0 && (y%100 == 0 || y%400 == 0) && d > 29)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		//not leap year
+		else if(m == 2 && d > 28)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 3 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 4 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 5 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 6 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 7 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 8 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 9 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 10 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 11 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
+		else if(m == 12 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			month = -1;
+			day = -1;
+			year = -1;
+			return;
+		}
 		month = m;
 		day = d;
 		year = y;
@@ -145,3 +268,4 @@ public class SimpleDate {
 	
 	
 }
+

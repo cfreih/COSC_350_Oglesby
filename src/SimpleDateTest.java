@@ -19,10 +19,10 @@ public class SimpleDateTest {
 		d1.setYear(2014);
 		//"3-16-2014"
 		System.out.println(d1.getMonth() + "-" + d1.getDay() + "-" + d1.getYear());
-		SimpleDate d2 = new SimpleDate(3,15,2013);
-		SimpleDate d3 = new SimpleDate(3,16,2013);
-		SimpleDate d4 = new SimpleDate(3,17,2013);
-		//"3/15/2013 3/16/2013 3/17/2013"
+		SimpleDate d2 = new SimpleDate(2013,3,15);
+		SimpleDate d3 = new SimpleDate(2013,3,16);
+		SimpleDate d4 = new SimpleDate(2013,3,17);
+		//"3/15/2013 3/16/2013 3/17/2013
 		System.out.println(d2 + " " + d3 + " " + d4);
 		//false
 		System.out.println(d1.withinNYears(d2, 1));
@@ -36,6 +36,25 @@ public class SimpleDateTest {
 		System.out.println(d3.withinNYears(d1, 1));
 		//true
 		System.out.println(d4.withinNYears(d1, 1));
+		//Invalid Date: Month
+		SimpleDate d5 = new SimpleDate(2012, 13, 1);
+		//-1/-1/-1
+		System.out.println(d5);
+		//Invalid Date: Day
+		d5 = new SimpleDate(2012,1,0);
+		//-1/-1/-1
+		System.out.println(d5);
+		//Invalid Date: Day
+		d5 = new SimpleDate(2012,1,32);
+		//-1/-1/-1
+		System.out.println(d5);
+		for(int i = 2; i < 13; i++)
+		{
+			//Invalid Date: Day
+			d5 = new SimpleDate(2012,i,32);
+			//-1/-1/-1
+			System.out.println(d5);
+		}
 	}
 
 }
