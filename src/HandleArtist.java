@@ -9,17 +9,9 @@ public abstract class HandleArtist
     String statement = "INSERT INTO "+ tableStatement +"(";
     HashMap<String,Object> objects = loadMap(artist);
     String[] keys = (String[]) objects.keySet().toArray();
-    for(int i = 0; i < keys.length; i++)
-    {
-      statement += keys[i];
-      if(i < keys.length - 1) statement += ",";
-    }
+    statement += HandlerUtility.loadKeys(keys);
     statement += ") VALUES(";
-    for(int i = 0; i < keys.length; i++)
-    {
-      statement += "'" + objects.get(i) + "'";
-      if(i < keys.length - 1) statement += ",";
-    }
+    statement += HandlerUtility.loadValues(objects, keys);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQLQuery();
@@ -34,11 +26,7 @@ public abstract class HandleArtist
     String statement = "SELECT";
     HashMap<String,Object> objects = loadMap(artist);
     String[] keys = (String[]) objects.keySet().toArray();
-    for(int i = 0; i < keys.length; i++)
-    {
-      statement += " " + keys[i];
-      if(i < keys.length - 1) statement += ",";
-    }
+    statement += HandlerUtility.loadKeys(keys);
     statement += " FROM " + tableStatement;
     statement += stringify(artist);
     statement += " ORDER BY " + orderBy;
@@ -100,11 +88,7 @@ public abstract class HandleArtist
     String statement = "UPDATE " + tableStatement + " SET";
     HashMap<String,Object> objects = loadMap(artist);
     String[] keys = (String[]) objects.keySet().toArray();
-    for(int i = 0; i < keys.length; i++)
-    {
-      statement += " " + keys[i] + "='" + objects.get(i);
-      if(i < keys.length - 1) statement += ",";
-    }
+    statement += HandlerUtility.loadKeysAndValues(objects,keys);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQLQuery();

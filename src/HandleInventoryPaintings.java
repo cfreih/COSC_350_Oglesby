@@ -113,7 +113,7 @@ public abstract class HandleInventoryPaintings
       String artistLastName = (String)result.get(i++);
       String titleOfWork = (String)result.get(i++);
       int dateOfWork = Integer.parseInt((String)result.get(i++));
-      int classification = Integer.parseInt((String)result.get(i++));
+      String classification = (String)result.get(i++);
       double heightCM = Double.parseDouble((String)result.get(i++));
       double widthCM = Double.parseDouble((String)result.get(i++));
       String medium = (String)result.get(i++);
