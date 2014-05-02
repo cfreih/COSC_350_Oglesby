@@ -5,7 +5,7 @@
  * @author Clint
  *
  */
-public class Painting {
+public class Painting implements Cloneable {
 	
 	private String artistFirstName;
 	private String artistLastName;
@@ -243,13 +243,24 @@ public class Painting {
 		else
 			return false;
 	}
+	/**
+	 * Desc: Creats a clone of this Painting
+	 * Return: the deep copy of this Painting
+	 * @throws CloneNotSupportedException 
+	 */
+	public Painting clone() throws CloneNotSupportedException
+	{
+		return (Painting) super.clone();
+		
+	}
 	
 	/**
 	 * Desc: Tests the various methods and constructors for a Painting
 	 * Post: Tests are printed to the screen to verify methods are working.
 	 * @param args
+	 * @throws CloneNotSupportedException 
 	 *
-	public static void main(String[] args)
+	public static void main(String[] args) throws CloneNotSupportedException
 	{
 		Painting testP = new Painting();
 		//Should print ", """
@@ -279,6 +290,12 @@ public class Painting {
 		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork() + " " + 
 				testP.getHeightCM() + " " + testP.getWidthCM() + " " + testP.getMedium()
 				+ " " + testP.getSubject() );	
+		
+		Painting cloneP = testP.clone();
+		testP.setArtistFirstName("Mace");
+		testP.setArtistLastName("Windu");
+		System.out.println(testP);
+		System.out.println(cloneP);
 	}*/
 	
 	

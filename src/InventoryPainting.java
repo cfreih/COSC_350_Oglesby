@@ -1,4 +1,4 @@
-import java.util.Date;
+
 
 /**
  * Class extending painting to fit the model of a painting in
@@ -6,17 +6,17 @@ import java.util.Date;
  * @author Clint
  *
  */
-public class InventoryPainting extends Painting{
+public class InventoryPainting extends Painting implements Cloneable{
  
  private String sellerName;
  private String sellerAddress;
- private Date dateOfPurchase;
+ private SimpleDate dateOfPurchase;
  private double maxPurchasePrice;
  private double actualPurchasePrice;
  private double maxAndActualRatio;
  private double targetSellPrice;
  private boolean soldYesOrNo;
- private Date dateOfSale;
+ private SimpleDate dateOfSale;
  private String buyerName;
  private String buyerAddress;
  private double actualSellPrice;
@@ -24,6 +24,9 @@ public class InventoryPainting extends Painting{
  private boolean flagBoughtReport;
  private boolean flagSoldReport;
  private String classification;
+ 
+ 
+ 
  
  /**
   * Desc:  no arg constructor initializing an InventoryPainting
@@ -35,11 +38,11 @@ public class InventoryPainting extends Painting{
   super();
   sellerName = "";
   sellerAddress = "";
-  dateOfPurchase = new Date();
+  dateOfPurchase = new SimpleDate();
   maxPurchasePrice = -1.0;
   actualPurchasePrice = -1.0;
   soldYesOrNo = false;
-  dateOfSale = new Date();
+  dateOfSale = new SimpleDate();
   buyerName = "";
   buyerAddress = "";
   actualSellPrice = -1.0;
@@ -58,7 +61,7 @@ public class InventoryPainting extends Painting{
   */
  public InventoryPainting(String firstName, String lastName, String title, int date,
    double height, double width, String med, String subj, int id, String sName, String sAddress,
-   Date dateP, double maxPurch, double actualPurch, boolean soldYN, Date dateS,
+   SimpleDate dateP, double maxPurch, double actualPurch, boolean soldYN, SimpleDate dateS,
    String bName, String bAddress, double actualSell, String classif)
  {
   super(firstName, lastName, title, date, height, width, med, subj, id);
@@ -114,6 +117,15 @@ public class InventoryPainting extends Painting{
       
  }
 
+ /**
+  * Desc:  sets the painting's MaxPurcahsePrice to mpx
+  * Post:  MaxPurcahsePrice is set to mpx
+  */
+ public void setMaxPurcahsePrice(double mpx)
+ {
+	 maxPurchasePrice = mpx;      
+ }
+
  
  /**
   * Desc:  returns the painting's sellerAddress
@@ -128,7 +140,7 @@ public class InventoryPainting extends Painting{
   * Desc:  sets the painting's dateOfOurchase to datePurch
   * Post:  dateOfPurchase is set to datePurch
   */
- public void setDateOfPurchase(Date datePurch)
+ public void setDateOfPurchase(SimpleDate datePurch)
  {
   dateOfPurchase = datePurch;
  }
@@ -143,18 +155,14 @@ public class InventoryPainting extends Painting{
   */
  public void setDateOfPurchase(int year, int month, int day)
  {
-  if(year < 8099 && year > 0 && month <= 12 && month > 0 &&
-    day > 0 && day < 31)
-   dateOfPurchase = new Date(year, month-1, day);
-  else
-   System.out.println("year must be between 0 and 8099, month between 1 and 12 and day between 1 and 31");
+   dateOfPurchase = new SimpleDate(year, month, day);
  }
  
  /**
   * Desc:  returns the painting's dateOfPurchase
   * Return:the painting's dateOfPurchase
   */
- public Date getDateOfPurchase()
+ public SimpleDate getDateOfPurchase()
  {
   return dateOfPurchase;
  }
@@ -182,6 +190,20 @@ public class InventoryPainting extends Painting{
   calcTargetSellPrice();
   calcFlagBoughtReport();
  }
+ 
+ /**
+  * Desc:  sets the painting's actualPurchasePrice to price.
+  *    updates the maxAndActualRatio and targetSellPrice.
+  *    sets the flagBoughtReport to its proper status
+  * Post:  actualPurchasePrice is set to price and maxAndActualRatio
+  *     and targetSellPrice is properly adjusted
+  */
+ public void setTargetSellPrice(double price)
+ {
+	targetSellPrice = price;    
+ }
+ 
+ 
  
  /**
   * Desc:  returns the painting's actualPurchasePrice
@@ -253,7 +275,7 @@ public class InventoryPainting extends Painting{
   * Pre:   soldYesOrNo must be set to true to set date.
   * Post:  dateOfSale is set to date
   */
- public void setDateOfSale(Date date)
+ public void setDateOfSale(SimpleDate date)
  {
   if(soldYesOrNo)
   {
@@ -275,13 +297,7 @@ public class InventoryPainting extends Painting{
  public void setDateOfSale(int year, int month, int day)
  {
   if(soldYesOrNo)
-  {
-   if(year < 8099 && year > 0 && month <= 12 && month > 0 &&
-     day > 0 && day < 31)
-    dateOfPurchase = new Date(year, month-1, day);
-   else
-    System.out.println("year must be between 0 and 8099, month between 1 and 12 and day between 1 and 31");
-  }
+    dateOfSale = new SimpleDate(year, month, day);
   else
    System.out.println("Painting has not be sold. Cannot set date");
  }
@@ -291,14 +307,14 @@ public class InventoryPainting extends Painting{
   * Pre:   soldYesOrNo must be true
   * Return:the painting's dateOfPurchase
   */
- public Date getDateOfSale()
+ public SimpleDate getDateOfSale()
  {
   if(soldYesOrNo)
-   return dateOfPurchase;
+   return dateOfSale;
   else
   {
    System.out.println("Painting has not been sold");
-   return new Date();
+   return new SimpleDate();
   }
  }
  
@@ -486,8 +502,35 @@ public class InventoryPainting extends Painting{
  {
   return classification;
  }
+ 
+ public void setFlagBoughtReport(boolean bool){
+	flagBoughtReport=bool;
+ }
+ 
+ public void setFlagSoldReport(boolean bool){
+	flagSoldReport=bool;
+ }
+ 
+ /**
+  * Desc: Creates a new InvenotryPainting that is a clone of this InventoryPainting
+  * Return: the deep-copy of this InventoryPainting
+ * @throws CloneNotSupportedException 
+  */
+ public InventoryPainting clone() throws CloneNotSupportedException
+ {
+	 InventoryPainting cloneP = (InventoryPainting) super.clone();
+	 cloneP.setDateOfPurchase(this.getDateOfPurchase().getYear(),
+			 this.getDateOfPurchase().getMonth(), this.getDateOfPurchase().getDay());
+	 cloneP.setDateOfSale(this.getDateOfSale().getYear(), this.getDateOfSale().getMonth(),
+			 this.getDateOfSale().getDay());
+	 return cloneP;
+ }
+ 
+ 
  /*
- public static void main(String[] args)
+  * Desc: Test the methods in InventoryPainting
+  */
+ public static void main(String[] args) throws CloneNotSupportedException
  {
   InventoryPainting testP = new InventoryPainting();
   //Should print ", """
@@ -497,8 +540,8 @@ public class InventoryPainting extends Painting{
     testP.getHeightCM() + " " + testP.getWidthCM() + " " + testP.getMedium()
     + " " + testP.getSubject() + "end");
   testP = new InventoryPainting("Sammichelle", "Bachman", "Twinkle, Twinkle", 1992, 24.2, 36.3,
-    "Oil", "Economics", -1, "Cloud Fieldsize", "Van by the river", new Date(2010, 6, 14),
-    1230000, 1000000, false, new Date(), "", "", -1, 2);
+    "Oil", "Economics", -1, "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6, 14),
+    1230000, 1000000, false, new SimpleDate(), "", "", -1, "MasterPiece");
   //Should print "Bachman, Sammichelle "Twinkle, Twinkle""
   System.out.println(testP);
   //Should print "-1 1992 0.1 199.9 Oil Economics"
@@ -533,18 +576,18 @@ public class InventoryPainting extends Painting{
   
   testP.setSellerName("Kevin Kevin");
   testP.setSellerAddress("Under the I-22 bridge");
-  testP.setDateOfPurchase(new Date(123, 9, 14));
+  testP.setDateOfPurchase(new SimpleDate(123, 9, 14));
   System.out.println(testP.getDateOfPurchase());
   testP.setDateOfPurchase(3,6,9);
   testP.setActualPurchasePrice(1500000);
   testP.setSoldYesOrNo(true);
-  testP.setDateOfSale(new Date(0,1,1));
+  testP.setDateOfSale(new SimpleDate(0,1,1));
   System.out.println(testP.getDateOfSale());
-  testP.setDateOfSale(2,5,1975);
+  testP.setDateOfSale(1975,2,5);
   testP.setBuyerName("Ky Kopp");
   testP.setBuyerAddress("Timbuktu");
   testP.setActualSellPrice(1500000);
-  testP.setClassification(1);
+  testP.setClassification("MasterWork");
   //Should print out the following:
   //"Kevin Keve Under the I-22 bridge [Date March 6, 9] 1230000 6000000 1.219 3225000"
   //"true [Date January 1, 1] Ky Kopp Timbuktu 1500000 true true 1 0.465
@@ -558,6 +601,12 @@ public class InventoryPainting extends Painting{
     testP.getFlagSoldReport() + " " + testP.getClassification() + " " + testP.getTargetAndActualRatio());
   testP.setActualSellPrice(4000000);
   System.out.println(testP.getFlagSoldReport());
- }*/
+  
+  InventoryPainting cloneIP = testP.clone();
+  testP.setDateOfPurchase(new SimpleDate(1943,7,4));
+  testP.setDateOfSale(new SimpleDate(2012,9,22));
+  System.out.println(testP.getDateOfPurchase() + " " + testP.getDateOfSale());
+  System.out.println(cloneIP.getDateOfPurchase() + " " + cloneIP.getDateOfSale());
+ }
  
 }

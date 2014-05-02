@@ -148,9 +148,12 @@ public class SimpleDate {
 			year = -1;
 			return;
 		}
-		month = m;
-		day = d;
-		year = y;
+		else
+		{
+			month = m;
+			day = d;
+			year = y;
+		}
 	}
 	
 	/**
@@ -159,7 +162,13 @@ public class SimpleDate {
 	 */
 	public void setMonth(int m)
 	{
-		month = m;
+		if(m > 12 || m < 1)
+		{
+			System.out.println("Invlaid date: Month");
+			month = -1;
+		}
+		else
+			month = m;
 	}
 	
 	/**
@@ -177,7 +186,80 @@ public class SimpleDate {
 	 */
 	public void setDay(int d)
 	{
-		day = d;
+		if(d < 1)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 1 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		//leap year
+		else if(month == 2 && year%4 == 0 && (year%100 == 0 || year%400 == 0) && d > 29)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		//not leap year
+		else if(month == 2 && d > 28)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 3 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 4 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 5 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 6 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 7 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 8 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 9 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 10 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 11 && d > 30)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else if(month == 12 && d > 31)
+		{
+			System.out.println("Invalid date: Day");
+			day = -1;
+		}
+		else
+			day = d;
 	}
 	
 	/**
@@ -263,7 +345,12 @@ public class SimpleDate {
 	 */
 	public String toString()
 	{
-		return this.getMonth() + "/" + this.getDay() + "/" + this.getYear();
+		String s = this.getMonth() + "/" + this.getDay() + "/" + Math.abs(this.getYear());
+		if(this.getYear() < 0)
+			s += " B.C.E.";
+		else
+			s += " C.E.";
+		return s;
 	}
 	
 	

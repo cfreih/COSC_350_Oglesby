@@ -1,4 +1,4 @@
-import java.util.Date;
+
 
 /**
  * This class extends the Painting class and implements the proper
@@ -6,10 +6,10 @@ import java.util.Date;
  * @author Clint
  *
  */
-public class AuctionPainting extends Painting{
+public class AuctionPainting extends Painting implements Cloneable{
 
  private double salePriceAuction;
- private Date dateOfSaleAuction;
+ private SimpleDate dateOfSaleAuction;
  
  /**
   * Desc:  no arg constructor initializing an AuctionPainting
@@ -20,7 +20,7 @@ public class AuctionPainting extends Painting{
  {
   super();
   salePriceAuction = -1.0;
-  dateOfSaleAuction = new Date();
+  dateOfSaleAuction = new SimpleDate();
  }
  
  /**
@@ -29,7 +29,7 @@ public class AuctionPainting extends Painting{
   *     being set with the proper parameters
   */
  public AuctionPainting(String firstName, String lastName, String title, int date,
-   double height, double width, String med, String subj, int id, double salePrice, Date dateSale)
+   double height, double width, String med, String subj, int id, double salePrice, SimpleDate dateSale)
  {
   super(firstName, lastName, title, date, height, width, med, subj, id);
   salePriceAuction = salePrice;
@@ -58,7 +58,7 @@ public class AuctionPainting extends Painting{
   * Desc:  sets the painting's dateOfSaleAuction to dateSale
   * Post:  dateOfSaleAuction is set to dateSale
   */
- public void setDateOfSaleAuction(Date dateSale)
+ public void setDateOfSaleAuction(SimpleDate dateSale)
  {
   dateOfSaleAuction = dateSale;
  }
@@ -73,28 +73,38 @@ public class AuctionPainting extends Painting{
   */
  public void setDateOfSaleAuction(int year, int month, int day)
  {
-  if(year < 8099 && year > 0 && month <= 12 && month > 0 &&
-    day > 0 && day < 31)
-   dateOfSaleAuction = new Date(year, month-1, day);
-  else
-   System.out.println("year must be between 0 and 8099, month between 1 and 12 and day between 1 and 31");
+   dateOfSaleAuction = new SimpleDate(year, month, day);
  }
  
  /**
   * Desc:  returns the painting's dateOfSaleAuction
   * Return:the painting's dateOfSaleAuction
   */
- public Date getDateOfSaleAuction()
+ public SimpleDate getDateOfSaleAuction()
  {
   return dateOfSaleAuction;
+ }
+ 
+ /**
+  * Desc: Method to clone an instance of an AuctionPainting to another AuctinoPainting
+  * Return: The deep-copy clone of this AuctionPainting
+ * @throws CloneNotSupportedException 
+  */
+ public AuctionPainting clone() throws CloneNotSupportedException
+ {
+	 AuctionPainting clonedP = (AuctionPainting) super.clone();
+	 clonedP.setDateOfSaleAuction(this.getDateOfSaleAuction().getYear(), 
+			 this.getDateOfSaleAuction().getMonth(),this.getDateOfSaleAuction().getDay());
+	 return clonedP;
  }
  
  /**
   * Desc: Tests for AuctionPaintings.
   * Post: Results of using methods printed on the screen.
   * @param args
+ * @throws CloneNotSupportedException 
   */
- public static void main(String[] args)
+ public static void main(String[] args) throws CloneNotSupportedException
  {
   AuctionPainting testP = new AuctionPainting();
   //Should print ", """
@@ -104,7 +114,7 @@ public class AuctionPainting extends Painting{
     testP.getHeightCM() + " " + testP.getWidthCM() + " " + testP.getMedium()
     + " " + testP.getSubject() + testP.getSalePriceAuction() + " " +
     testP.getDateOfSaleAuction() +" end");
-  testP = new AuctionPainting("Sammichelle", "Bachman", "Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics", -1, 12, new Date(1852,3,17));
+  testP = new AuctionPainting("Sammichelle", "Bachman", "Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics", -1, 12, new SimpleDate(1852,3,17));
   //Should print "Bachman, Sammichelle "Twinkle, Twinkle""
   System.out.println(testP);
   //Should print "-1 1992 0.1 199.9 Oil Economics 12.00 [Date with March 17 1852]"
@@ -120,7 +130,7 @@ public class AuctionPainting extends Painting{
   testP.setWidthCM(10000.1);
   testP.setMedium("Acrylic");
   testP.setSubject("Phypsychics");
-  testP.setDateOfSaleAuction(new Date(1533, 12, 31));
+  testP.setDateOfSaleAuction(new SimpleDate(1533, 12, 31));
   //Print out date of December 31 1533
   System.out.println(testP.getDateOfSaleAuction());
   testP.setSalePriceAuction(12525);
@@ -132,5 +142,11 @@ public class AuctionPainting extends Painting{
     testP.getHeightCM() + " " + testP.getWidthCM() + " " + testP.getMedium()
     + " " + testP.getSubject() + " " + testP.getSalePriceAuction() + " " +
     testP.getDateOfSaleAuction());
+  
+  AuctionPainting clonedAP = testP.clone();
+  testP.setDateOfSaleAuction(new SimpleDate(1325,11,20));
+  testP.setArtistFirstName("Bob");
+  System.out.println(testP + " " + testP.getDateOfSaleAuction());
+  System.out.println(clonedAP + " " + clonedAP.getDateOfSaleAuction());
  }
 }
