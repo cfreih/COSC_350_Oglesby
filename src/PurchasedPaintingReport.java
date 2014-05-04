@@ -1,6 +1,6 @@
 import java.util.*;
 //commentso this changes
-public class PurchasedPaintingReport
+public class PurchasedPaintingReport extends Report
 {
   private InventoryPainting[] paintingsBoughtInLastYear;
   private double maxAndActualRatio;
@@ -52,7 +52,7 @@ public class PurchasedPaintingReport
   {
     Date d=new Date();
     d.setYear(d.getYear()-1);
-    return HandleInventoryRecords.retrieveInventoryPaintings(d);
+    return HandleInventoryPaintings.retrieveInventoryPaintings(d);
   }
   
 }

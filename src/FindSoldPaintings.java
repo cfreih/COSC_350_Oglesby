@@ -1,5 +1,5 @@
 import java.util.*;
-public abstract class FindSoldPaintings
+public abstract class FindSoldPaintings extends Report
 {
   protected InventoryPainting[] soldPaintings;
   

@@ -17,7 +17,6 @@ public class DetectTrendsReport extends FindSoldPaintings
   {
     return reportPaintings;
   }
-  
   //Desc: method finds all artists who have sold more than one painting in the last year. 
   //Pre: soldPaintings must be loaded from the Handler
   //Return: returns a String array with the artists names from the last year as elements
