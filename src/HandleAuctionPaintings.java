@@ -14,7 +14,7 @@ public abstract class HandleAuctionPaintings
     statement += HandlerUtility.loadValues(objects, keys);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
   //Desc: method searches the database and retrieves any matching records.
   // Search terms are passed in as an AuctionPainting with fields initialized if they are search terms
@@ -31,7 +31,7 @@ public abstract class HandleAuctionPaintings
     statement += stringify(auction);
     statement += " ORDER BY " + orderBy;
     SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQLQuery();
+    Vector result = connection.executeSQL_Query();
     ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>();
     loadResults(auctionPaintings, result);
     return (AuctionPainting[]) auctionPaintings.toArray();
@@ -52,7 +52,8 @@ public abstract class HandleAuctionPaintings
       String subject = (String) result.get(i++);
       int artistID = Integer.parseInt((String)result.get(i++));
       double auctionSalePrice = Double.parseDouble((String)result.get(i++));
-      Date auctionDateOfSale = new Date(Date.parse((String)result.get(i)));
+      SimpleDate auctionDateOfSale = (SimpleDate) result.get(i);
+      //Date auctionDateOfSale = new Date(Date.parse((String)result.get(i)));
       auctionPaintings.add(new AuctionPainting(artistFirstName, artistLastName, titleOfWork, dateOfWork,
                            heightCM, widthCM, medium, subject, artistID, auctionSalePrice, auctionDateOfSale));
     }
@@ -105,7 +106,7 @@ public abstract class HandleAuctionPaintings
     statement += HandlerUtility.loadKeysAndValues(objects,keys);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
   //Desc: method deletes an AuctionPainting in the database
   //Post: an AuctionPainting is deleted in the database
@@ -115,6 +116,6 @@ public abstract class HandleAuctionPaintings
     String statement = "DELETE FROM " + tableStatement;
     statement += stringify(auction);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
 }

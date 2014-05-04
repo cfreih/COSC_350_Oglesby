@@ -29,6 +29,7 @@ public abstract class HandlerUtility
     if(o instanceof Number) return checkInitialization((Number) o);
     if(o instanceof Date) return checkInitialization((Date) o);
     if(o instanceof String) return checkInitialization((String) o);
+    return true;
   }
   //Desc: method to check if a Number is initialized
   //Return: returns true if uninitialized, false if initialized
@@ -36,6 +37,7 @@ public abstract class HandlerUtility
   {
     if(n instanceof Double) return ((Double) n) < 0;
     if(n instanceof Integer) return ((Integer) n) < 0;
+    return true;
   }
   //Desc: method to check if a String is initialized
   //Return: returns true if uninitialized, false if initialized

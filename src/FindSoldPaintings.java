@@ -9,14 +9,18 @@ public abstract class FindSoldPaintings
   {
     findSoldInLastYear();
   }
-  
   //Desc: method retrieves all of the painting sold in the last year
   //Post: the paintings sold in the last year are stored as soldPaintings
-  public void findSoldInLastYear()
+  protected void findSoldInLastYear()
   {
     Date d = new Date();
     d.setYear(d.getYear() - 1);
     this.soldPaintings = HandleInventoryPaintings.retrieveInventoryPaintings(d);
   }
-  
+  //Desc: setter for soldPaintings
+  //Post: soldPaintings is changed to arg
+  protected void setSoldPaintings(InventoryPainting[] soldPaintings)
+  {
+    this.soldPaintings = soldPaintings;
+  }
 }

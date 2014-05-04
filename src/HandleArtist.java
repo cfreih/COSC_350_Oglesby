@@ -14,7 +14,7 @@ public abstract class HandleArtist
     statement += HandlerUtility.loadValues(objects, keys);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
   //Desc: method searches the database and retrieves any matching records.
   // Search terms are passed in as an Artist with fields initialized if they are search terms
@@ -31,7 +31,7 @@ public abstract class HandleArtist
     statement += stringify(artist);
     statement += " ORDER BY " + orderBy;
     SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQLQuery();
+    Vector result = connection.executeSQL_Query();
     ArrayList<Artist> artists = new ArrayList<Artist>();
     loadResults(artists, result);
     return (Artist[]) artists.toArray();
@@ -91,7 +91,7 @@ public abstract class HandleArtist
     statement += HandlerUtility.loadKeysAndValues(objects,keys);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
   //Desc: method deletes an Artist in the database
   //Post: an artist is deleted in the database
@@ -101,7 +101,7 @@ public abstract class HandleArtist
     String statement = "DELETE FROM " + tableStatement;
     statement += stringify(artist);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
 }
  

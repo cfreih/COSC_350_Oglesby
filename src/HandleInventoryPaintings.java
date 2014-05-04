@@ -14,7 +14,7 @@ public abstract class HandleInventoryPaintings
     statement += HandlerUtility.loadValues(objects, keys);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
   //Desc: method searches the database and retrieves any matching records. 
   // Search terms only a Date object
@@ -33,7 +33,7 @@ public abstract class HandleInventoryPaintings
     statement += " WHERE sold=1 and dateOfSale > " + date + " ";
     statement += " ORDER BY " + orderBy;
     SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQLQuery();
+    Vector result = connection.executeSQL_Query();
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
     loadResults(inventoryPaintings, result);
     return (InventoryPainting[]) inventoryPaintings.toArray();
@@ -58,7 +58,7 @@ public abstract class HandleInventoryPaintings
     }
     statement += " ORDER BY " + orderBy;
     SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQLQuery();
+    Vector result = connection.executeSQL_Query();
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
     loadResults(inventoryPaintings, result);
     return (InventoryPainting[])inventoryPaintings.toArray();
@@ -78,7 +78,7 @@ public abstract class HandleInventoryPaintings
     statement += stringify(inventory);
     statement += " ORDER BY " + orderBy;
     SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQLQuery();
+    Vector result = connection.executeSQL_Query();
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
     loadResults(inventoryPaintings, result);
     return (InventoryPainting[])inventoryPaintings.toArray();
@@ -101,11 +101,13 @@ public abstract class HandleInventoryPaintings
       int artistID = Integer.parseInt((String)result.get(i++));
       String sellerName = (String)result.get(i++);
       String sellerAddress = (String)result.get(i++);
-      Date dateOfPurchase = new Date(Date.parse((String)result.get(i++)));
+      SimpleDate dateOfPurchase = (SimpleDate) result.get(i++);
+      //Date dateOfPurchase = new Date(Date.parse((String)result.get(i++)));
       double maxPurchasePrice = Double.parseDouble((String)result.get(i++));
       double actualPurchasePrice = Double.parseDouble((String)result.get(i++));
       boolean soldYesOrNo = Boolean.parseBoolean((String)result.get(i++));
-      Date dateOfSale = new Date(Date.parse((String)result.get(i++)));
+      SimpleDate dateOfSale = (SimpleDate) result.get(i++);
+      //Date dateOfSale = new Date(Date.parse((String)result.get(i++)));
       String buyerName = (String)result.get(i++);
       String buyerAddress = (String)result.get(i++);
       double actualSellingPrice = Double.parseDouble((String)result.get(i++));
@@ -172,7 +174,7 @@ public abstract class HandleInventoryPaintings
     statement += " FROM " + tableStatement;
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
   //Desc: method deletes an InventoryPainting in the database
   //Post: an InventoryPainting is deleted in the database
@@ -182,6 +184,6 @@ public abstract class HandleInventoryPaintings
     String statement = "DELETE FROM " + tableStatement;
     statement += stringify(inventory);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQLQuery();
+    connection.executeSQL_Query();
   }
 }
