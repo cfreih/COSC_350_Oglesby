@@ -14,14 +14,16 @@ public class OOGUI extends JPanel implements ActionListener{
 	private JPanel mainMenu = new JPanel()
 	private JButton updateAuctionRecordsMenuButton = new JButton()
 	private JPanel updateAuctionRecordsMenuPanel = new JPanel()
-	private JButton sellAndUpdateLOOMenuButton = new JButton()
-	private JPanel sellAndUpdateLOOMenuPanel = new JPanel()
+	private JButton manageInventoryLOOMenuButton = new JButton()
+	private JPanel manageInventoryLOOMenuPanel = new JPanel()
 	private JButton buyLOOMenuButton = new JButton()
 	private JPanel buyLOOMenuPanel = new JPanel()
 	private JButton updateArtistFashionabilityMenuButton = new JButton()
 	private JPanel updateArtistFashionabilityMenuPanel = new JPanel()
 	private JButton reportsMenuButton = new JButton()
-	private JPanel reportsMenuPanel = new JPanel()
+	private JButton buyReportButton = new JButton()
+	private JButton sellReportButton = new JButton()
+	private JButton trendReportButton = new JButton()
 	private JOptionPane buyOption = new JOptionPane()
 	
 	/**
@@ -46,7 +48,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	{
 		mainMenu.setLayout(new FlowLayout())
 		mainMenu.add(updateAuctionRecordsMenuButton)
-		mainMenu.add(sellAndUpdateLOOMenuButton)
+		mainMenu.add(manageInventoryLOOMenuButton)
 		mainMenu.add(buyLOOMenuButton)
 		mainMenu.add(updateArtistFashionabilityMenuButton)
 		mainMenu.add(reportsMenuButton)
@@ -59,7 +61,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	public void registerListeners()
 	{
 		updateAuctionRecordsMenuButton.addActionListener(this)
-		sellAndUpdateLOOMenuButton.addActionListener(this)
+		manageInventoryLOOMenuButton.addActionListener(this)
 		buyLOOMenuButton.addActionListener(this)
 		updateArtistFashionabilityMenuButton.addActionListener(this)
 		reportsMenuButton.addActionListener(this)
@@ -78,79 +80,127 @@ public class OOGUI extends JPanel implements ActionListener{
 			setUpUpdateAuctionRecordsMenuPanel()
 			changePanelToUpdateAuctionRecordsMenuPanel()
 			if(Update Selected)
-				AuctionPainging selectedAP = selectAuctionPainting()
-				updateChangedAttributes()
-			if(Delete Selected)
-				AuctionPainging selectedAP = selectAuctionPainting()
-				deletedAuctionPainting()
-			if(Add AuctionPainting Selected)
-				Auction Painting newP = makeNewAuctionPaintingObj()
-				HandleAuctionPaintings.createAuctionPainting(newP)
-		}
-		if(e.getSource() == sellAndUpdateLOOMenuButton)
-		{
-			setUpSellAndUpdateLOOMenuPanel()
-			changePanelToSellAndUpdateLOOMenuPanel()
-			InventoryPainting selectedIP = selectInventoryPainting()
-			if(Fields Changed && UpdateButton Pressed)
 			{
-				displayPaintingInfo()
-				if(Field x is changed)
-					selectedIP.setX(value changed)
-				HandleInventoryPaintings.updateInventoryPainting(selectedIP)
+				AuctionPainting selectedAP = selectAuctionPainting() //234
+				AuctionPaintings aucPaintings[] = HandleAuctionPaintings.retrieveAuctionPaintings(selectedAP)
+				selectedAP = aucPaintings[0]
+				//Error check that paintings exist in DB
+				AuctionPainting modifyAP = new AuctionPainting()
+				setupUpdateInputPanel()
+				changePanelToUpdateInputPanel()
+				if(Field X is changed)
+					modifyAP.setX(value changed)
+				if(update selected
+					HandleAuctionPaintings.updateAuctionPainting(selectedAP, modifyAP)
+				if(Delete Selected)
+					HandleAuctionPaintings.deleteAuctionPainting(selectedAP)
 			}
-			if(Delete Painting Pressed)
-				HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
+			if(Add AuctionPainting Selected)
+			{
+				AuctionPainting addingAP = new AuctionPainting()
+				setUpCreateInputPanel()
+				changePanelToCreateInputPanel()
+				addingAP = getInputtedFields()
+				if(Add confirm selected)
+					HandleAuctionPaintings.createAuctionPainting(addingAP)
+			}
+			if(SeeAll Selected)
+			{
+				show_All_Paintings_in_Auction_Records()
+			}
+		}
+		if(e.getSource() == manageInventoryLOOMenuButton)
+		{
+			setUpmanageInventoryLOOMenuPanel()
+			changePanelTomanageInventoryLOOMenuPanel()
+			if(Update selected)
+			{
+				setupUpdateInputPanel()
+				changeToUpdateInputPanel()
+				InventoryPainting selectedIP = selectInventoryPainting()
+				InventoryPainting modifyIP = new InventoryPainting()
+				if(Field x is changed)
+						modifyIP.setX(value changed)
+				if(Fields Changed && UpdateButton Pressed)
+				{
+					displayPaintingInfo()
+					HandleInventoryPaintings.updateInventoryPainting(modifyAP, selectedIP)
+				}
+				if(Delete Painting Pressed)
+					HandleInventoryPaintings.deleteInventoryPainting(selectedIP)
+			}
+			if(Add Selected)
+			{
+				setupAddInputPanel()
+				changeToAddInputPanel()
+				InventoryPainting addedPainting = getAddedPaintingInfo()    //returns an InventoryPainting
+											    //with what fields have been filled in
+				if(Add Confirmed)
+					HandleInventoryPaintings.createInventoryPainting(addedPainting)
+			}
 			if(Sell Painting Pressed)
 			{
-				getReleventInfoForSale()
-				HandleInventoryPaintings.updateInventoryPainting(slectedIP)
+				setupSellPaintingInputPanel()
+				changeToSellPaintingInputPanel()
+				InventoryPainting selectedIP = selectInventoryPainting()
+				InventoryPainting modifyIP = new InventoryPainting()
+				getReleventInfoForSale(modifyIP)
+				HandleInventoryPaintings.updateInventoryPainting(modifyIP, selectedIP)
+			}
+			if(SeeAll Selected)
+			{
+				show_All_Paintings_in_Inventory_Records()
+			}
+			if(SeeAllNotSold){
+				show_All_Paintings_not_Sold()
 			}
 		}
 		if(e.getSource() == buyLOOMenuButton)
 		{
 			setUpBuyLOOMenuPanel()
 			changePanelToBuyLOOMenuPanel()
-			InventoryPainting p = getReleventPaintingInfo()
-			calcMaxPrice(p)
-			displayMaxPriceWithBuyOption()
+			InventoryPainting p = getReleventPaintingInfo() //Takes info from input text boxes and sets up
+															//An Inventory Painting
+			p.setMaxPrice(Calculation.calcMaxPrice(p))			
+			displayMaxPriceWithBuyOption(p.getMaxPrice())   //Screen showing max price and option to buy painting
 			if(Bought selected)
 			{
 				getReleventInfo()
-				setRemaingFieldsForInventoryPainting()
+				setRemaingFieldsForInventoryPainting(p)
 				if(confirmed bought)
 					HandleInventory.createInventoryPainting(p)
 			}
+			else backToMainScreen()
 		}
 		if(e.getSource() == updateArtistFashionabilityMenuButton)
 		{
 			setUpUpdateArtistFashionabilityMenuPanel()
 			changePanelToUpdateArtistFashionabilityMenuPanel()
-			Artist selectedArtist = selectAnArtist()
-			if(fields changed)
-				HandleArtist.updateArtist(selectedArtist, HandleArtist.getArtistID(selectedArtist))
+			Artist selectedArtist = selectArtist()
+			Artist modifyArtist = new Artist()
+			if(Field X is changed)
+				modifyArtist.setX(changed value)
+			if(update confirmed)
+				HandleArtist.updateArtist(modifyArtist, selectedArtist)
 			if(delete pressed)
 				HandleArtist.deleteArtist(selectedArtist)
 		}
-		if(e.getSource() == reportsMenuButton)
+		if(e.getSource() == buyReportButton)
 		{
-			popUpreportsMenuFrame()
-			if(e.getSource() == buyReportButton)
-			{
-				purchPaintingsRep = new PurchasedPaintingsReport()
-				popUpBoughtReport(purchPaintingsRep.getBoughtPaintings(), purchPaintingsRep.getMaxANdActualRatioSum())
-			}
-			if(e.getSource() == sellReportButton)
-			{
-				soldPaintingsRep = new soldPaintingsReport()
-				popUpSoldReport(soldPaintingsRep.getSoldPaintings(), soldPaintingsRep.getTargetAndActualRatioAvg())
-			}
-			if(e.getSource() == trendReportButton)
-			{
-				trendRep = new DetectTrendsReport
-				popUpTrendsReport(detectTrendsReport.getFullTrendsReport())
-			}
+			PurhasedPaintingsReport purchPaintingsRep = new PurchasedPaintingsReport()
+			popUpBoughtReport(purchPaintingsRep.getBoughtPaintings(), purchPaintingsRep.getMaxANdActualRatioSum())
 		}
+		if(e.getSource() == sellReportButton)
+		{
+			SoldPaintingsReport soldPaintingsRep = new soldPaintingsReport()
+			popUpSoldReport(soldPaintingsRep.getSoldPaintings(), soldPaintingsRep.getTargetAndActualRatioAvg())
+		}
+		if(e.getSource() == trendReportButton)
+		{
+			DetectTrendsReport trendRep = new DetectTrendsReport()
+			popUpTrendsReport(trendRep.getReportPaintings())
+		}
+		
 	}
 	
 	/**
@@ -213,7 +263,7 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that InventoryPainting
-	 * Return:The InventoryPainting that is inputted by the user
+	 * Return:The InventoryPainting that is in-putted by the user
 	 */
 	public InventoryPainting selectInventoryPainting()
 	{
@@ -229,25 +279,25 @@ public class OOGUI extends JPanel implements ActionListener{
 	
 	/*
 	 * Desc:  Gets artistFirstName, artistLastName, and titleOfWork from user and gives back that AuctionPainting
-	 * Return:The AuctionPainting that is inputted by the user
+	 * Return:The AuctionPainting that is in-putted by the user
 	 */
 	public AuctionPainting selectAuctionPainting()
 	{
 		String fName = getFNameFromUser()
 		String lName = getLNameFromUser()
 		String pTitle = getPaintingTitleFromUser()
-		InventoryPainting selectedAP = new InventoryPainting()
+		AuctionPainting selectedAP = new AuctionPainting()
 		selectedAP.setArtistFirstName(fName)
 		selectedAP.setArtistLastName(lName)
 		selectedAP.setTitleOfWork(pTitle)
-		return selectedIP
+		return selectedAP
 	}
 	
 	/*
 	 * Desc:  Gets the artistFirstName, artistLastName and returns the user the Artist
-	 * Return:The Artist that is inputted by the user
+	 * Return:The Artist that is in-putted by the user
 	 */
-	public Artist selectAnArtist()
+	public Artist selectArtist()
 	{
 		String fName = getFNameFromUser()
 		String lName = getLNameFromUser()

@@ -4,51 +4,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>128</x>
-      <y>128</y>
-      <w>272</w>
-      <h>400</h>
-    </coordinates>
-    <panel_attributes>_Paintings class &lt;entity class&gt;_
---
--artistFirstName: String
--artistLastName: String
--artistID: int
--titleOfWork: String
--dateOfWork: int
--heightCM: double
--widthCM: double
--medium: String
--subject: String
--artistID
---
-+setArtistFirstName(firstName: String): void
-+getArtistFirstName(): String
-+setArtistLastName(lastName: String):void
-+getArtistLastName(): String
-+setArtistID(id: int): void
-+getArtistID(): int
-+setTitleOfWork(title: String): void
-+getTitleOfWork(): String
-+setDateOfWork(date: int): void
-+getDateOfWork(): int
-+setHeightCM(height: double): void
-+getHeightCM(): double
-+setWidthCM(width: double): void
-+getWidthCM(): double
-+setMedium(med: String): void
-+getMedium(): String
-+setSubject(subj: String): void
-+getSubject(): String
-+getArtistID(): int
-+toString(): String
-+equals(p: Painting): boolean</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>464</x>
+      <x>560</x>
       <y>184</y>
       <w>256</w>
       <h>184</h>
@@ -65,14 +21,14 @@
 +setArtistLastName(last: String): void
 +getArtistLastName(): String
 +getArtistID(): int
-+setFashionabilityConstant(fashConst: int): void
-+getFashionabilityConstant(): int</panel_attributes>
++setFashionabilityCoeff(fashConst: int): void
++getFashionabilityCoeff(): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>0</x>
+      <x>96</x>
       <y>648</y>
       <w>296</w>
       <h>136</h>
@@ -93,10 +49,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>352</x>
+      <x>448</x>
       <y>632</y>
       <w>296</w>
-      <h>656</h>
+      <h>696</h>
     </coordinates>
     <panel_attributes>_Inventory Painting class &lt;entity class&gt;_
 --
@@ -129,7 +85,7 @@
 +getMaxPurchasePrice(): double
 +setActualPurchasePrice(purchPrice: double): void
 +getActualPurchasePrice(): double
-#calcTargetSellPrice(): void
+-calcTargetSellPrice(): void
 +getTargetSellPrice(): double
 +setSoldYesOrNo(sold: boolean): void
 +getSoldYesOrNo(): boolean
@@ -157,18 +113,18 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>232</x>
-      <y>504</y>
+      <x>328</x>
+      <y>528</y>
       <w>224</w>
-      <h>144</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>24;24;24;96;208;96;208;128</additional_attributes>
+    <additional_attributes>24;24;24;72;208;72;208;104</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>40</x>
+      <x>136</x>
       <y>576</y>
       <w>232</w>
       <h>88</h>
@@ -179,7 +135,7 @@
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>392</x>
+      <x>488</x>
       <y>0</y>
       <w>88</w>
       <h>80</h>
@@ -190,12 +146,55 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>368</x>
+      <x>464</x>
       <y>56</y>
       <w>128</w>
       <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>24;24;112;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>224</x>
+      <y>120</y>
+      <w>272</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>_Paintings class &lt;entity class&gt;_
+--
+-artistFirstName: String
+-artistLastName: String
+-titleOfWork: String
+-dateOfWork: int
+-heightCM: double
+-widthCM: double
+-medium: String
+-subject: String
+-artistID: int
+--
++setArtistFirstName(firstName: String): void
++getArtistFirstName(): String
++setArtistLastName(lastName: String):void
++getArtistLastName(): String
++setArtistID(id: int): void
++getArtistID(): int
++setTitleOfWork(title: String): void
++getTitleOfWork(): String
++setDateOfWork(date: int): void
++getDateOfWork(): int
++setHeightCM(height: double): void
++getHeightCM(): double
++setWidthCM(width: double): void
++getWidthCM(): double
++setMedium(med: String): void
++getMedium(): String
++setSubject(subj: String): void
++getSubject(): String
++getArtistID(): int
++toString(): String
++equals(p: Painting): boolean</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

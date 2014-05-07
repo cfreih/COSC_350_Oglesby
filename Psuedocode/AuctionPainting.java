@@ -11,8 +11,8 @@ public class AuctionPainting extends Painting{
 	
 	/**
 	 * Desc:  no arg constructor initializing an AuctionPainting
-	 * Post:  eveything is given an initial value same as with
-	 * 		  Painting, date will be intialized with a no-arg constructor
+	 * Post:  everything is given an initial value same as with
+	 * 		  Painting, date will be initialized with a no-arg constructor
 	 */
 	public AuctionPainting()
 	{
@@ -23,7 +23,7 @@ public class AuctionPainting extends Painting{
 	
 	/**
 	 * Desc:  All arg constructor for painting
-	 * Post:  Painting is initalized with the fields
+	 * Post:  Painting is initialized with the fields
 	 * 		  being set with the proper parameters
 	 */
 	public Painting(String firstName, String lastName, String title, int date, int classif,
