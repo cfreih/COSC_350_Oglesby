@@ -9,7 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class MainMenuPanel extends JPanel implements ActionListener {
+public class MainMenuPanel extends JPanel {
 
 	private JButton btnBuyPainting;
 	private JButton btnSellPainting;
@@ -25,7 +25,14 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	 */
 	public MainMenuPanel() 
 	{
-		setBorder(new TitledBorder(null, "Main Menu", TitledBorder.CENTER, TitledBorder.TOP, null, null));		
+		btnBuyPainting = new JButton("Buy Painting");	
+		btnSellPainting = new JButton("Sell Painting");
+		lblLesObjectsDorient = new JLabel("Les Objects d'Orient");
+		btnManageArtists = new JButton("Manage Artists");
+		btnManageAuctionRecords = new JButton("Manage Auction Records");
+		btnManageInventory = new JButton("Manage Inventory");
+		btnReportsPopup = new JButton("Reports Popup");
+		btnExit = new JButton("Exit");
 		
 		setUpPanel();
 	}
@@ -39,7 +46,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		btnBuyPainting = new JButton("Buy Painting");		
+				
 		
 		btnBuyPainting.setMnemonic('B');
 		btnBuyPainting.setFont(new Font("Century", Font.PLAIN, 12));
@@ -49,7 +56,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_btnBuyPainting.gridx = 1;
 		gbc_btnBuyPainting.gridy = 1;
 		add(btnBuyPainting, gbc_btnBuyPainting);
-		btnSellPainting = new JButton("Sell Painting");
+		
 		
 		btnSellPainting.setMnemonic('S');
 		btnSellPainting.setFont(new Font("Century", Font.PLAIN, 12));
@@ -60,7 +67,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_btnSellPainting.gridy = 3;
 		add(btnSellPainting, gbc_btnSellPainting);
 		
-		lblLesObjectsDorient = new JLabel("Les Objects d'Orient");
+		
 		lblLesObjectsDorient.setFont(new Font("Brush Script MT", Font.ITALIC, 32));
 		GridBagConstraints gbc_lblLesObjectsDorient = new GridBagConstraints();
 		gbc_lblLesObjectsDorient.anchor = GridBagConstraints.NORTHWEST;
@@ -68,7 +75,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_lblLesObjectsDorient.gridx = 3;
 		gbc_lblLesObjectsDorient.gridy = 3;
 		add(lblLesObjectsDorient, gbc_lblLesObjectsDorient);
-		btnManageArtists = new JButton("Manage Artists");
+		
 		
 		btnManageArtists.setFont(new Font("Century", Font.PLAIN, 12));
 		btnManageArtists.setMnemonic('A');
@@ -78,7 +85,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_btnManageArtists.gridx = 1;
 		gbc_btnManageArtists.gridy = 5;
 		add(btnManageArtists, gbc_btnManageArtists);
-		btnManageAuctionRecords = new JButton("Manage Auction Records");		
+				
 		
 		btnManageAuctionRecords.setMnemonic('R');
 		btnManageAuctionRecords.setFont(new Font("Century", Font.PLAIN, 12));
@@ -89,7 +96,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_btnManageAuctionRecords.gridx = 1;
 		gbc_btnManageAuctionRecords.gridy = 7;
 		add(btnManageAuctionRecords, gbc_btnManageAuctionRecords);
-		btnManageInventory = new JButton("Manage Inventory");
+		
 		
 		btnManageInventory.setFont(new Font("Century", Font.PLAIN, 12));
 		btnManageInventory.setMnemonic('I');
@@ -100,7 +107,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_btnManageInventory.gridy = 9;
 		add(btnManageInventory, gbc_btnManageInventory);
 		
-		btnReportsPopup = new JButton("Reports Popup");
+		
 		btnReportsPopup.setMnemonic('R');
 		btnReportsPopup.setFont(new Font("Century", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnReportsPopup = new GridBagConstraints();
@@ -110,7 +117,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		gbc_btnReportsPopup.gridy = 11;
 		add(btnReportsPopup, gbc_btnReportsPopup);
 		
-		btnExit = new JButton("Exit");
+		
 		btnExit.setFont(new Font("Century", Font.PLAIN, 12));
 		btnExit.setMnemonic('x');
 		GridBagConstraints gbc_btnExit = new GridBagConstraints();
@@ -123,7 +130,7 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 	
 	/**
 	 * Desc: Registers listers for the different action events
-	 */
+	 *
 	public void registerListeners()
 	{
 		btnBuyPainting.addActionListener(this);
@@ -133,38 +140,28 @@ public class MainMenuPanel extends JPanel implements ActionListener {
 		btnManageInventory.addActionListener(this);
 		btnReportsPopup.addActionListener(this);
 		btnExit.addActionListener(this);
-	}
+	}*/
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnBuyPainting)
-		{
-			
-		}
-		else if(e.getSource() == btnSellPainting)
-		{
-			
-		}
-		else if(e.getSource() == btnManageArtists)
-		{
-			
-		}
-		else if(e.getSource() == btnManageAuctionRecords)
-		{
-			
-		}
-		else if(e.getSource() == btnManageInventory)
-		{
-			
-		}
-		else if(e.getSource() == btnReportsPopup)
-		{
-			
-		}
-		else if(e.getSource() == btnExit)
-		{
-			
-		}
-	}
 
+	public JButton getBtnManageAuctionRecords() {
+		return btnManageAuctionRecords;
+	}
+	public JButton getBtnBuyPainting() {
+		return btnBuyPainting;
+	}
+	public JButton getBtnSellPainting() {
+		return btnSellPainting;
+	}
+	public JButton getBtnManageArtists() {
+		return btnManageArtists;
+	}
+	public JButton getBtnManageInventory() {
+		return btnManageInventory;
+	}
+	public JButton getBtnReportsPopup() {
+		return btnReportsPopup;
+	}
+	public JButton getBtnExit() {
+		return btnExit;
+	}
 }

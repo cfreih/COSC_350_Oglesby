@@ -23,17 +23,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Dimension;
 
+
 /**
- * 
- */
 
 /**
  * @author Clint
- *
+ * 
  */
 public class UpdateAuctionPanel extends JPanel {
 	
-	private SpringLayout springLayout;
 	private JLabel lblPaintingInfo;
 	private JScrollPane scrollPane;
 	private JTable paintingsTable;
@@ -62,78 +60,85 @@ public class UpdateAuctionPanel extends JPanel {
 	private JButton btnSaveChanges;
 	private JButton btnDelete;
 	private JButton btnCancel;
-	
-	public UpdateAuctionPanel()
-	{
-		springLayout = new SpringLayout();
+
+	public UpdateAuctionPanel() {
 		lblPaintingInfo = new JLabel("Current Painting Info");
+		lblPaintingInfo.setBounds(27, 61, 119, 15);
 		paintingsTable = new JTable();
 		scrollPane = new JScrollPane(paintingsTable);
+		scrollPane.setBounds(27, 79, 696, 54);
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
-		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
-		formattedLastName = new JFormattedTextField(createFormatter("********************"));
+		lblArtistFirstName.setBounds(27, 176, 215, 15);
+		formattedFirstName = new JFormattedTextField(
+				createFormatter("********************"));
+		formattedFirstName.setBounds(27, 194, 226, 21);
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
-		formattedTitle = new JFormattedTextField(createFormatter("****************************************"));
+		lblTitleOfWork.setBounds(65, 258, 186, 15);
+		formattedTitle = new JFormattedTextField(
+				createFormatter("****************************************"));
+		formattedTitle.setBounds(27, 276, 446, 21);
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####'?"));
+		lblDateOfWork.setBounds(27, 300, 108, 15);
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
+		formattedDateOfWork.setBounds(27, 318, 116, 21);
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
-		formattedDateAuction = new JFormattedTextField(createFormatter("##/##/####"));
-		lblPriceSoldAt = new JLabel("Price Sold at Auction");
-		formattedSalePrice = new JFormattedTextField(NumberFormat.getNumberInstance());
+		lblDateSoldAt.setBounds(186, 300, 193, 15);
+		formattedDateAuction = new JFormattedTextField(
+				createFormatter("##/##/####"));
+		formattedDateAuction.setBounds(186, 318, 116, 21);
 		lblHeightcm = new JLabel("Height(cm)");
-		formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
+		lblHeightcm.setBounds(27, 342, 62, 15);
+		formattedHeight = new JFormattedTextField(
+				NumberFormat.getNumberInstance());
+		formattedHeight.setBounds(27, 360, 61, 21);
 		lblWidthcm = new JLabel("Width (cm)");
-		formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
+		lblWidthcm.setBounds(186, 342, 62, 15);
+		formattedWidth = new JFormattedTextField(
+				NumberFormat.getNumberInstance());
+		formattedWidth.setBounds(186, 360, 61, 21);
 		lblMedium = new JLabel("Medium");
+		lblMedium.setBounds(27, 384, 47, 15);
 		textFieldMedium = new JTextField();
+		textFieldMedium.setBounds(27, 402, 226, 21);
 		lblSubject = new JLabel("Subject");
+		lblSubject.setBounds(27, 426, 42, 15);
 		textFieldSubject = new JTextField();
-		btnSaveChanges = new JButton("Save Changes");
-		btnDelete = new JButton("Delete Painting");
-		btnCancel = new JButton("Cancel");
-		
+		textFieldSubject.setBounds(27, 444, 226, 21);
+
 		setUpPanel();
 	}
 
-	public void setUpPanel()
-	{
-		setLayout(springLayout);
-		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new TitledBorder(null, "Manage Auction Paintings", TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+	public void setUpPanel() {
+		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
+				null, null), new TitledBorder(null, "Manage Auction Paintings",
+				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+		setLayout(null);
 
-		
 		lblPaintingInfo.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblPaintingInfo, 0, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, lblPaintingInfo, 0, SpringLayout.WEST, this);
 		add(lblPaintingInfo);
-		
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane, 24, SpringLayout.SOUTH, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane, 10, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane, 78, SpringLayout.SOUTH, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane, -8, SpringLayout.EAST, this);
 		add(scrollPane);
-		
+
 		/**
-		 * Need to get a painting and make that the Object[][] array that will be the one row in the table.
+		 * Need to get a painting and make that the Object[][] array that will
+		 * be the one row in the table.
 		 */
 		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		paintingsTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, "", null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Artist First Name", "Arist Last Name", "Title", "Date of Work", "Date of Sale", "Sale Price", "Height", "Width", "Medium", "Subject"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, Integer.class, Object.class, Double.class, Integer.class, Integer.class, String.class, String.class
-			};
+		paintingsTable.setModel(new DefaultTableModel(new Object[][] { { null,
+				null, "", null, null, null, null, null, null, null }, },
+				new String[] { "Artist First Name", "Arist Last Name", "Title",
+						"Date of Work", "Date of Sale", "Sale Price", "Height",
+						"Width", "Medium", "Subject" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class,
+					String.class, Integer.class, Object.class, Double.class,
+					Integer.class, Integer.class, String.class, String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false
-			};
+
+			boolean[] columnEditables = new boolean[] { false, false, false,
+					false, false, false, false, false, false, false };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -154,199 +159,141 @@ public class UpdateAuctionPanel extends JPanel {
 		paintingsTable.getColumnModel().getColumn(9).setResizable(false);
 		paintingsTable.setFont(new Font("Century", Font.PLAIN, 12));
 		paintingsTable.setCellSelectionEnabled(true);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, lblArtistFirstName, 26, SpringLayout.SOUTH, scrollPane);
-		springLayout.putConstraint(SpringLayout.WEST, lblArtistFirstName, 10, SpringLayout.WEST, this);
 		lblArtistFirstName.setFont(new Font("Century", Font.PLAIN, 12));
 		add(lblArtistFirstName);
-		
-		
+		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
+		lblArtistLastName.setBounds(399, 176, 213, 15);
+		lblArtistLastName.setFont(new Font("Century", Font.PLAIN, 12));
+		add(lblArtistLastName);
+
 		lblArtistFirstName.setLabelFor(formattedFirstName);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedFirstName, 48, SpringLayout.SOUTH, scrollPane);
-		springLayout.putConstraint(SpringLayout.WEST, formattedFirstName, 10, SpringLayout.WEST, this);
 		formattedFirstName.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedFirstName.setColumns(20);
 		add(formattedFirstName);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, lblArtistLastName, 0, SpringLayout.NORTH, lblArtistFirstName);
-		lblArtistLastName.setFont(new Font("Century", Font.PLAIN, 12));
-		add(lblArtistLastName);
-		
-		
+
+		lblArtistinfo = new JLabel("Artist Information");
+		lblArtistinfo.setBounds(27, 147, 103, 15);
+		lblArtistinfo.setFont(new Font("Century", Font.ITALIC, 12));
+		add(lblArtistinfo);
+		formattedLastName = new JFormattedTextField(
+				createFormatter("********************"));
+		formattedLastName.setBounds(399, 194, 213, 21);
+
 		lblArtistLastName.setLabelFor(formattedLastName);
-		springLayout.putConstraint(SpringLayout.WEST, lblArtistLastName, 0, SpringLayout.WEST, formattedLastName);
-		springLayout.putConstraint(SpringLayout.SOUTH, formattedLastName, 0, SpringLayout.SOUTH, formattedFirstName);
-		springLayout.putConstraint(SpringLayout.EAST, formattedLastName, -151, SpringLayout.EAST, this);
 		formattedLastName.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedLastName.setColumns(20);
 		add(formattedLastName);
-		
-		lblArtistinfo = new JLabel("ArtistInfo");
-		lblArtistinfo.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.WEST, lblArtistinfo, 0, SpringLayout.WEST, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblArtistinfo, -6, SpringLayout.NORTH, lblArtistFirstName);
-		add(lblArtistinfo);
-		
-		lblPaintingInfo_1 = new JLabel("Painting Info");
-		lblPaintingInfo_1.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblPaintingInfo_1, 6, SpringLayout.SOUTH, formattedFirstName);
-		springLayout.putConstraint(SpringLayout.WEST, lblPaintingInfo_1, 0, SpringLayout.WEST, lblPaintingInfo);
+
+		lblPaintingInfo_1 = new JLabel("Painting Information");
+		lblPaintingInfo_1.setBounds(27, 229, 117, 15);
+		lblPaintingInfo_1.setFont(new Font("Century", Font.ITALIC, 12));
 		add(lblPaintingInfo_1);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, lblTitleOfWork, 6, SpringLayout.SOUTH, lblPaintingInfo_1);
-		springLayout.putConstraint(SpringLayout.WEST, lblTitleOfWork, 0, SpringLayout.WEST, scrollPane);
 		lblTitleOfWork.setFont(new Font("Century", Font.PLAIN, 12));
 		add(lblTitleOfWork);
-		
-		
+
 		lblTitleOfWork.setLabelFor(formattedTitle);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedTitle, 11, SpringLayout.SOUTH, lblTitleOfWork);
-		springLayout.putConstraint(SpringLayout.WEST, formattedTitle, 0, SpringLayout.WEST, scrollPane);
 		formattedTitle.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedTitle.setColumns(40);
 		add(formattedTitle);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, lblDateOfWork, 6, SpringLayout.SOUTH, formattedTitle);
-		springLayout.putConstraint(SpringLayout.WEST, lblDateOfWork, 0, SpringLayout.WEST, scrollPane);
 		lblDateOfWork.setFont(new Font("Century", Font.PLAIN, 12));
 		add(lblDateOfWork);
-		
-		
+		lblPriceSoldAt = new JLabel("Price Sold at Auction");
+		lblPriceSoldAt.setBounds(399, 300, 117, 15);
+		lblPriceSoldAt.setFont(new Font("Century", Font.PLAIN, 12));
+		add(lblPriceSoldAt);
+
 		lblDateOfWork.setLabelFor(formattedDateOfWork);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedDateOfWork, 6, SpringLayout.SOUTH, lblDateOfWork);
-		springLayout.putConstraint(SpringLayout.WEST, formattedDateOfWork, 0, SpringLayout.WEST, scrollPane);
 		formattedDateOfWork.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedDateOfWork.setColumns(10);
 		add(formattedDateOfWork);
-		
-		
+
 		lblDateSoldAt.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblDateSoldAt, 0, SpringLayout.NORTH, lblDateOfWork);
-		springLayout.putConstraint(SpringLayout.WEST, lblDateSoldAt, 45, SpringLayout.EAST, lblDateOfWork);
 		add(lblDateSoldAt);
-		
-		
+
 		formattedDateAuction.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedDateAuction.setColumns(10);
-		springLayout.putConstraint(SpringLayout.WEST, formattedDateAuction, 0, SpringLayout.WEST, lblDateSoldAt);
-		springLayout.putConstraint(SpringLayout.SOUTH, formattedDateAuction, 0, SpringLayout.SOUTH, formattedDateOfWork);
 		add(formattedDateAuction);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, lblPriceSoldAt, 6, SpringLayout.SOUTH, formattedTitle);
-		springLayout.putConstraint(SpringLayout.WEST, lblPriceSoldAt, 73, SpringLayout.EAST, lblDateSoldAt);
-		lblPriceSoldAt.setFont(new Font("Century", Font.PLAIN, 12));
-		add(lblPriceSoldAt);
-		
-		
+		formattedSalePrice = new JFormattedTextField(
+				NumberFormat.getNumberInstance());
+		formattedSalePrice.setBounds(399, 318, 213, 21);
+
 		lblPriceSoldAt.setLabelFor(formattedSalePrice);
 		formattedSalePrice.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedSalePrice.setColumns(20);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedSalePrice, 0, SpringLayout.NORTH, formattedDateOfWork);
-		springLayout.putConstraint(SpringLayout.WEST, formattedSalePrice, 0, SpringLayout.WEST, lblPriceSoldAt);
 		add(formattedSalePrice);
-		
-		
+
 		lblHeightcm.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblHeightcm, 6, SpringLayout.SOUTH, formattedDateOfWork);
-		springLayout.putConstraint(SpringLayout.WEST, lblHeightcm, 0, SpringLayout.WEST, scrollPane);
 		add(lblHeightcm);
-		
-		
+
 		lblHeightcm.setLabelFor(formattedHeight);
 		formattedHeight.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedHeight.setColumns(5);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedHeight, 6, SpringLayout.SOUTH, lblHeightcm);
-		springLayout.putConstraint(SpringLayout.WEST, formattedHeight, 0, SpringLayout.WEST, scrollPane);
 		add(formattedHeight);
-		
-		
+
 		lblWidthcm.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.WEST, lblWidthcm, 0, SpringLayout.WEST, lblDateSoldAt);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblWidthcm, 0, SpringLayout.SOUTH, lblHeightcm);
 		add(lblWidthcm);
-		
-		
+
 		lblWidthcm.setLabelFor(formattedWidth);
 		formattedWidth.setColumns(5);
 		formattedWidth.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, formattedWidth, 0, SpringLayout.NORTH, formattedHeight);
-		springLayout.putConstraint(SpringLayout.WEST, formattedWidth, 0, SpringLayout.WEST, lblDateSoldAt);
 		add(formattedWidth);
-		
-		
+
 		lblMedium.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblMedium, 6, SpringLayout.SOUTH, formattedHeight);
-		springLayout.putConstraint(SpringLayout.WEST, lblMedium, 0, SpringLayout.WEST, scrollPane);
 		add(lblMedium);
-		
-		
+
 		lblMedium.setLabelFor(textFieldMedium);
 		textFieldMedium.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, textFieldMedium, 6, SpringLayout.SOUTH, lblMedium);
-		springLayout.putConstraint(SpringLayout.WEST, textFieldMedium, 10, SpringLayout.WEST, this);
 		add(textFieldMedium);
 		textFieldMedium.setColumns(20);
-		
-		
+
 		lblSubject.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblSubject, 6, SpringLayout.SOUTH, textFieldMedium);
-		springLayout.putConstraint(SpringLayout.WEST, lblSubject, 0, SpringLayout.WEST, scrollPane);
 		add(lblSubject);
-		
-		
+
 		lblSubject.setLabelFor(textFieldSubject);
 		textFieldSubject.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, textFieldSubject, 6, SpringLayout.SOUTH, lblSubject);
-		springLayout.putConstraint(SpringLayout.WEST, textFieldSubject, 0, SpringLayout.WEST, scrollPane);
 		add(textFieldSubject);
 		textFieldSubject.setColumns(20);
-		
-		
-		springLayout.putConstraint(SpringLayout.SOUTH, btnSaveChanges, -28, SpringLayout.SOUTH, this);
+		btnSaveChanges = new JButton("Save Changes");
+		btnSaveChanges.setBounds(31, 518, 150, 40);
 		btnSaveChanges.setPreferredSize(new Dimension(150, 40));
 		btnSaveChanges.setMnemonic('S');
-		springLayout.putConstraint(SpringLayout.NORTH, btnSaveChanges, -73, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, btnSaveChanges, 0, SpringLayout.WEST, scrollPane);
-		springLayout.putConstraint(SpringLayout.EAST, btnSaveChanges, 160, SpringLayout.WEST, this);
 		add(btnSaveChanges);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, btnDelete, 72, SpringLayout.SOUTH, textFieldSubject);
-		springLayout.putConstraint(SpringLayout.WEST, btnDelete, 210, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, btnDelete, -28, SpringLayout.SOUTH, this);
+		btnDelete = new JButton("Delete Painting");
+		btnDelete.setBounds(264, 518, 132, 40);
 		btnDelete.setMnemonic('D');
 		add(btnDelete);
-		
-		
-		springLayout.putConstraint(SpringLayout.NORTH, btnCancel, 216, SpringLayout.SOUTH, formattedSalePrice);
-		springLayout.putConstraint(SpringLayout.SOUTH, btnCancel, -28, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, btnCancel, -205, SpringLayout.EAST, this);
-		springLayout.putConstraint(SpringLayout.EAST, btnDelete, -69, SpringLayout.WEST, btnCancel);
-		springLayout.putConstraint(SpringLayout.WEST, btnCancel, 0, SpringLayout.WEST, lblPriceSoldAt);
+		btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(615, 518, 106, 40);
 		btnCancel.setMnemonic('C');
 		add(btnCancel);
-		
+
 	}
-	
+
 	/**
-	 * Desc: Method to create a format for the strings to be entered. 
-	 * 		 Taken from the Java "How to use Formatted Text Fields" site.
-	 * @param s what the format will be.
+	 * Desc: Method to create a format for the strings to be entered. Taken from
+	 * the Java "How to use Formatted Text Fields" site.
+	 * 
+	 * @param s
+	 *            what the format will be.
 	 * @return A Maskformatter of the format from String s.
 	 */
 	protected MaskFormatter createFormatter(String s) {
-	    MaskFormatter formatter = null;
-	    try {
-	        formatter = new MaskFormatter(s);
-	    } catch (java.text.ParseException exc) {
-	        System.err.println("formatter is bad: " + exc.getMessage());
-	        System.exit(-1);
-	    }
-	    return formatter;
+		MaskFormatter formatter = null;
+		try {
+			formatter = new MaskFormatter(s);
+		} catch (java.text.ParseException exc) {
+			System.err.println("formatter is bad: " + exc.getMessage());
+			System.exit(-1);
+		}
+		return formatter;
+	}
+	public JButton getBtnSaveChanges() {
+		return btnSaveChanges;
+	}
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+	public JButton getBtnCancel() {
+		return btnCancel;
 	}
 }
