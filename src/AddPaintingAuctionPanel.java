@@ -52,7 +52,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
 		formattedTitle = new JFormattedTextField(createFormatter("****************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####'?"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
 		formattedDateAuction = new JFormattedTextField(createFormatter("##/##/####"));
 		lblPriceSoldAt = new JLabel("Price Sold at Auction");
