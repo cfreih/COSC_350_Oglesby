@@ -35,15 +35,13 @@ public class PurchasedPaintingReport extends Report
   //Post: The ratio saved into maxAndaActualRatio of this object.
   private void calcMaxAndActualRatio()
   {
-    int count=0;
     int total=0;
     int length=paintingsBoughtInLastYear.length;
     for(int i=0;i<length; i++)
     {
       total+=paintingsBoughtInLastYear[i].getMaxAndActualRatio();
-      count++;
     }
-    maxAndActualRatio=total/count;
+    maxAndActualRatio=total/length;
   }
   
   //Desc: Finds all paintings that have been bought in the last year. 
