@@ -25,7 +25,7 @@ public abstract class HandleAuctionPaintings
     String orderBy = "artistLastName, artistFirstName";
     String statement = "SELECT";
     HashMap<String,Object> objects = loadMap(auction);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += " FROM " + tableStatement;
     statement += stringify(auction);
@@ -83,7 +83,7 @@ public abstract class HandleAuctionPaintings
     String result = "";
     HashMap<String,Object> objects = loadMap(auction);
     boolean[] flags = new boolean[objects.size()];
-    String[] keys = (String[])objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     for(int i = 0; i < keys.length; i++)
     {
       if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true;
