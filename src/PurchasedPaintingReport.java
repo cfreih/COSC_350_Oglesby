@@ -1,6 +1,5 @@
 import java.util.*;
-//commentso this changes
-public class PurchasedPaintingReport extends Report
+public class PurchasedPaintingReport
 {
   private InventoryPainting[] paintingsBoughtInLastYear;
   private double maxAndActualRatio;
@@ -36,12 +35,11 @@ public class PurchasedPaintingReport extends Report
   private void calcMaxAndActualRatio()
   {
     int total=0;
-    int length=paintingsBoughtInLastYear.length;
-    for(int i=0;i<length; i++)
+    for(int i=0;i<paintingsBoughtInLastYear.length; i++)
     {
       total+=paintingsBoughtInLastYear[i].getMaxAndActualRatio();
     }
-    maxAndActualRatio=total/length;
+    maxAndActualRatio=total/paintingsBoughtInLastYear.length;
   }
   
   //Desc: Finds all paintings that have been bought in the last year. 
@@ -49,7 +47,6 @@ public class PurchasedPaintingReport extends Report
   private InventoryPainting[] getPaintingsBoughtInLastYear()
   {
     Date d=new Date();
-    d.setYear(d.getYear()-1);
     return HandleInventoryPaintings.retrieveInventoryPaintings(d);
   }
   

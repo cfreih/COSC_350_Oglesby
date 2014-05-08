@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+public abstract class Calculation
+=======
 //Desc: Class to find that maximum purchase price for an input painting
 class Calculation
+>>>>>>> 2e45e92939d082261a5e87bd688eb8f296247bca
 {
  
  //Desc: Calculates the similarity between this painting and the auction record provided.
