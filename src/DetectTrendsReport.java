@@ -68,38 +68,9 @@ class DetectTrendsReportTest extends DetectTrendsReport
   //Output: prints the results of unit tests
   public static void runTests()
   {
-    //System.out.println("\tFindTrendingArtistTest: " + findTrendingArtistsTest());
+    System.out.println("\tFindTrendingArtistTest: " + findTrendingArtistsTest());
     System.out.println("\tSplitNamesTest: " + splitNamesTest());  
   }
-  //Desc: Unit Test for splitNames
-  //Return: True if successful, false if failure
-  private static boolean splitNamesTest()
-  {
-    //Test Case #1: Generic Success
-    String[] s = {"Bock\nSamuel","Freiheit\nClint","Burwitz\nTimothy","Cassante\nArce Claudio"};
-    InventoryPainting[] paintings = splitNames(s);
-    for(int i = 0; i < paintings.length; i++)
-    {
-      s[i] = s[i].replaceAll("\n"," ");
-      String temp = paintings[i].getArtistLastName() + " " + paintings[i].getArtistFirstName();
-      if(!temp.equals(s[i])) return false;
-    }
-    //Test Case #2: Empty String Array
-    s = new String[0];
-    paintings = splitNames(s);
-    for(int i = 0; i < paintings.length; i++)
-    {
-      s[i] = s[i].replaceAll("\n"," ");
-      String temp = paintings[i].getArtistLastName() + " " + paintings[i].getArtistFirstName();
-      if(!temp.equals(s[i])) return false;
-    }
-    //Test Case #3: null Reference
-    s = null;
-    paintings = splitNames(s);
-    if(paintings != null) return false;
-    return true;
-  }
-  /*
   //Desc: Unit Test for splitNames
   //Return: True if successful, false if failure
   private static boolean findTrendingArtistsTest()
@@ -143,5 +114,32 @@ class DetectTrendsReportTest extends DetectTrendsReport
     if(s != null) return false;
     return true;
   }
-  */
+    //Desc: Unit Test for splitNames
+    //Return: True if successful, false if failure
+    private static boolean splitNamesTest()
+    {
+        //Test Case #1: Generic Success
+        String[] s = {"Bock\nSamuel","Freiheit\nClint","Burwitz\nTimothy","Cassante\nArce Claudio"};
+        InventoryPainting[] paintings = splitNames(s);
+        for(int i = 0; i < paintings.length; i++)
+        {
+            s[i] = s[i].replaceAll("\n"," ");
+            String temp = paintings[i].getArtistLastName() + " " + paintings[i].getArtistFirstName();
+            if(!temp.equals(s[i])) return false;
+        }
+        //Test Case #2: Empty String Array
+        s = new String[0];
+        paintings = splitNames(s);
+        for(int i = 0; i < paintings.length; i++)
+        {
+            s[i] = s[i].replaceAll("\n"," ");
+            String temp = paintings[i].getArtistLastName() + " " + paintings[i].getArtistFirstName();
+            if(!temp.equals(s[i])) return false;
+        }
+        //Test Case #3: null Reference
+        s = null;
+        paintings = splitNames(s);
+        if(paintings != null) return false;
+        return true;
+    }
 }

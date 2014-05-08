@@ -3,7 +3,7 @@ public abstract class HandlerUtility
 {
   //Desc: method to convert a Date into an int
   //Return: returns the Date as an int
-  public static int dateToInt(Date d)
+  public static int dateToInt(SimpleDate d)
   {
     int date = 0;
     date += d.getYear() * 10000;
@@ -53,37 +53,37 @@ public abstract class HandlerUtility
   }
   //Desc: method to load keys and values into a String
   //Return: returns a String that is loaded with the keys
-  public static String loadKeysAndValues(HashMap<String,Object> objects, Object[] keys)
+  public static String loadKeysAndValues(Pair[] pairs)
   {
     String statement = "";
-    for(int i = 0; i < keys.length; i++)
+    for(int i = 0; i < pairs.length; i++)
     {
-      statement += " " + (String)keys[i] + "='" + objects.get(i);
-      if(i < keys.length - 1) statement += ",";
+      statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue();
+      if(i < pairs.length - 1) statement += ",";
     }
     return statement;
   }
   //Desc: method to load keys into a String
   //Return: returns a String that is loaded with the keys
-  public static String loadKeys(Object[] keys)
+  public static String loadKeys(Pair[] pairs)
   {
-    String statement = "";
-    for(int i = 0; i < keys.length; i++)
+    String statement = " ";
+    for(int i = 0; i < pairs.length; i++)
     {
-      statement += (String) keys[i];
-      if(i < keys.length - 1) statement += ",";
+      statement += pairs[i].getKey();
+      if(i < pairs.length - 1) statement += ",";
     }
     return statement;
   }
   //Desc: method to load values into a String
   //Return: returns a String that is loaded with the keys
-  public static String loadValues(HashMap<String,Object> objects, Object[] keys)
+  public static String loadValues(Pair[] pairs)
   {
     String statement = "";
-    for(int i = 0; i < keys.length; i++)
+    for(int i = 0; i < pairs.length; i++)
     {
-      statement += "'" + objects.get(i) + "'";
-      if(i < keys.length - 1) statement += ",";
+      statement += "'" + pairs[i].getValue() + "'";
+      if(i < pairs.length - 1) statement += ",";
     }
     return statement;
   }

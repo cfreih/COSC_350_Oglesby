@@ -13,7 +13,7 @@ public abstract class FindSoldPaintings extends Report
   //Post: the paintings sold in the last year are stored as soldPaintings
   protected void findSoldInLastYear()
   {
-    Date d = new Date();
+    SimpleDate d = new SimpleDate(12);
     d.setYear(d.getYear() - 1);
     this.soldPaintings = HandleInventoryPaintings.retrieveInventoryPaintings(d);
   }

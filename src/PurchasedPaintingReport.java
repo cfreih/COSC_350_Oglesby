@@ -46,7 +46,7 @@ public class PurchasedPaintingReport
   //Return: An array of InventoryPainting Objects that were bought in the last year.
   private InventoryPainting[] getPaintingsBoughtInLastYear()
   {
-    Date d=new Date();
+    SimpleDate d=new SimpleDate(12);
     return HandleInventoryPaintings.retrieveInventoryPaintings(d);
   }
   

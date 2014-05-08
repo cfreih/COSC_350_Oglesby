@@ -7,11 +7,10 @@ public abstract class HandleArtist
   {
     String tableStatement = "artists";
     String statement = "INSERT INTO "+ tableStatement +"(";
-    HashMap<String,Object> objects = loadMap(artist);
-    Object[] keys = objects.keySet().toArray();
-    statement += HandlerUtility.loadKeys(keys);
+    Pair[] pairs = loadMap(artist);
+    statement += HandlerUtility.loadKeys(pairs);
     statement += ") VALUES(";
-    statement += HandlerUtility.loadValues(objects, keys);
+    statement += HandlerUtility.loadValues(pairs);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Query();
@@ -24,9 +23,8 @@ public abstract class HandleArtist
     String tableStatement = "artists";
     String orderBy = "artistLastName, artistFirstName";
     String statement = "SELECT";
-    HashMap<String,Object> objects = loadMap(artist);
-    Object[] keys = objects.keySet().toArray();
-    statement += HandlerUtility.loadKeys(keys);
+    Pair[] pairs = loadMap(new Artist());
+    statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     statement += stringify(artist);
     statement += " ORDER BY " + orderBy;
@@ -52,30 +50,29 @@ public abstract class HandleArtist
   //Desc: method to load a HashMap with values to assist in the automation of SQL statements
   // In particular, this method assists with limiting the amount of hardcoding in the stringify
   //Return: the fully loaded HashMap is returned
-  private static HashMap<String,Object> loadMap(Artist artist)
+  private static Pair[] loadMap(Artist artist)
   {
-    HashMap<String,Object> objects = new HashMap<String,Object>();
-    objects.put("artistLastName", artist.getArtistLastName());
-    objects.put("artistFirstName", artist.getArtistFirstName());
-    objects.put("fashionability", artist.getFashionabilityCoeff());
-    objects.put("artistID", artist.getArtistID());
-    return objects;
+    ArrayList<Pair> pairs = new ArrayList<Pair>();
+    pairs.add(new Pair("artistLastName", artist.getArtistLastName()));
+    pairs.add(new Pair("artistFirstName", artist.getArtistFirstName()));
+    pairs.add(new Pair("fashionability", artist.getFashionabilityCoeff()));
+    pairs.add(new Pair("artistID", artist.getArtistID()));
+    return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);
   }
   //Desc: method converts an Artist into a String
   //Return: returns a String for the SQL statement
   private static String stringify(Artist artist)
   {
     String result = "";
-    HashMap<String,Object> objects = loadMap(artist);
-    boolean[] flags = new boolean[objects.size()];
-    Object[] keys = objects.keySet().toArray();
-    for(int i = 0; i < keys.length; i++)
+    Pair[] pairs = loadMap(artist);
+    boolean[] flags = new boolean[pairs.length];
+    for(int i = 0; i < pairs.length; i++)
     {
-      if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true;
+      if(HandlerUtility.checkInitialization(pairs[i].getValue())) flags[i] = true;
       else
       {
-        if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + keys[i] + "='" + objects.get(keys[i]) + "'";
-        else result += " AND " + keys[i] + "='" + objects.get(keys[i]) + "'";
+          if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+          else result += " AND " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
       }
     }
     return result;
@@ -86,9 +83,8 @@ public abstract class HandleArtist
   {
     String tableStatement = "artists";
     String statement = "UPDATE " + tableStatement + " SET";
-    HashMap<String,Object> objects = loadMap(artist);
-    Object[] keys = objects.keySet().toArray();
-    statement += HandlerUtility.loadKeysAndValues(objects,keys);
+    Pair[] pairs = loadMap(artist);
+    statement += HandlerUtility.loadKeysAndValues(pairs);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Query();

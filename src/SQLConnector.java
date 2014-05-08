@@ -3,30 +3,38 @@ import java.sql.*;
 import java.util.*;
 
 public class SQLConnector{
-	
-	private static final String DATABASE_URL = "jdbc:mysql://localhost/LOO_database"; //Database URL
+
 	private Connection connection; //manages connection
 	private Statement statement;   //query statement
 	private ResultSet resultSet;   //manages results
-	private String sqlStatment;
+	private String sqlStatement;
 	
 	
 	public SQLConnector(String sqlStamt){
-		sqlStatment = sqlStamt;
+		sqlStatement = sqlStamt;
 	}
 	
 	public Vector executeSQL_Query(){
-		Vector querryReadyResult = new Vector(0);
+		Vector queryReadyResult = new Vector(0);
+        String url = "jdbc:mysql://localhost:3306/";
+        String dbName = "LOO_database";
+        String driver = "com.mysql.jdbc.Driver";
+        String userName = "root";
+        String password = "password";
+
 		try{
+
+            Class.forName(driver).newInstance(); //creates connector
+
 			////establish connection to database
-			connection = DriverManager.getConnection(DATABASE_URL,"deitel","deitel");
+			connection = DriverManager.getConnection(url + dbName,userName,password);
 			//create Statement for query database
 			statement = connection.createStatement();
 			//query database
-			resultSet= statement.executeQuery(sqlStatment);			
-			querryReadyResult = processQuerryResult(resultSet);			
+			resultSet= statement.executeQuery(sqlStatement);
+			queryReadyResult = processQueryResult(resultSet);
 		}
-		catch(SQLException sqlException)
+		catch(Exception sqlException)
 		{
 			sqlException.printStackTrace();
 		}
@@ -43,18 +51,23 @@ public class SQLConnector{
 			exception.printStackTrace();
 			} 
 		}
-		return querryReadyResult;
+		return queryReadyResult;
 	}
 	
 	public int executeSQL_Update(){
+        String url = "jdbc:mysql://localhost:3306/";
+        String dbName = "demo";
+        String driver = "com.mysql.jdbc.Driver";
+        String userName = "root";
+        String password = "password";
 		int resultFlag = -1;
 		try{
 			////establish connection to database
-			connection = DriverManager.getConnection(DATABASE_URL,"deitel","deitel");
+			connection = DriverManager.getConnection(url + dbName,userName,password);
 			//create Statement for query database
 			statement = connection.createStatement();
 			//query database
-			resultFlag = statement.executeUpdate(sqlStatment);						
+			resultFlag = statement.executeUpdate(sqlStatement);
 		}
 		catch(SQLException sqlException)
 		{
@@ -75,19 +88,19 @@ public class SQLConnector{
 		return resultFlag;
 	}
 	
-	public Vector processQuerryResult(ResultSet querryResultSet){
-		Vector querryReadyResult = new Vector(0);
+	public Vector processQueryResult(ResultSet queryResultSet){
+		Vector queryReadyResult = new Vector(0);
 		try{
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int numberOfColums = metaData.getColumnCount();
-			while(querryResultSet.next()){
+			while(queryResultSet.next()){
 				for(int i=1; i <= numberOfColums; i++)
-					querryReadyResult.add(querryResultSet.getObject(i));
+					queryReadyResult.add(queryResultSet.getObject(i));
 			}
 		}	
 		catch ( Exception exception ){
 			exception.printStackTrace();
 		} 
-		return querryReadyResult;
+		return queryReadyResult;
 	}		
 }
