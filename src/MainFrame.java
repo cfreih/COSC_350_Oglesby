@@ -98,6 +98,11 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpMainMenu()
 	{
 		mainMenu = new MainMenuPanel();
+		mainMenu.getBtnReportsPopup().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReportGUI g = new ReportGUI(new Report());
+			}
+		});
 		mainMenu.getBtnExit().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);

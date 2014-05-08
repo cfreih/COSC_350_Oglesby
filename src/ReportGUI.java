@@ -52,7 +52,7 @@ public class ReportGUI
     frame.add(grid,c);
     
     frame.setResizable(false);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.pack();
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
