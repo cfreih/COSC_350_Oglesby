@@ -8,7 +8,7 @@ public abstract class HandleAuctionPaintings
     String tableStatement = "auction_paintings";
     String statement = "INSERT INTO "+ tableStatement +"(";
     HashMap<String,Object> objects = loadMap(auction);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += ") VALUES(";
     statement += HandlerUtility.loadValues(objects, keys);
@@ -102,7 +102,7 @@ public abstract class HandleAuctionPaintings
     String tableStatement = "artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID";
     String statement = "UPDATE " + tableStatement + " SET";
     HashMap<String,Object> objects = loadMap(auction);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeysAndValues(objects,keys);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);

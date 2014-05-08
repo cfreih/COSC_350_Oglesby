@@ -8,7 +8,7 @@ public abstract class HandleArtist
     String tableStatement = "artists";
     String statement = "INSERT INTO "+ tableStatement +"(";
     HashMap<String,Object> objects = loadMap(artist);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += ") VALUES(";
     statement += HandlerUtility.loadValues(objects, keys);
@@ -25,7 +25,7 @@ public abstract class HandleArtist
     String orderBy = "artistLastName, artistFirstName";
     String statement = "SELECT";
     HashMap<String,Object> objects = loadMap(artist);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += " FROM " + tableStatement;
     statement += stringify(artist);
@@ -68,7 +68,7 @@ public abstract class HandleArtist
     String result = "";
     HashMap<String,Object> objects = loadMap(artist);
     boolean[] flags = new boolean[objects.size()];
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     for(int i = 0; i < keys.length; i++)
     {
       if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true;
@@ -87,7 +87,7 @@ public abstract class HandleArtist
     String tableStatement = "artists";
     String statement = "UPDATE " + tableStatement + " SET";
     HashMap<String,Object> objects = loadMap(artist);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeysAndValues(objects,keys);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);

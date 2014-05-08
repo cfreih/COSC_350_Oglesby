@@ -8,7 +8,7 @@ public abstract class HandleInventoryPaintings
     String tableStatement = "inventory_paintings";
     String statement = "INSERT INTO "+ tableStatement +"(";
     HashMap<String,Object> objects = loadMap(inventory);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += ") VALUES(";
     statement += HandlerUtility.loadValues(objects, keys);
@@ -27,7 +27,7 @@ public abstract class HandleInventoryPaintings
     int date = HandlerUtility.dateToInt(d);
     String statement = "SELECT";
     HashMap<String,Object> objects = loadMap(new InventoryPainting());
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += " FROM " + tableStatement;
     statement += " WHERE sold=1 and dateOfSale > " + date + " ";
@@ -48,7 +48,7 @@ public abstract class HandleInventoryPaintings
     String orderBy = "artistLastName, artistFirstName";
     String statement = "SELECT";
     HashMap<String,Object> objects = loadMap(new InventoryPainting());
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += " FROM " + tableStatement;
     for(int i = 0; i < inventory.length; i++)
@@ -72,7 +72,7 @@ public abstract class HandleInventoryPaintings
     String orderBy = "artistLastName, artistFirstName";
     String statement = "SELECT";
     HashMap<String,Object> objects = loadMap(new InventoryPainting());
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeys(keys);
     statement += " FROM " + tableStatement;
     statement += stringify(inventory);
@@ -150,7 +150,7 @@ public abstract class HandleInventoryPaintings
     String result = "";
     HashMap<String,Object> objects = loadMap(inventory);
     boolean[] flags = new boolean[objects.size()];
-    String[] keys = (String[])objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     for(int i = 0; i < keys.length; i++)
     {
       if(HandlerUtility.checkInitialization(objects.get(keys[i]))) flags[i] = true;
@@ -169,7 +169,7 @@ public abstract class HandleInventoryPaintings
     String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
     String statement = "UPDATE " + tableStatement + " SET";
     HashMap<String,Object> objects = loadMap(inventory);
-    String[] keys = (String[]) objects.keySet().toArray();
+    Object[] keys = objects.keySet().toArray();
     statement += HandlerUtility.loadKeysAndValues(objects,keys);
     statement += " FROM " + tableStatement;
     statement += stringify(searchKey);

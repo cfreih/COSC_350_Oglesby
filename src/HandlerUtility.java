@@ -53,31 +53,31 @@ public abstract class HandlerUtility
   }
   //Desc: method to load keys and values into a String
   //Return: returns a String that is loaded with the keys
-  public static String loadKeysAndValues(HashMap<String,Object> objects, String[] keys)
+  public static String loadKeysAndValues(HashMap<String,Object> objects, Object[] keys)
   {
     String statement = "";
     for(int i = 0; i < keys.length; i++)
     {
-      statement += " " + keys[i] + "='" + objects.get(i);
+      statement += " " + (String)keys[i] + "='" + objects.get(i);
       if(i < keys.length - 1) statement += ",";
     }
     return statement;
   }
   //Desc: method to load keys into a String
   //Return: returns a String that is loaded with the keys
-  public static String loadKeys(String[] keys)
+  public static String loadKeys(Object[] keys)
   {
     String statement = "";
     for(int i = 0; i < keys.length; i++)
     {
-      statement += keys[i];
+      statement += (String) keys[i];
       if(i < keys.length - 1) statement += ",";
     }
     return statement;
   }
   //Desc: method to load values into a String
   //Return: returns a String that is loaded with the keys
-  public static String loadValues(HashMap<String,Object> objects, String[] keys)
+  public static String loadValues(HashMap<String,Object> objects, Object[] keys)
   {
     String statement = "";
     for(int i = 0; i < keys.length; i++)
