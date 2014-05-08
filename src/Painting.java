@@ -253,6 +253,11 @@ public class Painting implements Cloneable {
 		return (Painting) super.clone();
 		
 	}
+
+    public void setArtistID(int artistID)
+    {
+        this.artistID = artistID;
+    }
 	
 	/**
 	 * Desc: Tests the various methods and constructors for a Painting

@@ -107,21 +107,21 @@ values (4, 'Painting1-2', 1997, '20100422', 3100000.55, 24.10, 15.10, 'Canvas', 
 insert into auction_paintings (artistID, title, dateOfWork, dateOfAuction, salePrice, height, width, medium, subject)
 values (4, 'Painting1-3', 1985, '20020322', 5000000.55, 23.10, 75.10, 'Water', 'House');
 
-insert into inventory_paintings (artistID, title, dateOfWork, clasification, height, width, medium, subject, dateOfPurchase, 
-			nameOfSeller, addressOfSeller, maximunPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
+insert into inventory_paintings (artistID, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, 
+			nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting1', 2001, 'Masterpiece', 12.0, 34.0, 
 			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, true, '20140128', 'Jessica Spalding',
 			'Costelo', 400000.54);
 			
 			
-insert into inventory_paintings (artistID, title, dateOfWork, clasification, height, width, medium, subject, dateOfPurchase, 
-			nameOfSeller, addressOfSeller, maximunPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
+insert into inventory_paintings (artistID, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, 
+			nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting2', 2001, 'Masterpiece', 12.0, 34.0, 
 			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, false, NULL, '',
 			'', 0);
 
-insert into inventory_paintings (artistID, title, dateOfWork, clasification, height, width, medium, subject, dateOfPurchase, 
-			nameOfSeller, addressOfSeller, maximunPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
+insert into inventory_paintings (artistID, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, 
+			nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting3', 1981, 'Masterpiece', 110.0, 34.0, 
 			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, true, '20110128', 'Jessica Spalding',
 			'Costelo', 400000.99);
