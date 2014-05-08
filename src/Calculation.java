@@ -1,6 +1,5 @@
 import java.lang.String;
 import java.util.*;
-//comment so this changes
 public abstract class Calculation
 {
  //Desc: Calculates the similarity between this painting and the auction record provided.
@@ -40,7 +39,9 @@ public abstract class Calculation
  //Return: The max price the user should pay for the painting.
  public static double calcMaxPrice(InventoryPainting painting)
  {
-   AuctionPainting[] records = HandleInventory.retriveAuctionPainting(painting.getArtistLastName());
+   AuctionPainting paintingByArtist=new AuctionPainting();
+   paintingByArtist.setArtistFirstName(painting.getArtistFirstName());
+   AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(paintingByArtist);
    double price = 0;
    if(painting.getClassification().toLowerCase().equals("masterpiece")) price=calcMaxMasterpiece(painting, records);
    else if (painting.getClassification().toLowerCase().equals("masterwork")) price=calcMaxMasterwork(painting, records);
@@ -80,7 +81,7 @@ public abstract class Calculation
  {
    double area=painting.getHeightCM()*painting.getWidthCM();
    Artist artist=new Artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1,-1);
-   Artist[] artists=HandleArtist.retrieveArtist(artist);
+   Artist[] artists=HandleArtist.retrieveArtists(artist);
    int fashionabilityConstant=artists[0].getFashionabilityCoeff();
    return area * fashionabilityConstant;
  }
