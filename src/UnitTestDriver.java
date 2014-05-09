@@ -4,5 +4,6 @@ public class UnitTestDriver
   {
     System.out.println("Detect Trends Report Unit Tests: ");
     DetectTrendsReportTest.runTests();
+    HandleInventoryPaintingsTest.runTests();
   }
 }

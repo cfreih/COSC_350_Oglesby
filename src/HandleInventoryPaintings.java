@@ -6,15 +6,16 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is created in the database
   public static void createInventoryPainting(InventoryPainting inventory)
   {
+    boolean isQuery = false;
     String tableStatement = "inventory_paintings";
     String statement = "INSERT INTO "+ tableStatement +"(";
-    Pair[] pairs = loadMap(inventory);
+    Pair[] pairs = HandleInventoryPaintings.loadMap(inventory, isQuery);
     statement += HandlerUtility.loadKeys(pairs);
     statement += ") VALUES(";
     statement += HandlerUtility.loadValues(pairs);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQL_Query();
+    connection.executeSQL_Update();
   }
   //Desc: method searches the database and retrieves any matching records. 
   // Search terms only a Date object
@@ -22,16 +23,16 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(SimpleDate d)
   {
+    boolean isQuery = true;
     String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
     String orderBy = "artistID";
     int date = HandlerUtility.dateToInt(d);
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting()); //clint needs to fix inventorypainting
+    Pair[] pairs = loadMap(new InventoryPainting(),isQuery); //clint needs to fix inventorypainting
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     statement += " WHERE sold=1 and dateOfSale > " + date + " ";
     statement += " ORDER BY " + orderBy;
-    System.out.println(statement);
     SQLConnector connection = new SQLConnector(statement);
     Vector result = connection.executeSQL_Query();
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
@@ -44,10 +45,11 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
   {
+    boolean isQuery = true;
     String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
     String orderBy = "artistID";
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting());
+    Pair[] pairs = loadMap(new InventoryPainting(), isQuery);
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     for(int i = 0; i < inventory.length; i++)
@@ -67,10 +69,11 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
   {
+    boolean isQuery = true;
     String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
     String orderBy = "artistID";
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting());
+    Pair[] pairs = loadMap(new InventoryPainting(),isQuery);
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     statement += stringify(inventory);
@@ -79,18 +82,20 @@ public abstract class HandleInventoryPaintings
     Vector result = connection.executeSQL_Query();
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
     loadResults(inventoryPaintings, result);
-    return (InventoryPainting[])inventoryPaintings.toArray();
+    return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
   }
   //Desc: method to parse results from SQL database back into InventoryPaintings
   //Post: ArrayList is loaded with results from SQL database
   public static void loadResults(ArrayList<InventoryPainting> inventoryPaintings, Vector result)
   {
+    System.out.println("Size of result: " + (result.size() / 23));
     for(int i = 0; i < result.size(); i++)
     {
-      String artistFirstName = "Lazy";
-      String artistLastName = "Claudio";
+      String artistFirstName = (String) result.get(i++);
+      String artistLastName = (String) result.get(i++);
       int artistID = (Integer)result.get(i++);
       String titleOfWork = (String)result.get(i++);
+      System.out.println("Artist Name, ID, and Painting Title: " + artistFirstName + " " + artistLastName + " " + artistID + " " + titleOfWork);
       int dateOfWork = (Integer)result.get(i++);
       String classification = (String)result.get(i++);
       double heightCM = ((BigDecimal)result.get(i++)).doubleValue();
@@ -124,10 +129,15 @@ public abstract class HandleInventoryPaintings
   //Desc: method to load a HashMap with values to assist in the automation of SQL statements
   // In particular, this method assists with limiting the amount of hardcoding in the stringify
   //Return: the fully loaded HashMap is returned
-  private static Pair[] loadMap(InventoryPainting inventory)
+  public static Pair[] loadMap(InventoryPainting inventory, boolean isQuery)
   {
     ArrayList<Pair> pairs = new ArrayList<Pair>();
-    pairs.add(new Pair("artists.artistID", inventory.getArtistID()));
+    if(isQuery)
+    {
+        pairs.add(new Pair("artists.firstName", inventory.getArtistFirstName()));
+        pairs.add(new Pair("artists.lastName", inventory.getArtistLastName()));
+    }
+    pairs.add(new Pair("inventory_paintings.artistID", inventory.getArtistID()));
     pairs.add(new Pair("inventory_paintings.title", inventory.getTitleOfWork()));
     pairs.add(new Pair("inventory_paintings.dateOfWork", inventory.getDateOfWork()));
     pairs.add(new Pair("inventory_paintings.classification", inventory.getClassification()));
@@ -154,8 +164,9 @@ public abstract class HandleInventoryPaintings
   //Return: returns a String for the SQL statement
   private static String stringify(InventoryPainting inventory)
   {
+    boolean isQuery = true;
     String result = "";
-    Pair[] pairs = loadMap(inventory);
+    Pair[] pairs = loadMap(inventory,isQuery);
     boolean[] flags = new boolean[pairs.length];
     for(int i = 0; i < pairs.length; i++)
     {
@@ -173,9 +184,10 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is updated in the database
   public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
   {
+    boolean isQuery = false;
     String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
     String statement = "UPDATE " + tableStatement + " SET";
-    Pair[] pairs = loadMap(inventory);
+    Pair[] pairs = loadMap(inventory, isQuery);
     statement += HandlerUtility.loadKeysAndValues(pairs);
     statement += " FROM " + tableStatement;
     statement += stringify(searchKey);
@@ -192,4 +204,26 @@ public abstract class HandleInventoryPaintings
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Query();
   }
+}
+class HandleInventoryPaintingsTest
+{
+    //Desc: method to run unit tests for all methods
+    //Output: prints the results of unit tests
+    public static void runTests()
+    {
+        createInventoryPaintingTest();
+    }
+    public static boolean createInventoryPaintingTest()
+    {
+        InventoryPainting testPainting = new InventoryPainting("Sammichelle", "Bachman",
+                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics", -1,
+                "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
+                14), 1230000, 1000000, false, new SimpleDate(
+                SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
+        HandleInventoryPaintings.createInventoryPainting(testPainting);
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        if(result.length != 1) return false;
+        if(!result.equals(testPainting)) return false;
+        return true;
+    }
 }

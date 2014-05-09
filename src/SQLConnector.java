@@ -56,7 +56,7 @@ public class SQLConnector{
 	
 	public int executeSQL_Update(){
         String url = "jdbc:mysql://localhost:3306/";
-        String dbName = "demo";
+        String dbName = "LOO_database";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "password";
