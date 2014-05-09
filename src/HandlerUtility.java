@@ -18,7 +18,7 @@ public abstract class HandlerUtility
     if(count > flags.length - 1 || count < 0) throw new ArrayIndexOutOfBoundsException("Out of bounds");
     for(int i = 0; i <= count; i++)
     {
-      if(!flags[i]) return false;
+      if(flags[i]) return false;
     }
     return true;
   }
@@ -58,7 +58,7 @@ public abstract class HandlerUtility
     String statement = "";
     for(int i = 0; i < pairs.length; i++)
     {
-      statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue();
+      statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
       if(i < pairs.length - 1) statement += ",";
     }
     return statement;
