@@ -1,4 +1,5 @@
 import java.text.NumberFormat;
+import java.text.ParseException;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import javax.swing.text.MaskFormatter;
 import java.awt.Font;
 
 import javax.swing.JButton;
+
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -51,14 +53,14 @@ public class AddPaintingAuctionPanel extends JPanel {
 		gridBagLayout = new GridBagLayout();
 		lblArtistinfo = new JLabel("Artist Information");
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
 		formattedLastName = new JFormattedTextField(
-				createFormatter("********************"));
+				createFormatter("?*******************"));
 		lblPaintingInfo_1 = new JLabel("Painting Information");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
 		formattedTitle = new JFormattedTextField(
-				createFormatter("****************************************"));
+				createFormatter("?***************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
 		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
@@ -69,10 +71,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		lblHeightcm = new JLabel("Height (cm)");
 		formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWidthcm = new JLabel("Width (cm)");
-		lblWidthcm.setFont(new Font("Century", Font.PLAIN, 12));
 		formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
-		formattedWidth.setFont(new Font("Century", Font.PLAIN, 12));
-		formattedWidth.setColumns(5);
 		lblMedium = new JLabel("Medium");
 		textFieldMedium = new JTextField();
 		lblSubject = new JLabel("Subject");
@@ -237,6 +236,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		
 		
 		GridBagConstraints gbc_lblWidthcm = new GridBagConstraints();
+		lblWidthcm.setFont(new Font("Century", Font.PLAIN, 12));
 		gbc_lblWidthcm.anchor = GridBagConstraints.WEST;
 		gbc_lblWidthcm.insets = new Insets(0, 0, 5, 0);
 		gbc_lblWidthcm.gridx = 2;
@@ -256,6 +256,8 @@ public class AddPaintingAuctionPanel extends JPanel {
 		
 		
 		GridBagConstraints gbc_formattedWidth = new GridBagConstraints();
+		formattedWidth.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedWidth.setColumns(5);
 		gbc_formattedWidth.anchor = GridBagConstraints.WEST;
 		gbc_formattedWidth.insets = new Insets(0, 0, 5, 0);
 		gbc_formattedWidth.gridx = 2;
@@ -313,13 +315,13 @@ public class AddPaintingAuctionPanel extends JPanel {
 		btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Century", Font.PLAIN, 12));
 		
-				btnCancel.setPreferredSize(new Dimension(200, 20));
-				btnCancel.setMnemonic('C');
-				GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-				gbc_btnCancel.fill = GridBagConstraints.VERTICAL;
-				gbc_btnCancel.gridx = 2;
-				gbc_btnCancel.gridy = 17;
-				add(btnCancel, gbc_btnCancel);
+		btnCancel.setPreferredSize(new Dimension(200, 20));
+		btnCancel.setMnemonic('C');
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.fill = GridBagConstraints.VERTICAL;
+		gbc_btnCancel.gridx = 2;
+		gbc_btnCancel.gridy = 17;
+		add(btnCancel, gbc_btnCancel);
 	}
 
 	/**
@@ -339,6 +341,124 @@ public class AddPaintingAuctionPanel extends JPanel {
 			System.exit(-1);
 		}
 		return formatter;
+	}
+	
+	public boolean isInputValid()
+	{
+		String med = textFieldMedium.getText().trim();
+		String subj = textFieldSubject.getText().trim();
+		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && !(formattedSalePrice.getValue() == null)
+				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
+				&& !(subj.length() == 0))
+		{
+			/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
+				&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
+				&& !(subj.length() == 0)) + "00");
+			System.out.println(formattedFirstName.isEditValid() + "1");
+			System.out.println(formattedLastName.isEditValid() + "2");
+			System.out.println(formattedTitle.isEditValid() + "3");
+			System.out.println(formattedDateOfWork.isEditValid() + "4");
+			System.out.println(formattedDateAuction.isEditValid() + "5");
+			System.out.println((formattedSalePrice.getValue() == null) + "6");
+			System.out.println((formattedHeight.getValue() == null) + "7");
+			System.out.println((formattedHeight.getValue() == null) + "8");
+			System.out.println((med.length() == 0) + "9");
+			System.out.println((subj.length() == 0) + "10");*/
+			String[] fieldValues = getFieldValues();
+			double dateWork = Double.parseDouble(fieldValues[3]);
+			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
+			double salePrice = Double.parseDouble(fieldValues[5]);
+			double height = Double.parseDouble(fieldValues[6]);
+			double width = Double.parseDouble(fieldValues[7]);
+			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0) && (height > 0) && (width > 0))
+				return true;
+			else
+				return false;
+		}
+		else
+		{
+			/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+					&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
+					&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
+					&& !(subj.length() == 0)) + "01");
+			System.out.println(formattedFirstName.isEditValid() + "1");
+			System.out.println(formattedLastName.isEditValid() + "2");
+			System.out.println(formattedTitle.isEditValid() + "3");
+			System.out.println(formattedDateOfWork.isEditValid() + "4");
+			System.out.println(formattedDateAuction.isEditValid() + "5");
+			System.out.println((formattedSalePrice.getValue() == null) + "6");
+			System.out.println((formattedHeight.getValue() == null) + "7");
+			System.out.println((formattedHeight.getValue() == null) + "8");
+			System.out.println((med.length() == 0) + "9");
+			System.out.println((subj.length() == 0) + "10");*/
+			return false;
+		}
+	}
+	
+	/**
+	 * Desc: resets the text fields to be blank again.
+	 * Post: all the text fields have the value of being blank again.
+	 */
+	public void resetTextFields()
+	{
+		formattedFirstName.setValue(null);
+		formattedLastName.setValue(null);
+		formattedTitle.setValue(null);
+		formattedDateOfWork.setValue(null);
+		formattedDateAuction.setValue(null);
+		formattedSalePrice.setValue(null);
+		formattedHeight.setValue(null);
+		formattedWidth.setValue(null);
+		textFieldMedium.setText("");
+		textFieldSubject.setText("");
+	}
+	
+	/**
+	 * Desc: Gets all the elements of the panel
+	 * Pre: The fields are valid.
+	 * Return: A String array of everything. The array is in the order
+	 * 		   first name [0], last name [1], title [2], date of work [3], date of auction [4],
+	 * 		   sale price [5], height [6], width [7], medium [8], and subject [9].
+	 */
+	public String[] getFieldValues()
+	{
+		String[] fieldValues = new String[10];
+		fieldValues[0] = (String) formattedFirstName.getValue();
+		fieldValues[1] = (String) formattedLastName.getValue();
+		fieldValues[2] = (String) formattedTitle.getValue();
+		fieldValues[3] = (String) formattedDateOfWork.getValue();
+		fieldValues[4] = (String) formattedDateAuction.getValue();
+		fieldValues[5] = Long.toString((long) formattedSalePrice.getValue());
+		fieldValues[6] = Long.toString((long) formattedHeight.getValue());
+		fieldValues[7] = Long.toString((long)formattedWidth.getValue());
+		fieldValues[8] = textFieldMedium.getText();
+		fieldValues[9] = textFieldSubject.getText();
+		
+		return fieldValues;
+	}
+	/**
+	 * Desc: Creates an AuctionPainting from a String[] in the order of
+	 * 		 first name [0], last name [1], title [2], date of work [3], date of auction [4],
+	 * 		 sale price [5], height [6], width [7], medium [8], and subject [9].
+	 * Pre: values is in the proper order
+	 * Return: An AuctionPainting with the values of values
+	 * @param values is a String[] matching the format in the description.
+	 */
+	public static AuctionPainting createNewAuctionPainting(String[] values)
+	{
+		String fName = values[0];
+		String lName = values[1];
+		String title = values[2];
+		int dateWork = Integer.parseInt(values[3]);
+		SimpleDate dateAuction = SimpleDate.parseSimpleDate(values[4]);
+		double salePrice = Double.parseDouble(values[5]);
+		double height = Double.parseDouble(values[6]);
+		double width = Double.parseDouble(values[7]);
+		String med = values[8];
+		String subj = values[9];
+		return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,-1,salePrice,dateAuction);
 	}
 
 	public static void main(String[] args) {

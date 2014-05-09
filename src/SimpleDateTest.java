@@ -59,6 +59,16 @@ public class SimpleDateTest {
 
 		d1 = new SimpleDate(SimpleDate.TODAY);
 		System.out.println(d1);
+		
+		d2 = new SimpleDate(SimpleDate.TODAY);
+		System.out.println(d1.equals(d2));
+		d3 = new SimpleDate(2014,5,8);
+		System.out.println(d1.equals(d3));
+		d4 = new SimpleDate(2014,5,7);
+		System.out.println(d1.equals(d4));
+		
+		d5 = SimpleDate.parseSimpleDate("11/11/1111");
+		System.out.println(d5);
 	}
 
 }

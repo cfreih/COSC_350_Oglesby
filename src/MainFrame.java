@@ -82,11 +82,23 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		addPaintingAuction.getBtnAddPaintingTo().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] options = {"Yes", "Cancel"};
-				int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this painting?",
-						"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				if(n == 0)
-					cardLayout.show(getContentPane(), AUCTION_MM);
+				if(!addPaintingAuction.isInputValid())
+				{
+					JOptionPane.showMessageDialog(addPaintingAuction, "Input is invalid, make sure all fields are correct");
+				}
+				else
+				{
+					Object[] options = {"Yes", "Cancel"};
+					int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this painting?",
+							"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+					if(n == 0)
+					{
+						//HandleAuctionPaintings.createAuctionPainting(AddPaintingAuctionPanel.createNewAuctionPainting(addPaintingAuction.getFieldValues()));
+						cardLayout.show(getContentPane(), AUCTION_MM);
+						addPaintingAuction.resetTextFields();
+					}
+			
+				}
 			}
 		});
 	}

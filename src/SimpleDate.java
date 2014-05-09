@@ -300,11 +300,23 @@ public class SimpleDate {
 	 */
 	public static SimpleDate parseSimpleDate(String s) {
 		Scanner fDelimiter = new Scanner(s);
-		fDelimiter.useDelimiter("[/-.]");
+		fDelimiter.useDelimiter("[/-]");
 		int month = fDelimiter.nextInt();
 		int day = fDelimiter.nextInt();
 		int year = fDelimiter.nextInt();
 		return new SimpleDate(year, month, day);
+	}
+	
+	/**
+	 * Desc: Tests whether two SimpleDate Objects are equal
+	 * Return: True if the two SimpleDates are the same date. False otherwise.
+	 */
+	public boolean equals(SimpleDate test)
+	{
+		if(this.day == test.getDay() && this.month == test.getMonth() && this.year == test.getYear())
+			return true;
+		else
+			return false;
 	}
 
 	/*
@@ -318,7 +330,48 @@ public class SimpleDate {
 				+ Math.abs(this.getYear());
 		if (this.getYear() < 0)
 			s += " B.C.E.";
+		else
+			s += " C.E.";
 		return s;
+	}
+	
+	/**
+	 * class to throw an excpetion when a SimpleDate is given an invalid day.
+	 * @author Clint
+	 *
+	 */
+	class InvalidSimpleDateDayException extends Exception
+	{
+		public InvalidSimpleDateDayException()
+		{
+			super();
+		}
+	}
+	
+	/**
+	 * class to throw an excpetion when a SimpleDate is given an invalid day.
+	 * @author Clint
+	 *
+	 */
+	class InvalidSimpleDateMonthException extends Exception
+	{
+		public InvalidSimpleDateMonthException()
+		{
+			super();
+		}
+	}
+	
+	/**
+	 * class to throw an excpetion when a SimpleDate is given an invalid day.
+	 * @author Clint
+	 *
+	 */
+	class InvalidSimpleDateYearException extends Exception
+	{
+		public InvalidSimpleDateYearException()
+		{
+			super();
+		}
 	}
 
 }
