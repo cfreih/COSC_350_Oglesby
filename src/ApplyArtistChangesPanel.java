@@ -1,6 +1,7 @@
 package test;
 
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class ApplyArtistChangesPanel extends JPanel {
 	private JLabel lblArtistInfo;
@@ -31,37 +33,29 @@ public class ApplyArtistChangesPanel extends JPanel {
 	private JTable table;
 	public ApplyArtistChangesPanel() {
 		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedFirstName.setBounds(38, 120, 152, 20);
 		formattedLastName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedLastName.setBounds(38, 164, 152, 20);
 		formattedFashionability = new JFormattedTextField(createFormatter("#####"));
+		formattedFashionability.setBounds(38, 209, 49, 20);
 		
 		setUpPanel();
 	}
 	public void setUpPanel()
 	{
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 253, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
 				null, null), new TitledBorder(null, "Apply Changes",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+		setLayout(null);
 		
 		lblArtistInfo = new JLabel("Artist Info");
-		GridBagConstraints gbc_lblArtistInfo = new GridBagConstraints();
-		gbc_lblArtistInfo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblArtistInfo.gridx = 1;
-		gbc_lblArtistInfo.gridy = 0;
-		add(lblArtistInfo, gbc_lblArtistInfo);
+		lblArtistInfo.setBounds(141, 18, 49, 14);
+		add(lblArtistInfo);
 		
 		scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 1;
-		add(scrollPane, gbc_scrollPane);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(38, 37, 354, 40);
+		add(scrollPane);
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
@@ -72,85 +66,46 @@ public class ApplyArtistChangesPanel extends JPanel {
 				"First Name", "Last Name", "Fashionability Coeff."
 			}
 		));
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(125);
 		table.getColumnModel().getColumn(2).setMinWidth(100);
 		scrollPane.setViewportView(table);
 		
 		lblNewArtistInfo = new JLabel("New Artist Info (Values left blank will not be modified)");
-		GridBagConstraints gbc_lblNewArtistInfo = new GridBagConstraints();
-		gbc_lblNewArtistInfo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewArtistInfo.gridx = 1;
-		gbc_lblNewArtistInfo.gridy = 2;
-		add(lblNewArtistInfo, gbc_lblNewArtistInfo);
+		lblNewArtistInfo.setBounds(38, 82, 256, 14);
+		add(lblNewArtistInfo);
 		
 		lblFirstName = new JLabel("First Name (max 20 characters)");
-		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-		gbc_lblFirstName.anchor = GridBagConstraints.WEST;
-		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFirstName.gridx = 1;
-		gbc_lblFirstName.gridy = 3;
-		add(lblFirstName, gbc_lblFirstName);
+		lblFirstName.setBounds(38, 101, 151, 14);
+		add(lblFirstName);
 		
 		formattedFirstName.setColumns(20);
-		GridBagConstraints gbc_formattedFirstName = new GridBagConstraints();
-		gbc_formattedFirstName.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedFirstName.anchor = GridBagConstraints.WEST;
-		gbc_formattedFirstName.gridx = 1;
-		gbc_formattedFirstName.gridy = 4;
-		add(formattedFirstName, gbc_formattedFirstName);
+		add(formattedFirstName);
 		
 		lblLastNamemax = new JLabel("Last Name (max 20 characters)");
-		GridBagConstraints gbc_lblLastNamemax = new GridBagConstraints();
-		gbc_lblLastNamemax.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLastNamemax.anchor = GridBagConstraints.WEST;
-		gbc_lblLastNamemax.gridx = 1;
-		gbc_lblLastNamemax.gridy = 5;
-		add(lblLastNamemax, gbc_lblLastNamemax);
+		lblLastNamemax.setBounds(38, 145, 150, 14);
+		add(lblLastNamemax);
 		
 		formattedLastName.setColumns(20);
-		GridBagConstraints gbc_formattedLastName = new GridBagConstraints();
-		gbc_formattedLastName.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedLastName.anchor = GridBagConstraints.WEST;
-		gbc_formattedLastName.gridx = 1;
-		gbc_formattedLastName.gridy = 6;
-		add(formattedLastName, gbc_formattedLastName);
+		add(formattedLastName);
 		
 		lblFashionabilityCoefficient = new JLabel("Fashionability Coefficient");
-		GridBagConstraints gbc_lblFashionabilityCoefficient = new GridBagConstraints();
-		gbc_lblFashionabilityCoefficient.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFashionabilityCoefficient.anchor = GridBagConstraints.WEST;
-		gbc_lblFashionabilityCoefficient.gridx = 1;
-		gbc_lblFashionabilityCoefficient.gridy = 7;
-		add(lblFashionabilityCoefficient, gbc_lblFashionabilityCoefficient);
+		lblFashionabilityCoefficient.setBounds(38, 189, 120, 14);
+		add(lblFashionabilityCoefficient);
 		
 		formattedFashionability.setColumns(5);
-		GridBagConstraints gbc_formattedFashionability = new GridBagConstraints();
-		gbc_formattedFashionability.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedFashionability.anchor = GridBagConstraints.WEST;
-		gbc_formattedFashionability.gridx = 1;
-		gbc_formattedFashionability.gridy = 8;
-		add(formattedFashionability, gbc_formattedFashionability);
+		add(formattedFashionability);
 		
 		btnDeleteArtist = new JButton("Delete Artist");
-		GridBagConstraints gbc_btnDeleteArtist = new GridBagConstraints();
-		gbc_btnDeleteArtist.insets = new Insets(0, 0, 5, 0);
-		gbc_btnDeleteArtist.gridx = 2;
-		gbc_btnDeleteArtist.gridy = 8;
-		add(btnDeleteArtist, gbc_btnDeleteArtist);
+		btnDeleteArtist.setBounds(299, 208, 93, 23);
+		add(btnDeleteArtist);
 		
 		btnSaveChanges = new JButton("Save Changes");
-		GridBagConstraints gbc_btnSaveChanges = new GridBagConstraints();
-		gbc_btnSaveChanges.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSaveChanges.anchor = GridBagConstraints.WEST;
-		gbc_btnSaveChanges.gridx = 1;
-		gbc_btnSaveChanges.gridy = 9;
-		add(btnSaveChanges, gbc_btnSaveChanges);
+		btnSaveChanges.setBounds(38, 236, 101, 23);
+		add(btnSaveChanges);
 		
 		btnCancel = new JButton("Cancel");
-		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.gridx = 2;
-		gbc_btnCancel.gridy = 9;
-		add(btnCancel, gbc_btnCancel);
+		btnCancel.setBounds(313, 236, 65, 23);
+		add(btnCancel);
 	}
 	protected MaskFormatter createFormatter(String s) {
 		MaskFormatter formatter = null;
@@ -171,5 +126,16 @@ public class ApplyArtistChangesPanel extends JPanel {
 	}
 	public JButton getBtnCancel() {
 		return btnCancel;
+	}
+	public static void main(String args[])
+	{
+		JFrame f = new JFrame("test window");
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setResizable(false);
+		f.setLocationRelativeTo(null);
+		f.setSize(800, 600);
+		f.setLocation(10, 10);
+		f.getContentPane().add(new ApplyArtistChangesPanel());
+		f.show();
 	}
 }
