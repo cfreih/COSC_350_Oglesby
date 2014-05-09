@@ -11,7 +11,7 @@ CREATE TABLE artists (
 	artistID INT NOT NULL AUTO_INCREMENT,
 	firstName varchar (20),
 	lastName varchar (20),
-	fashionability DECIMAL,
+	fashionability INT,
 	PRIMARY KEY(artistID)
 ) ENGINE=InnoDB
 ;
