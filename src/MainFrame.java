@@ -10,20 +10,19 @@ public class MainFrame extends JFrame implements ActionListener{
 
 	private GridBagLayout gridBagLayout;
 	private AddPaintingAuctionPanel addPaintingAuction;
+	private CalcMaxPurchasePricePanel calcMaxPurchase;
+	private CompletePurchasePanel completePurchase;
 	private MainMenuPanel mainMenu;
+	private ManageArtistPanel manageArtist;
 	private ManageAuctionMainMenuPanel auctionMM;
+	private ManageInventoryMainMenuPanel manageInventoryMM;
 	private SearchAuctionPanel searchAuction;
-	private SeeAllPaintingsPanel seeAllAuction;
+	private SeeAllAuctionPaintingsPanel seeAllAuction;
+	private UpdateArtistPanel updateArtist;
 	private UpdateAuctionPanel updateAuction;
+	private UpdateInventoryPanel updateInventory;
+	
 	private CardLayout cardLayout;
-
-	// constants to change panels
-	public static int TO_BUY_PAINTING = 0;
-	public static int TO_SELL_PAINTING = 1;
-	public static int TO_MANAGE_ARTISTS = 2;
-	public static int TO_MANAGE_AUCTION = 3;
-	public static int TO_MANAGE_INVENTORY = 4;
-	public static int POPUP_RECORDS = 5;
 	
 	//constants to be used for indicating a panel
 	public static String AUCTION_MM = "Auction Main Menu";
@@ -32,6 +31,12 @@ public class MainFrame extends JFrame implements ActionListener{
 	public static String UPDATE_AUCTION = "Update Auction";
 	public static String ADD_PAINTING_AUCTION = "Add Painting Auction";
 	public static String SEARCH_AUCTION = "Search Auction";
+	public static String CALC_MAX_PURCH = "Calculate Max Purchase Price";
+	public static String COMPLETE_PURCHASE = "Complete Purchase";
+	public static String MANAGE_ARTIST = "Manage Artists";
+	public static String MANAGE_INVENTORY = "Manage Inventory";
+	public static String UPDATE_INVENTORY = "Update Inventory";
+	public static String UPDATE_ARTIST = "Update Artist";
 	
 	
 	/*
@@ -39,15 +44,22 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	public MainFrame() {
 		setUpAddPaintingAuction();	
+		setUpCalcMaxPurchase();
+		setUpCompletePurchase();
 		setUpMainMenu();
+		setUpManageArtist();
 		setUpAuctionMM();
+		setUpManageInventoryMM();
 		setUpSearchAuction();
 		setUpSeeAllAuction();
+		setUpUpdateArtist();
 		setUpUpdateAuction();
+		setUpUpdateInventory();
 		cardLayout = new CardLayout();
 
 		setUpFrame();
 	}
+
 
 	/**
 	 * Desc: sets up the Frame for MainFrame
@@ -66,6 +78,12 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(updateAuction, UPDATE_AUCTION);
 		getContentPane().add(addPaintingAuction, ADD_PAINTING_AUCTION);
 		getContentPane().add(searchAuction, SEARCH_AUCTION);
+		getContentPane().add(calcMaxPurchase, CALC_MAX_PURCH);
+		getContentPane().add(completePurchase, COMPLETE_PURCHASE);
+		getContentPane().add(manageArtist, MANAGE_ARTIST);
+		getContentPane().add(manageInventoryMM, MANAGE_INVENTORY);
+		getContentPane().add(updateInventory, UPDATE_INVENTORY);
+		getContentPane().add(updateArtist, UPDATE_ARTIST);
 	}
 	
 	/**
@@ -104,12 +122,61 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
+	 * Desc: sets up the calcMaxPurcahse to be set up and used in MainFrame
+	 * Post: calcMaxPurchase and its components are able to be used in MainFrame
+	 */
+	private void setUpCalcMaxPurchase()
+	{
+		calcMaxPurchase = new CalcMaxPurchasePricePanel();
+		calcMaxPurchase.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MAIN_MENU);
+			}
+		});
+		calcMaxPurchase.getBtnAddPaintingTo().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Check to make sure input is valid
+				//setup painting form inputted info
+				//double maxPurch = Calculations.calcMaxPurchasePrice(new painting);
+				//if maxPurch = -1 don't allow to buy
+				//else JOptionPane.show.....
+				//if yes goto completePurchase
+				//else stay at buy panel.
+			}
+		});
+	}
+	
+	/**
+	 * Desc: sets up the completePurchase to be set up and used in MainFrame
+	 * Post: completePurchase and its components are able to be used in MainFrame
+	 */
+	private void setUpCompletePurchase()
+	{
+		completePurchase = new CompletePurchasePanel();
+	}
+	
+	/**
 	 * Desc: sets up the mainMenu to be set up and used in MainFrame
 	 * Post: mainMenu and its components are able to be used in MainFrame
 	 */
 	private void setUpMainMenu()
 	{
 		mainMenu = new MainMenuPanel();
+		mainMenu.getBtnManageInventory().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+			}
+		});
+		mainMenu.getBtnManageArtists().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+			}
+		});
+		mainMenu.getBtnBuyPainting().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), CALC_MAX_PURCH);
+			}
+		});
 		mainMenu.getBtnReportsPopup().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReportGUI g = new ReportGUI(new Report());
@@ -125,6 +192,15 @@ public class MainFrame extends JFrame implements ActionListener{
 				cardLayout.show(getContentPane(), AUCTION_MM);
 			}
 		});
+	}
+	
+	/**
+	 * Desc: sets up the manageArtist to be set up and used in MainFrame
+	 * Post: manageArtist and its components are able to be used in MainFrame
+	 */
+	private void setUpManageArtist()
+	{
+		manageArtist = new ManageArtistPanel();
 	}
 	
 	/**
@@ -157,6 +233,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
+	 * Desc: sets up the manageInventoryMM to be set up and used in MainFrame
+	 * Post: manageInventoryMM and its components are able to be used in MainFrame
+	 */
+	private void setUpManageInventoryMM()
+	{
+		manageInventoryMM = new ManageInventoryMainMenuPanel();
+	}
+	
+	/**
 	 * Desc: sets up the searchAuction to be set up and used in MainFrame
 	 * Post: searchAuction and its components are able to be used in MainFrame
 	 */
@@ -183,12 +268,21 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	private void setUpSeeAllAuction()
 	{
-		seeAllAuction = new SeeAllPaintingsPanel();
+		seeAllAuction = new SeeAllAuctionPaintingsPanel();
 		seeAllAuction.getBtnBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(getContentPane(), AUCTION_MM);
 			}
 		});
+	}
+	
+	/**
+	 * Desc: sets up the updateArtist to be set up and used in MainFrame
+	 * Post: updateArtist and its components are able to be used in MainFrame
+	 */
+	private void setUpUpdateArtist()
+	{
+		updateArtist = new UpdateArtistPanel();
 	}
 	
 	/**
@@ -221,6 +315,15 @@ public class MainFrame extends JFrame implements ActionListener{
 					cardLayout.show(getContentPane(), AUCTION_MM);
 			}
 		});
+	}
+	
+	/**
+	 * Desc: sets up the updateInventory to be set up and used in MainFrame
+	 * Post: updateInventory and its components are able to be used in MainFrame
+	 */
+	private void setUpUpdateInventory()
+	{
+		updateInventory = new UpdateInventoryPanel();
 	}
 	
 	/**

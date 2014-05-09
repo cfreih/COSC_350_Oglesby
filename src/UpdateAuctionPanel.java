@@ -73,7 +73,7 @@ public class UpdateAuctionPanel extends JPanel {
 				createFormatter("********************"));
 		formattedFirstName.setBounds(27, 194, 226, 21);
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
-		lblTitleOfWork.setBounds(65, 258, 186, 15);
+		lblTitleOfWork.setBounds(27, 255, 186, 15);
 		formattedTitle = new JFormattedTextField(
 				createFormatter("****************************************"));
 		formattedTitle.setBounds(27, 276, 446, 21);

@@ -1,5 +1,3 @@
-package test;
-
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.border.CompoundBorder;
@@ -14,7 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ModifyDeleteArtistPanel extends JPanel {
+public class UpdateArtistPanel extends JPanel {
 	private JLabel lblArtistInfo;
 	private JLabel lblFirstName;
 	private JLabel lblLastNamemax;
@@ -22,7 +20,7 @@ public class ModifyDeleteArtistPanel extends JPanel {
 	private JFormattedTextField formattedLastName;
 	private JButton btnSelectArtist;
 	private JButton btnCancel;
-	public ModifyDeleteArtistPanel() {
+	public UpdateArtistPanel() {
 		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
 		formattedLastName = new JFormattedTextField(createFormatter("?*******************"));
 		
