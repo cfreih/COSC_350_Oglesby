@@ -245,7 +245,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		if (soldYesOrNo) {
 			dateOfSale = date;
 		} else
-			System.out.println("Painting has not be sold. Cannot set date");
+			dateOfSale = new SimpleDate();
 	}
 
 	/**
@@ -258,7 +258,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		if (soldYesOrNo)
 			dateOfSale = new SimpleDate(year, month, day);
 		else
-			System.out.println("Painting has not be sold. Cannot set date");
+			dateOfSale = new SimpleDate(-1,-1,-1);
 	}
 
 	/**
@@ -269,7 +269,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 		if (soldYesOrNo)
 			return dateOfSale;
 		else {
-			System.out.println("Painting has not been sold");
 			return new SimpleDate(SimpleDate.DEFAULT);
 		}
 	}
@@ -282,8 +281,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		if (soldYesOrNo) {
 			buyerName = name;
 		} else
-			System.out
-					.println("Painting has not be sold. Cannot set buyerName");
+			buyerName = "";
 	}
 
 	/**
@@ -291,12 +289,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * Return:the painting's buyerName
 	 */
 	public String getBuyerName() {
-		if (soldYesOrNo)
 			return buyerName;
-		else {
-			System.out.println("Painting has not been sold.");
-			return "";
-		}
 	}
 
 	/**
@@ -306,9 +299,9 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setBuyerAddress(String address) {
 		if (soldYesOrNo) {
 			buyerAddress = address;
-		} else
-			System.out
-					.println("Painting has not be sold. Cannot set buyerAddress");
+		} 
+		else
+			buyerAddress = "";
 	}
 
 	/**
@@ -316,12 +309,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * Return:the painting's buyerAddress
 	 */
 	public String getBuyerAddress() {
-		if (soldYesOrNo)
-			return buyerAddress;
-		else {
-			System.out.println("Painting has not been sold.");
-			return "";
-		}
+		return buyerAddress;
 	}
 
 	/**
@@ -335,9 +323,9 @@ public class InventoryPainting extends Painting implements Cloneable {
 			actualSellPrice = price;
 			calcTargetAndActualRatio();
 			calcFlagSoldReport();
-		} else
-			System.out
-					.println("Painting has not be sold. Cannot set buyerAddress");
+		} 
+		else
+			actualSellPrice = -1;
 	}
 
 	/**
@@ -345,12 +333,8 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * true Return:the painting's actualSellPrice
 	 */
 	public double getActualSellPrice() {
-		if (soldYesOrNo)
-			return actualSellPrice;
-		else {
-			System.out.println("Painting has not been sold.");
-			return -1;
-		}
+		return actualSellPrice;
+		
 	}
 
 	/**
