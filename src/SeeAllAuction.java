@@ -29,7 +29,7 @@ import java.awt.ScrollPane;
  * @author Clint
  * 
  */
-public class SeeAllPaintingsPanel extends JPanel {
+public class SeeAllAuction extends JPanel {
 
 	//private JTable paintingsTable;
 	private SpringLayout springLayout;
@@ -39,7 +39,7 @@ public class SeeAllPaintingsPanel extends JPanel {
 	private JScrollPane listScroll;
 	private GridBagLayout gridBagLayout;
 
-	public SeeAllPaintingsPanel() {
+	public SeeAllAuction() {
 		/*paintingsTable = new JTable();
 		springLayout = new SpringLayout();
 		scrollPane = new JScrollPane(paintingsTable);*/
@@ -98,7 +98,7 @@ public class SeeAllPaintingsPanel extends JPanel {
 		f.setSize(800, 600);
 		f.setLocation(10, 10);
 		f.show();
-		f.getContentPane().add(new SeeAllPaintingsPanel());
+		f.getContentPane().add(new SeeAllAuction());
 
 	}
 	public JButton getBtnBack() {
