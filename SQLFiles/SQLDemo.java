@@ -11,7 +11,7 @@ public class SQLDemo
 		SQLConnector connector = new SQLConnector("SELECT lastName, firstName FROM painters order by lastName;");
 		Vector querryReadyResult = connector.executeSQL_Query();
 		int flag= querryReadyResult.size();
-		//System.out.println(flag);
+		System.out.println(flag);
 		System.out.println("Ordered by Last Name");
 		for(int i=0; i<flag; i++){
 			System.out.println(querryReadyResult.elementAt(i));			

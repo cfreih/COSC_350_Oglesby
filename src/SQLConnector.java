@@ -103,4 +103,14 @@ public class SQLConnector{
 		} 
 		return queryReadyResult;
 	}		
+	 	public static void main( String[] args )
+   	{
+		//SQLConnector connector = new SQLConnector("insert into auction_paintings (painterID, title, dateOfWork, dateOfAuction, salePrice, height, widht, medium, subject) values (1, 'Painting1-4', 1995, '20100322', 200000.55, 12.10, 15.10, 'Oil', 'Lunar');");
+		//int flag = connector.executeSQL_Update();
+		//System.out.println(flag);
+		SQLConnector connector = new SQLConnector("SELECT lastName, firstName FROM painters order by lastName;");
+		Vector querryReadyResult = connector.executeSQL_Query();
+		int flag= querryReadyResult.size();
+		System.out.println(flag);
+	}
 }
