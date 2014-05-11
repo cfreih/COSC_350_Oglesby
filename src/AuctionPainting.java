@@ -28,8 +28,8 @@ public class AuctionPainting extends Painting implements Cloneable {
 	 */
 	public AuctionPainting(String firstName, String lastName, String title,
 			int date, double height, double width, String med, String subj,
-			int id, double salePrice, SimpleDate dateSale) {
-		super(firstName, lastName, title, date, height, width, med, subj, id);
+			double salePrice, SimpleDate dateSale) {
+		super(firstName, lastName, title, date, height, width, med, subj);
 		salePriceAuction = salePrice;
 		dateOfSaleAuction = dateSale;
 	}
@@ -102,19 +102,19 @@ public class AuctionPainting extends Painting implements Cloneable {
 		// Should print ", """
 		System.out.println(testP);
 		// Should print "-1 -1 -1.0 -1.0  -1.0 [Current Date and Time] end"
-		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork()
+		System.out.println(testP.getDateOfWork()
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject()
 				+ testP.getSalePriceAuction() + " "
 				+ testP.getDateOfSaleAuction() + " end");
 		testP = new AuctionPainting("Sammichelle", "Bachman",
-				"Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics", -1,
+				"Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics",
 				12, new SimpleDate(1852, 3, 17));
 		// Should print "Bachman, Sammichelle "Twinkle, Twinkle""
 		System.out.println(testP);
 		// Should print
 		// "-1 1992 0.1 199.9 Oil Economics 12.00 [Date with March 17 1852]"
-		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork()
+		System.out.println(testP.getDateOfWork()
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject() + " "
 				+ testP.getSalePriceAuction() + " "
@@ -136,7 +136,7 @@ public class AuctionPainting extends Painting implements Cloneable {
 		System.out.println(testP);
 		// Should print
 		// "-1 2014 999.9 10000.1 Acrylic Phypsychics 12525 [Date of April 1 1725]"
-		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork()
+		System.out.println(testP.getDateOfWork()
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject() + " "
 				+ testP.getSalePriceAuction() + " "

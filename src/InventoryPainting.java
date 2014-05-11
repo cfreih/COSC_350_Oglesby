@@ -56,11 +56,11 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 */
 	public InventoryPainting(String firstName, String lastName, String title,
 			int date, double height, double width, String med, String subj,
-			int id, String sName, String sAddress, SimpleDate dateP,
+			String sName, String sAddress, SimpleDate dateP,
 			double maxPurch, double actualPurch,
 			SimpleDate dateS, String bName, String bAddress, double actualSell,
 			String classif) {
-		super(firstName, lastName, title, date, height, width, med, subj, id);
+		super(firstName, lastName, title, date, height, width, med, subj);
 		sellerName = sName;
 		sellerAddress = sAddress;
 		dateOfPurchase = dateP;
@@ -405,18 +405,18 @@ public class InventoryPainting extends Painting implements Cloneable {
 		// Should print ", """
 		System.out.println(testP);
 		// Should print "-1 -1 -1.0 -1.0  end"
-		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork()
+		System.out.println(testP.getDateOfWork()
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject() + "end");
 		testP = new InventoryPainting("Sammichelle", "Bachman",
-				"Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics", -1,
+				"Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
 				"Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
 						14), 1230000, 1000000,  new SimpleDate(
 						SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
 		// Should print "Bachman, Sammichelle "Twinkle, Twinkle""
 		System.out.println(testP);
 		// Should print "-1 1992 0.1 199.9 Oil Economics"
-		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork()
+		System.out.println(testP.getDateOfWork()
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject());
 		// Should print out the following:
@@ -444,7 +444,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		// Should print "Burrrrwalz, Timothy "Little Star""
 		System.out.println(testP);
 		// Should print "-1 2014 999.9 10000.1 Acrylic Phypsychics"
-		System.out.println(testP.getArtistID() + " " + testP.getDateOfWork()
+		System.out.println(testP.getDateOfWork()
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject());
 

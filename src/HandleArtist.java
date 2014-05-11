@@ -6,10 +6,9 @@ public abstract class HandleArtist
   //Post: an artist is created in the database
   public static void createArtist(Artist artist)
   {
-    boolean isQuery = false;
     String tableStatement = "artists";
     String statement = "INSERT INTO "+ tableStatement +"(";
-    Pair[] pairs = loadMap(artist, isQuery);
+    Pair[] pairs = loadMap(artist);
     statement += HandlerUtility.loadKeys(pairs);
     statement += ") VALUES(";
     statement += HandlerUtility.loadValues(pairs);
@@ -22,11 +21,10 @@ public abstract class HandleArtist
   //Return: returns an Artist array, with elements matching search terms
   public static Artist[] retrieveArtists(Artist artist) //if string is empty, will bring all
   {
-    boolean isQuery = true;
     String tableStatement = "artists";
     String orderBy = "lastName, firstName";
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new Artist(), isQuery);
+    Pair[] pairs = loadMap(new Artist());
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     statement += stringify(artist);
@@ -46,29 +44,26 @@ public abstract class HandleArtist
       String artistFirstName = (String)result.get(i++);
       String artistLastName = (String)result.get(i++);
       int fashionabilityConstant = (Integer)result.get(i++);
-      int artistID = (Integer)result.get(i);
-      artists.add(new Artist(artistFirstName, artistLastName, fashionabilityConstant, artistID));
+      artists.add(new Artist(artistFirstName, artistLastName, fashionabilityConstant));
     }
   }
   //Desc: method to load a HashMap with values to assist in the automation of SQL statements
   // In particular, this method assists with limiting the amount of hardcoding in the stringify
   //Return: the fully loaded HashMap is returned
-  private static Pair[] loadMap(Artist artist, boolean isQuery)
+  private static Pair[] loadMap(Artist artist)
   {
     ArrayList<Pair> pairs = new ArrayList<Pair>();
     pairs.add(new Pair("firstName", artist.getArtistFirstName()));
     pairs.add(new Pair("lastName", artist.getArtistLastName()));
     pairs.add(new Pair("fashionability", artist.getFashionabilityCoeff()));
-    if(isQuery) pairs.add(new Pair("artistID", artist.getArtistID()));
     return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);
   }
   //Desc: method converts an Artist into a String
   //Return: returns a String for the SQL statement
   private static String stringify(Artist artist)
   {
-    boolean isQuery = true;
     String result = "";
-    Pair[] pairs = loadMap(artist,isQuery);
+    Pair[] pairs = loadMap(artist);
     boolean[] flags = new boolean[pairs.length];
     for(int i = 0; i < pairs.length; i++)
     {
@@ -89,10 +84,9 @@ public abstract class HandleArtist
   //Post: an artist is updated in the database
   public static void updateArtist(Artist artist, Artist searchKey)
   {
-    boolean isQuery = false;
     String tableStatement = "artists";
     String statement = "UPDATE " + tableStatement + " SET";
-    Pair[] pairs = loadMap(artist, isQuery);
+    Pair[] pairs = loadMap(artist);
     statement += HandlerUtility.loadKeysAndValues(pairs);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);
@@ -124,9 +118,9 @@ class HandleArtistTest extends HandleArtist
     public static boolean createArtistTest()
     {
         Artist[] testArtists = {
-                new Artist("Fred", "Phelps", 1, -1),
-                new Artist("Lergan", "Berlock", 999, -1),
-                new Artist("Brendel", "the Destroyer", 532, -1)};
+                new Artist("Fred", "Phelps", 1),
+                new Artist("Lergan", "Berlock", 999),
+                new Artist("Brendel", "the Destroyer", 532)};
         for(int i = 0; i < testArtists.length; i++)
         {
             HandleArtist.createArtist(testArtists[i]);
@@ -144,19 +138,19 @@ class HandleArtistTest extends HandleArtist
     }
     public static boolean retrieveArtistsTest()
     {
-        Artist testArtist = new Artist("Clint","Freiheit",8900, -1);
+        Artist testArtist = new Artist("Clint","Freiheit",8900);
         Artist[] correctnessTest = HandleArtist.retrieveArtists(testArtist);
         if(!correctnessTest[0].getArtistFirstName().equals(testArtist.getArtistFirstName())) return false;
         if(!correctnessTest[0].getArtistLastName().equals(testArtist.getArtistLastName())) return false;
         if(correctnessTest[0].getFashionabilityCoeff() != testArtist.getFashionabilityCoeff()) return false;
-        testArtist = new Artist("Claudio", "Arky", 4000, -1);
+        testArtist = new Artist("Claudio", "Arky", 4000);
         correctnessTest = HandleArtist.retrieveArtists(testArtist);
         if(correctnessTest.length != 0) return false;
         return true;
     }
     public static boolean updateArtistsTest()
     {
-        Artist testArtist = new Artist("Sam","Bock",5522, -1);
+        Artist testArtist = new Artist("Sam","Bock",5522);
         Artist[] correctnessTest = HandleArtist.retrieveArtists(testArtist);
         if(!correctnessTest[0].getArtistFirstName().equals(testArtist.getArtistFirstName())) return false;
         if(!correctnessTest[0].getArtistLastName().equals(testArtist.getArtistLastName())) return false;
@@ -177,13 +171,13 @@ class HandleArtistTest extends HandleArtist
     }
     public static boolean deleteArtistsTest()
     {
-        Artist testArtist = new Artist("Tim","Burwitz", 6000, -1);
+        Artist testArtist = new Artist("Tim","Burwitz", 6000);
         Artist[] correctnessTest = HandleArtist.retrieveArtists(testArtist);
         Artist temp = correctnessTest[0];
         deleteArtist(testArtist);
         correctnessTest = retrieveArtists(testArtist);
         if(correctnessTest.length != 0) return false;
-        createArtist(new Artist("Tim", "Burwitz", 6000, -1));
+        createArtist(new Artist("Tim", "Burwitz", 6000));
         return true;
     }
 }

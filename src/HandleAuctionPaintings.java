@@ -53,7 +53,7 @@ public abstract class HandleAuctionPaintings
       SimpleDate auctionDateOfSale = (SimpleDate) result.get(i);
       //Date auctionDateOfSale = new Date(Date.parse((String)result.get(i)));
       auctionPaintings.add(new AuctionPainting(artistFirstName, artistLastName, titleOfWork, dateOfWork,
-                           heightCM, widthCM, medium, subject, artistID, auctionSalePrice, auctionDateOfSale));
+                           heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale));
     }
   }
   //Desc: method to load a HashMap with values to assist in the automation of SQL statements
@@ -62,14 +62,14 @@ public abstract class HandleAuctionPaintings
   private static Pair[] loadMap(AuctionPainting auction)
   {
     ArrayList<Pair> pairs = new ArrayList<Pair>();
-    pairs.add(new Pair("artistID", auction.getArtistID()));
+    pairs.add(new Pair("firstName", auction.getArtistFirstName()));
+    pairs.add(new Pair("lastName", auction.getArtistLastName()));
     pairs.add(new Pair("titleOfWork", auction.getTitleOfWork()));
     pairs.add(new Pair("dateOfWork", auction.getDateOfWork()));
     pairs.add(new Pair("heightCM", auction.getHeightCM()));
     pairs.add(new Pair("widthCM", auction.getWidthCM()));
     pairs.add(new Pair("medium", auction.getMedium()));
     pairs.add(new Pair("subject", auction.getSubject()));
-    pairs.add(new Pair("artistID", auction.getArtistID()));
     pairs.add(new Pair("auctionSalePrice", auction.getSalePriceAuction()));
     pairs.add(new Pair("auctionDateOfSale", auction.getDateOfSaleAuction()));
     return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);

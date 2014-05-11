@@ -9,7 +9,6 @@ public class Artist implements Cloneable{
 	private String artistFirstName;
 	private String artistLastName;
 	private int fashionabilityCoeff;
-	private int artistID;
 	
 	/* Desc: no arg constructor initializing an Artist
 	   Post: All attributes is initialized firstName, lastName to empty string
@@ -18,18 +17,16 @@ public class Artist implements Cloneable{
 		artistFirstName="";
 		artistLastName="";
 		fashionabilityCoeff = -1;
-		artistID = -1;
 	}
 	
 	/* Desc: All arg constructor initializing an Artist
 	   Pre:  Values are provided for each attribute 
 	   Post: All attributes is initialized firstName, lastName to the given values
 		     fashionabilityCoeff to -1 */	
-	public Artist(String fName, String lName, int fCoeff, int id){
+	public Artist(String fName, String lName, int fCoeff){
 		artistFirstName=fName;
 		artistLastName=lName;
 		fashionabilityCoeff = fCoeff;
-		artistID = id;
 	}	
 	
 	/* Desc: Returns the Artist First Name
@@ -67,15 +64,7 @@ public class Artist implements Cloneable{
 	public void setFashionabilityCoeff(int fCoeff){
 		fashionabilityCoeff=fCoeff;
 	}
-		
-	/**
-	 * Desc:  Gets the artistID value of this object
-	 * Return:The artistID is returned
-	 */
-	public int getArtistID()
-	{
-		return artistID;
-	}
+
 	
 	/*
 	 * Desc: the toString() method for an artist.

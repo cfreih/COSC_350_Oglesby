@@ -80,7 +80,7 @@ public abstract class Calculation
  private static double calcMaxOther(InventoryPainting painting, AuctionPainting[] records)
  {
    double area=painting.getHeightCM()*painting.getWidthCM();
-   Artist artist=new Artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1,-1);
+   Artist artist=new Artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1);
    Artist[] artists=HandleArtist.retrieveArtists(artist);
    int fashionabilityConstant=artists[0].getFashionabilityCoeff();
    return area * fashionabilityConstant;

@@ -15,7 +15,7 @@ public class Painting implements Cloneable {
 	private double widthCM;
 	private String medium;
 	private String subject;
-	private int artistID;
+	//private int artistID;
 	
 	/**
 	 * Desc:  No arg constructor for a painting
@@ -32,7 +32,7 @@ public class Painting implements Cloneable {
 		widthCM = -1.0;
 		medium = "";
 		subject = "";
-		artistID = -1;
+		//artistID = -1;
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class Painting implements Cloneable {
 	 * 		  being set with the proper parameters
 	 */
 	public Painting(String firstName, String lastName, String title, int date,
-			double height, double width, String med, String subj, int id)
+			double height, double width, String med, String subj)
 	{
 		artistFirstName = firstName;
 		artistLastName = lastName;
@@ -51,7 +51,7 @@ public class Painting implements Cloneable {
 		widthCM = width;
 		medium = med;
 		subject = subj;
-		artistID = id;
+		//artistID = id;
 	}
 	
 	/**
@@ -210,15 +210,6 @@ public class Painting implements Cloneable {
 	}
 	
 	/**
-	 * Desc:  Gets the artistID value of this object
-	 * Return:The artistID is returned
-	*/
-	public int getArtistID()
-	{
-		return artistID;
-	}
-	
-	/**
 	 * Desc:  returns the String representation of the painting
 	 * Return:returns a string in form "artistsLastName, artistFirstName "titleOfWork""
 	 */
@@ -254,10 +245,6 @@ public class Painting implements Cloneable {
 		
 	}
 
-    public void setArtistID(int artistID)
-    {
-        this.artistID = artistID;
-    }
 	
 	/**
 	 * Desc: Tests the various methods and constructors for a Painting

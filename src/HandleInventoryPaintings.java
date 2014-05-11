@@ -6,14 +6,9 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is created in the database
   public static void createInventoryPainting(InventoryPainting inventory)
   {
-    boolean isQuery = false;
     String tableStatement = "inventory_paintings";
-    String fromTableStatement = "artists";
     String statement = "INSERT INTO "+ tableStatement +"(";
-    Artist[] a = HandleArtist.retrieveArtists(new Artist(inventory.getArtistFirstName(), inventory.getArtistLastName(), -1, -1));
-    if(a.length == 0) return; //throw errors
-    inventory.setArtistID(a[0].getArtistID());
-    Pair[] pairs = HandleInventoryPaintings.loadMap(inventory, isQuery);
+    Pair[] pairs = HandleInventoryPaintings.loadMap(inventory);
     statement += HandlerUtility.loadKeys(pairs);
     statement += ") VALUES( ";
     statement += HandlerUtility.loadValues(pairs);
@@ -28,12 +23,11 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(SimpleDate d)
   {
-    boolean isQuery = true;
-    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
-    String orderBy = "artistID";
+    String tableStatement = "inventory_paintings";
+    String orderBy = "inventoryPaintingID";
     int date = HandlerUtility.dateToInt(d);
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting(),isQuery); //clint needs to fix inventorypainting
+    Pair[] pairs = loadMap(new InventoryPainting()); //clint needs to fix inventorypainting
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     statement += " WHERE sold=1 and dateOfSale > " + date + " ";
@@ -50,11 +44,10 @@ public abstract class HandleInventoryPaintings
   //Return: returns an InventoryPainting array, with elements matching search terms
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
   {
-    boolean isQuery = true;
-    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
-    String orderBy = "artistID";
+    String tableStatement = "inventory_paintings";
+    String orderBy = "inventoryPaintingID";
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting(), isQuery);
+    Pair[] pairs = loadMap(new InventoryPainting());
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     for(int i = 0; i < inventory.length; i++)
@@ -75,10 +68,10 @@ public abstract class HandleInventoryPaintings
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
   {
     boolean isQuery = true;
-    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.fkartistID";
-    String orderBy = "fkartistID";
+    String tableStatement = "inventory_paintings";
+    String orderBy = "inventoryPaintingID";
     String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting(),isQuery);
+    Pair[] pairs = loadMap(new InventoryPainting());
     statement += HandlerUtility.loadKeys(pairs);
     statement += " FROM " + tableStatement;
     statement += stringify(inventory);
@@ -93,15 +86,11 @@ public abstract class HandleInventoryPaintings
   //Desc: method to load a HashMap with values to assist in the automation of SQL statements
   // In particular, this method assists with limiting the amount of hardcoding in the stringify
   //Return: the fully loaded HashMap is returned
-  public static Pair[] loadMap(InventoryPainting inventory, boolean isQuery)
+  public static Pair[] loadMap(InventoryPainting inventory)
   {
     ArrayList<Pair> pairs = new ArrayList<Pair>();
-    if(isQuery)
-    {
-        pairs.add(new Pair("artists.firstName", inventory.getArtistFirstName()));
-        pairs.add(new Pair("artists.lastName", inventory.getArtistLastName()));
-    }
-    pairs.add(new Pair("inventory_paintings.fkartistID", inventory.getArtistID()));
+    pairs.add(new Pair("inventory_paintings.firstName", inventory.getArtistFirstName()));
+    pairs.add(new Pair("inventory_paintings.lastName", inventory.getArtistLastName()));
     pairs.add(new Pair("inventory_paintings.title", inventory.getTitleOfWork()));
     pairs.add(new Pair("inventory_paintings.dateOfWork", inventory.getDateOfWork()));
     pairs.add(new Pair("inventory_paintings.classification", inventory.getClassification()));
@@ -115,7 +104,6 @@ public abstract class HandleInventoryPaintings
     pairs.add(new Pair("inventory_paintings.maximumPurchasePrice", inventory.getMaxPurchasePrice()));
     pairs.add(new Pair("inventory_paintings.actualPurchasePrice", inventory.getActualPurchasePrice()));
     pairs.add(new Pair("inventory_paintings.targetSellingPrice", inventory.getTargetSellPrice()));
-    //pairs.add(new Pair("inventory_paintings.sold", inventory.getSoldYesOrNo() ? 1 : -1)); //REALLY WANT TO REMOVE
     pairs.add(new Pair("inventory_paintings.dateOfSale", HandlerUtility.dateToInt(inventory.getDateOfSale())));
     pairs.add(new Pair("inventory_paintings.nameOfBuyer", inventory.getBuyerName()));
     pairs.add(new Pair("inventory_paintings.addressOfBuyer", inventory.getBuyerAddress()));
@@ -132,7 +120,6 @@ public abstract class HandleInventoryPaintings
         {
             String artistFirstName = (String) result.get(i++);
             String artistLastName = (String) result.get(i++);
-            int artistID = (Integer)result.get(i++);
             String titleOfWork = (String)result.get(i++);
             int dateOfWork = (Integer)result.get(i++);
             String classification = (String)result.get(i++);
@@ -147,15 +134,12 @@ public abstract class HandleInventoryPaintings
             double actualPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
             double targetPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
             boolean soldYesOrNo = (Boolean)result.get(i++);
-            Integer temp = ((Integer)result.get(i++));
-            SimpleDate dateOfSale;
-            if(soldYesOrNo) dateOfSale = HandlerUtility.intToDate(temp);
-            else dateOfSale = new SimpleDate();
+            SimpleDate dateOfSale = HandlerUtility.intToDate((Integer)result.get(i++));
             String buyerName = (String)result.get(i++);
             String buyerAddress = (String)result.get(i++);
             double actualSellingPrice = ((BigDecimal)result.get(i)).doubleValue();
             inventoryPaintings.add(new InventoryPainting(artistFirstName, artistLastName, titleOfWork, dateOfWork,
-                    heightCM, widthCM, medium, subject, artistID, sellerName, sellerAddress,
+                    heightCM, widthCM, medium, subject, sellerName, sellerAddress,
                     dateOfPurchase, maxPurchasePrice, actualPurchasePrice,
                     dateOfSale, buyerName, buyerAddress,
                     actualSellingPrice, classification));
@@ -165,9 +149,8 @@ public abstract class HandleInventoryPaintings
   //Return: returns a String for the SQL statement
   private static String stringify(InventoryPainting inventory)
   {
-    boolean isQuery = true;
     String result = "";
-    Pair[] pairs = loadMap(inventory,isQuery);
+    Pair[] pairs = loadMap(inventory);
     boolean[] flags = new boolean[pairs.length];
     for(int i = 0; i < pairs.length; i++)
     {
@@ -188,10 +171,9 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is updated in the database
   public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
   {
-    boolean isQuery = false;
-    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
+    String tableStatement = "inventory_paintings";
     String statement = "UPDATE " + tableStatement + " SET";
-    Pair[] pairs = loadMap(inventory, isQuery);
+    Pair[] pairs = loadMap(inventory);
     statement += HandlerUtility.loadKeysAndValues(pairs);
     statement += " FROM " + tableStatement;
     statement += stringify(searchKey);
@@ -202,7 +184,7 @@ public abstract class HandleInventoryPaintings
   //Post: an InventoryPainting is deleted in the database
   public static void deleteInventoryPainting(InventoryPainting inventory)
   {
-    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
+    String tableStatement = "inventory_paintings";
     String statement = "DELETE FROM " + tableStatement;
     statement += stringify(inventory);
     SQLConnector connection = new SQLConnector(statement);
@@ -223,7 +205,7 @@ class HandleInventoryPaintingsTest
     {
         //Create painting from old artist
         InventoryPainting testPainting = new InventoryPainting("Clint", "Freiheit",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics", 4,
+                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(
                 SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
@@ -257,7 +239,7 @@ class HandleInventoryPaintingsTest
         }
         //Test for getting a specific InventoryPainting
         testPainting = new InventoryPainting("Sam","Bock","TestPainting1", 2001, 12.0, 34.0, "Oil",
-                "computers", 1, "Steve Shum", "GSC", new SimpleDate(2014,01,22), 10000, 50000,  new SimpleDate(2014,01,28),
+                "computers", "Steve Shum", "GSC", new SimpleDate(2014,01,22), 10000, 50000,  new SimpleDate(2014,01,28),
                 "Jessica Spalding", "Costelo", 400000.54, "Masterpiece");
         result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
         if(result.length != 1) return false;

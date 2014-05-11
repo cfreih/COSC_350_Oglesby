@@ -464,7 +464,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		double width = Double.parseDouble(values[7]);
 		String med = values[8];
 		String subj = values[9];
-		return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,-1,salePrice,dateAuction);
+		return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,salePrice,dateAuction);
 	}
 
 	public static void main(String[] args) {
