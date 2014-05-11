@@ -431,14 +431,23 @@ public class AddPaintingAuctionPanel extends JPanel {
 	public String[] getFieldValues()
 	{
 		String[] fieldValues = new String[10];
-		fieldValues[0] = (String) formattedFirstName.getValue();
-		fieldValues[1] = (String) formattedLastName.getValue();
-		fieldValues[2] = (String) formattedTitle.getValue();
-		fieldValues[3] = (String) formattedDateOfWork.getValue();
-		fieldValues[4] = (String) formattedDateAuction.getValue();
-		fieldValues[5] = Long.toString((Long) formattedSalePrice.getValue());
-		fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
-		fieldValues[7] = Long.toString((Long)formattedWidth.getValue());
+		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		fieldValues[4] = ((String) formattedDateAuction.getValue()).trim();
+		if(formattedSalePrice.getValue() instanceof Long)
+			fieldValues[5] = Long.toString((Long) formattedSalePrice.getValue());
+		else
+			fieldValues[5] = Double.toString((Double) formattedSalePrice.getValue());
+		if(formattedHeight.getValue() instanceof Long)
+			fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+		else
+			fieldValues[6] = Double.toString((Double) formattedSalePrice.getValue());
+		if(formattedHeight.getValue() instanceof Long)
+			fieldValues[7] = Long.toString((Long)formattedWidth.getValue());
+		else
+			fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
 		fieldValues[8] = textFieldMedium.getText();
 		fieldValues[9] = textFieldSubject.getText();
 		

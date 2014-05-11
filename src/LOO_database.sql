@@ -22,7 +22,7 @@ CREATE TABLE auction_paintings (
 	lastName varchar (20),
 	title varchar (40),
 	dateOfWork INT,
-	dateOfAuction INT,
+	dateOfAuction INT(18),
 	salePrice DECIMAL(18,2),
 	height DECIMAL(10,2),
 	width DECIMAL(10,2),
