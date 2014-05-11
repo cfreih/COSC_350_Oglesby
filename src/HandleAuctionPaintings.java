@@ -13,7 +13,8 @@ public abstract class HandleAuctionPaintings
     statement += HandlerUtility.loadValues(pairs);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQL_Query();
+    System.out.println(statement);
+    connection.executeSQL_Update();
   }
   //Desc: method searches the database and retrieves any matching records.
   // Search terms are passed in as an AuctionPainting with fields initialized if they are search terms
@@ -63,14 +64,14 @@ public abstract class HandleAuctionPaintings
     ArrayList<Pair> pairs = new ArrayList<Pair>();
     pairs.add(new Pair("firstName", auction.getArtistFirstName()));
     pairs.add(new Pair("lastName", auction.getArtistLastName()));
-    pairs.add(new Pair("titleOfWork", auction.getTitleOfWork()));
+    pairs.add(new Pair("title", auction.getTitleOfWork()));
     pairs.add(new Pair("dateOfWork", auction.getDateOfWork()));
-    pairs.add(new Pair("heightCM", auction.getHeightCM()));
-    pairs.add(new Pair("widthCM", auction.getWidthCM()));
+    pairs.add(new Pair("height", auction.getHeightCM()));
+    pairs.add(new Pair("width", auction.getWidthCM()));
     pairs.add(new Pair("medium", auction.getMedium()));
     pairs.add(new Pair("subject", auction.getSubject()));
-    pairs.add(new Pair("auctionSalePrice", auction.getSalePriceAuction()));
-    pairs.add(new Pair("auctionDateOfSale", auction.getDateOfSaleAuction()));
+    pairs.add(new Pair("salePrice", auction.getSalePriceAuction()));
+    pairs.add(new Pair("dateOfAuction", HandlerUtility.dateToInt(auction.getDateOfSaleAuction())));
     return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);
   }
   //Desc: method converts an AuctionPainting into a String
