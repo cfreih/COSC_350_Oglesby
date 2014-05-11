@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Window.Type;
+import java.awt.Font;
 
 public class MainFrame extends JFrame implements ActionListener{
 
@@ -56,7 +58,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	/*
 	 * Desc: Initializes the MainFrame object
 	 */
-	public MainFrame() {
+	public MainFrame() {		
 		setUpMainMenu();
 		
 		setUpCalcMaxPurchase();
@@ -89,6 +91,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	public void setUpFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFont(new Font("Century", Font.PLAIN, 12));
+		setTitle("Les Objects d'Orient\r\n");
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setSize(800, 600);
