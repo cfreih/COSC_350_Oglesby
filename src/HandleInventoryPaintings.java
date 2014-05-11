@@ -130,9 +130,6 @@ public abstract class HandleInventoryPaintings
             String sellerAddress = (String)result.get(i++);
             double maxPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
             double actualPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
-
-
-
             Object temp = result.get(i);
             SimpleDate dateOfSale;
             String buyerName, buyerAddress;
@@ -200,7 +197,7 @@ public abstract class HandleInventoryPaintings
     statement += " FROM " + tableStatement;
     statement += stringify(searchKey, 1);
     SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQL_Query();
+    connection.executeSQL_Update();
   }
   //Desc: method deletes an InventoryPainting in the database
   //Post: an InventoryPainting is deleted in the database
@@ -223,6 +220,7 @@ class HandleInventoryPaintingsTest
         System.out.println("\tRetrieveInventoryTestSingle: " + retrieveInventoryPaintingTestSingle());
         System.out.println("\tRetrieveInventoryTestDate: " + retrieveInventoryPaintingTestDate());
         System.out.println("\tRetrieveInventoryTestMultiple: " + retrieveInventoryPaintingTestMultiple());
+        System.out.println("\tUpdateInventoryTest" + updateInventoryPaintingTest());
     }
     public static boolean createInventoryPaintingTest()
     {
@@ -319,6 +317,21 @@ class HandleInventoryPaintingsTest
         {
             System.out.println(result[i]);
         }
+        return true;
+    }
+    public static boolean updateInventoryPaintingTest()
+    {
+        InventoryPainting searchKey = new InventoryPainting("Clint", "Freiheit",
+            "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+            "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
+            14), 1230000, 1000000, new SimpleDate(2013, 6,
+            14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
+        InventoryPainting modification = new InventoryPainting();
+        modification.setArtistFirstName("Clinton");
+        HandleInventoryPaintings.updateInventoryPainting(modification, searchKey);
+        searchKey.setArtistFirstName("Clinton");
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(searchKey);
+        if(result.length < 1) return false;
         return true;
     }
 }
