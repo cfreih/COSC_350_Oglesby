@@ -150,7 +150,7 @@ public class MainFrame extends JFrame implements ActionListener{
 							"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 					if(n == 0)
 					{
-						//HandleAuctionPaintings.createAuctionPainting(AddPaintingAuctionPanel.createNewAuctionPainting(addPaintingAuction.getFieldValues()));
+						HandleAuctionPaintings.createAuctionPainting(AddPaintingAuctionPanel.createNewAuctionPainting(addPaintingAuction.getFieldValues()));
 						cardLayout.show(getContentPane(), AUCTION_MM);
 						addPaintingAuction.resetTextFields();
 					}
