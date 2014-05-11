@@ -15,9 +15,9 @@ public abstract class HandlerUtility
   //Return: returns the int as an Date
   public static SimpleDate intToDate(int i)
   {
-      int year = i /10000;
-      int month = i / 100 - year;
-      int day = i - year - month;
+      int year = i / 10000;
+      int month = (i - (year * 10000)) / 100;
+      int day = i - (year * 10000) - (month * 100);
       return new SimpleDate(year, month, day);
   }
   //Desc: method to iterate through flags and return boolean value

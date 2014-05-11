@@ -103,7 +103,6 @@ public abstract class HandleInventoryPaintings
     pairs.add(new Pair("inventory_paintings.addressOfSeller", inventory.getSellerAddress()));
     pairs.add(new Pair("inventory_paintings.maximumPurchasePrice", inventory.getMaxPurchasePrice()));
     pairs.add(new Pair("inventory_paintings.actualPurchasePrice", inventory.getActualPurchasePrice()));
-    pairs.add(new Pair("inventory_paintings.targetSellingPrice", inventory.getTargetSellPrice()));
     pairs.add(new Pair("inventory_paintings.dateOfSale", HandlerUtility.dateToInt(inventory.getDateOfSale())));
     pairs.add(new Pair("inventory_paintings.nameOfBuyer", inventory.getBuyerName()));
     pairs.add(new Pair("inventory_paintings.addressOfBuyer", inventory.getBuyerAddress()));
@@ -114,8 +113,6 @@ public abstract class HandleInventoryPaintings
     //Post: ArrayList is loaded with results from SQL database
     public static void loadResults(ArrayList<InventoryPainting> inventoryPaintings, Vector result)
     {
-        System.out.println("Num in result: " + (result.size() / 23));
-        System.out.println("Num in result: " + (result.size()));
         for(int i = 0; i < result.size(); i++)
         {
             String artistFirstName = (String) result.get(i++);
@@ -132,8 +129,6 @@ public abstract class HandleInventoryPaintings
             String sellerAddress = (String)result.get(i++);
             double maxPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
             double actualPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
-            double targetPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
-            boolean soldYesOrNo = (Boolean)result.get(i++);
             SimpleDate dateOfSale = HandlerUtility.intToDate((Integer)result.get(i++));
             String buyerName = (String)result.get(i++);
             String buyerAddress = (String)result.get(i++);
@@ -197,8 +192,8 @@ class HandleInventoryPaintingsTest
     //Output: prints the results of unit tests
     public static void runTests()
     {
-        //System.out.println("\tCreateInventoryPaintingTest: " + createInventoryPaintingTest());
-        System.out.println("\tRetrieveInventoryTest: " + retrieveInventoryPaintingTest());
+        System.out.println("\tCreateInventoryPaintingTest: " + createInventoryPaintingTest());
+        //System.out.println("\tRetrieveInventoryTest: " + retrieveInventoryPaintingTest());
         //things
     }
     public static boolean createInventoryPaintingTest()
