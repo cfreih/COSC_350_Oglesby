@@ -56,9 +56,9 @@ public abstract class HandlerUtility
   }
   //Desc: method to check if a Date is initialized
   //Return: returns true if uninitialized, false if initialized
-  public static boolean checkInitialization(Date d)
+  public static boolean checkInitialization(SimpleDate d)
   {
-    return d == null;
+    return d.getYear() == -1;
   }
   //Desc: method to load keys and values into a String
   //Return: returns a String that is loaded with the keys
