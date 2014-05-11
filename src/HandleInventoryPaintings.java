@@ -194,8 +194,8 @@ public abstract class HandleInventoryPaintings
     String statement = "UPDATE " + tableStatement + " SET";
     Pair[] pairs = loadMap(inventory);
     statement += HandlerUtility.loadKeysAndValues(pairs);
-    statement += " FROM " + tableStatement;
     statement += stringify(searchKey, 1);
+    System.out.println(statement);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Update();
   }
@@ -220,7 +220,7 @@ class HandleInventoryPaintingsTest
         System.out.println("\tRetrieveInventoryTestSingle: " + retrieveInventoryPaintingTestSingle());
         System.out.println("\tRetrieveInventoryTestDate: " + retrieveInventoryPaintingTestDate());
         System.out.println("\tRetrieveInventoryTestMultiple: " + retrieveInventoryPaintingTestMultiple());
-        System.out.println("\tUpdateInventoryTest" + updateInventoryPaintingTest());
+        System.out.println("\tUpdateInventoryTest: " + updateInventoryPaintingTest());
     }
     public static boolean createInventoryPaintingTest()
     {
@@ -281,12 +281,6 @@ class HandleInventoryPaintingsTest
     public static boolean retrieveInventoryPaintingTestDate()
     {
         //Test for getting all past a point
-        InventoryPainting testPainting = new InventoryPainting("Clint", "Freiheit",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
-                "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
-                14), 1230000, 1000000, new SimpleDate(2013, 6,
-                14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
-        HandleInventoryPaintings.createInventoryPainting(testPainting);
         SimpleDate s = new SimpleDate(SimpleDate.TODAY);
         s.setYear(s.getYear() - 1);
         InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(s);
@@ -313,14 +307,11 @@ class HandleInventoryPaintingsTest
         temp[2].setTitleOfWork("TestPainting1");
         InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(temp);
         if(result.length < 1) return false;
-        for(int i = 0; i < result.length; i++)
-        {
-            System.out.println(result[i]);
-        }
         return true;
     }
     public static boolean updateInventoryPaintingTest()
     {
+        //Case for changing one field on a full search term
         InventoryPainting searchKey = new InventoryPainting("Clint", "Freiheit",
             "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
             "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
@@ -332,6 +323,14 @@ class HandleInventoryPaintingsTest
         searchKey.setArtistFirstName("Clinton");
         InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(searchKey);
         if(result.length < 1) return false;
+        for(int i = 0; i < result.length; i++)
+        {
+            System.out.println(result[i]);
+        }
+        //Case for changing all fields on one search term
+        searchKey = new InventoryPainting();
+        searchKey.setArtistFirstName("Sam");
+
         return true;
     }
 }

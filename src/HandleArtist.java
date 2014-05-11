@@ -43,7 +43,7 @@ public abstract class HandleArtist
     {
       String artistFirstName = (String)result.get(i++);
       String artistLastName = (String)result.get(i++);
-      int fashionabilityConstant = (Integer)result.get(i++);
+      int fashionabilityConstant = (Integer)result.get(i);
       artists.add(new Artist(artistFirstName, artistLastName, fashionabilityConstant));
     }
   }
@@ -98,8 +98,7 @@ public abstract class HandleArtist
   {
     String tableStatement = "artists";
     String statement = "DELETE FROM " + tableStatement;
-    statement += stringify(artist) + " LIMIT 1";
-    System.out.println(statement);
+    statement += stringify(artist);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Update();
   }
@@ -172,12 +171,12 @@ class HandleArtistTest extends HandleArtist
     public static boolean deleteArtistsTest()
     {
         Artist testArtist = new Artist("Tim","Burwitz", 6000);
+        createArtist(testArtist);
         Artist[] correctnessTest = HandleArtist.retrieveArtists(testArtist);
         Artist temp = correctnessTest[0];
         deleteArtist(testArtist);
         correctnessTest = retrieveArtists(testArtist);
         if(correctnessTest.length != 0) return false;
-        createArtist(new Artist("Tim", "Burwitz", 6000));
         return true;
     }
 }

@@ -67,8 +67,12 @@ public abstract class HandlerUtility
     String statement = "";
     for(int i = 0; i < pairs.length; i++)
     {
-      statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
-      if(i < pairs.length - 1) statement += ",";
+      if(checkInitialization(pairs[i].getValue()));
+      else
+      {
+          statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+          if(i < pairs.length - 1) statement += ",";
+      }
     }
     return statement;
   }
