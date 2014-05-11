@@ -396,6 +396,22 @@ public class InventoryPainting extends Painting implements Cloneable {
 				.getDateOfSale().getMonth(), this.getDateOfSale().getDay());
 		return cloneP;
 	}
+	
+	/**
+	 * Desc: Prints out all the fields of the InventoryPainting
+	 * Return: The string containing all fields of the InventoryPainting
+	 */
+	public String toString()
+	{
+		return getArtistFirstName() + " " + getArtistLastName() + " " + getTitleOfWork() + " " +
+				getDateOfWork() + "\n\t" 
+				+ getClassification() + " " + getHeightCM() + " " + getWidthCM() + " " + getMedium()
+				+ " " + getSubject() + "\n\t"
+				+ getDateOfPurchase() + " " + getSellerName() + " " + getSellerAddress() + " " 
+				+ getMaxPurchasePrice() + "\n\t" 
+				+ getActualPurchasePrice() + " " + getDateOfSale() + " " + getBuyerName() + " " 
+				+ getBuyerAddress()+ " " + getActualSellPrice();
+	}
 
 	/*
 	 * Desc: Test the methods in InventoryPainting
@@ -485,5 +501,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		System.out.println(cloneIP.getDateOfPurchase() + " "
 				+ cloneIP.getDateOfSale());
 	}
+	
+	
 
 }

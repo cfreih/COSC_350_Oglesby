@@ -158,7 +158,7 @@ class HandleAuctionPaintingsTest
         //Test for getting a specific InventoryPainting
         testPainting = result[0];
         result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
-        if(result.length != 1) return false;
+        if(result.length < 1) return false;
         if(!result[0].equals(testPainting)) return false;
         return true;
     }
