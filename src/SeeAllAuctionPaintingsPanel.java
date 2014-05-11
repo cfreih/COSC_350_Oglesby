@@ -1,19 +1,14 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.DropMode;
-import javax.swing.JTable;
 
 import java.awt.Font;
 
-import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -21,7 +16,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Dimension;
-import java.awt.ScrollPane;
 
 /**
 
@@ -38,18 +32,16 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 	private JList listAllAP;
 	private JScrollPane listScroll;
 	private GridBagLayout gridBagLayout;
+	
+	AuctionPainting[] allAP;
 
+	
 	public SeeAllAuctionPaintingsPanel() {
 		/*paintingsTable = new JTable();
 		springLayout = new SpringLayout();
 		scrollPane = new JScrollPane(paintingsTable);*/
-		// AuctionPainting[] allAP =
-		// HandleAuctionPaintings.retrieveAuctionPaintings(new
-		// AuctionPainting());
-		AuctionPainting[] allAP = new AuctionPainting[40];
-		for (int i = 0; i < allAP.length; i++)
-			allAP[i] = new AuctionPainting();
-		listAllAP = new JList(allAP);
+		allAP = HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting());
+		listAllAP = new JList<Object>(allAP);
 		listScroll = new JScrollPane(listAllAP);		
 		btnBack = new JButton("Back");
 		gridBagLayout = new GridBagLayout();
@@ -67,7 +59,7 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-
+		
 		listAllAP.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listAllAP.setVisibleRowCount(40);
 		listAllAP.setSize(new Dimension(1, 40));
@@ -89,6 +81,15 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		gbc_btnBack.gridy = 3;
 		add(btnBack, gbc_btnBack);
 	}
+	
+	/**
+	 * Desc: Updates the list to include all elements.
+	 * Post: listAllAP contains all elements of the auction records.
+	 */
+	public void updateList()
+	{
+		listAllAP.setListData(HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting()));
+	}
 
 	public static void main(String[] args) {
 		JFrame f = new JFrame("test window");
@@ -97,10 +98,14 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		f.setLocationRelativeTo(null);
 		f.setSize(800, 600);
 		f.setLocation(10, 10);
-		f.show();
 		f.getContentPane().add(new SeeAllAuctionPaintingsPanel());
+		f.setVisible(true);
+		
 
 	}
+	
+	
+	
 	public JButton getBtnBack() {
 		return btnBack;
 	}

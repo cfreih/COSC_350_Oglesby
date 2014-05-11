@@ -85,8 +85,7 @@ public class AuctionPainting extends Painting implements Cloneable {
 	public AuctionPainting clone() throws CloneNotSupportedException {
 		AuctionPainting clonedP = (AuctionPainting) super.clone();
 		clonedP.setDateOfSaleAuction(this.getDateOfSaleAuction().getYear(),
-				this.getDateOfSaleAuction().getMonth(), this
-						.getDateOfSaleAuction().getDay());
+				this.getDateOfSaleAuction().getMonth(), this.getDateOfSaleAuction().getDay());
 		return clonedP;
 	}
 

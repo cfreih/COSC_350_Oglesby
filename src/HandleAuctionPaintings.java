@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.*;
 public abstract class HandleAuctionPaintings
 {
@@ -13,7 +14,6 @@ public abstract class HandleAuctionPaintings
     statement += HandlerUtility.loadValues(pairs);
     statement += ")";
     SQLConnector connection = new SQLConnector(statement);
-    System.out.println(statement);
     connection.executeSQL_Update();
   }
   //Desc: method searches the database and retrieves any matching records.
@@ -22,7 +22,7 @@ public abstract class HandleAuctionPaintings
   public static AuctionPainting[] retrieveAuctionPaintings(AuctionPainting auction) //if string is empty, will bring all
   {
     String tableStatement = "auction_paintings";
-    String orderBy = "artistLastName, artistFirstName";
+    String orderBy = "lastName, firstName";
     String statement = "SELECT";
     Pair[] pairs = loadMap(new AuctionPainting());
     statement += HandlerUtility.loadKeys(pairs);
@@ -33,7 +33,7 @@ public abstract class HandleAuctionPaintings
     Vector result = connection.executeSQL_Query();
     ArrayList<AuctionPainting> auctionPaintings = new ArrayList<AuctionPainting>();
     loadResults(auctionPaintings, result);
-    return (AuctionPainting[]) auctionPaintings.toArray();
+    return Arrays.copyOf(auctionPaintings.toArray(), auctionPaintings.toArray().length, AuctionPainting[].class);
   }
   //Desc: method to parse results from SQL database back into AuctionPaintings
   //Post: ArrayList is loaded with results from SQL database
@@ -44,14 +44,19 @@ public abstract class HandleAuctionPaintings
       String artistFirstName = (String) result.get(i++);
       String artistLastName = (String) result.get(i++);
       String titleOfWork = (String) result.get(i++);
-      int dateOfWork = Integer.parseInt((String)result.get(i++));
-      double heightCM = Double.parseDouble((String)result.get(i++));
-      double widthCM = Double.parseDouble((String)result.get(i++));
+      //int dateOfWork = Integer.parseInt((String)result.get(i++));
+      int dateOfWork = (int) result.get(i++);
+      //double heightCM = Double.parseDouble((String)result.get(i++));
+      double heightCM = ((BigDecimal) result.get(i++)).doubleValue();
+      //double widthCM = Double.parseDouble((String)result.get(i++));
+      double widthCM = ((BigDecimal) result.get(i++)).doubleValue();
       String medium = (String) result.get(i++);
       String subject = (String) result.get(i++);
-      int artistID = Integer.parseInt((String)result.get(i++));
-      double auctionSalePrice = Double.parseDouble((String)result.get(i++));
-      SimpleDate auctionDateOfSale = (SimpleDate) result.get(i);
+      //int artistID = Integer.parseInt((String)result.get(i++));
+      //int artistID = (int) result.get(i++);
+      //double auctionSalePrice = Double.parseDouble((String)result.get(i++));
+      double auctionSalePrice = ((BigDecimal) result.get(i++)).doubleValue();
+      SimpleDate auctionDateOfSale = HandlerUtility.intToDate((int) result.get(i));
       auctionPaintings.add(new AuctionPainting(artistFirstName, artistLastName, titleOfWork, dateOfWork,
                            heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale));
     }

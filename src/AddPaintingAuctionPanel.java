@@ -445,7 +445,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		else
 			fieldValues[6] = Double.toString((Double) formattedSalePrice.getValue());
 		if(formattedHeight.getValue() instanceof Long)
-			fieldValues[7] = Long.toString((Long)formattedWidth.getValue());
+			fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
 		else
 			fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
 		fieldValues[8] = textFieldMedium.getText();
