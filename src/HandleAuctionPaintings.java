@@ -82,10 +82,14 @@ public abstract class HandleAuctionPaintings
     boolean[] flags = new boolean[pairs.length];
     for(int i = 0; i < pairs.length; i++)
     {
-      if(HandlerUtility.checkInitialization(pairs[i].getValue())) flags[i] = true;
+      if(HandlerUtility.checkInitialization(pairs[i].getValue()));
       else
       {
-          if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+          if(HandlerUtility.checkFlags(flags, i))
+          {
+              result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+              flags[i] = true;
+          }
           else result += " AND " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
       }
     }

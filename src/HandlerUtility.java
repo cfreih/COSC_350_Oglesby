@@ -21,7 +21,7 @@ public abstract class HandlerUtility
       return new SimpleDate(year, month, day);
   }
   //Desc: method to iterate through flags and return boolean value
-  //Return: returns true if all are true, false if any are false
+  //Return: returns true if all are false, false if any are true
   public static boolean checkFlags(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
   {
     if(count > flags.length - 1 || count < 0) throw new ArrayIndexOutOfBoundsException("Out of bounds");
@@ -65,13 +65,15 @@ public abstract class HandlerUtility
   public static String loadKeysAndValues(Pair[] pairs)
   {
     String statement = "";
+    boolean comma = false;
     for(int i = 0; i < pairs.length; i++)
     {
       if(checkInitialization(pairs[i].getValue()));
       else
       {
+          if(comma) statement += ",";
           statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
-          if(i < pairs.length - 1) statement += ",";
+          comma = true;
       }
     }
     return statement;

@@ -67,7 +67,7 @@ public abstract class HandleArtist
     boolean[] flags = new boolean[pairs.length];
     for(int i = 0; i < pairs.length; i++)
     {
-      if(HandlerUtility.checkInitialization(pairs[i].getValue())) flags[i] = true;
+      if(HandlerUtility.checkInitialization(pairs[i].getValue()));
       else
       {
           if(HandlerUtility.checkFlags(flags, i))
@@ -107,12 +107,24 @@ class HandleArtistTest extends HandleArtist
 {
     //Desc: method to run unit tests for all methods
     //Output: prints the results of unit tests
-    public static void runTests()
+    public static Pair[] runTests()
     {
-        System.out.println("\tCreateArtistTest: " + createArtistTest());
-        System.out.println("\tRetrieveArtistTest: " + retrieveArtistsTest());
-        System.out.println("\tUpdateArtistTest: " + updateArtistsTest());
-        System.out.println("\tDeleteArtistTest: " + deleteArtistsTest());
+        Pair[] report = new Pair[5];
+        boolean result = true;
+        boolean temp = createArtistTest();
+        if(!temp) result = false;
+        report[1] = new Pair("\tCreateArtistTest: ", temp);
+        temp = retrieveArtistsTest();
+        if(!temp) result = false;
+        report[2] = new Pair("\tRetrieveArtistTest: ", temp);
+        temp = updateArtistsTest();
+        if(!temp) result = false;
+        report[3] = new Pair("\tUpdateArtistTest: ", temp);
+        temp = deleteArtistsTest();
+        if(!temp) result = false;
+        report[4] = new Pair("\tDeleteArtistTest: ", temp);
+        report[0] = new Pair("", result);
+        return report;
     }
     public static boolean createArtistTest()
     {
@@ -150,17 +162,12 @@ class HandleArtistTest extends HandleArtist
     public static boolean updateArtistsTest()
     {
         Artist testArtist = new Artist("Sam","Bock",5522);
+        createArtist(testArtist);
         Artist[] correctnessTest = HandleArtist.retrieveArtists(testArtist);
         if(!correctnessTest[0].getArtistFirstName().equals(testArtist.getArtistFirstName())) return false;
         if(!correctnessTest[0].getArtistLastName().equals(testArtist.getArtistLastName())) return false;
         if(correctnessTest[0].getFashionabilityCoeff() != testArtist.getFashionabilityCoeff()) return false;
         testArtist.setArtistFirstName("Samuel");
-        updateArtist(testArtist, correctnessTest[0]);
-        correctnessTest = HandleArtist.retrieveArtists(testArtist);
-        if(!correctnessTest[0].getArtistFirstName().equals(testArtist.getArtistFirstName())) return false;
-        if(!correctnessTest[0].getArtistLastName().equals(testArtist.getArtistLastName())) return false;
-        if(correctnessTest[0].getFashionabilityCoeff() != testArtist.getFashionabilityCoeff()) return false;
-        testArtist.setArtistFirstName("Sam");
         updateArtist(testArtist, correctnessTest[0]);
         correctnessTest = HandleArtist.retrieveArtists(testArtist);
         if(!correctnessTest[0].getArtistFirstName().equals(testArtist.getArtistFirstName())) return false;

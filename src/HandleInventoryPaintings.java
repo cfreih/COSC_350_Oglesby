@@ -2,114 +2,113 @@ import java.math.BigDecimal;
 import java.util.*;
 public abstract class HandleInventoryPaintings
 {
-  //Desc: method creates an InventoryPainting in the database
-  //Post: an InventoryPainting is created in the database
-  public static void createInventoryPainting(InventoryPainting inventory)
-  {
-    String tableStatement = "inventory_paintings";
-    String statement = "INSERT INTO "+ tableStatement +"(";
-    Pair[] pairs = HandleInventoryPaintings.loadMap(inventory);
-    statement += HandlerUtility.loadKeys(pairs);
-    statement += ") VALUES( ";
-    statement += HandlerUtility.loadValues(pairs);
-    statement += ")";
-    SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQL_Update();
-  }
-  //Desc: method searches the database and retrieves any matching records. 
-  // Search terms only a Date object
-  // Is a special case for the FindSoldPaintings class.
-  //Return: returns an InventoryPainting array, with elements matching search terms
-  public static InventoryPainting[] retrieveInventoryPaintings(SimpleDate d)
-  {
-    String tableStatement = "inventory_paintings";
-    String orderBy = "inventoryPaintingID";
-    int date = HandlerUtility.dateToInt(d);
-    String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting()); //clint needs to fix inventorypainting
-    statement += HandlerUtility.loadKeys(pairs);
-    statement += " FROM " + tableStatement;
-    statement += " WHERE dateOfSale > " + date + " ";
-    statement += " ORDER BY " + orderBy;
-    SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQL_Query();
-    ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
-    loadResults(inventoryPaintings, result);
-    return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
-  }
-  //Desc: method searches the database and retrieves any matching records. 
-  // Search terms are passed in as an InventoryPainting array with fields intialized if they are search terms
-  // Is a special case for the DetectTrendsReport class.
-  //Return: returns an InventoryPainting array, with elements matching search terms
-  public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
-  {
-    int isMultiple = 1;
-    String tableStatement = "inventory_paintings";
-    String orderBy = "inventoryPaintingID";
-    String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting());
-    statement += HandlerUtility.loadKeys(pairs);
-    statement += " FROM " + tableStatement;
-    statement += stringify(inventory[0], isMultiple);
-    isMultiple = 2;
-    for(int i = 1; i < inventory.length; i++)
+    //Desc: method creates an InventoryPainting in the database
+    //Post: an InventoryPainting is created in the database
+    public static void createInventoryPainting(InventoryPainting inventory)
     {
-      statement += " OR";
-      statement += stringify(inventory[i], isMultiple);
+        String tableStatement = "inventory_paintings";
+        String statement = "INSERT INTO "+ tableStatement +"(";
+        Pair[] pairs = HandleInventoryPaintings.loadMap(inventory);
+        statement += HandlerUtility.loadKeys(pairs);
+        statement += ") VALUES( ";
+        statement += HandlerUtility.loadValues(pairs);
+        statement += ")";
+        SQLConnector connection = new SQLConnector(statement);
+        connection.executeSQL_Update();
     }
-    statement += " ORDER BY " + orderBy;
-    SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQL_Query();
-    ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
-    loadResults(inventoryPaintings, result);
-    return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
-  }
-  //Desc: method searches the database and retrieves any matching records. 
-  // Search terms are passed in as an InventoryPainting with fields initialized if they are search terms
-  //Return: returns an InventoryPainting array, with elements matching search terms
-  public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
-  {
-    String tableStatement = "inventory_paintings";
-    String orderBy = "inventoryPaintingID";
-    String statement = "SELECT";
-    Pair[] pairs = loadMap(new InventoryPainting());
-    statement += HandlerUtility.loadKeys(pairs);
-    statement += " FROM " + tableStatement;
-    statement += stringify(inventory, 1);
-    statement += " ORDER BY " + orderBy;
-    SQLConnector connection = new SQLConnector(statement);
-    Vector result = connection.executeSQL_Query();
-    ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
-    loadResults(inventoryPaintings, result);
-    return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
-  }
-  //Desc: method to load a HashMap with values to assist in the automation of SQL statements
-  // In particular, this method assists with limiting the amount of hardcoding in the stringify
-  //Return: the fully loaded HashMap is returned
-  public static Pair[] loadMap(InventoryPainting inventory)
-  {
-      ArrayList<Pair> pairs = new ArrayList<Pair>();
-      pairs.add(new Pair("inventory_paintings.firstName", inventory.getArtistFirstName()));
-      pairs.add(new Pair("inventory_paintings.lastName", inventory.getArtistLastName()));
-      pairs.add(new Pair("inventory_paintings.title", inventory.getTitleOfWork()));
-      pairs.add(new Pair("inventory_paintings.dateOfWork", inventory.getDateOfWork()));
-      pairs.add(new Pair("inventory_paintings.classification", inventory.getClassification()));
-      pairs.add(new Pair("inventory_paintings.height", inventory.getHeightCM()));
-      pairs.add(new Pair("inventory_paintings.width", inventory.getWidthCM()));
-      pairs.add(new Pair("inventory_paintings.medium", inventory.getMedium()));
-      pairs.add(new Pair("inventory_paintings.subject", inventory.getSubject()));
-      pairs.add(new Pair("inventory_paintings.dateOfPurchase", HandlerUtility.dateToInt(inventory.getDateOfPurchase())));
-      pairs.add(new Pair("inventory_paintings.nameOfSeller", inventory.getSellerName()));
-      pairs.add(new Pair("inventory_paintings.addressOfSeller", inventory.getSellerAddress()));
-      pairs.add(new Pair("inventory_paintings.maximumPurchasePrice", inventory.getMaxPurchasePrice()));
-      pairs.add(new Pair("inventory_paintings.actualPurchasePrice", inventory.getActualPurchasePrice()));
-
-          pairs.add(new Pair("inventory_paintings.dateOfSale", HandlerUtility.dateToInt(inventory.getDateOfSale())));
-          pairs.add(new Pair("inventory_paintings.nameOfBuyer", inventory.getBuyerName()));
-          pairs.add(new Pair("inventory_paintings.addressOfBuyer", inventory.getBuyerAddress()));
-          pairs.add(new Pair("inventory_paintings.actualSellingPrice", inventory.getActualSellPrice()));
-      return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);
-  }
+    //Desc: method searches the database and retrieves any matching records.
+    // Search terms only a Date object
+    // Is a special case for the FindSoldPaintings class.
+    //Return: returns an InventoryPainting array, with elements matching search terms
+    public static InventoryPainting[] retrieveInventoryPaintings(SimpleDate d)
+    {
+        String tableStatement = "inventory_paintings";
+        String orderBy = "inventoryPaintingID";
+        int date = HandlerUtility.dateToInt(d);
+        String statement = "SELECT";
+        Pair[] pairs = loadMap(new InventoryPainting()); //clint needs to fix inventorypainting
+        statement += HandlerUtility.loadKeys(pairs);
+        statement += " FROM " + tableStatement;
+        statement += " WHERE dateOfSale > " + date + " ";
+        statement += " ORDER BY " + orderBy;
+        SQLConnector connection = new SQLConnector(statement);
+        Vector result = connection.executeSQL_Query();
+        ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
+        loadResults(inventoryPaintings, result);
+        return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
+    }
+    //Desc: method searches the database and retrieves any matching records.
+    // Search terms are passed in as an InventoryPainting array with fields intialized if they are search terms
+    // Is a special case for the DetectTrendsReport class.
+    //Return: returns an InventoryPainting array, with elements matching search terms
+    public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
+    {
+        int isMultiple = 1;
+        String tableStatement = "inventory_paintings";
+        String orderBy = "inventoryPaintingID";
+        String statement = "SELECT";
+        Pair[] pairs = loadMap(new InventoryPainting());
+        statement += HandlerUtility.loadKeys(pairs);
+        statement += " FROM " + tableStatement;
+        statement += stringify(inventory[0], isMultiple);
+        isMultiple = 2;
+        for(int i = 1; i < inventory.length; i++)
+        {
+            statement += " OR";
+            statement += stringify(inventory[i], isMultiple);
+        }
+        statement += " ORDER BY " + orderBy;
+        SQLConnector connection = new SQLConnector(statement);
+        Vector result = connection.executeSQL_Query();
+        ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
+        loadResults(inventoryPaintings, result);
+        return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
+    }
+    //Desc: method searches the database and retrieves any matching records.
+    // Search terms are passed in as an InventoryPainting with fields initialized if they are search terms
+    //Return: returns an InventoryPainting array, with elements matching search terms
+    public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
+    {
+        String tableStatement = "inventory_paintings";
+        String orderBy = "inventoryPaintingID";
+        String statement = "SELECT";
+        Pair[] pairs = loadMap(new InventoryPainting());
+        statement += HandlerUtility.loadKeys(pairs);
+        statement += " FROM " + tableStatement;
+        statement += stringify(inventory, 1);
+        statement += " ORDER BY " + orderBy;
+        SQLConnector connection = new SQLConnector(statement);
+        Vector result = connection.executeSQL_Query();
+        ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
+        loadResults(inventoryPaintings, result);
+        return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
+    }
+    //Desc: method to load a HashMap with values to assist in the automation of SQL statements
+    // In particular, this method assists with limiting the amount of hardcoding in the stringify
+    //Return: the fully loaded HashMap is returned
+    public static Pair[] loadMap(InventoryPainting inventory)
+    {
+        ArrayList<Pair> pairs = new ArrayList<Pair>();
+        pairs.add(new Pair("firstName", inventory.getArtistFirstName()));
+        pairs.add(new Pair("lastName", inventory.getArtistLastName()));
+        pairs.add(new Pair("title", inventory.getTitleOfWork()));
+        pairs.add(new Pair("dateOfWork", inventory.getDateOfWork()));
+        pairs.add(new Pair("classification", inventory.getClassification()));
+        pairs.add(new Pair("height", inventory.getHeightCM()));
+        pairs.add(new Pair("width", inventory.getWidthCM()));
+        pairs.add(new Pair("medium", inventory.getMedium()));
+        pairs.add(new Pair("subject", inventory.getSubject()));
+        pairs.add(new Pair("dateOfPurchase", HandlerUtility.dateToInt(inventory.getDateOfPurchase())));
+        pairs.add(new Pair("nameOfSeller", inventory.getSellerName()));
+        pairs.add(new Pair("addressOfSeller", inventory.getSellerAddress()));
+        pairs.add(new Pair("maximumPurchasePrice", inventory.getMaxPurchasePrice()));
+        pairs.add(new Pair("actualPurchasePrice", inventory.getActualPurchasePrice()));
+        pairs.add(new Pair("dateOfSale", HandlerUtility.dateToInt(inventory.getDateOfSale())));
+        pairs.add(new Pair("nameOfBuyer", inventory.getBuyerName()));
+        pairs.add(new Pair("addressOfBuyer", inventory.getBuyerAddress()));
+        pairs.add(new Pair("actualSellingPrice", inventory.getActualSellPrice()));
+        return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);
+    }
     //Desc: method to parse results from SQL database back into InventoryPaintings
     //Post: ArrayList is loaded with results from SQL database
     public static void loadResults(ArrayList<InventoryPainting> inventoryPaintings, Vector result)
@@ -157,79 +156,95 @@ public abstract class HandleInventoryPaintings
         }
     }
     //Desc: method converts an InventoryPainting into a String. Flags are set to true if the value is uninitialized.
-  //Return: returns a String for the SQL statement
-  private static String stringify(InventoryPainting inventory, int isMultiple)
-  {
-    String result = "";
-    Pair[] pairs = loadMap(inventory);
-    boolean[] flags = new boolean[pairs.length];
-    for(int i = 0; i < pairs.length; i++)
+    //Return: returns a String for the SQL statement
+    private static String stringify(InventoryPainting inventory, int isMultiple)
     {
-      if(HandlerUtility.checkInitialization(pairs[i].getValue())) flags[i] = true;
-      else
-      {
-          if(HandlerUtility.checkFlags(flags, i) && isMultiple == 1)
-          {
-              result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
-              flags[i] = true;
-          }
-        else if(isMultiple == 2)
-          {
-              result += " " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
-              isMultiple = 3;
-          }
-          else
-          {
-              result += " AND " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
-          }
-      }
+        String result = "";
+        Pair[] pairs = loadMap(inventory);
+        boolean[] flags = new boolean[pairs.length];
+        for(int i = 0; i < pairs.length; i++)
+        {
+            if(HandlerUtility.checkInitialization(pairs[i].getValue()));
+            else
+            {
+                if(HandlerUtility.checkFlags(flags, i) && isMultiple == 1)
+                {
+                    result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+                    flags[i] = true;
+                }
+                else if(isMultiple == 2)
+                {
+                    result += " " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+                    isMultiple = 3;
+                }
+                else
+                {
+                    result += " AND " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+                }
+            }
+        }
+        return result;
     }
-    return result;
-  }
-  //Desc: method updates an InventoryPainting in the database. Compares to titleOfWork as key.
-  //Post: an InventoryPainting is updated in the database
-  public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
-  {
-    String tableStatement = "inventory_paintings";
-    String statement = "UPDATE " + tableStatement + " SET";
-    Pair[] pairs = loadMap(inventory);
-    statement += HandlerUtility.loadKeysAndValues(pairs);
-    statement += stringify(searchKey, 1);
-    System.out.println(statement);
-    SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQL_Update();
-  }
-  //Desc: method deletes an InventoryPainting in the database
-  //Post: an InventoryPainting is deleted in the database
-  public static void deleteInventoryPainting(InventoryPainting inventory)
-  {
-    String tableStatement = "inventory_paintings";
-    String statement = "DELETE FROM " + tableStatement;
-    statement += stringify(inventory, 1);
-    SQLConnector connection = new SQLConnector(statement);
-    connection.executeSQL_Query();
-  }
+    //Desc: method updates an InventoryPainting in the database. Compares to titleOfWork as key.
+    //Post: an InventoryPainting is updated in the database
+    public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
+    {
+        String tableStatement = "inventory_paintings";
+        String statement = "UPDATE " + tableStatement + " SET";
+        Pair[] pairs = loadMap(inventory);
+        statement += HandlerUtility.loadKeysAndValues(pairs);
+        statement += stringify(searchKey, 1);
+        SQLConnector connection = new SQLConnector(statement);
+        connection.executeSQL_Update();
+    }
+    //Desc: method deletes an InventoryPainting in the database
+    //Post: an InventoryPainting is deleted in the database
+    public static void deleteInventoryPainting(InventoryPainting inventory)
+    {
+        String tableStatement = "inventory_paintings";
+        String statement = "DELETE FROM " + tableStatement;
+        statement += stringify(inventory, 1);
+        SQLConnector connection = new SQLConnector(statement);
+        connection.executeSQL_Update();
+    }
 }
 class HandleInventoryPaintingsTest
 {
     //Desc: method to run unit tests for all methods
     //Output: prints the results of unit tests
-    public static void runTests()
+    public static Pair[] runTests()
     {
-        System.out.println("\tCreateInventoryPaintingTest: " + createInventoryPaintingTest());
-        System.out.println("\tRetrieveInventoryTestSingle: " + retrieveInventoryPaintingTestSingle());
-        System.out.println("\tRetrieveInventoryTestDate: " + retrieveInventoryPaintingTestDate());
-        System.out.println("\tRetrieveInventoryTestMultiple: " + retrieveInventoryPaintingTestMultiple());
-        System.out.println("\tUpdateInventoryTest: " + updateInventoryPaintingTest());
+        Pair[] report = new Pair[7];
+        boolean result = true;
+        boolean temp = createInventoryPaintingTest();
+        if(!temp) result = false;
+        report[1] = new Pair("\tCreateInventoryPaintingTest: ", temp);
+        temp = retrieveInventoryPaintingTestSingle();
+        if(!temp) result = false;
+        report[2] = new Pair("\tRetrieveInventoryTestSingle: ", temp);
+        temp = retrieveInventoryPaintingTestDate();
+        if(!temp) result = false;
+        report[3] = new Pair("\tRetrieveInventoryTestDate: ", temp);
+        temp = retrieveInventoryPaintingTestMultiple();
+        if(!temp) result = false;
+        report[4] = new Pair("\tRetrieveInventoryTestMultiple: ", temp);
+        temp = updateInventoryPaintingTest();
+        if(!temp) result = false;
+        report[5] = new Pair("\tUpdateInventoryTest: ", temp);
+        temp = deleteInventoryPaintingTest();
+        if(!temp) result = false;
+        report[6] = new Pair("\tDeleteInventoryTest: ", temp);
+        report[0] = new Pair("", result);
+        return report;
     }
     public static boolean createInventoryPaintingTest()
     {
         //Create painting from old artist
-        InventoryPainting testPainting = new InventoryPainting("Clint", "Freiheit",
+        InventoryPainting testPainting = new InventoryPainting("Sammichelle", "Bachman",
                 "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
-                14), 1230000, 1000000, new SimpleDate(2010, 6,
-                14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
+                14), 1230000, 1000000, new SimpleDate(
+                SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
         HandleInventoryPaintings.createInventoryPainting(testPainting);
         InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
         if(result.length < 1) return false;
@@ -237,11 +252,11 @@ class HandleInventoryPaintingsTest
                 && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())) return false;
         //Create painting with new Artist
-         testPainting = new InventoryPainting("Sammichelle", "Bachman",
+        testPainting = new InventoryPainting("Clint", "Freiheit",
                 "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
-                14), 1230000, 1000000, new SimpleDate(
-                SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
+                14), 1230000, 1000000, new SimpleDate(2010, 6,
+                14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
         HandleInventoryPaintings.createInventoryPainting(testPainting);
         result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
         if(result.length < 1) return false;
@@ -262,9 +277,9 @@ class HandleInventoryPaintingsTest
         if(result.length < 1) return false;
         InventoryPainting temp = result[0];
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
-             && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
-             && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())
-             && result[0].getDateOfWork() == testPainting.getDateOfWork()) return false;
+                && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
+                && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())
+                && result[0].getDateOfWork() == testPainting.getDateOfWork()) return false;
         //Test for getting a specific InventoryPainting with some fields initialized
         testPainting = new InventoryPainting();
         testPainting.setArtistFirstName("Sam");
@@ -311,26 +326,43 @@ class HandleInventoryPaintingsTest
     }
     public static boolean updateInventoryPaintingTest()
     {
-        //Case for changing one field on a full search term
-        InventoryPainting searchKey = new InventoryPainting("Clint", "Freiheit",
-            "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
-            "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
-            14), 1230000, 1000000, new SimpleDate(2013, 6,
-            14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
+        //Case for changing one field on a one field search term
+        InventoryPainting searchKey = new InventoryPainting();
+        searchKey.setArtistFirstName("Clint");
         InventoryPainting modification = new InventoryPainting();
         modification.setArtistFirstName("Clinton");
         HandleInventoryPaintings.updateInventoryPainting(modification, searchKey);
-        searchKey.setArtistFirstName("Clinton");
-        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(searchKey);
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(modification);
         if(result.length < 1) return false;
-        for(int i = 0; i < result.length; i++)
-        {
-            System.out.println(result[i]);
-        }
         //Case for changing all fields on one search term
         searchKey = new InventoryPainting();
+        searchKey.setTitleOfWork("TestPainting1");
+        modification = new InventoryPainting("Sammichelle", "Bachman",
+            "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+            "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
+            14), 1230000, 1000000, new SimpleDate(
+            SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
+        HandleInventoryPaintings.updateInventoryPainting(modification, searchKey);
+        result = HandleInventoryPaintings.retrieveInventoryPaintings(modification);
+        if(result.length < 1) return false;
+        return true;
+    }
+    public static boolean deleteInventoryPaintingTest()
+    {
+        //Case for deleting a specific painting with all fields
+        InventoryPainting searchKey = new InventoryPainting("Sammichelle", "Bachman",
+                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
+                14), 1230000, 1000000, new SimpleDate(
+                SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
+        HandleInventoryPaintings.deleteInventoryPainting(searchKey);
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(searchKey);
+        if(result.length != 0) return false;
+        searchKey = new InventoryPainting();
         searchKey.setArtistFirstName("Sam");
-
+        HandleInventoryPaintings.deleteInventoryPainting(searchKey);
+        result = HandleInventoryPaintings.retrieveInventoryPaintings(searchKey);
+        if(result.length != 0) return false;
         return true;
     }
 }
