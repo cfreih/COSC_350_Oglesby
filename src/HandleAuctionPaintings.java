@@ -20,7 +20,7 @@ public abstract class HandleAuctionPaintings
   //Return: returns an AuctionPainting array, with elements matching search terms
   public static AuctionPainting[] retrieveAuctionPaintings(AuctionPainting auction) //if string is empty, will bring all
   {
-    String tableStatement = "FROM artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID";
+    String tableStatement = "auction_paintings";
     String orderBy = "artistLastName, artistFirstName";
     String statement = "SELECT";
     Pair[] pairs = loadMap(new AuctionPainting());
@@ -51,7 +51,6 @@ public abstract class HandleAuctionPaintings
       int artistID = Integer.parseInt((String)result.get(i++));
       double auctionSalePrice = Double.parseDouble((String)result.get(i++));
       SimpleDate auctionDateOfSale = (SimpleDate) result.get(i);
-      //Date auctionDateOfSale = new Date(Date.parse((String)result.get(i)));
       auctionPaintings.add(new AuctionPainting(artistFirstName, artistLastName, titleOfWork, dateOfWork,
                            heightCM, widthCM, medium, subject, auctionSalePrice, auctionDateOfSale));
     }
@@ -96,7 +95,7 @@ public abstract class HandleAuctionPaintings
   //Post: an AuctionPainting is updated in the database
   public static void updateAuctionPainting(AuctionPainting auction, AuctionPainting searchKey)
   {
-    String tableStatement = "artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID";
+    String tableStatement = "auction_paintings";
     String statement = "UPDATE " + tableStatement + " SET";
     Pair[] pairs = loadMap(auction);
     statement += HandlerUtility.loadKeysAndValues(pairs);
@@ -108,10 +107,59 @@ public abstract class HandleAuctionPaintings
   //Post: an AuctionPainting is deleted in the database
   public static void deleteAuctionPainting(AuctionPainting auction)
   {
-    String tableStatement = "artists INNER JOIN auction_paintings ON artists.artistID= auction_paintings.artistID";
+    String tableStatement = "auction_paintings";
     String statement = "DELETE FROM " + tableStatement;
     statement += stringify(auction);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Query();
   }
+ 
+}
+class HandleAuctionPaintingsTest
+{
+	  
+	//Desc: method to run unit tests for all methods
+	//Output: prints the results of unit tests
+	public static void runTests()
+	{
+	    System.out.println("\tCreateAuctionPaintingTest: " + createAuctionPaintingTest());
+	    //System.out.println("\tRetrieveAuctionTest: " + retrieveAuctionPaintingTest());
+	    //things
+	}
+	
+	public static boolean createAuctionPaintingTest()
+	{
+		AuctionPainting testPainting = new AuctionPainting("Sammichelle", "Bachman",
+				"Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics",
+				12, new SimpleDate(1852, 3, 17));
+		HandleAuctionPaintings.createAuctionPainting(testPainting);
+		AuctionPainting[] result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
+		if(result.length < 1) return false;
+		if(!result[0].equals(testPainting)) return false;
+		testPainting = new AuctionPainting("Earl", "Chuck", "Beauty and the Beautier",
+			1273, 23, 56, "Paint", "Me, Myself, and I",
+			3.50, new SimpleDate(1999,12,31));
+		HandleAuctionPaintings.createAuctionPainting(testPainting);
+		result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
+		if(result.length < 1) return false;
+		if(!result[0].equals(testPainting)) return false;
+		return true;
+	}
+	
+	public static boolean retrieveAuctionPaintingTest()
+    {
+        //Test for getting all InventoryPaintings
+        AuctionPainting testPainting = new AuctionPainting();
+        AuctionPainting[] result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
+        for(int i = 0; i < result.length; i++)
+        {
+            System.out.println(result[i]);
+        }
+        //Test for getting a specific InventoryPainting
+        testPainting = result[0];
+        result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
+        if(result.length != 1) return false;
+        if(!result[0].equals(testPainting)) return false;
+        return true;
+    }
 }
