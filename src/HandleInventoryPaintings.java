@@ -12,11 +12,13 @@ public abstract class HandleInventoryPaintings
     String statement = "INSERT INTO "+ tableStatement +"(";
     Artist[] a = HandleArtist.retrieveArtists(new Artist(inventory.getArtistFirstName(), inventory.getArtistLastName(), -1, -1));
     if(a.length == 0) return; //throw errors
+    inventory.setArtistID(a[0].getArtistID());
     Pair[] pairs = HandleInventoryPaintings.loadMap(inventory, isQuery);
     statement += HandlerUtility.loadKeys(pairs);
-    statement += ") SELECT";
+    statement += ") VALUES( ";
     statement += HandlerUtility.loadValues(pairs);
-    statement += "FROM " + fromTableStatement + " WHERE artistID = '" + a[0].getArtistID() + "'";
+    statement += ")";
+    System.out.println(statement);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Update();
   }
@@ -73,8 +75,8 @@ public abstract class HandleInventoryPaintings
   public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting inventory) //if string is empty, will bring all
   {
     boolean isQuery = true;
-    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.artistID";
-    String orderBy = "artistID";
+    String tableStatement = "artists INNER JOIN inventory_paintings ON artists.artistID= inventory_paintings.fkartistID";
+    String orderBy = "fkartistID";
     String statement = "SELECT";
     Pair[] pairs = loadMap(new InventoryPainting(),isQuery);
     statement += HandlerUtility.loadKeys(pairs);
@@ -98,8 +100,8 @@ public abstract class HandleInventoryPaintings
     {
         pairs.add(new Pair("artists.firstName", inventory.getArtistFirstName()));
         pairs.add(new Pair("artists.lastName", inventory.getArtistLastName()));
-        pairs.add(new Pair("inventory_paintings.artistID", inventory.getArtistID()));
     }
+    pairs.add(new Pair("inventory_paintings.fkartistID", inventory.getArtistID()));
     pairs.add(new Pair("inventory_paintings.title", inventory.getTitleOfWork()));
     pairs.add(new Pair("inventory_paintings.dateOfWork", inventory.getDateOfWork()));
     pairs.add(new Pair("inventory_paintings.classification", inventory.getClassification()));
@@ -113,25 +115,11 @@ public abstract class HandleInventoryPaintings
     pairs.add(new Pair("inventory_paintings.maximumPurchasePrice", inventory.getMaxPurchasePrice()));
     pairs.add(new Pair("inventory_paintings.actualPurchasePrice", inventory.getActualPurchasePrice()));
     pairs.add(new Pair("inventory_paintings.targetSellingPrice", inventory.getTargetSellPrice()));
-    pairs.add(new Pair("inventory_paintings.sold", inventory.getSoldYesOrNo() ? 1 : 0));
-    if(inventory.getSoldYesOrNo())
-    {
-        pairs.add(new Pair("inventory_paintings.dateOfSale", HandlerUtility.dateToInt(inventory.getDateOfSale())));
-        pairs.add(new Pair("inventory_paintings.nameOfBuyer", inventory.getBuyerName()));
-        pairs.add(new Pair("inventory_paintings.addressOfBuyer", inventory.getBuyerAddress()));
-        pairs.add(new Pair("inventory_paintings.actualSellingPrice", inventory.getActualSellPrice()));
-        pairs.add(new Pair("inventory_paintings.flagBoughtReport", inventory.getFlagBoughtReport() ? 1 : 0));
-        pairs.add(new Pair("inventory_paintings.flagSoldReport", inventory.getFlagSoldReport() ? 1 : 0));
-    }
-    else
-    {
-        pairs.add(new Pair("inventory_paintings.dateOfSale", 010010001));
-        pairs.add(new Pair("inventory_paintings.nameOfBuyer", ""));
-        pairs.add(new Pair("inventory_paintings.addressOfBuyer", ""));
-        pairs.add(new Pair("inventory_paintings.actualSellingPrice", -1));
-        pairs.add(new Pair("inventory_paintings.flagBoughtReport", 0));
-        pairs.add(new Pair("inventory_paintings.flagSoldReport", 0));
-    }
+    //pairs.add(new Pair("inventory_paintings.sold", inventory.getSoldYesOrNo() ? 1 : -1)); //REALLY WANT TO REMOVE
+    pairs.add(new Pair("inventory_paintings.dateOfSale", HandlerUtility.dateToInt(inventory.getDateOfSale())));
+    pairs.add(new Pair("inventory_paintings.nameOfBuyer", inventory.getBuyerName()));
+    pairs.add(new Pair("inventory_paintings.addressOfBuyer", inventory.getBuyerAddress()));
+    pairs.add(new Pair("inventory_paintings.actualSellingPrice", inventory.getActualSellPrice()));
     return Arrays.copyOf(pairs.toArray(), pairs.toArray().length, Pair[].class);
   }
     //Desc: method to parse results from SQL database back into InventoryPaintings
@@ -152,27 +140,24 @@ public abstract class HandleInventoryPaintings
             double widthCM = ((BigDecimal)result.get(i++)).doubleValue();
             String medium = (String)result.get(i++);
             String subject = (String)result.get(i++);
-            Date temp = ((Date)result.get(i++)); //hopefully remove
-            SimpleDate dateOfPurchase = new SimpleDate(temp.getYear(), temp.getMonth(), temp.getDay());
+            SimpleDate dateOfPurchase = HandlerUtility.intToDate((Integer)result.get(i++));
             String sellerName = (String)result.get(i++);
             String sellerAddress = (String)result.get(i++);
             double maxPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
             double actualPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
             double targetPurchasePrice = ((BigDecimal)result.get(i++)).doubleValue();
-            boolean soldYesOrNo = (Boolean)result.get(i++); //breaking here
-            temp = ((Date)result.get(i++)); //hopefully remove
+            boolean soldYesOrNo = (Boolean)result.get(i++);
+            Integer temp = ((Integer)result.get(i++));
             SimpleDate dateOfSale;
-            if(soldYesOrNo) dateOfSale = new SimpleDate(temp.getYear(), temp.getMonth(), temp.getDay());
+            if(soldYesOrNo) dateOfSale = HandlerUtility.intToDate(temp);
             else dateOfSale = new SimpleDate();
             String buyerName = (String)result.get(i++);
             String buyerAddress = (String)result.get(i++);
-            double actualSellingPrice = ((BigDecimal)result.get(i++)).doubleValue();
-            boolean flagBoughtReport = (Boolean)result.get(i++);
-            boolean flagSoldReport = (Boolean)result.get(i);
+            double actualSellingPrice = ((BigDecimal)result.get(i)).doubleValue();
             inventoryPaintings.add(new InventoryPainting(artistFirstName, artistLastName, titleOfWork, dateOfWork,
                     heightCM, widthCM, medium, subject, artistID, sellerName, sellerAddress,
                     dateOfPurchase, maxPurchasePrice, actualPurchasePrice,
-                    soldYesOrNo, dateOfSale, buyerName, buyerAddress,
+                    dateOfSale, buyerName, buyerAddress,
                     actualSellingPrice, classification));
         }
     }
@@ -189,7 +174,11 @@ public abstract class HandleInventoryPaintings
       if(HandlerUtility.checkInitialization(pairs[i].getValue())) flags[i] = true;
       else
       {
-        if(HandlerUtility.checkFlags(flags, i)) result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+          if(HandlerUtility.checkFlags(flags, i))
+          {
+              result += " WHERE " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+              flags[i] = true;
+          }
         else result += " AND " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
       }
     }
@@ -226,19 +215,53 @@ class HandleInventoryPaintingsTest
     //Output: prints the results of unit tests
     public static void runTests()
     {
-        createInventoryPaintingTest();
+        //System.out.println("\tCreateInventoryPaintingTest: " + createInventoryPaintingTest());
+        System.out.println("\tRetrieveInventoryTest: " + retrieveInventoryPaintingTest());
+        //things
     }
     public static boolean createInventoryPaintingTest()
     {
-        InventoryPainting testPainting = new InventoryPainting("Sammichelle", "Bachman",
+        //Create painting from old artist
+        InventoryPainting testPainting = new InventoryPainting("Clint", "Freiheit",
+                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics", 4,
+                "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
+                14), 1230000, 1000000, new SimpleDate(
+                SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
+        HandleInventoryPaintings.createInventoryPainting(testPainting);
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        System.out.println(result.length);
+        if(result.length != 1) return false;
+        if(!result[0].equals(testPainting)) return false;
+        /*
+        //Create painting with new Artist
+         testPainting = new InventoryPainting("Sammichelle", "Bachman",
                 "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics", -1,
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, false, new SimpleDate(
                 SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
         HandleInventoryPaintings.createInventoryPainting(testPainting);
-        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
         if(result.length != 1) return false;
-        if(!result.equals(testPainting)) return false;
+        if(!result[0].equals(testPainting)) return false;
+        */
+        return true;
+    }
+    public static boolean retrieveInventoryPaintingTest()
+    {
+        //Test for getting all InventoryPaintings
+        InventoryPainting testPainting = new InventoryPainting();
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        for(int i = 0; i < result.length; i++)
+        {
+            System.out.println(result[i]);
+        }
+        //Test for getting a specific InventoryPainting
+        testPainting = new InventoryPainting("Sam","Bock","TestPainting1", 2001, 12.0, 34.0, "Oil",
+                "computers", 1, "Steve Shum", "GSC", new SimpleDate(2014,01,22), 10000, 50000,  new SimpleDate(2014,01,28),
+                "Jessica Spalding", "Costelo", 400000.54, "Masterpiece");
+        result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        if(result.length != 1) return false;
+        if(!testPainting.equals(result[0])) return false;
         return true;
     }
 }

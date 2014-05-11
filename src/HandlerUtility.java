@@ -11,6 +11,15 @@ public abstract class HandlerUtility
     date += d.getDay();
     return date;
   }
+  //Desc: method to convert a int into an Date
+  //Return: returns the int as an Date
+  public static SimpleDate intToDate(int i)
+  {
+      int year = i /10000;
+      int month = i / 100 - year;
+      int day = i - year - month;
+      return new SimpleDate(year, month, day);
+  }
   //Desc: method to iterate through flags and return boolean value
   //Return: returns true if all are true, false if any are false
   public static boolean checkFlags(boolean[] flags, int count) throws ArrayIndexOutOfBoundsException
@@ -27,7 +36,7 @@ public abstract class HandlerUtility
   public static boolean checkInitialization(Object o)
   {
     if(o instanceof Number) return checkInitialization((Number) o);
-    if(o instanceof Date) return checkInitialization((Date) o);
+    if(o instanceof SimpleDate) return checkInitialization((SimpleDate) o);
     if(o instanceof String) return checkInitialization((String) o);
     return true;
   }

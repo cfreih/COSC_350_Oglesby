@@ -15,7 +15,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	private double actualPurchasePrice;
 	private double maxAndActualRatio;
 	private double targetSellPrice;
-	private boolean soldYesOrNo;
+	//private boolean soldYesOrNo;
 	private SimpleDate dateOfSale;
 	private String buyerName;
 	private String buyerAddress;
@@ -37,12 +37,12 @@ public class InventoryPainting extends Painting implements Cloneable {
 		dateOfPurchase = new SimpleDate(SimpleDate.DEFAULT);
 		maxPurchasePrice = -1.0;
 		actualPurchasePrice = -1.0;
-		soldYesOrNo = false;
+		//soldYesOrNo = false;
 		dateOfSale = new SimpleDate(SimpleDate.DEFAULT);
 		buyerName = "";
 		buyerAddress = "";
 		actualSellPrice = -1.0;
-
+        targetSellPrice = -1.0;
 		maxAndActualRatio = -1.0;
 		targetAndActualRatio = -1.0;
 		//flagBoughtReport = false;
@@ -57,7 +57,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public InventoryPainting(String firstName, String lastName, String title,
 			int date, double height, double width, String med, String subj,
 			int id, String sName, String sAddress, SimpleDate dateP,
-			double maxPurch, double actualPurch, boolean soldYN,
+			double maxPurch, double actualPurch,
 			SimpleDate dateS, String bName, String bAddress, double actualSell,
 			String classif) {
 		super(firstName, lastName, title, date, height, width, med, subj, id);
@@ -66,7 +66,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		dateOfPurchase = dateP;
 		maxPurchasePrice = maxPurch;
 		actualPurchasePrice = actualPurch;
-		soldYesOrNo = soldYN;
+		//soldYesOrNo = soldYN;
 		dateOfSale = dateS;
 		buyerName = bName;
 		buyerAddress = bAddress;
@@ -222,30 +222,11 @@ public class InventoryPainting extends Painting implements Cloneable {
 	}
 
 	/**
-	 * Desc: sets the painting's soldYesOrNo status Post: soldYesOrNo is set to
-	 * sold
-	 */
-	public void setSoldYesOrNo(boolean sold) {
-		soldYesOrNo = sold;
-	}
-
-	/**
-	 * Desc: returns the painting's soldYesOrNo status Return:the painting's
-	 * soldYesOrNo status
-	 */
-	public boolean getSoldYesOrNo() {
-		return soldYesOrNo;
-	}
-
-	/**
 	 * Desc: sets the painting's dateOfSale Pre: soldYesOrNo must be set to true
 	 * to set date. Post: dateOfSale is set to date
 	 */
 	public void setDateOfSale(SimpleDate date) {
-		if (soldYesOrNo) {
 			dateOfSale = date;
-		} else
-			dateOfSale = new SimpleDate();
 	}
 
 	/**
@@ -255,10 +236,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * 1 and 31 Post: dateOfPurchase is set to the date of year, month, and day
 	 */
 	public void setDateOfSale(int year, int month, int day) {
-		if (soldYesOrNo)
 			dateOfSale = new SimpleDate(year, month, day);
-		else
-			dateOfSale = new SimpleDate(-1,-1,-1);
 	}
 
 	/**
@@ -266,11 +244,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * Return:the painting's dateOfPurchase
 	 */
 	public SimpleDate getDateOfSale() {
-		if (soldYesOrNo)
 			return dateOfSale;
-		else {
-			return new SimpleDate(SimpleDate.DEFAULT);
-		}
 	}
 
 	/**
@@ -278,10 +252,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * to true to set date. Post: buyerName is set to name
 	 */
 	public void setBuyerName(String name) {
-		if (soldYesOrNo) {
 			buyerName = name;
-		} else
-			buyerName = "";
 	}
 
 	/**
@@ -297,11 +268,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * be set to true to set date. Post: buyerAddress is set to address
 	 */
 	public void setBuyerAddress(String address) {
-		if (soldYesOrNo) {
 			buyerAddress = address;
-		} 
-		else
-			buyerAddress = "";
 	}
 
 	/**
@@ -319,13 +286,8 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * to price and targetAndActualRatio is properly adjusted
 	 */
 	public void setActualSellPrice(double price) {
-		if (soldYesOrNo) {
 			actualSellPrice = price;
 			calcTargetAndActualRatio();
-			//calcFlagSoldReport();
-		} 
-		else
-			actualSellPrice = -1;
 	}
 
 	/**
@@ -449,7 +411,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		testP = new InventoryPainting("Sammichelle", "Bachman",
 				"Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics", -1,
 				"Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
-						14), 1230000, 1000000, false, new SimpleDate(
+						14), 1230000, 1000000,  new SimpleDate(
 						SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
 		// Should print "Bachman, Sammichelle "Twinkle, Twinkle""
 		System.out.println(testP);
@@ -466,7 +428,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 				+ testP.getActualPurchasePrice() + " "
 				+ testP.getMaxAndActualRatio() + " "
 				+ testP.getTargetSellPrice());
-		System.out.println(testP.getSoldYesOrNo() + " " + testP.getDateOfSale()
+		System.out.println(testP.getDateOfSale()
 				+ " " + testP.getBuyerName() + " " + testP.getBuyerAddress()
 				+ " " + testP.getActualSellPrice() + " "
 				+ " " + testP.getClassification() + " "
@@ -492,7 +454,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 		System.out.println(testP.getDateOfPurchase());
 		testP.setDateOfPurchase(3, 6, 9);
 		testP.setActualPurchasePrice(1500000);
-		testP.setSoldYesOrNo(true);
 		testP.setDateOfSale(new SimpleDate(0, 1, 1));
 		System.out.println(testP.getDateOfSale());
 		testP.setDateOfSale(1975, 2, 5);
@@ -509,7 +470,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 				+ testP.getActualPurchasePrice() + " "
 				+ testP.getMaxAndActualRatio() + " "
 				+ testP.getTargetSellPrice());
-		System.out.println(testP.getSoldYesOrNo() + " " + testP.getDateOfSale()
+		System.out.println(testP.getDateOfSale()
 				+ " " + testP.getBuyerName() + " " + testP.getBuyerAddress()
 				+ " " + testP.getActualSellPrice() + " "
 				+ " " + testP.getClassification() + " "
