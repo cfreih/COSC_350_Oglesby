@@ -13,8 +13,6 @@ import javax.swing.text.MaskFormatter;
 import java.awt.Color;
 import java.text.NumberFormat;
 
-import net.miginfocom.swing.MigLayout;
-
 
 public class UpdateInventoryPanel extends JScrollPane {
 	

@@ -21,8 +21,8 @@ public class InventoryPainting extends Painting implements Cloneable {
 	private String buyerAddress;
 	private double actualSellPrice;
 	private double targetAndActualRatio;
-	private boolean flagBoughtReport;
-	private boolean flagSoldReport;
+	//private boolean flagBoughtReport;
+	//private boolean flagSoldReport;
 	private String classification;
 
 	/**
@@ -45,8 +45,8 @@ public class InventoryPainting extends Painting implements Cloneable {
 
 		maxAndActualRatio = -1.0;
 		targetAndActualRatio = -1.0;
-		flagBoughtReport = false;
-		flagSoldReport = false;
+		//flagBoughtReport = false;
+		//flagSoldReport = false;
 		classification = "";
 	}
 
@@ -75,8 +75,8 @@ public class InventoryPainting extends Painting implements Cloneable {
 
 		calcMaxAndActualRatio();
 		calcTargetAndActualRatio();
-		calcFlagBoughtReport();
-		calcFlagSoldReport();
+		//calcFlagBoughtReport();
+		//calcFlagSoldReport();
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		actualPurchasePrice = price;
 		calcMaxAndActualRatio();
 		calcTargetSellPrice();
-		calcFlagBoughtReport();
+		//calcFlagBoughtReport();
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		if (soldYesOrNo) {
 			actualSellPrice = price;
 			calcTargetAndActualRatio();
-			calcFlagSoldReport();
+			//calcFlagSoldReport();
 		} 
 		else
 			actualSellPrice = -1;
@@ -359,41 +359,41 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * will be set for true if a painting was bought by Osbert for more than the
 	 * maxPurcahsePrice Post: The flagBoughtReport is properly set
 	 */
-	private void calcFlagBoughtReport() {
+	/*private void calcFlagBoughtReport() {
 		if (actualPurchasePrice > maxPurchasePrice) {
 			flagBoughtReport = true;
 		} else
 			flagBoughtReport = false;
-	}
+	}*/
 
 	/**
 	 * Desc: returns the painting's flagBoughtReport status Return:the
 	 * painting's flagBoughtReport status
 	 */
-	public boolean getFlagBoughtReport() {
+	/*public boolean getFlagBoughtReport() {
 		return flagBoughtReport;
-	}
+	}*/
 
 	/**
 	 * Desc: Calculates whether the flagSoldReport should be set or not. It will
 	 * be set for true if a painting was sold by Osbert for 5% or more less than
 	 * targetSellPrice Post: The flagSoldReport is properly set
 	 */
-	private void calcFlagSoldReport() {
+	/*private void calcFlagSoldReport() {
 		double fivePercentOffTarget = targetSellPrice - targetSellPrice * 0.05;
 		if (actualSellPrice <= fivePercentOffTarget) {
 			flagSoldReport = true;
 		} else
 			flagSoldReport = false;
-	}
+	}*/
 
 	/**
 	 * Desc: returns the painting's flagSoldReport status Return:the painting's
 	 * flagSoldReport status
 	 */
-	public boolean getFlagSoldReport() {
+	/*public boolean getFlagSoldReport() {
 		return flagSoldReport;
-	}
+	}*/
 
 	/**
 	 * Desc: sets the InventoryPainting's classification to classID Post:
@@ -412,11 +412,11 @@ public class InventoryPainting extends Painting implements Cloneable {
 	}
 
 	public void setFlagBoughtReport(boolean bool) {
-		flagBoughtReport = bool;
+		//flagBoughtReport = bool;
 	}
 
 	public void setFlagSoldReport(boolean bool) {
-		flagSoldReport = bool;
+		//flagSoldReport = bool;
 	}
 
 	/**
@@ -469,7 +469,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 		System.out.println(testP.getSoldYesOrNo() + " " + testP.getDateOfSale()
 				+ " " + testP.getBuyerName() + " " + testP.getBuyerAddress()
 				+ " " + testP.getActualSellPrice() + " "
-				+ testP.getFlagBoughtReport() + " " + testP.getFlagSoldReport()
 				+ " " + testP.getClassification() + " "
 				+ testP.getTargetAndActualRatio());
 		testP.setArtistFirstName("Timothy");
@@ -513,11 +512,9 @@ public class InventoryPainting extends Painting implements Cloneable {
 		System.out.println(testP.getSoldYesOrNo() + " " + testP.getDateOfSale()
 				+ " " + testP.getBuyerName() + " " + testP.getBuyerAddress()
 				+ " " + testP.getActualSellPrice() + " "
-				+ testP.getFlagBoughtReport() + " " + testP.getFlagSoldReport()
 				+ " " + testP.getClassification() + " "
 				+ testP.getTargetAndActualRatio());
 		testP.setActualSellPrice(4000000);
-		System.out.println(testP.getFlagSoldReport());
 
 		InventoryPainting cloneIP = testP.clone();
 		testP.setDateOfPurchase(new SimpleDate(1943, 7, 4));

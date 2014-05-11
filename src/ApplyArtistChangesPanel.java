@@ -1,4 +1,4 @@
-package test;
+
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;

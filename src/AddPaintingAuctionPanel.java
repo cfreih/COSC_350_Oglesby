@@ -343,6 +343,11 @@ public class AddPaintingAuctionPanel extends JPanel {
 		return formatter;
 	}
 	
+	/**
+	 * Desc: checks whether info inputted in is valid so that the buttons can be used.
+	 * Return: true if the input is valid, false if it is invalid.
+	 * @return
+	 */
 	public boolean isInputValid()
 	{
 		String med = textFieldMedium.getText().trim();
@@ -372,7 +377,8 @@ public class AddPaintingAuctionPanel extends JPanel {
 			double salePrice = Double.parseDouble(fieldValues[5]);
 			double height = Double.parseDouble(fieldValues[6]);
 			double width = Double.parseDouble(fieldValues[7]);
-			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0) && (height > 0) && (width > 0))
+			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0)
+					&& (height > 0) && (width > 0))
 				return true;
 			else
 				return false;
@@ -430,9 +436,9 @@ public class AddPaintingAuctionPanel extends JPanel {
 		fieldValues[2] = (String) formattedTitle.getValue();
 		fieldValues[3] = (String) formattedDateOfWork.getValue();
 		fieldValues[4] = (String) formattedDateAuction.getValue();
-		fieldValues[5] = Long.toString((long) formattedSalePrice.getValue());
-		fieldValues[6] = Long.toString((long) formattedHeight.getValue());
-		fieldValues[7] = Long.toString((long)formattedWidth.getValue());
+		fieldValues[5] = Long.toString((Long) formattedSalePrice.getValue());
+		fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+		fieldValues[7] = Long.toString((Long)formattedWidth.getValue());
 		fieldValues[8] = textFieldMedium.getText();
 		fieldValues[9] = textFieldSubject.getText();
 		
@@ -469,7 +475,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		f.setSize(800, 600);
 		f.setLocation(10, 10);
 		f.getContentPane().add(new AddPaintingAuctionPanel());
-		f.show();
+		f.setVisible(true);
 	}
 
 	public JButton getBtnAddPaintingTo() {
