@@ -13,10 +13,10 @@ CREATE TABLE artists (
 	lastName varchar (20),
 	fashionability INT,
 	PRIMARY KEY(artistID)
-) ENGINE=InnoDB
+) /* ENGINE=InnoDB */
 ;
 
-CREATE TABLE auction_paintings (
+CREATE TABLE auction_paintings (	
 	auctionPaintingID INT NOT NULL AUTO_INCREMENT,
 	firstName varchar (20),
 	lastName varchar (20),
@@ -27,11 +27,11 @@ CREATE TABLE auction_paintings (
 	height DECIMAL(10,2),
 	width DECIMAL(10,2),
 	medium varchar (25),
-	subject varchar (25),
+	subject varchar (25),	
 	INDEX(medium),
-	INDEX(subject),
+	INDEX(subject),	
 	PRIMARY KEY(auctionPaintingID)
-) ENGINE=InnoDB
+) /* ENGINE=InnoDB */
 ;
 
 CREATE TABLE inventory_paintings (
@@ -54,13 +54,17 @@ CREATE TABLE inventory_paintings (
 	nameOfBuyer varchar(30),
 	addressOfBuyer varchar(40),
 	actualSellingPrice DECIMAL(18,2),
+	flagBoughtReport BOOLEAN DEFAULT FALSE,
+	flagSoldReport BOOLEAN DEFAULT FALSE,	
+	INDEX(dateOfPurchase),
+	INDEX(dateOfSale),	
 	INDEX(dateOfPurchase),
 	INDEX(dateOfSale),
 	PRIMARY KEY(inventoryPaintingID)
-) ENGINE=InnoDB
+) /* ENGINE=InnoDB */
 ;
  
-insert into artists (firstName, lastName, fashionability) values ('Sam','Bock','5522');
+/* insert into artists (firstName, lastName, fashionability) values ('Sam','Bock','5522');
 insert into artists (firstName, lastName, fashionability) values ('Claudio','Arce','4000');
 insert into artists (firstName, lastName, fashionability) values ('Tim','Burwitz','6000');
 insert into artists (firstName, lastName, fashionability) values ('Clint','Freiheit','8900');
@@ -120,8 +124,16 @@ insert into inventory_paintings (firstName, lastName, title, dateOfWork, classif
 			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, NULL, '',
 			'', 0);
 
-insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, 
+
+insert into inventory_paintings (artistID, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, 
+			nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, targetSellingPrice, sold, dateOfSale, 
+			nameOfBuyer, addressOfBuyer, actualSellingPrice) values (1, 'TestPainting3', 1981, 'Masterpiece', 110.0, 34.0, 
+			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, 200000, true, '20110128', 'Jessica Spalding',
+			'Costelo', 400000.99); */
+
+/* insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, 
 			nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, 
 			nameOfBuyer, addressOfBuyer, actualSellingPrice) values ('Sam','Bock', 'TestPainting3', 1981, 'Masterpiece', 110.0, 34.0, 
 			'Oil', 'computers', '20140122', 'Steve Shum', 'GSC', 10000, 50000, '20110128', 'Jessica Spalding',
 			'Costelo', 400000.99);
+ */
