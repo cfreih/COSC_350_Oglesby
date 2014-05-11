@@ -110,7 +110,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * Desc: sets the painting's MaxPurcahsePrice to mpx Post: MaxPurcahsePrice
 	 * is set to mpx
 	 */
-	public void setMaxPurcahsePrice(double mpx) {
+	public void setMaxPurchasePrice(double mpx) {
 		maxPurchasePrice = mpx;
 	}
 

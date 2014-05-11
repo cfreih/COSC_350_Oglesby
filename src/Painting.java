@@ -224,8 +224,9 @@ public class Painting implements Cloneable {
 	 * 		  artistLastName, titleOfWork, and year.
 	 * Return:returns a boolean stating whether two paintings are equal.
 	 */
-	public boolean equals(Painting p)
+	public boolean equals(Object o)
 	{
+        Painting p = (Painting) o;
 		if(this.artistFirstName == p.artistFirstName && this.artistLastName == p.artistLastName
 				&& this.titleOfWork == p.titleOfWork && this.dateOfWork == p.dateOfWork)
 		{

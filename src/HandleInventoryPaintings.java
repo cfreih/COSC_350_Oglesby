@@ -13,7 +13,6 @@ public abstract class HandleInventoryPaintings
     statement += ") VALUES( ";
     statement += HandlerUtility.loadValues(pairs);
     statement += ")";
-    System.out.println(statement);
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Update();
   }
@@ -76,6 +75,7 @@ public abstract class HandleInventoryPaintings
     statement += " FROM " + tableStatement;
     statement += stringify(inventory);
     statement += " ORDER BY " + orderBy;
+    System.out.println(statement);
     SQLConnector connection = new SQLConnector(statement);
     Vector result = connection.executeSQL_Query();
     ArrayList<InventoryPainting> inventoryPaintings = new ArrayList<InventoryPainting>();
@@ -206,7 +206,7 @@ class HandleInventoryPaintingsTest
     //Output: prints the results of unit tests
     public static void runTests()
     {
-        System.out.println("\tCreateInventoryPaintingTest: " + createInventoryPaintingTest());
+        //System.out.println("\tCreateInventoryPaintingTest: " + createInventoryPaintingTest());
         System.out.println("\tRetrieveInventoryTest: " + retrieveInventoryPaintingTest());
         //things
     }
@@ -216,10 +216,16 @@ class HandleInventoryPaintingsTest
         InventoryPainting testPainting = new InventoryPainting("Clint", "Freiheit",
                 "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
+                14), 1230000, 1000000, new SimpleDate(SimpleDate.DEFAULT),
+                "", "", -1, "MasterPiece");
+        testPainting = new InventoryPainting("Sammichelle", "Bachman",
+                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(
                 SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
         HandleInventoryPaintings.createInventoryPainting(testPainting);
         InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        System.out.println(result.length);
         if(result.length < 1) return false;
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
                 && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
@@ -250,10 +256,25 @@ class HandleInventoryPaintingsTest
         //Test for getting a specific InventoryPainting
         testPainting = result[0];
         result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
-        if(result.length != 1) return false;
+        if(result.length < 1) return false;
+        InventoryPainting temp = result[0];
+        if(!result[0].equals(testPainting)) return false;
+        //if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
+          //  && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
+            //&& result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())) return false;
+        //Test for getting a specific InventoryPainting with some fields initialized
+        testPainting = new InventoryPainting();
+        testPainting.setArtistFirstName("Sam");
+        testPainting.setArtistLastName("Bock");
+        result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
+        if(result.length < 1) return false;
+        for(int i = 0; i < result.length; i++)
+        {
+            System.out.println(result[i]);
+        }
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
-            && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
-            && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())) return false;
+                && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
+                && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())) return false;
         return true;
     }
 }
