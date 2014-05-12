@@ -16,5 +16,11 @@ public class UnitTestDriver
         {
             System.out.println(result[i].getKey() + result[i].getValue());
         }
+        result = HandleAuctionPaintingsTest.runTests();
+        System.out.println("Handle Auction Paintings Unit Tests: " + result[0].getValue());
+        for(int i = 1; i < result.length ; i++)
+        {
+            System.out.println(result[i].getKey() + result[i].getValue());
+        }
     }
 }
