@@ -15,6 +15,7 @@ import javax.swing.text.MaskFormatter;
 import java.awt.Font;
 
 import javax.swing.JButton;
+
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -50,19 +51,19 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   gridBagLayout = new GridBagLayout();
   lblArtistinfo = new JLabel("Artist Information");
   lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-  formattedFirstName = new JFormattedTextField(createFormatter("********************"));
+  formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
   lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
   formattedLastName = new JFormattedTextField(
-    createFormatter("********************"));
+    createFormatter("?*******************"));
   lblPaintingInfo_1 = new JLabel("Painting Information");
   lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
   formattedTitle = new JFormattedTextField(
-    createFormatter("****************************************"));
+    createFormatter("?***************************************"));
   lblDateOfWork = new JLabel("Date of Work (yyyy)");
   formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
-  lblClassification = new JLabel("Classification (max 20 characters)");
+  lblClassification = new JLabel("Classification (max 30 characters)");
   formattedClassification = new JFormattedTextField(
-    createFormatter("********************"));
+    createFormatter("?*****************************"));
   lblHeightcm = new JLabel("Height (cm)");
   formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
   lblWidthcm = new JLabel("Width (cm)");
@@ -70,10 +71,10 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
   formattedWidth.setFont(new Font("Century", Font.PLAIN, 12));
   formattedWidth.setColumns(5);
-  lblMedium = new JLabel("Medium");
-  textFieldMedium = new JTextField();
-  lblSubject = new JLabel("Subject");
-  textFieldSubject = new JTextField();
+  lblMedium = new JLabel("Medium (max 25 characters)");
+  textFieldMedium = new JFormattedTextField(createFormatter("?************************"));
+  lblSubject = new JLabel("Subject (max 25 characters)");
+  textFieldSubject = new JFormattedTextField(createFormatter("?************************"));
   btnCalcMaxPrice = new JButton("Calculate Maximum Purchase Price");  
   btnCalcMaxPrice.setFont(new Font("Century", Font.PLAIN, 12));
 
@@ -196,11 +197,12 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   add(lblClassification, gbc_lblClassification);
 
   lblClassification.setLabelFor(formattedClassification);
-  formattedClassification.setColumns(20);
+  formattedClassification.setColumns(30);
   formattedClassification.setFont(new Font("Century", Font.PLAIN, 12));
   GridBagConstraints gbc_formattedClassification = new GridBagConstraints();
   gbc_formattedClassification.anchor = GridBagConstraints.NORTHWEST;
   gbc_formattedClassification.insets = new Insets(0, 0, 5, 5);
+  gbc_formattedClassification.gridwidth = 2;
   gbc_formattedClassification.gridx = 1;
   gbc_formattedClassification.gridy = 9;
   add(formattedClassification, gbc_formattedClassification);
@@ -252,7 +254,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   
   lblMedium.setLabelFor(textFieldMedium);
 
-  textFieldMedium.setColumns(20);
+  textFieldMedium.setColumns(25);
   textFieldMedium.setFont(new Font("Century", Font.PLAIN, 12));
   GridBagConstraints gbc_textFieldMedium = new GridBagConstraints();
   gbc_textFieldMedium.anchor = GridBagConstraints.NORTHWEST;
@@ -272,7 +274,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   
 
   lblSubject.setLabelFor(textFieldSubject);
-  textFieldSubject.setColumns(20);
+  textFieldSubject.setColumns(25);
   textFieldSubject.setFont(new Font("Century", Font.PLAIN, 12));
   GridBagConstraints gbc_textFieldSubject = new GridBagConstraints();
   gbc_textFieldSubject.anchor = GridBagConstraints.NORTHWEST;
@@ -327,14 +329,119 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   f.setLocationRelativeTo(null);
   f.setSize(800, 600);
   f.setLocation(10, 10);
-  f.getContentPane().add(new AddPaintingAuctionPanel());
+  f.getContentPane().add(new CalcMaxPurchasePricePanel());
   f.show();
  }
-
- public JButton getBtnAddPaintingTo() {
-  return btnCalcMaxPrice;
- }
- public JButton getBtnCancel() {
-  return btnCancel;
- }
+ public boolean isInputValid()
+	{
+		String med = textFieldMedium.getText().trim();
+		String subj = textFieldSubject.getText().trim();
+		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+				&& formattedDateOfWork.isEditValid()
+				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
+				&& !(subj.length() == 0))
+		{
+			/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
+				&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
+				&& !(subj.length() == 0)) + "00");
+			System.out.println(formattedFirstName.isEditValid() + "1");
+			System.out.println(formattedLastName.isEditValid() + "2");
+			System.out.println(formattedTitle.isEditValid() + "3");
+			System.out.println(formattedDateOfWork.isEditValid() + "4");
+			System.out.println(formattedDateAuction.isEditValid() + "5");
+			System.out.println((formattedSalePrice.getValue() == null) + "6");
+			System.out.println((formattedHeight.getValue() == null) + "7");
+			System.out.println((formattedHeight.getValue() == null) + "8");
+			System.out.println((med.length() == 0) + "9");
+			System.out.println((subj.length() == 0) + "10");*/
+			String[] fieldValues = getFieldValues();
+			double dateWork = Double.parseDouble(fieldValues[3]);
+			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
+			double salePrice = Double.parseDouble(fieldValues[5]);
+			double height = Double.parseDouble(fieldValues[6]);
+			double width = Double.parseDouble(fieldValues[7]);
+			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0)
+					&& (height > 0) && (width > 0))
+				return true;
+			else
+				return false;
+		}
+		else
+		{
+			/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+					&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
+					&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
+					&& !(subj.length() == 0)) + "01");
+			System.out.println(formattedFirstName.isEditValid() + "1");
+			System.out.println(formattedLastName.isEditValid() + "2");
+			System.out.println(formattedTitle.isEditValid() + "3");
+			System.out.println(formattedDateOfWork.isEditValid() + "4");
+			System.out.println(formattedDateAuction.isEditValid() + "5");
+			System.out.println((formattedSalePrice.getValue() == null) + "6");
+			System.out.println((formattedHeight.getValue() == null) + "7");
+			System.out.println((formattedHeight.getValue() == null) + "8");
+			System.out.println((med.length() == 0) + "9");
+			System.out.println((subj.length() == 0) + "10");*/
+			return false;
+		  }
+		}
+		public String[] getFieldValues()
+		{
+			String[] fieldValues = new String[10];
+			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+			fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+			fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+			if(formattedHeight.getValue() instanceof Long)
+				fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+			else
+				fieldValues[6] = Double.toString((Double) formattedHeight.getValue());
+			if(formattedWidth.getValue() instanceof Long)
+				fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
+			else
+				fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
+			fieldValues[8] = textFieldMedium.getText();
+			fieldValues[9] = textFieldSubject.getText();
+			
+			return fieldValues;
+		}
+		public void resetTextFields()
+		{
+			formattedFirstName.setValue(null);
+			formattedLastName.setValue(null);
+			formattedTitle.setValue(null);
+			formattedDateOfWork.setValue(null);
+			formattedHeight.setValue(null);
+			formattedWidth.setValue(null);
+			textFieldMedium.setText("");
+			textFieldSubject.setText("");
+		}
+		public static InventoryPainting createNewInventoryPainting(String[] values)
+		{
+			String fName = values[0];
+			String lName = values[1];
+			String title = values[2];
+			int dateWork = Integer.parseInt(values[3]);
+			double height = Double.parseDouble(values[6]);
+			double width = Double.parseDouble(values[7]);
+			String med = values[8];
+			String subj = values[9];
+			InventoryPainting painting=new InventoryPainting();
+			painting.setArtistFirstName(fName);
+			painting.setArtistLastName(lName);
+			painting.setTitleOfWork(title);
+			painting.setDateOfWork(dateWork);
+			painting.setHeightCM(height);
+			painting.setWidthCM(width);
+			painting.setMedium(med);
+			painting.setSubject(subj);
+			return painting;
+		}
+		public JButton getBtnAddPaintingTo() {
+			return btnCalcMaxPrice;
+		}
+		public JButton getBtnCancel() {
+			return btnCancel;
+		}
 }
