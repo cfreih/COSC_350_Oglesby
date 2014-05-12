@@ -46,6 +46,7 @@ public abstract class Calculation
    if(painting.getClassification().toLowerCase().equals("masterpiece")) price=calcMaxMasterpiece(painting, records);
    else if (painting.getClassification().toLowerCase().equals("masterwork")) price=calcMaxMasterwork(painting, records);
    else price = calcMaxOther(painting, records);
+   painting.setMaxPurchasePrice(price);
    return price;
  }
  //Desc: Calculates the max buy price if the painting is a masterpiece.
