@@ -1,6 +1,5 @@
 
 import java.text.NumberFormat;
-
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,11 +10,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
-
 import java.awt.Font;
-
 import javax.swing.JButton;
-
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -49,7 +45,7 @@ public class CompletePurchasePanel extends JPanel {
 
 		gridBagLayout.columnWidths = new int[] { 0, 29, 200, 0 };
 		gridBagLayout.rowHeights = new int[] { 30, 15, 21, 30, 21, 15, 21, 16,
-				41, 15, 21, 16, 22, 15, 21, 15, 21, 27, 0 };
+				33, 33, 21, 16, 22, 15, 21, 15, 21, 27, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -57,7 +53,7 @@ public class CompletePurchasePanel extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 		formattedSellerName = new JFormattedTextField(
-				createFormatter("****************************************"));
+				createFormatter("***************************************"));
 		btnAddPaintingTo = new JButton("Complete Purchase");
 		btnAddPaintingTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
