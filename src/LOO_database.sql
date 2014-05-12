@@ -13,7 +13,6 @@ CREATE TABLE artists (
 	lastName varchar (20),
 	fashionability INT,
 	PRIMARY KEY(artistID)
-) /* ENGINE=InnoDB */
 ;
 
 CREATE TABLE auction_paintings (	
@@ -31,7 +30,7 @@ CREATE TABLE auction_paintings (
 	INDEX(medium),
 	INDEX(subject),	
 	PRIMARY KEY(auctionPaintingID)
-) /* ENGINE=InnoDB */
+)
 ;
 
 CREATE TABLE inventory_paintings (
@@ -61,7 +60,7 @@ CREATE TABLE inventory_paintings (
 	INDEX(dateOfPurchase),
 	INDEX(dateOfSale),
 	PRIMARY KEY(inventoryPaintingID)
-) /* ENGINE=InnoDB */
+)
 ;
  
 /* insert into artists (firstName, lastName, fashionability) values ('Sam','Bock','5522');
