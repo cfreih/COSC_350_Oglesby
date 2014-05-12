@@ -15,12 +15,13 @@ public class ManageArtistPanel extends JPanel {
 	private JButton btnModifyDeleteExistingArtist;
 	private JButton btnAddNewArtist;
 	private JButton btnSeeAllArtists;
+	private JButton btnBackToMain;
 	public ManageArtistPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{64, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 75, 0, 75, 62, 75, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 75, 49, 76, 50, 75, 50, 75, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
@@ -45,10 +46,18 @@ public class ManageArtistPanel extends JPanel {
 		
 		btnAddNewArtist = new JButton("Add New Artist");
 		GridBagConstraints gbc_btnAddNewArtist = new GridBagConstraints();
+		gbc_btnAddNewArtist.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAddNewArtist.fill = GridBagConstraints.BOTH;
 		gbc_btnAddNewArtist.gridx = 1;
 		gbc_btnAddNewArtist.gridy = 6;
 		add(btnAddNewArtist, gbc_btnAddNewArtist);
+		
+		btnBackToMain = new JButton("Back To Main Menu");
+		GridBagConstraints gbc_btnBackToMain = new GridBagConstraints();
+		gbc_btnBackToMain.fill = GridBagConstraints.BOTH;
+		gbc_btnBackToMain.gridx = 1;
+		gbc_btnBackToMain.gridy = 8;
+		add(btnBackToMain, gbc_btnBackToMain);
 	}
 
 	public JButton getBtnModifyDeleteExistingArtist() {
@@ -59,5 +68,8 @@ public class ManageArtistPanel extends JPanel {
 	}
 	public JButton getBtnSeeAllArtists() {
 		return btnSeeAllArtists;
+	}
+	public JButton getBtnBackToMain() {
+		return btnBackToMain;
 	}
 }
