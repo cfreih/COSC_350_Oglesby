@@ -32,9 +32,9 @@ public class ApplyArtistChangesPanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	public ApplyArtistChangesPanel() {
-		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
 		formattedFirstName.setBounds(38, 120, 152, 20);
-		formattedLastName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("H*******************"));
 		formattedLastName.setBounds(38, 164, 152, 20);
 		formattedFashionability = new JFormattedTextField(createFormatter("#####"));
 		formattedFashionability.setBounds(38, 209, 49, 20);
@@ -117,7 +117,32 @@ public class ApplyArtistChangesPanel extends JPanel {
 		}
 		return formatter;
 	}
-
+	public boolean isInputValid()
+	{
+		int fashionability=Integer.parseInt((String) formattedFashionability.getValue());
+		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedFashionability.isEditValid())
+		{
+			if((fashionability >= 0) && (fashionability <=10000))
+				return true;
+			else
+				return false;
+		}
+		return false;
+	}
+	public void resetTextFields()
+	{
+		formattedFirstName.setValue(null);
+		formattedLastName.setValue(null);
+		formattedFashionability.setValue(null);
+	}
+	public Artist createNewArtist()
+	{
+		Artist artist=new Artist();
+		artist.setArtistFirstName((String)formattedFirstName.getValue());
+		artist.setArtistLastName((String)formattedLastName.getValue());
+		artist.setFashionabilityCoeff((int)formattedFashionability.getValue());
+		return artist;
+	}
 	public JButton getBtnSaveChanges() {
 		return btnSaveChanges;
 	}

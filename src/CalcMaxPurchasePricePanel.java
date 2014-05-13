@@ -51,19 +51,19 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   gridBagLayout = new GridBagLayout();
   lblArtistinfo = new JLabel("Artist Information");
   lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-  formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
+  formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
   lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
   formattedLastName = new JFormattedTextField(
-    createFormatter("?*******************"));
+    createFormatter("H*******************"));
   lblPaintingInfo_1 = new JLabel("Painting Information");
   lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
   formattedTitle = new JFormattedTextField(
-    createFormatter("?***************************************"));
+    createFormatter("H***************************************"));
   lblDateOfWork = new JLabel("Date of Work (yyyy)");
   formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
   lblClassification = new JLabel("Classification (max 30 characters)");
   formattedClassification = new JFormattedTextField(
-    createFormatter("?*****************************"));
+    createFormatter("H*****************************"));
   lblHeightcm = new JLabel("Height (cm)");
   formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
   lblWidthcm = new JLabel("Width (cm)");
@@ -72,9 +72,9 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   formattedWidth.setFont(new Font("Century", Font.PLAIN, 12));
   formattedWidth.setColumns(5);
   lblMedium = new JLabel("Medium (max 25 characters)");
-  textFieldMedium = new JFormattedTextField(createFormatter("?************************"));
+  textFieldMedium = new JFormattedTextField(createFormatter("H************************"));
   lblSubject = new JLabel("Subject (max 25 characters)");
-  textFieldSubject = new JFormattedTextField(createFormatter("?************************"));
+  textFieldSubject = new JFormattedTextField(createFormatter("H************************"));
   btnCalcMaxPrice = new JButton("Calculate Maximum Purchase Price");  
   btnCalcMaxPrice.setFont(new Font("Century", Font.PLAIN, 12));
 
@@ -341,20 +341,6 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
 				&& !(subj.length() == 0))
 		{
-			/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
-				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
-				&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
-				&& !(subj.length() == 0)) + "00");
-			System.out.println(formattedFirstName.isEditValid() + "1");
-			System.out.println(formattedLastName.isEditValid() + "2");
-			System.out.println(formattedTitle.isEditValid() + "3");
-			System.out.println(formattedDateOfWork.isEditValid() + "4");
-			System.out.println(formattedDateAuction.isEditValid() + "5");
-			System.out.println((formattedSalePrice.getValue() == null) + "6");
-			System.out.println((formattedHeight.getValue() == null) + "7");
-			System.out.println((formattedHeight.getValue() == null) + "8");
-			System.out.println((med.length() == 0) + "9");
-			System.out.println((subj.length() == 0) + "10");*/
 			String[] fieldValues = getFieldValues();
 			double dateWork = Double.parseDouble(fieldValues[3]);
 			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
@@ -369,20 +355,6 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		}
 		else
 		{
-			/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
-					&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
-					&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
-					&& !(subj.length() == 0)) + "01");
-			System.out.println(formattedFirstName.isEditValid() + "1");
-			System.out.println(formattedLastName.isEditValid() + "2");
-			System.out.println(formattedTitle.isEditValid() + "3");
-			System.out.println(formattedDateOfWork.isEditValid() + "4");
-			System.out.println(formattedDateAuction.isEditValid() + "5");
-			System.out.println((formattedSalePrice.getValue() == null) + "6");
-			System.out.println((formattedHeight.getValue() == null) + "7");
-			System.out.println((formattedHeight.getValue() == null) + "8");
-			System.out.println((med.length() == 0) + "9");
-			System.out.println((subj.length() == 0) + "10");*/
 			return false;
 		  }
 		}

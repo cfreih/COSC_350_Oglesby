@@ -131,39 +131,10 @@ public class ModifyDeleteArtistPanel extends JPanel {
 			{
 				if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() )
 				{
-					/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
-						&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
-						&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
-						&& !(subj.length() == 0)) + "00");
-					System.out.println(formattedFirstName.isEditValid() + "1");
-					System.out.println(formattedLastName.isEditValid() + "2");
-					System.out.println(formattedTitle.isEditValid() + "3");
-					System.out.println(formattedDateOfWork.isEditValid() + "4");
-					System.out.println(formattedDateAuction.isEditValid() + "5");
-					System.out.println((formattedSalePrice.getValue() == null) + "6");
-					System.out.println((formattedHeight.getValue() == null) + "7");
-					System.out.println((formattedHeight.getValue() == null) + "8");
-					System.out.println((med.length() == 0) + "9");
-					System.out.println((subj.length() == 0) + "10");*/
-					String[] fieldValues = getFieldValues();
 					return true;
 				}
 				else
 				{
-					/*System.out.println((formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
-							&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && formattedSalePrice.isEditValid()
-							&& formattedHeight.isEditValid() && formattedWidth.isEditValid() && !(med.length() == 0)
-							&& !(subj.length() == 0)) + "01");
-					System.out.println(formattedFirstName.isEditValid() + "1");
-					System.out.println(formattedLastName.isEditValid() + "2");
-					System.out.println(formattedTitle.isEditValid() + "3");
-					System.out.println(formattedDateOfWork.isEditValid() + "4");
-					System.out.println(formattedDateAuction.isEditValid() + "5");
-					System.out.println((formattedSalePrice.getValue() == null) + "6");
-					System.out.println((formattedHeight.getValue() == null) + "7");
-					System.out.println((formattedHeight.getValue() == null) + "8");
-					System.out.println((med.length() == 0) + "9");
-					System.out.println((subj.length() == 0) + "10");*/
 					return false;
 				  }
 				}
@@ -174,7 +145,7 @@ public class ModifyDeleteArtistPanel extends JPanel {
 				fieldValues[1] = ((String) formattedLastName.getValue()).trim();
 				return fieldValues;
 			}
-		 	public static Artist createNewAuctionPainting(String[] values)
+		 	public static Artist createNewArtist(String[] values)
 			{
 				String fName = values[0];
 				String lName = values[1];

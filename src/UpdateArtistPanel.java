@@ -106,7 +106,26 @@ public class UpdateArtistPanel extends JPanel {
 		}
 		return formatter;
 	}
-
+	public boolean isInputValid()
+	{
+		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() )
+		{
+				return false;
+		}
+		return false;
+	}
+	public Artist createNewArtist()
+	{
+		Artist artist=new Artist();
+		artist.setArtistFirstName((String)formattedFirstName.getValue());
+		artist.setArtistLastName((String)formattedLastName.getValue());
+		return artist;
+	}
+	public void resetTextFields()
+	{
+		formattedFirstName.setValue(null);
+		formattedLastName.setValue(null);
+	}
 	public JButton getBtnSelectArtist() {
 		return btnSelectArtist;
 	}

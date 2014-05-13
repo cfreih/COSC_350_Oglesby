@@ -4,8 +4,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -53,7 +51,7 @@ public class CompletePurchasePanel extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 		formattedSellerName = new JFormattedTextField(
-				createFormatter("***************************************"));
+				createFormatter("H**************************************"));
 		btnAddPaintingTo = new JButton("Complete Purchase");
 		btnAddPaintingTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -80,7 +78,7 @@ public class CompletePurchasePanel extends JPanel {
 						
 								lblSellerName.setLabelFor(formattedSellerName);
 				formattedSellerName = new JFormattedTextField(
-						createFormatter("****************************************"));
+						createFormatter("H***************************************"));
 						
 								formattedSellerName.setFont(new Font("Century", Font.PLAIN, 12));
 								formattedSellerName.setColumns(40);
@@ -104,7 +102,7 @@ public class CompletePurchasePanel extends JPanel {
 						
 								lblSellerAddress.setLabelFor(formattedSellerAddress);
 		formattedSellerAddress = new JFormattedTextField(
-				createFormatter("****************************************"));
+				createFormatter("H***************************************"));
 				formattedSellerAddress.setColumns(40);
 				formattedSellerAddress.setFont(new Font("Century", Font.PLAIN, 12));
 				GridBagConstraints gbc_formattedSellerAddress = new GridBagConstraints();
@@ -157,6 +155,12 @@ public class CompletePurchasePanel extends JPanel {
 				gbc_btnCancel.gridy = 9;
 				add(btnCancel, gbc_btnCancel);
 	}
+	public boolean isInputValid()
+	{
+		if(formattedSellerName.isEditValid() && formattedSellerAddress.isEditValid() && formattedBuyPrice.isEditValid())
+			return true;
+		else return false;
+	}
 
 	/**
 	 * Desc: Method to create a format for the strings to be entered. Taken from
@@ -176,10 +180,22 @@ public class CompletePurchasePanel extends JPanel {
 		}
 		return formatter;
 	}
+	public void resetTextFields()
+	{
+		formattedSellerName.setValue(null);
+		formattedSellerAddress.setValue(null);
+		formattedBuyPrice.setValue(null);
+	}
 	public JButton getBtnAddPaintingTo() {
 		return btnAddPaintingTo;
 	}
-
+	public InventoryPainting updateInventoryPainting(InventoryPainting painting)
+	{
+		painting.setSellerName((String)formattedSellerName.getValue());
+		painting.setSellerAddress((String)formattedSellerAddress.getValue());
+		painting.setActualPurchasePrice((double)formattedBuyPrice.getValue());
+		return painting;
+	}
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}

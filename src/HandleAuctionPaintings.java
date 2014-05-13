@@ -197,8 +197,10 @@ class HandleAuctionPaintingsTest
         //Case for changing one field on a one field search term
         AuctionPainting searchKey = new AuctionPainting();
         searchKey.setArtistFirstName("Clint");
+        searchKey.setTitleOfWork("Good Painting");
         AuctionPainting modification = new AuctionPainting();
         modification.setArtistFirstName("Clinton");
+        modification.setTitleOfWork("Shitty Painting");
         HandleAuctionPaintings.updateAuctionPainting(modification, searchKey);
         AuctionPainting[] result = HandleAuctionPaintings.retrieveAuctionPaintings(modification);
         if(result.length < 1) return false;
