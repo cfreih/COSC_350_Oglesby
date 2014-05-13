@@ -20,7 +20,7 @@ public abstract class HandleInventoryPaintings
     // Search terms only a Date object
     // Is a special case for the FindSoldPaintings class.
     //Return: returns an InventoryPainting array, with elements matching search terms
-    public static InventoryPainting[] retrieveInventoryPaintings(SimpleDate d)
+    public static InventoryPainting[] retrieveInventoryPaintings(SimpleDate d, boolean sold)
     {
         String tableStatement = "inventory_paintings";
         String orderBy = "inventoryPaintingID";
@@ -29,7 +29,8 @@ public abstract class HandleInventoryPaintings
         Pair[] pairs = loadMap(new InventoryPainting()); //clint needs to fix inventorypainting
         statement += HandlerUtility.loadKeys(pairs);
         statement += " FROM " + tableStatement;
-        statement += " WHERE dateOfSale > " + date + " ";
+        if(sold) statement += " WHERE dateOfSale > " + date + " ";
+        else statement += " WHERE dateOfPurchase > " + date + " ";
         statement += " ORDER BY " + orderBy;
         SQLConnector connection = new SQLConnector(statement);
         Vector result = connection.executeSQL_Query();
@@ -43,6 +44,7 @@ public abstract class HandleInventoryPaintings
     //Return: returns an InventoryPainting array, with elements matching search terms
     public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
     {
+        if(inventory.length < 1) return null;
         int isMultiple = 1;
         String tableStatement = "inventory_paintings";
         String orderBy = "inventoryPaintingID";
@@ -298,7 +300,7 @@ class HandleInventoryPaintingsTest
         //Test for getting all past a point
         SimpleDate s = new SimpleDate(SimpleDate.TODAY);
         s.setYear(s.getYear() - 1);
-        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(s);
+        InventoryPainting[] result = HandleInventoryPaintings.retrieveInventoryPaintings(s,true);
         if(result.length < 1) return false;
         return true;
     }

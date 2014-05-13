@@ -15,7 +15,7 @@ public abstract class FindSoldPaintings extends Report
   {
     SimpleDate d = new SimpleDate(12);
     d.setYear(d.getYear() - 1);
-    this.soldPaintings = HandleInventoryPaintings.retrieveInventoryPaintings(d);
+    this.soldPaintings = HandleInventoryPaintings.retrieveInventoryPaintings(d, true);
   }
   //Desc: setter for soldPaintings
   //Post: soldPaintings is changed to arg
@@ -23,4 +23,8 @@ public abstract class FindSoldPaintings extends Report
   {
     this.soldPaintings = soldPaintings;
   }
+    public InventoryPainting[] getSoldPaintings()
+    {
+        return soldPaintings;
+    }
 }
