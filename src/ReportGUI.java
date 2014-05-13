@@ -96,7 +96,7 @@ public class ReportGUI
     {
         grid.removeAll();
         final Pair[] columnTitles = HandleInventoryPaintings.loadMap(new InventoryPainting());
-        ArrayList<Pair[]> pairs = new ArrayList<Pair[]>();
+        final ArrayList<Pair[]> pairs = new ArrayList<Pair[]>();
         for(int i = 0; i < paintings.length; i++)
         {
             pairs.add(HandleInventoryPaintings.loadMap(paintings[i]));
@@ -116,6 +116,10 @@ public class ReportGUI
             @Override
             public Object getValueAt(int rowIndex, int columnIndex)
             {
+                if(rowIndex < pairs.size() && columnIndex < columnTitles.length)
+                {
+                    return pairs.get(rowIndex)[columnIndex].getValue();
+                }
                 return null;
             }
             @Override
@@ -128,13 +132,6 @@ public class ReportGUI
                 return "?";
             }
         });
-        for(int i = 0; i < pairs.size(); i++)
-        {
-            for(int j = 0; j < columnTitles.length; j++)
-            {
-                table.setValueAt(pairs.get(i)[j], i, j);
-            }
-        }
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowHeight(22);
         table.setAutoResizeMode(0);
