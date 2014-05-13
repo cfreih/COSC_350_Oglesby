@@ -9,21 +9,22 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import java.awt.Font;
 
-public class AddNewArtistPanel extends JPanel {
+public class SelectPaintingToSellPanel extends JPanel {
 	private JLabel lblArtistInfo;
 	private JLabel lblFirstName;
 	private JLabel lblLastNamemax;
-	private JLabel lblFashionabilityCoefficient;
+	private JLabel lblTitle;
 	private JFormattedTextField formattedFirstName;
 	private JFormattedTextField formattedLastName;
-	private JFormattedTextField formattedFashionability;
-	private JButton btnAddNewArtist;
+	private JFormattedTextField formattedTitle;
+	private JButton btnSelectPainting;
 	private JButton btnCancel;
-	public AddNewArtistPanel() {
+	private JLabel lblPaintingInfo;
+	public SelectPaintingToSellPanel() {
 		formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
 		formattedLastName = new JFormattedTextField(createFormatter("H*******************"));
-		formattedFashionability = new JFormattedTextField(createFormatter("#####"));
 		
 		setUpPanel();
 	}
@@ -31,15 +32,16 @@ public class AddNewArtistPanel extends JPanel {
 	{
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 253, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
-				null, null), new TitledBorder(null, "Add New Artist",
+				null, null), new TitledBorder(null, "Select Painting To Sell",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
 		lblArtistInfo = new JLabel("Artist Info");
+		lblArtistInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblArtistInfo = new GridBagConstraints();
 		gbc_lblArtistInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblArtistInfo.gridx = 1;
@@ -78,45 +80,50 @@ public class AddNewArtistPanel extends JPanel {
 		gbc_formattedLastName.gridy = 4;
 		add(formattedLastName, gbc_formattedLastName);
 		
-		lblFashionabilityCoefficient = new JLabel("Fashionability Coefficient");
-		GridBagConstraints gbc_lblFashionabilityCoefficient = new GridBagConstraints();
-		gbc_lblFashionabilityCoefficient.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFashionabilityCoefficient.anchor = GridBagConstraints.WEST;
-		gbc_lblFashionabilityCoefficient.gridx = 1;
-		gbc_lblFashionabilityCoefficient.gridy = 5;
-		add(lblFashionabilityCoefficient, gbc_lblFashionabilityCoefficient);
+		lblPaintingInfo = new JLabel("Painting Info");
+		lblPaintingInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblPaintingInfo = new GridBagConstraints();
+		gbc_lblPaintingInfo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPaintingInfo.gridx = 1;
+		gbc_lblPaintingInfo.gridy = 5;
+		add(lblPaintingInfo, gbc_lblPaintingInfo);
 		
-		formattedFashionability.setColumns(5);
-		GridBagConstraints gbc_formattedFashionability = new GridBagConstraints();
-		gbc_formattedFashionability.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedFashionability.anchor = GridBagConstraints.WEST;
-		gbc_formattedFashionability.gridx = 1;
-		gbc_formattedFashionability.gridy = 6;
-		add(formattedFashionability, gbc_formattedFashionability);
+		lblTitle = new JLabel("Title (max 40 characters)");
+		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTitle.anchor = GridBagConstraints.WEST;
+		gbc_lblTitle.gridx = 1;
+		gbc_lblTitle.gridy = 6;
+		add(lblTitle, gbc_lblTitle);
+		formattedTitle = new JFormattedTextField(createFormatter("H***************************************"));
 		
-		btnAddNewArtist = new JButton("Add New Artist");
-		GridBagConstraints gbc_btnAddNewArtist = new GridBagConstraints();
-		gbc_btnAddNewArtist.insets = new Insets(0, 0, 0, 5);
-		gbc_btnAddNewArtist.anchor = GridBagConstraints.WEST;
-		gbc_btnAddNewArtist.gridx = 1;
-		gbc_btnAddNewArtist.gridy = 7;
-		add(btnAddNewArtist, gbc_btnAddNewArtist);
+		formattedTitle.setColumns(40);
+		GridBagConstraints gbc_formattedTitle = new GridBagConstraints();
+		gbc_formattedTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_formattedTitle.anchor = GridBagConstraints.WEST;
+		gbc_formattedTitle.gridx = 1;
+		gbc_formattedTitle.gridy = 7;
+		add(formattedTitle, gbc_formattedTitle);
+		
+		btnSelectPainting = new JButton("Select Painting To Sell");
+		GridBagConstraints gbc_btnSelectPainting = new GridBagConstraints();
+		gbc_btnSelectPainting.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSelectPainting.anchor = GridBagConstraints.WEST;
+		gbc_btnSelectPainting.gridx = 1;
+		gbc_btnSelectPainting.gridy = 8;
+		add(btnSelectPainting, gbc_btnSelectPainting);
 		
 		btnCancel = new JButton("Cancel");
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.gridx = 2;
-		gbc_btnCancel.gridy = 7;
+		gbc_btnCancel.gridy = 8;
 		add(btnCancel, gbc_btnCancel);
 	}
 	public boolean isInputValid()
 	{
-		int fashionability=Integer.parseInt((String) formattedFashionability.getValue());
-		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedFashionability.isEditValid())
+		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid())
 		{
-			if((fashionability >= 0) && (fashionability <=10000))
 				return true;
-			else
-				return false;
 		}
 		return false;
 	}
@@ -134,20 +141,20 @@ public class AddNewArtistPanel extends JPanel {
 	{
 		formattedFirstName.setValue(null);
 		formattedLastName.setValue(null);
-		formattedFashionability.setValue(null);
+		formattedTitle.setValue(null);
 	}
-	public Artist createNewArtist()
+	public InventoryPainting createNewInventoryPainting()
 	{
-		Artist artist=new Artist();
-		artist.setArtistFirstName((String)formattedFirstName.getValue());
-		artist.setArtistLastName((String)formattedLastName.getValue());
-		artist.setFashionabilityCoeff((int)formattedFashionability.getValue());
-		return artist;
-	}
-	public JButton getBtnAddNewArtist() {
-		return btnAddNewArtist;
+		InventoryPainting inventoryPainting=new InventoryPainting();
+		inventoryPainting.setArtistFirstName((String)formattedFirstName.getValue());
+		inventoryPainting.setArtistLastName((String)formattedLastName.getValue());
+		inventoryPainting.setTitleOfWork((String)formattedTitle.getValue());
+		return inventoryPainting;
 	}
 	public JButton getBtnCancel() {
 		return btnCancel;
+	}
+	public JButton getBtnSelectPainting() {
+		return btnSelectPainting;
 	}
 }
