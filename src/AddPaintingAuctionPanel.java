@@ -62,7 +62,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		formattedTitle = new JFormattedTextField(
 				createFormatter("?***************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
 		formattedDateAuction = new JFormattedTextField(
 				createFormatter("##/##/####"));
@@ -467,7 +467,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		String fName = values[0];
 		String lName = values[1];
 		String title = values[2];
-		int dateWork = Integer.parseInt(values[3]);
+		String dateWork = values[3];
 		SimpleDate dateAuction = SimpleDate.parseSimpleDate(values[4]);
 		double salePrice = Double.parseDouble(values[5]);
 		double height = Double.parseDouble(values[6]);

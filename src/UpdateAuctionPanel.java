@@ -83,7 +83,7 @@ public class UpdateAuctionPanel extends JPanel {
 		formattedTitle.setBounds(27, 276, 446, 21);
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
 		lblDateOfWork.setBounds(27, 300, 108, 15);
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		formattedDateOfWork.setBounds(27, 318, 116, 21);
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
 		lblDateSoldAt.setBounds(186, 300, 193, 15);
@@ -304,6 +304,11 @@ public class UpdateAuctionPanel extends JPanel {
 	{
 		String med = textFieldMedium.getText().trim();
 		String subj = textFieldSubject.getText().trim();
+		String fName = ((String) formattedFirstName.getValue()).trim();
+		String lName = ((String) formattedLastName.getValue()).trim();
+		String title = ((String) formattedTitle.getValue()).trim();
+		String dateOfWork = ((String) formattedDateOfWork.getValue()).trim();
+		
 		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
 				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && !(formattedSalePrice.getValue() == null)
 				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
@@ -372,7 +377,7 @@ public class UpdateAuctionPanel extends JPanel {
 		if(fieldValues[2].length() > 0)
 			update.setTitleOfWork(fieldValues[2]);
 		if(fieldValues[3].length() > 0)
-			update.setDateOfWork(Integer.parseInt(fieldValues[3]));
+			update.setDateOfWork(fieldValues[3]);
 		if(fieldValues[4].length() > 0)
 			update.setDateOfSaleAuction(SimpleDate.parseSimpleDate(fieldValues[4]));
 		if(fieldValues[5].length() > 0)
@@ -418,6 +423,12 @@ public class UpdateAuctionPanel extends JPanel {
 
 	public AuctionPainting getOrigPainting() {
 		return origPainting;
+	}
+	
+	public static void main(String[] args)
+	{
+		UpdateAuctionPanel updateAuction = new UpdateAuctionPanel();
+		String[] fields = updateAuction.getFieldValues();
 	}
 
 }
