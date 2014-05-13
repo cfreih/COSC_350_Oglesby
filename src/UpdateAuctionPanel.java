@@ -304,27 +304,60 @@ public class UpdateAuctionPanel extends JPanel {
 	{
 		String med = textFieldMedium.getText().trim();
 		String subj = textFieldSubject.getText().trim();
-		String fName = ((String) formattedFirstName.getValue()).trim();
-		String lName = ((String) formattedLastName.getValue()).trim();
-		String title = ((String) formattedTitle.getValue()).trim();
-		String dateOfWork = ((String) formattedDateOfWork.getValue()).trim();
+		String fName = "";
+		if(formattedFirstName.getValue() != null)
+			fName = ((String) formattedFirstName.getValue()).trim();
+		String lName = "";
+		if(formattedLastName.getValue() != null)
+			lName = ((String) formattedLastName.getValue()).trim();
+		String title = "";
+		if(formattedTitle.getValue() != null)
+			title = ((String) formattedTitle.getValue()).trim();
+		String dateOfWork = "";
+		if(formattedDateOfWork.getValue() != null)
+			dateOfWork = ((String) formattedDateOfWork.getValue()).trim();
 		
-		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
-				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && !(formattedSalePrice.getValue() == null)
-				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
-				&& !(subj.length() == 0))
+		if(fName.length() > 0 || lName.length() > 0 || title.length() > 0 || dateOfWork.length() > 0 || !(formattedSalePrice.getValue() == null)
+				|| !(formattedHeight.getValue() == null) || !(formattedWidth.getValue() == null) || !(med.length() == 0)
+				|| !(subj.length() == 0) || formattedDateAuction.getValue() != null)
 		{
 			String[] fieldValues = getFieldValues();
-			double dateWork = Double.parseDouble(fieldValues[3]);
-			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
-			double salePrice = Double.parseDouble(fieldValues[5]);
-			double height = Double.parseDouble(fieldValues[6]);
-			double width = Double.parseDouble(fieldValues[7]);
-			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0)
-					&& (height > 0) && (width > 0))
-				return true;
-			else 
-				return false;
+			int dateWork = -1;
+			if(!fieldValues[3].equals(""))
+			{
+				String formatted = fieldValues[3];
+				if(formatted.length() > 4)
+					formatted = formatted.substring(0, 4);
+				dateWork = Integer.parseInt(formatted);
+			}
+			SimpleDate dateAuction = new SimpleDate();
+			if(!fieldValues[4].equals(""))
+				dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
+			double salePrice = 0;
+			if(!fieldValues[5].equals(""))
+				salePrice = Double.parseDouble(fieldValues[5]);
+			double height = 0;
+			if(!fieldValues[6].equals(""))
+				height = Double.parseDouble(fieldValues[6]);
+			double width = 0;
+			if(!fieldValues[7].equals(""))
+				width = Double.parseDouble(fieldValues[7]);
+			if(dateOfWork.length() > 0)
+				if(dateWork < 1100)
+					return false;
+			if(!(formattedSalePrice.getValue() == null))
+				if(salePrice <= 0)
+					return false;
+			if(!(formattedHeight.getValue() == null))
+				if(height <= 0)
+					return false;
+			if(!(formattedWidth.getValue() == null))
+				if(width <= 0)
+					return false;
+			if(formattedDateAuction.getValue() != null)
+				if(dateAuction.equals(new AuctionPainting()) || dateAuction.getYear() < dateWork)
+					return false;
+			return true;
 		}
 		else
 			return false;
@@ -340,23 +373,45 @@ public class UpdateAuctionPanel extends JPanel {
 	public String[] getFieldValues()
 	{
 		String[] fieldValues = new String[10];
-		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
-		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
-		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
-		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
-		fieldValues[4] = ((String) formattedDateAuction.getValue()).trim();
-		if(formattedSalePrice.getValue() instanceof Long)
-			fieldValues[5] = Long.toString((Long) formattedSalePrice.getValue());
-		else
-			fieldValues[5] = Double.toString((Double) formattedSalePrice.getValue());
-		if(formattedHeight.getValue() instanceof Long)
-			fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
-		else
-			fieldValues[6] = Double.toString((Double) formattedHeight.getValue());
-		if(formattedWidth.getValue() instanceof Long)
-			fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
-		else
-			fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
+		fieldValues[0] = "";
+		if(formattedFirstName.getValue() != null)
+			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = "";
+		if(formattedLastName.getValue() != null)
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = "";
+		if(formattedTitle.getValue() != null)
+			fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = "";
+		if(formattedDateOfWork.getValue() != null)
+			fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		fieldValues[4] = "";
+		if(formattedDateAuction.getValue() != null)
+			fieldValues[4] = ((String) formattedDateAuction.getValue()).trim();
+		fieldValues[5] = "";
+		if(formattedSalePrice.getValue() != null)
+		{
+			if(formattedSalePrice.getValue() instanceof Long)
+				fieldValues[5] = Long.toString((Long) formattedSalePrice.getValue());
+			else
+				fieldValues[5] = Double.toString((Double) formattedSalePrice.getValue());
+		}
+		fieldValues[6] = "";
+		if(formattedHeight.getValue() != null)
+		{
+			if(formattedHeight.getValue() instanceof Long)
+				fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+			else
+				fieldValues[6] = Double.toString((Double) formattedHeight.getValue());
+		}
+		fieldValues[7] = "";
+		if(formattedWidth.getValue() != null)
+		{
+			if(formattedWidth.getValue() instanceof Long)
+				fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
+			else
+				fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
+		}
 		fieldValues[8] = textFieldMedium.getText();
 		fieldValues[9] = textFieldSubject.getText();
 		
@@ -425,10 +480,5 @@ public class UpdateAuctionPanel extends JPanel {
 		return origPainting;
 	}
 	
-	public static void main(String[] args)
-	{
-		UpdateAuctionPanel updateAuction = new UpdateAuctionPanel();
-		String[] fields = updateAuction.getFieldValues();
-	}
 
 }
