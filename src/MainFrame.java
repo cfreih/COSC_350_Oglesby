@@ -433,8 +433,9 @@ public class MainFrame extends JFrame implements ActionListener{
 						} catch (CloneNotSupportedException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
-						}						
+						}
 						updateAuction.updateAuctionPainting(updatePainting);
+						HandleAuctionPaintings.updateAuctionPainting(updatePainting, origPainting);
 						cardLayout.show(getContentPane(), AUCTION_MM);
 					}
 				}
