@@ -21,6 +21,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private ManageAuctionMainMenuPanel auctionMM;
 	private AddPaintingAuctionPanel addPaintingAuction;
 	private SearchAuctionPanel searchAuction;
+	private SearchResultsAuction searchResultsAuction;
 	private SeeAllAuctionPaintingsPanel seeAllAuction;
 	private UpdateAuctionPanel updateAuction;
 	
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	public static String UPDATE_AUCTION = "Update Auction";
 	public static String ADD_PAINTING_AUCTION = "Add Painting Auction";
 	public static String SEARCH_AUCTION = "Search Auction";
+	public static String SEARCH_RESULTS_AUCTION = "Search Results Auction";
 	
 	public static String MANAGE_ARTIST = "Manage Artists";
 	public static String UPDATE_ARTIST = "Update Artist";
@@ -67,6 +69,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpAuctionMM();
 		setUpAddPaintingAuction();	
 		setUpSearchAuction();
+		setUpSearchResultsAuction();
 		setUpSeeAllAuction();
 		setUpUpdateAuction();
 		
@@ -114,6 +117,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(addArtist, ADD_ARTIST);
 		getContentPane().add(applyArtistChanges, APPLY_ARTIST_CHANGES);
 		getContentPane().add(searchInventory, SEARCH_INVENTORY);
+		getContentPane().add(searchResultsAuction, SEARCH_RESULTS_AUCTION);
 	}
 	
 	/**
@@ -267,6 +271,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		auctionMM.getModifyPaintingButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				searchAuction.resetTextFields();
 				cardLayout.show(getContentPane(), SEARCH_AUCTION);
 			}
 		});
@@ -296,19 +301,68 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchAuction = new SearchAuctionPanel();
 		searchAuction.getBtnCancel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				searchAuction.resetTextFields();
 				cardLayout.show(getContentPane(), AUCTION_MM);
 			}
 		});
 		searchAuction.getBtnSearch().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//search for valid painting(s)
-				//pop up a screen of paintings that can be selected.
+				if(!searchAuction.isInputValid())
+				{
+					JOptionPane.showMessageDialog(searchAuction, "Input is invalid, make sure all fields are correct");
+				}
+				else
+				{
+					//if searchResults > 1 go straight to update screen
+					String[] fieldValues = searchAuction.getFieldValues();
+					AuctionPainting searchTerms = SearchAuctionPanel.createNewAuctionPainting(fieldValues);
+					AuctionPainting[] searchResults = HandleAuctionPaintings.retrieveAuctionPaintings(searchTerms);
+					if(searchResults.length == 0)
+					{
+						JOptionPane.showConfirmDialog(searchAuction, "No results found in search");
+					}
+					else if(searchResults.length == 1)
+					{
+						updateAuction.updateTableModel(searchResults[0]);
+						cardLayout.show(getContentPane(), UPDATE_AUCTION);
+						searchAuction.resetTextFields();
+					}
+					else
+					{
+						searchResultsAuction.updateSearchResultsList(searchResults);
+						cardLayout.show(getContentPane(), SEARCH_RESULTS_AUCTION);
+					}					
+				}
+				
+					
+			}
+		});
+	}
+	/**
+	 * Desc: sets up the searchResultsAuction to be set up and used in MainFrame
+	 * Post: searchResultsAuction and its components are able to be used in MainFrame
+	 */
+	private void setUpSearchResultsAuction()
+	{
+		searchResultsAuction = new SearchResultsAuction();
+		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AuctionPainting updatePainting = searchResultsAuction.getSelectedPainting();
+				updateAuction.updateTableModel(updatePainting);
 				cardLayout.show(getContentPane(), UPDATE_AUCTION);
+			}
+		});
+		searchResultsAuction.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(getContentPane(), SEARCH_AUCTION);
 			}
 		});
 	}
 	
-	
+	/**
+	 * Desc: sets up the searchInventory to be set up and used in MainFrame
+	 * Post: searchInventory and its components are able to be used in MainFrame
+	 */
 	private void setUpSearchInventory()
 	{
 		searchInventory = new SearchInventoryPanel();
@@ -355,7 +409,10 @@ public class MainFrame extends JFrame implements ActionListener{
 				int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to delete this painting?",
 						"Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 				if(n == 0)
+				{
+					
 					cardLayout.show(getContentPane(), AUCTION_MM);
+				}
 			}
 		});
 		updateAuction.getBtnSaveChanges().addActionListener(new ActionListener() {

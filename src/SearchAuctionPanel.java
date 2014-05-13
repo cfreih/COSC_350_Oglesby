@@ -37,13 +37,13 @@ public class SearchAuctionPanel extends JPanel {
 		gridBagLayout = new GridBagLayout();
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
 		formattedFirstName = new JFormattedTextField(
-				createFormatter("********************"));
+				createFormatter("?*******************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
 		formattedLastName = new JFormattedTextField(
-				createFormatter("********************"));
+				createFormatter("?*******************"));
 		lblTitleOfWork = new JLabel("Title Of Work (max 40 characters)");
 		formattedTitleOfWork = new JFormattedTextField(
-				createFormatter("****************************************"));
+				createFormatter("?***************************************"));
 		btnSearch = new JButton("Search");
 		btnCancel = new JButton("Cancel");
 
@@ -138,6 +138,73 @@ public class SearchAuctionPanel extends JPanel {
 		gbc_btnCancel.gridy = 10;
 		add(btnCancel, gbc_btnCancel);
 
+	}
+	
+	/**
+	 * Desc: Checks to see if the input is valid so that the search can be done.
+	 * @return true if the input is valid (any field has input), false if it is not.
+	 */
+	public boolean isInputValid()
+	{
+		String fName = "";
+		String lName = "";
+		String title = "";
+		if(formattedFirstName.isEditValid())
+			fName = ((String) formattedFirstName.getValue()).trim();
+		if(formattedLastName.isEditValid())
+			lName = ((String) formattedLastName.getValue()).trim();
+		if(formattedTitleOfWork.isEditValid())
+			title = ((String) formattedTitleOfWork.getValue()).trim();
+		if(fName.length() > 0 || lName.length() > 0 || title.length() > 0)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * Desc: gets the field values in this panel and creates the String[]
+	 * 		 in the order of firstName [0], lastName [1], and title [2].
+	 * Return: String[] in the above order.
+	 */
+	public String[] getFieldValues()
+	{
+		String[] fieldValues = new String[3];
+		if(formattedFirstName.isEditValid())
+			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		else
+			fieldValues[0] = "";
+		if(formattedLastName.isEditValid())
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		else
+			fieldValues[1] = "";
+		if(formattedTitleOfWork.isEditValid())
+			fieldValues[2] = ((String) formattedTitleOfWork.getValue()).trim();
+		else
+			fieldValues[2] = "";
+		return fieldValues;
+	}
+	
+	/**
+	 * 
+	 */
+	public static AuctionPainting createNewAuctionPainting(String[] fieldValues)
+	{
+		AuctionPainting search = new AuctionPainting();
+		search.setArtistFirstName(fieldValues[0]);
+		search.setArtistLastName(fieldValues[1]);
+		search.setTitleOfWork(fieldValues[2]);
+		return search;
+	}
+	
+	/**
+	 * Desc: resets the text fields to be blank again.
+	 * Post: all the text fields have the value of being blank again.
+	 */
+	public void resetTextFields()
+	{
+		formattedFirstName.setValue(null);
+		formattedLastName.setValue(null);
+		formattedTitleOfWork.setValue(null);	
 	}
 
 	/**

@@ -11,8 +11,8 @@ public class SimpleDate {
 	private int month;
 	private int day;
 	private int year;
-	public static int DEFAULT = 9;
-	public static int TODAY = 12;
+	public static final int DEFAULT = 9;
+	public static final int TODAY = 12;
 
 	/*
 	 * public static enum Selection { DEFAULT, TODAY }
@@ -300,8 +300,8 @@ public class SimpleDate {
 				+ Math.abs(this.getYear());
 		if (this.getYear() < 0)
 			s += " B.C.E.";
-		else
-			s += " C.E.";
+		/*else
+			s += " C.E.";*/ //commented out for Oglesby project
 		return s;
 	}
 	

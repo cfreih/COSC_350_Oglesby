@@ -53,9 +53,9 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
 				null, null), new TitledBorder(null, "Manage Auction Records",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
-		gridBagLayout.columnWidths = new int[] { 34, 755, 0 };
+		gridBagLayout.columnWidths = new int[] { 34, 355, 355, 0 };
 		gridBagLayout.rowHeights = new int[] { 45, 425, 43, 35, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -65,6 +65,7 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		listAllAP.setSize(new Dimension(1, 40));
 		listAllAP.setFont(new Font("Century", Font.PLAIN, 12));
 		GridBagConstraints gbc_listAllAP = new GridBagConstraints();
+		gbc_listAllAP.gridwidth = 2;
 		gbc_listAllAP.fill = GridBagConstraints.BOTH;
 		gbc_listAllAP.insets = new Insets(0, 0, 5, 5);
 		gbc_listAllAP.gridx = 1;
@@ -76,6 +77,7 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		btnBack.setFont(new Font("Century", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		gbc_btnBack.anchor = GridBagConstraints.WEST;
+		gbc_btnBack.insets = new Insets(0, 0, 0, 5);
 		gbc_btnBack.fill = GridBagConstraints.VERTICAL;
 		gbc_btnBack.gridx = 1;
 		gbc_btnBack.gridy = 3;
@@ -88,7 +90,8 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 	 */
 	public void updateList()
 	{
-		listAllAP.setListData(HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting()));
+		allAP = HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting());
+		listAllAP.setListData(allAP);
 	}
 
 	public static void main(String[] args) {

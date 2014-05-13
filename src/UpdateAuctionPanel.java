@@ -60,6 +60,9 @@ public class UpdateAuctionPanel extends JPanel {
 	private JButton btnSaveChanges;
 	private JButton btnDelete;
 	private JButton btnCancel;
+	
+	private DefaultTableModel tableModel;
+	private AuctionPainting origPainting;
 
 	public UpdateAuctionPanel() {
 		lblPaintingInfo = new JLabel("Current Painting Info");
@@ -104,6 +107,30 @@ public class UpdateAuctionPanel extends JPanel {
 		lblSubject.setBounds(27, 426, 42, 15);
 		textFieldSubject = new JTextField();
 		textFieldSubject.setBounds(27, 444, 226, 21);
+		
+		origPainting = new AuctionPainting();
+		tableModel = new DefaultTableModel(new Object[][] { { origPainting.getArtistFirstName(),
+			origPainting.getArtistLastName(), origPainting.getTitleOfWork(), origPainting.getDateOfWork(), 
+			origPainting.getDateOfSaleAuction(), origPainting.getSalePriceAuction(), origPainting.getHeightCM(),
+			origPainting.getWidthCM(), origPainting.getMedium(), origPainting.getSubject() }, },
+			new String[] { "Artist First Name", "Arist Last Name", "Title",
+					"Date of Work", "Date of Sale", "Sale Price", "Height",
+					"Width", "Medium", "Subject" }) {
+		Class[] columnTypes = new Class[] { String.class, String.class,
+				String.class, Integer.class, Object.class, Double.class,
+				Integer.class, Integer.class, String.class, String.class };
+
+		public Class getColumnClass(int columnIndex) {
+			return columnTypes[columnIndex];
+		}
+
+		boolean[] columnEditables = new boolean[] { false, false, false,
+				false, false, false, false, false, false, false };
+
+		public boolean isCellEditable(int row, int column) {
+			return columnEditables[column];
+		}
+	};		
 
 		setUpPanel();
 	}
@@ -123,26 +150,7 @@ public class UpdateAuctionPanel extends JPanel {
 		 * be the one row in the table.
 		 */
 		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		paintingsTable.setModel(new DefaultTableModel(new Object[][] { { null,
-				null, "", null, null, null, null, null, null, null }, },
-				new String[] { "Artist First Name", "Arist Last Name", "Title",
-						"Date of Work", "Date of Sale", "Sale Price", "Height",
-						"Width", "Medium", "Subject" }) {
-			Class[] columnTypes = new Class[] { String.class, String.class,
-					String.class, Integer.class, Object.class, Double.class,
-					Integer.class, Integer.class, String.class, String.class };
-
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-
-			boolean[] columnEditables = new boolean[] { false, false, false,
-					false, false, false, false, false, false, false };
-
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		paintingsTable.setModel(tableModel);
 		paintingsTable.getColumnModel().getColumn(0).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(0).setPreferredWidth(90);
 		paintingsTable.getColumnModel().getColumn(1).setResizable(false);
@@ -267,6 +275,24 @@ public class UpdateAuctionPanel extends JPanel {
 		btnCancel.setMnemonic('C');
 		add(btnCancel);
 
+	}
+	
+	/**
+	 * Desc: Updates the table model being used so the GUI shows the proper
+	 * 		 painting info.
+	 * @param painting
+	 */
+	public void updateTableModel(AuctionPainting painting)
+	{
+		Object[][] dataVector = new Object[][]{ { painting.getArtistFirstName(),
+			painting.getArtistLastName(), painting.getTitleOfWork(), painting.getDateOfWork(), 
+			painting.getDateOfSaleAuction(), painting.getSalePriceAuction(), painting.getHeightCM(),
+			painting.getWidthCM(), painting.getMedium(), painting.getSubject() }, };
+		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
+				"Date of Work", "Date of Sale", "Sale Price", "Height",
+				"Width", "Medium", "Subject" };
+		tableModel.setDataVector(dataVector, columnNames);
+		
 	}
 
 	/**
