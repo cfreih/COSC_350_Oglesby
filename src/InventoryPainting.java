@@ -413,6 +413,14 @@ public class InventoryPainting extends Painting implements Cloneable {
 				+ getBuyerAddress()+ " " + getActualSellPrice();
 	}
 
+	public Object[] toTableRow(){
+		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getTitleOfWork(), getDateOfWork(),
+							 classification, getHeightCM(), getWidthCM(), getMedium(),getSubject(), dateOfPurchase, 
+							 sellerName, sellerAddress, maxPurchasePrice, actualPurchasePrice, dateOfSale.toString(),
+							 buyerName, buyerAddress, actualSellPrice};
+		return rowData;
+		
+	}
 	/*
 	 * Desc: Test the methods in InventoryPainting
 	 */

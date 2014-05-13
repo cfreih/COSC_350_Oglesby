@@ -21,6 +21,8 @@ import java.text.NumberFormat;
 
 
 public class UpdateInventoryPanel extends JScrollPane {
+	private InventoryPainting paintingToModify;
+	
 	private JPanel updateInventoryPanel; 
 	private SpringLayout springLayout; 
 		
@@ -67,7 +69,8 @@ public class UpdateInventoryPanel extends JScrollPane {
 	
 
 	
-	public UpdateInventoryPanel(){
+	public UpdateInventoryPanel(InventoryPainting invPainting ){
+		paintingToModify = invPainting;
 		
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);		
 		updateInventoryPanel = new JPanel();
@@ -142,9 +145,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 		 */
 		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		paintingsTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, "", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-			},
+			new Object[][] {paintingToModify.toTableRow()},
 			new String[] {
 				"Artist First Name", "Arist Last Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Purchase", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
 			}
@@ -393,9 +394,14 @@ public class UpdateInventoryPanel extends JScrollPane {
 	    return formatter;
 	}
 	
+	
 	public static void main( String[] args )
    	{
-		UpdateInventoryPanel IP = new UpdateInventoryPanel();		
+		InventoryPainting paint = new InventoryPainting();
+		paint.setArtistFirstName("Micahel");
+		paint.setArtistLastName("LeVan");
+		paint.setTitleOfWork("Test1");
+		UpdateInventoryPanel IP = new UpdateInventoryPanel(paint);		
 		JFrame frame =new JFrame("Test");		
 		frame.getContentPane().add(IP , BorderLayout.CENTER);
 		frame.setSize(800, 600);
