@@ -189,11 +189,11 @@ public abstract class HandleInventoryPaintings
     }
     //Desc: method updates an InventoryPainting in the database. Compares to titleOfWork as key.
     //Post: an InventoryPainting is updated in the database
-    public static void updateInventoryPainting(InventoryPainting inventory, InventoryPainting searchKey)
+    public static void updateInventoryPainting(InventoryPainting modification, InventoryPainting searchKey)
     {
         String tableStatement = "inventory_paintings";
         String statement = "UPDATE " + tableStatement + " SET";
-        Pair[] pairs = loadMap(inventory);
+        Pair[] pairs = loadMap(modification);
         statement += HandlerUtility.loadKeysAndValues(pairs);
         statement += stringify(searchKey, 1);
         SQLConnector connection = new SQLConnector(statement);

@@ -97,11 +97,11 @@ public abstract class HandleAuctionPaintings
   }
   //Desc: method updates an AuctionPainting in the database. Compares to titleOfWork as key.
   //Post: an AuctionPainting is updated in the database
-  public static void updateAuctionPainting(AuctionPainting auction, AuctionPainting searchKey)
+  public static void updateAuctionPainting(AuctionPainting modification, AuctionPainting searchKey)
   {
     String tableStatement = "auction_paintings";
     String statement = "UPDATE " + tableStatement + " SET";
-    Pair[] pairs = loadMap(auction);
+    Pair[] pairs = loadMap(modification);
     statement += HandlerUtility.loadKeysAndValues(pairs);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);

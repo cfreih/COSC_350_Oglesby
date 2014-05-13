@@ -82,11 +82,11 @@ public abstract class HandleArtist
   }
   //Desc: method updates an Artist in the database. Compares to artistID as key
   //Post: an artist is updated in the database
-  public static void updateArtist(Artist artist, Artist searchKey)
+  public static void updateArtist(Artist modification, Artist searchKey)
   {
     String tableStatement = "artists";
     String statement = "UPDATE " + tableStatement + " SET";
-    Pair[] pairs = loadMap(artist);
+    Pair[] pairs = loadMap(modification);
     statement += HandlerUtility.loadKeysAndValues(pairs);
     statement += stringify(searchKey);
     SQLConnector connection = new SQLConnector(statement);

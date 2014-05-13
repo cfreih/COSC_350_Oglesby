@@ -1,4 +1,8 @@
 import javax.swing.*;
+import javax.swing.event.TableColumnModelListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,19 +41,25 @@ public class ReportGUI
     //Return: returns a InventoryPainting[]
     private InventoryPainting[] convertToInventoryPainting(DetectTrendsReport d)
     {
-        return d.getReportPaintings();
+        InventoryPainting[] paintings = d.getReportPaintings();
+        if(paintings == null) return new InventoryPainting[0];
+        return paintings;
     }
     //Desc: converts a PurchasedPaintingReport in a InventoryPainting[]
     //Return: returns a InventoryPainting[]
     private InventoryPainting[] convertToInventoryPainting(PurchasedPaintingReport p)
     {
-        return p.getBoughtPaintings();
+        InventoryPainting[] paintings = p.getBoughtPaintings();
+        if(paintings == null) return new InventoryPainting[0];
+        return paintings;
     }
     //Desc: converts a SoldPaintingsReport in a InventoryPainting[]
     //Return: returns a InventoryPainting[]
     private InventoryPainting[] convertToInventoryPainting(SoldPaintingsReport s)
     {
-        return s.getSoldPaintings();
+        InventoryPainting[] paintings = s.getSoldPaintings();
+        if(paintings == null) return new InventoryPainting[0];
+        return paintings;
     }
     //Desc: method to encapsulate setting up the JFrame
     //Post: the JFrame will be setup
@@ -85,19 +95,52 @@ public class ReportGUI
     private void setupGrid(InventoryPainting[] paintings)
     {
         grid.removeAll();
-        JList list = new JList(paintings);
-        list.setVisibleRowCount(20);
-        JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setPreferredSize(new Dimension(730, 365));
-        grid.add(scrollPane);
-
-        grid.removeAll();
+        final Pair[] columnTitles = HandleInventoryPaintings.loadMap(new InventoryPainting());
         ArrayList<Pair[]> pairs = new ArrayList<Pair[]>();
         for(int i = 0; i < paintings.length; i++)
         {
-            //pairs.add(HandleInventoryPaintings.loadMap(paintings[i]));
+            pairs.add(HandleInventoryPaintings.loadMap(paintings[i]));
         }
-        JTable table = new JTable();
+        JTable table = new JTable(new AbstractTableModel()
+        {
+            @Override
+            public int getRowCount()
+            {
+                return 50;
+            }
+            @Override
+            public int getColumnCount()
+            {
+                return columnTitles.length;
+            }
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex)
+            {
+                return null;
+            }
+            @Override
+            public String getColumnName(int column)
+            {
+                for(int i = 0; i < columnTitles.length; i++)
+                {
+                    if(column == i) return columnTitles[i].getKey();
+                }
+                return "?";
+            }
+        });
+        for(int i = 0; i < pairs.size(); i++)
+        {
+            for(int j = 0; j < columnTitles.length; j++)
+            {
+                table.setValueAt(pairs.get(i)[j], i, j);
+            }
+        }
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setRowHeight(22);
+        table.setAutoResizeMode(0);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(730, 365));
+        grid.add(scrollPane);
 
 
     }
