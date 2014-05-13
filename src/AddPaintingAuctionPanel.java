@@ -453,6 +453,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		
 		return fieldValues;
 	}
+	
 	/**
 	 * Desc: Creates an AuctionPainting from a String[] in the order of
 	 * 		 first name [0], last name [1], title [2], date of work [3], date of auction [4],

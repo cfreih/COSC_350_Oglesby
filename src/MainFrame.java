@@ -319,7 +319,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					AuctionPainting[] searchResults = HandleAuctionPaintings.retrieveAuctionPaintings(searchTerms);
 					if(searchResults.length == 0)
 					{
-						JOptionPane.showConfirmDialog(searchAuction, "No results found in search");
+						JOptionPane.showMessageDialog(searchAuction, "No results found in search");
 					}
 					else if(searchResults.length == 1)
 					{
@@ -406,22 +406,38 @@ public class MainFrame extends JFrame implements ActionListener{
 		updateAuction.getBtnDelete().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object[] options = {"Yes", "Cancel"};
-				int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to delete this painting?",
+				int n = JOptionPane.showOptionDialog(updateAuction, "Are you sure you want to delete this painting?",
 						"Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 				if(n == 0)
 				{
-					
+					HandleAuctionPaintings.deleteAuctionPainting(updateAuction.getOrigPainting());
 					cardLayout.show(getContentPane(), AUCTION_MM);
 				}
 			}
 		});
 		updateAuction.getBtnSaveChanges().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object[] options = {"Yes", "Cancel"};
-				int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to update this painting?",
-						"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				if(n == 0)
-					cardLayout.show(getContentPane(), AUCTION_MM);
+				if(!updateAuction.isEditValid())
+					JOptionPane.showMessageDialog(updateAuction, "No fields have been updated.");
+				else
+				{
+					Object[] options = {"Yes", "Cancel"};
+					int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to update this painting?",
+							"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+					if(n == 0)
+					{
+						AuctionPainting origPainting = updateAuction.getOrigPainting();						
+						AuctionPainting updatePainting = new AuctionPainting();
+						try {
+							updatePainting = origPainting.clone();
+						} catch (CloneNotSupportedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}						
+						updateAuction.updateAuctionPainting(updatePainting);
+						cardLayout.show(getContentPane(), AUCTION_MM);
+					}
+				}
 			}
 		});
 	}

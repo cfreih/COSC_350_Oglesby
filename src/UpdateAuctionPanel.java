@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.Dimension;
 
 
@@ -294,6 +295,98 @@ public class UpdateAuctionPanel extends JPanel {
 		tableModel.setDataVector(dataVector, columnNames);
 		
 	}
+	
+	/**
+	 * Desc: Checks if any fields have been changed.
+	 * Return: true if any field has been changed, false otherwise.
+	 */
+	public boolean isEditValid()
+	{
+		String med = textFieldMedium.getText().trim();
+		String subj = textFieldSubject.getText().trim();
+		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid()
+				&& formattedDateOfWork.isEditValid() && formattedDateAuction.isEditValid() && !(formattedSalePrice.getValue() == null)
+				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
+				&& !(subj.length() == 0))
+		{
+			String[] fieldValues = getFieldValues();
+			double dateWork = Double.parseDouble(fieldValues[3]);
+			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
+			double salePrice = Double.parseDouble(fieldValues[5]);
+			double height = Double.parseDouble(fieldValues[6]);
+			double width = Double.parseDouble(fieldValues[7]);
+			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0)
+					&& (height > 0) && (width > 0))
+				return true;
+			else 
+				return false;
+		}
+		else
+			return false;
+	}
+	
+	/**
+	 * Desc: Gets all the elements of the panel
+	 * Pre: The fields are valid.
+	 * Return: A String array of everything. The array is in the order
+	 * 		   first name [0], last name [1], title [2], date of work [3], date of auction [4],
+	 * 		   sale price [5], height [6], width [7], medium [8], and subject [9].
+	 */
+	public String[] getFieldValues()
+	{
+		String[] fieldValues = new String[10];
+		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		fieldValues[4] = ((String) formattedDateAuction.getValue()).trim();
+		if(formattedSalePrice.getValue() instanceof Long)
+			fieldValues[5] = Long.toString((Long) formattedSalePrice.getValue());
+		else
+			fieldValues[5] = Double.toString((Double) formattedSalePrice.getValue());
+		if(formattedHeight.getValue() instanceof Long)
+			fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+		else
+			fieldValues[6] = Double.toString((Double) formattedHeight.getValue());
+		if(formattedWidth.getValue() instanceof Long)
+			fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
+		else
+			fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
+		fieldValues[8] = textFieldMedium.getText();
+		fieldValues[9] = textFieldSubject.getText();
+		
+		return fieldValues;
+	}
+	
+	/**
+	 * Desc: Updates an AuctionPainting based on what fields have been changed.
+	 * Post: update has fields changed based on what has been inputted.
+	 */
+	public void updateAuctionPainting(AuctionPainting update)
+	{
+		String[] fieldValues = getFieldValues();
+		if(fieldValues[0].length() > 0)
+			update.setArtistFirstName(fieldValues[0]);
+		if(fieldValues[1].length() > 0)
+			update.setArtistLastName(fieldValues[1]);
+		if(fieldValues[2].length() > 0)
+			update.setTitleOfWork(fieldValues[2]);
+		if(fieldValues[3].length() > 0)
+			update.setDateOfWork(Integer.parseInt(fieldValues[3]));
+		if(fieldValues[4].length() > 0)
+			update.setDateOfSaleAuction(SimpleDate.parseSimpleDate(fieldValues[4]));
+		if(fieldValues[5].length() > 0)
+			update.setSalePriceAuction(Double.parseDouble(fieldValues[5]));
+		if(fieldValues[6].length() > 0)
+			update.setHeightCM(Double.parseDouble(fieldValues[7]));
+		if(fieldValues[7].length() > 0)
+			update.setWidthCM(Double.parseDouble(fieldValues[8]));
+		if(fieldValues[8].length() > 0)
+			update.setMedium(fieldValues[9]);
+		if(fieldValues[9].length() > 0)
+			update.setSubject(fieldValues[9]);
+		
+	}
 
 	/**
 	 * Desc: Method to create a format for the strings to be entered. Taken from
@@ -322,4 +415,9 @@ public class UpdateAuctionPanel extends JPanel {
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
+
+	public AuctionPainting getOrigPainting() {
+		return origPainting;
+	}
+
 }
