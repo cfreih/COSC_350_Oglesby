@@ -120,7 +120,7 @@ public abstract class HandleInventoryPaintings
             String artistFirstName = (String) result.get(i++);
             String artistLastName = (String) result.get(i++);
             String titleOfWork = (String)result.get(i++);
-            int dateOfWork = (Integer)result.get(i++);
+            String dateOfWork = (String)result.get(i++);
             String classification = (String)result.get(i++);
             double heightCM = ((BigDecimal)result.get(i++)).doubleValue();
             double widthCM = ((BigDecimal)result.get(i++)).doubleValue();
@@ -243,7 +243,7 @@ class HandleInventoryPaintingsTest
     {
         //Create painting from old artist
         InventoryPainting testPainting = new InventoryPainting("Sammichelle", "Bachman",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(
                 SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
@@ -255,7 +255,7 @@ class HandleInventoryPaintingsTest
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())) return false;
         //Create painting with new Artist
         testPainting = new InventoryPainting("Clint", "Freiheit",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(2010, 6,
                 14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
@@ -287,7 +287,7 @@ class HandleInventoryPaintingsTest
         testPainting.setArtistFirstName("Sam");
         testPainting.setArtistLastName("Bock");
         testPainting.setTitleOfWork("TestPainting1");
-        testPainting.setDateOfWork(2001);
+        testPainting.setDateOfWork("2001");
         result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
         if(result.length < 1) return false;
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
@@ -309,12 +309,12 @@ class HandleInventoryPaintingsTest
         //Find paintings based on multiple input paintings
         InventoryPainting[] temp = new InventoryPainting[3];
         temp[0] = new InventoryPainting("Clint", "Freiheit",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(2013, 6,
                 14),"Big Bob", "Big Bobs Burgers", 20, "MasterPiece");
         temp[1] = new InventoryPainting("Sammichelle", "Bachman",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(
                 SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
@@ -340,7 +340,7 @@ class HandleInventoryPaintingsTest
         searchKey = new InventoryPainting();
         searchKey.setTitleOfWork("TestPainting1");
         modification = new InventoryPainting("Sammichelle", "Bachman",
-            "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+            "Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
             "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
             14), 1230000, 1000000, new SimpleDate(
             SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
@@ -353,7 +353,7 @@ class HandleInventoryPaintingsTest
     {
         //Case for deleting a specific painting with all fields
         InventoryPainting searchKey = new InventoryPainting("Sammichelle", "Bachman",
-                "Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
                 "Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
                 14), 1230000, 1000000, new SimpleDate(
                 SimpleDate.DEFAULT), "", "", -1, "MasterPiece");

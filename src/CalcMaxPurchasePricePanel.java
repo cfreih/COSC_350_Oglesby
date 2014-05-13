@@ -394,7 +394,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 			String fName = values[0];
 			String lName = values[1];
 			String title = values[2];
-			int dateWork = Integer.parseInt(values[3]);
+			String dateWork = values[3];
 			double height = Double.parseDouble(values[6]);
 			double width = Double.parseDouble(values[7]);
 			String med = values[8];
