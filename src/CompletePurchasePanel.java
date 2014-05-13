@@ -193,7 +193,7 @@ public class CompletePurchasePanel extends JPanel {
 	{
 		painting.setSellerName((String)formattedSellerName.getValue());
 		painting.setSellerAddress((String)formattedSellerAddress.getValue());
-		painting.setActualPurchasePrice((double)formattedBuyPrice.getValue());
+		painting.setActualPurchasePrice((Double)formattedBuyPrice.getValue());
 		return painting;
 	}
 	public JButton getBtnCancel() {
