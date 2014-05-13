@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
@@ -45,11 +44,11 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	private JLabel lblWidthcm;
 	private JFormattedTextField formattedWidth;
 	private JLabel lblMedium;
-	private JTextField textFieldMedium;
+	private JFormattedTextField textFieldMedium;
 	private JLabel lblSubject;
 	private JLabel lblDateOfPurchase;
 	private JFormattedTextField formattedDateOfPurchase;
-	private JTextField textFieldSubject;
+	private JFormattedTextField textFieldSubject;
 	private JLabel lblNameOfSeller;
 	private JFormattedTextField formattedNameofSeller;
 	private JLabel lblAddressOfSeller;
@@ -65,12 +64,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	private JFormattedTextField formattedAddressOfBuyer;
 	private JLabel lblActualSellingPrice;
 	private JFormattedTextField formattedActualSellingPrice;
-	private JButton btnSaveNew;
-	private JButton btnDelete;
+	private JButton btnSaveNew;	
 	private JButton btnCancel;
-	
-	
-
 	
 	public AddPaintingInventoryPanel(){
 		
@@ -96,28 +91,28 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		lblWidthcm = new JLabel("Width (cm) *");			
 		formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblMedium = new JLabel("Medium *");		
-		textFieldMedium = new JTextField();
+		textFieldMedium = new JFormattedTextField(createFormatter("*************************"));
 		lblSubject = new JLabel("Subject *");
+		textFieldSubject = new JFormattedTextField(createFormatter("*************************"));
 		lblDateOfPurchase = new JLabel("Date of Purchase *");
-		formattedDateOfPurchase = new JFormattedTextField();		
-		textFieldSubject = new JTextField();
+		formattedDateOfPurchase = new JFormattedTextField();				
 		lblClassification = new JLabel("Classification *");		
-		formattedClassification = new JFormattedTextField(createFormatter("********************"));
+		formattedClassification = new JFormattedTextField(createFormatter("******************************"));
 		lblNameOfSeller = new JLabel("Name of Seller *");		
-		formattedNameofSeller = new JFormattedTextField();
+		formattedNameofSeller = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfSeller = new JLabel("Address of Seller *");		
-		formattedAddressOfSeller = new JFormattedTextField();
+		formattedAddressOfSeller = new JFormattedTextField(createFormatter("******************************************"));
 		lblActualPurchasePrice = new JLabel("Actual Purchase Price *");		
-		formattedActualPurchasePrice = new JFormattedTextField();
+		formattedActualPurchasePrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWarning_2 = new JLabel("( ** Must be all Provided OR all Blank )");
 		lblDateOfSale = new JLabel("Date of Sale **");
 		formattedDateOfSale = new JFormattedTextField();
 		lblNameOfBuyer = new JLabel("Name of Buyer **");		
-		formattedNameOfBuyer = new JFormattedTextField();
+		formattedNameOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfBuyer = new JLabel("Address of Buyer **");		
-		formattedAddressOfBuyer = new JFormattedTextField();
+		formattedAddressOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
 		lblActualSellingPrice = new JLabel("Actual Selling Price **");		
-		formattedActualSellingPrice = new JFormattedTextField();
+		formattedActualSellingPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		btnSaveNew = new JButton("Save New Painting");		
 		btnCancel = new JButton("Cancel");
 		

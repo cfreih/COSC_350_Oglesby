@@ -27,7 +27,7 @@ public class AuctionPainting extends Painting implements Cloneable {
 	 * the fields being set with the proper parameters
 	 */
 	public AuctionPainting(String firstName, String lastName, String title,
-			int date, double height, double width, String med, String subj,
+			String date, double height, double width, String med, String subj,
 			double salePrice, SimpleDate dateSale) {
 		super(firstName, lastName, title, date, height, width, med, subj);
 		salePriceAuction = salePrice;
@@ -107,7 +107,7 @@ public class AuctionPainting extends Painting implements Cloneable {
 				+ testP.getSalePriceAuction() + " "
 				+ testP.getDateOfSaleAuction() + " end");
 		testP = new AuctionPainting("Sammichelle", "Bachman",
-				"Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics",
+				"Twinkle, Twinkle", "1992", 0.1, 199.9, "Oil", "Economics",
 				12, new SimpleDate(1852, 3, 17));
 		// Should print "Bachman, Sammichelle "Twinkle, Twinkle""
 		System.out.println(testP);
@@ -121,7 +121,7 @@ public class AuctionPainting extends Painting implements Cloneable {
 		testP.setArtistFirstName("Timothy");
 		testP.setArtistLastName("Burrrrwalz");
 		testP.setTitleOfWork("Little Star");
-		testP.setDateOfWork(2014);
+		testP.setDateOfWork("2014");
 		testP.setHeightCM(999.9);
 		testP.setWidthCM(10000.1);
 		testP.setMedium("Acrylic");

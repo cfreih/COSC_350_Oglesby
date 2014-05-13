@@ -55,7 +55,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 * initialized with the fields being set with the proper parameters
 	 */
 	public InventoryPainting(String firstName, String lastName, String title,
-			int date, double height, double width, String med, String subj,
+			String date, double height, double width, String med, String subj,
 			String sName, String sAddress, SimpleDate dateP,
 			double maxPurch, double actualPurch,
 			SimpleDate dateS, String bName, String bAddress, double actualSell,
@@ -425,7 +425,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 				+ " " + testP.getHeightCM() + " " + testP.getWidthCM() + " "
 				+ testP.getMedium() + " " + testP.getSubject() + "end");
 		testP = new InventoryPainting("Sammichelle", "Bachman",
-				"Twinkle, Twinkle", 1992, 24.2, 36.3, "Oil", "Economics",
+				"Twinkle, Twinkle", "1992", 24.2, 36.3, "Oil", "Economics",
 				"Cloud Fieldsize", "Van by the river", new SimpleDate(2010, 6,
 						14), 1230000, 1000000,  new SimpleDate(
 						SimpleDate.DEFAULT), "", "", -1, "MasterPiece");
@@ -452,7 +452,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		testP.setArtistFirstName("Timothy");
 		testP.setArtistLastName("Burrrrwalz");
 		testP.setTitleOfWork("Little Star");
-		testP.setDateOfWork(2014);
+		testP.setDateOfWork("2014");
 		testP.setHeightCM(999.9);
 		testP.setWidthCM(10000.1);
 		testP.setMedium("Acrylic");

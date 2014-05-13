@@ -10,7 +10,7 @@ public class Painting implements Cloneable {
 	private String artistFirstName;
 	private String artistLastName;
 	private String titleOfWork;
-	private int dateOfWork;
+	private String dateOfWork;
 	private double heightCM;
 	private double widthCM;
 	private String medium;
@@ -27,7 +27,7 @@ public class Painting implements Cloneable {
 		artistFirstName = "";
 		artistLastName = "";
 		titleOfWork = "";
-		dateOfWork = -1;
+		dateOfWork = "";
 		heightCM = -1.0;
 		widthCM = -1.0;
 		medium = "";
@@ -40,7 +40,7 @@ public class Painting implements Cloneable {
 	 * Post:  Painting is initialized with the fields
 	 * 		  being set with the proper parameters
 	 */
-	public Painting(String firstName, String lastName, String title, int date,
+	public Painting(String firstName, String lastName, String title, String date,
 			double height, double width, String med, String subj)
 	{
 		artistFirstName = firstName;
@@ -120,7 +120,7 @@ public class Painting implements Cloneable {
 	 * Desc:  sets the painting's dateOfWork to date
 	 * Post:  dateOfWork is set to date
 	 */
-	public void setDateOfWork(int date)
+	public void setDateOfWork(String date)
 	{
 		dateOfWork = date;
 	}
@@ -130,7 +130,7 @@ public class Painting implements Cloneable {
 	 * 		  was painted
 	 * Return:the painting's dateOfWOrk
 	 */
-	public int getDateOfWork()
+	public String getDateOfWork()
 	{
 		return dateOfWork;
 	}
