@@ -44,7 +44,7 @@ public abstract class HandleAuctionPaintings
       String artistFirstName = (String) result.get(i++);
       String artistLastName = (String) result.get(i++);
       String titleOfWork = (String) result.get(i++);
-      int dateOfWork = (Integer) result.get(i++);
+      String dateOfWork = (String) result.get(i++);
       double heightCM = ((BigDecimal) result.get(i++)).doubleValue();
       double widthCM = ((BigDecimal) result.get(i++)).doubleValue();
       String medium = (String) result.get(i++);
@@ -146,7 +146,7 @@ class HandleAuctionPaintingsTest
 	public static boolean createAuctionPaintingTest()
 	{
 		AuctionPainting testPainting = new AuctionPainting("Sammichelle", "Bachman",
-				"Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics",
+				"Twinkle, Twinkle", "1992", 0.1, 199.9, "Oil", "Economics",
 				12, new SimpleDate(1852, 3, 17));
 		HandleAuctionPaintings.createAuctionPainting(testPainting);
 		AuctionPainting[] result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
@@ -156,7 +156,7 @@ class HandleAuctionPaintingsTest
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())
                 && result[0].getDateOfWork() == testPainting.getDateOfWork()) return false;
 		testPainting = new AuctionPainting("Earl", "Chuck", "Beauty and the Beautier",
-			1273, 23, 56, "Paint", "Me, Myself, and I",
+			"1273", 23, 56, "Paint", "Me, Myself, and I",
 			3.50, new SimpleDate(1999,12,31));
 		HandleAuctionPaintings.createAuctionPainting(testPainting);
 		result = HandleAuctionPaintings.retrieveAuctionPaintings(testPainting);
@@ -208,7 +208,7 @@ class HandleAuctionPaintingsTest
         searchKey = new AuctionPainting();
         searchKey.setTitleOfWork("TestPainting1");
         modification = new AuctionPainting("Sammichelle", "Bachman",
-                "Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 0.1, 199.9, "Oil", "Economics",
                 12, new SimpleDate(1852, 3, 17));
         HandleAuctionPaintings.updateAuctionPainting(modification, searchKey);
         result = HandleAuctionPaintings.retrieveAuctionPaintings(modification);
@@ -219,7 +219,7 @@ class HandleAuctionPaintingsTest
     {
         //Case for deleting a specific painting with all fields
         AuctionPainting searchKey = new AuctionPainting("Sammichelle", "Bachman",
-                "Twinkle, Twinkle", 1992, 0.1, 199.9, "Oil", "Economics",
+                "Twinkle, Twinkle", "1992", 0.1, 199.9, "Oil", "Economics",
                 12, new SimpleDate(1852, 3, 17));
         HandleAuctionPaintings.deleteAuctionPainting(searchKey);
         AuctionPainting[] result = HandleAuctionPaintings.retrieveAuctionPaintings(searchKey);

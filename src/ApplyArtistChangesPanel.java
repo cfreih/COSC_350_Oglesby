@@ -140,7 +140,7 @@ public class ApplyArtistChangesPanel extends JPanel {
 		Artist artist=new Artist();
 		artist.setArtistFirstName((String)formattedFirstName.getValue());
 		artist.setArtistLastName((String)formattedLastName.getValue());
-		artist.setFashionabilityCoeff((int)formattedFashionability.getValue());
+		artist.setFashionabilityCoeff((Integer)formattedFashionability.getValue());
 		return artist;
 	}
 	public JButton getBtnSaveChanges() {

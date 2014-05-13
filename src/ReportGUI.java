@@ -8,81 +8,57 @@ public class ReportGUI
     protected JFrame frame;
     protected Report report;
     protected JPanel grid;
+    protected int lastClicked = -1;
     //Desc: Constructor for Report
     public ReportGUI(Report report)
     {
         this.report = report;
-        String[] paintings = {"Please select a report"};
-        setupFrame(paintings);
+        setupFrame();
     }
-    //Desc: converts a Report in a String[]
-    //Return: returns a String[]
-    private String[] convertToString()
+    //Desc: converts a Report in a InventoryPainting[]
+    //Return: returns a InventoryPainting[]
+    private InventoryPainting[] convertToInventoryPainting()
     {
         if(report instanceof DetectTrendsReport)
         {
-            return convertToString((DetectTrendsReport) report);
+            return convertToInventoryPainting((DetectTrendsReport) report);
         }
         if(report instanceof PurchasedPaintingReport)
         {
-            return convertToString((PurchasedPaintingReport) report);
+            return convertToInventoryPainting((PurchasedPaintingReport) report);
         }
         if(report instanceof SoldPaintingsReport)
         {
-            return convertToString((SoldPaintingsReport) report);
+            return convertToInventoryPainting((SoldPaintingsReport) report);
         }
         return null;
     }
-    //Desc: converts a DetectTrendsReport in a String[]
-    //Return: returns a String[]
-    private String[] convertToString(DetectTrendsReport d)
+    //Desc: converts a DetectTrendsReport in a InventoryPainting[]
+    //Return: returns a InventoryPainting[]
+    private InventoryPainting[] convertToInventoryPainting(DetectTrendsReport d)
     {
-        String[] result = {"No Paintings exist"};
-        InventoryPainting[] paintings = d.getReportPaintings();
-        if(paintings == null || paintings.length == 0) return result;
-        result = new String[paintings.length];
-        for(int i = 0; i < result.length; i++)
-        {
-            result[i] = paintings[i].toString();
-        }
-        return result;
+        return d.getReportPaintings();
     }
-    //Desc: converts a PurchasedPaintingReport in a String[]
-    //Return: returns a String[]
-    private String[] convertToString(PurchasedPaintingReport p)
+    //Desc: converts a PurchasedPaintingReport in a InventoryPainting[]
+    //Return: returns a InventoryPainting[]
+    private InventoryPainting[] convertToInventoryPainting(PurchasedPaintingReport p)
     {
-        String[] result = {"No Paintings exist"};
-        InventoryPainting[] paintings = p.getBoughtPaintings();
-        if(paintings == null || paintings.length == 0) return result;
-        result = new String[paintings.length];
-        for(int i = 0; i < result.length; i++)
-        {
-            result[i] = paintings[i].toString();
-        }
-        return result;
+        return p.getBoughtPaintings();
     }
-    //Desc: converts a SoldPaintingsReport in a String[]
-    //Return: returns a String[]
-    private String[] convertToString(SoldPaintingsReport s)
+    //Desc: converts a SoldPaintingsReport in a InventoryPainting[]
+    //Return: returns a InventoryPainting[]
+    private InventoryPainting[] convertToInventoryPainting(SoldPaintingsReport s)
     {
-        String[] result = {"No Paintings exist"};
-        InventoryPainting[] paintings = s.getSoldPaintings();
-        if(paintings == null || paintings.length == 0) return result;
-        result = new String[paintings.length];
-        for(int i = 0; i < result.length; i++)
-        {
-            result[i] = paintings[i].toString();
-        }
-        return result;
+        return s.getSoldPaintings();
     }
     //Desc: method to encapsulate setting up the JFrame
     //Post: the JFrame will be setup
-    public void setupFrame(String[] paintings)
+    public void setupFrame()
     {
         frame = new JFrame("Report GUI");
         JPanel iconPanel = new JPanel();
         grid = new JPanel(new FlowLayout());
-        setupGrid(paintings);
+        setupGrid(new InventoryPainting[0]);
         addButtons(iconPanel);
         setupGridBag(iconPanel, grid);
         setupFrameSettings();
@@ -101,12 +77,12 @@ public class ReportGUI
     //Post: Paintings are displayed in the grid
     private void displayPaintings()
     {
-        String[] paintings = convertToString();
+        InventoryPainting[] paintings = convertToInventoryPainting();
         setupGrid(paintings);
     }
     //Desc: creates and sets up the grid
     //Post: the Grid is setup
-    private void setupGrid(String[] paintings)
+    private void setupGrid(InventoryPainting[] paintings)
     {
         grid.removeAll();
         JList list = new JList(paintings);
@@ -114,6 +90,16 @@ public class ReportGUI
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setPreferredSize(new Dimension(730, 365));
         grid.add(scrollPane);
+
+        grid.removeAll();
+        ArrayList<Pair[]> pairs = new ArrayList<Pair[]>();
+        for(int i = 0; i < paintings.length; i++)
+        {
+            //pairs.add(HandleInventoryPaintings.loadMap(paintings[i]));
+        }
+        JTable table = new JTable();
+
+
     }
     //Desc: creates and sets up buttons
     //Post: buttons are added to the panel
@@ -129,11 +115,15 @@ public class ReportGUI
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                purchasedButton.setFont(activeFont);
-                soldButton.setFont(passiveFont);
-                detectedButton.setFont(passiveFont);
-                report = new PurchasedPaintingReport();
-                displayPaintings();
+                if(lastClicked != 0)
+                {
+                    purchasedButton.setFont(activeFont);
+                    soldButton.setFont(passiveFont);
+                    detectedButton.setFont(passiveFont);
+                    report = new PurchasedPaintingReport();
+                    displayPaintings();
+                    lastClicked = 0;
+                }
             }
         });
         soldButton.addActionListener(new ActionListener()
@@ -141,11 +131,15 @@ public class ReportGUI
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                purchasedButton.setFont(passiveFont);
-                soldButton.setFont(activeFont);
-                detectedButton.setFont(passiveFont);
-                report = new SoldPaintingsReport();
-                displayPaintings();
+                if(lastClicked != 1)
+                {
+                    purchasedButton.setFont(passiveFont);
+                    soldButton.setFont(activeFont);
+                    detectedButton.setFont(passiveFont);
+                    report = new SoldPaintingsReport();
+                    displayPaintings();
+                    lastClicked = 1;
+                }
             }
         });
         detectedButton.addActionListener(new ActionListener()
@@ -153,11 +147,15 @@ public class ReportGUI
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                purchasedButton.setFont(passiveFont);
-                soldButton.setFont(passiveFont);
-                detectedButton.setFont(activeFont);
-                report = new DetectTrendsReport();
-                displayPaintings();
+                if(lastClicked != 2)
+                {
+                    purchasedButton.setFont(passiveFont);
+                    soldButton.setFont(passiveFont);
+                    detectedButton.setFont(activeFont);
+                    report = new DetectTrendsReport();
+                    displayPaintings();
+                    lastClicked = 2;
+                }
             }
         });
         purchasedButton.setFont(passiveFont);
