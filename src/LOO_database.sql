@@ -13,6 +13,7 @@ CREATE TABLE artists (
 	lastName varchar (20),
 	fashionability INT,
 	PRIMARY KEY(artistID)
+)	
 ;
 
 CREATE TABLE auction_paintings (	
