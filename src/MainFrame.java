@@ -219,9 +219,18 @@ public class MainFrame extends JFrame implements ActionListener{
 		calcMaxPurchase.getBtnCalcMaxPrice().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Check to make sure input is valid
-				//setup painting form inputted info
+				calcMaxPurchase.isInputValid();
+				//setup painting form input info
+				InventoryPainting painting=calcMaxPurchase.createNewInventoryPainting(calcMaxPurchase.getFieldValues());
 				//double maxPurch = Calculations.calcMaxPurchasePrice(new painting);
+				double maxPrice=Calculation.calcMaxPrice(painting);
 				//if maxPurch = -1 don't allow to buy
+				if(maxPrice<-5)
+					JOptionPane.showMessageDialog(calcMaxPurchase, "No similar paintings do not buy");
+				else if(maxPrice<0)
+					JOptionPane.showMessageDialog(calcMaxPurchase, "No artist fashionability do not buy");
+				else
+					JOptionPane.showMessageDialog(calcMaxPurchase, "Max Price: "+maxPrice);
 				//else JOptionPane.show.....
 				//if yes goto completePurchase
 				//else stay at buy panel.
