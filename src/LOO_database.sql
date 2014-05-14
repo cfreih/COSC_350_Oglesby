@@ -110,13 +110,13 @@ values ('Clint','Freiheit', 'Painting1-3', '1985', '20020322', 5000000.55, 23.10
 
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
-values ('Sam', 'Bock', 'TestPainting-1', '1825', 'Masterpiece', 12.0, 34.0, 'Oil', 'computers', 20140122, 'Steve Shum', 'GSC', 10000, 50600, 20140128, 'Jessica Spalding', 'Costelo', 400000.54);
+values ('Sam', 'Bock', 'TestPainting-1', '1825', 'Masterpiece', 12.0, 34.0, 'Oil', 'computers', 20140122, 'Steve Shum', 'GSC', 100000, 50600, 20140128, 'Jessica Spalding', 'Costelo', 400000.54);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
-values ('Sam','Bock', 'TestPainting-2', '2004',     'Masterwork',  12.0,     34.0,   'Oil',   'computers', 20140123,         'Steve Shum', 'GSC',           10000,                80000,               20140129,   'Jessica Spalding', 'Costelo',      4000000.54);
+values ('Sam','Bock', 'TestPainting-2', '2004',     'Masterwork',  12.0,     34.0,   'Oil',   'computers', 20140123,         'Steve Shum', 'GSC',           90000,                80000,               20140129,   'Jessica Spalding', 'Costelo',      4000000.54);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
-values ('Claudio',     'Arce',   'TestPainting-3', '1600?',     'Other',  12.0,     34.0,   'Oil',   'computers', 20130124,         'Steve Shum', 'GSC',           10000,                50000,               null,   null, null,      null);
+values ('Claudio',     'Arce',   'TestPainting-3', '1600?',     'Other',  12.0,     34.0,   'Oil',   'computers', 20130124,         'Steve Shum', 'GSC',           20000,                50000,               null,   null, null,      null);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
 values ('Clint',     'Freiheit',   'TestPainting-4', '1756',     'Other',  12.0,     34.0,   'Oil',   'computers', 20140125,         'Steve Shum', 'GSC',           60000,                50000,               20140127,   'Jessica Spalding', 'Costelo',      1400000.54);
@@ -128,13 +128,13 @@ insert into inventory_paintings (firstName, lastName, title, dateOfWork, classif
 values ('Steve',     'Shum',   'TestPainting-6', '1564',     'Masterwork',  12.0,     34.0,   'Oil',   'computers', 20140127,         'Steve Shum', 'GSC',           10000,                50000,               null,   null, null,      null);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
-values ('Sam',     'Bock',   'TestPainting-7', '1801',     'Masterpiece',  12.0,     34.0,   'Oil',   'computers', 20130822,         'Steve Shum', 'GSC',           40000,                50000,               20140125,   'Jessica Spalding', 'Costelo',      400000.54);
+values ('Sam',     'Bock',   'TestPainting-7', '1801',     'Masterpiece',  12.0,     34.0,   'Oil',   'computers', 20130822,         'Steve Shum', 'GSC',           40000,                50000,               20140125,   'Jessica Spalding', 'Costelo',      40000.54);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
 values ('Tim',     'Burwitz',   'TestPainting-8', '2001',     'Masterwork',  12.0,     34.0,   'Oil',   'computers', 20140922,         'Steve Shum', 'GSC',           10000,                50000,               null,   null, null,      null);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
-values ('Tim',     'Burwitz',   'TestPainting-9', '1525',     'Masterpiece',  12.0,     34.0,   'Oil',   'computers', 20140222,         'Steve Shum', 'GSC',           100000,                50000,               20140124,   'Jessica Spalding', 'Costelo',      400000.54);
+values ('Tim',     'Burwitz',   'TestPainting-9', '1525',     'Masterpiece',  12.0,     34.0,   'Oil',   'computers', 20140222,         'Steve Shum', 'GSC',           100000,                50000,               20140124,   'Jessica Spalding', 'Costelo',      90000.54);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
 values ('Steve',     'Shum',   'TestPainting-10', '1725',     'Masterpiece',  12.0,     34.0,   'Oil',   'computers', 20140122,         'Steve Shum', 'GSC',           10000,                50000,               null,   null, null,      null);            
