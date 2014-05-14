@@ -85,6 +85,11 @@ public class Artist implements Cloneable{
 	{
 		return (Artist) super.clone();
 	}
+	public Object[] toTableRow(){
+		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getFashionabilityCoeff()};
+		return rowData;
+		
+	}
 	
 	/**
 	 * Desc: The tests for all the methods and constructors.
