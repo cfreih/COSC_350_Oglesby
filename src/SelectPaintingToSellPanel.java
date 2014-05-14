@@ -40,7 +40,7 @@ public class SelectPaintingToSellPanel extends JPanel {
 				null, null), new TitledBorder(null, "Select Painting To Sell",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
-		lblArtistInfo = new JLabel("Artist Info");
+		lblArtistInfo = new JLabel("Artist Information");
 		lblArtistInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblArtistInfo = new GridBagConstraints();
 		gbc_lblArtistInfo.insets = new Insets(0, 0, 5, 5);
@@ -80,7 +80,7 @@ public class SelectPaintingToSellPanel extends JPanel {
 		gbc_formattedLastName.gridy = 4;
 		add(formattedLastName, gbc_formattedLastName);
 		
-		lblPaintingInfo = new JLabel("Painting Info");
+		lblPaintingInfo = new JLabel("Painting Information");
 		lblPaintingInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblPaintingInfo = new GridBagConstraints();
 		gbc_lblPaintingInfo.insets = new Insets(0, 0, 5, 5);
