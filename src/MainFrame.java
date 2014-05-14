@@ -324,6 +324,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					else if(searchResults.length == 1)
 					{
 						updateAuction.updateTableModel(searchResults[0]);
+						updateAuction.resetTextFields();
 						cardLayout.show(getContentPane(), UPDATE_AUCTION);
 						searchAuction.resetTextFields();
 					}
@@ -349,6 +350,7 @@ public class MainFrame extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				AuctionPainting updatePainting = searchResultsAuction.getSelectedPainting();
 				updateAuction.updateTableModel(updatePainting);
+				updateAuction.resetTextFields();
 				cardLayout.show(getContentPane(), UPDATE_AUCTION);
 			}
 		});

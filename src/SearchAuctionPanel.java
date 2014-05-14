@@ -37,13 +37,13 @@ public class SearchAuctionPanel extends JPanel {
 		gridBagLayout = new GridBagLayout();
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
 		formattedFirstName = new JFormattedTextField(
-				createFormatter("?*******************"));
+				createFormatter("********************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
 		formattedLastName = new JFormattedTextField(
-				createFormatter("?*******************"));
+				createFormatter("********************"));
 		lblTitleOfWork = new JLabel("Title Of Work (max 40 characters)");
 		formattedTitleOfWork = new JFormattedTextField(
-				createFormatter("?***************************************"));
+				createFormatter("****************************************"));
 		btnSearch = new JButton("Search");
 		btnCancel = new JButton("Cancel");
 
@@ -149,11 +149,11 @@ public class SearchAuctionPanel extends JPanel {
 		String fName = "";
 		String lName = "";
 		String title = "";
-		if(formattedFirstName.isEditValid())
+		if(formattedFirstName.getValue() != null)
 			fName = ((String) formattedFirstName.getValue()).trim();
-		if(formattedLastName.isEditValid())
+		if(formattedLastName.getValue() != null)
 			lName = ((String) formattedLastName.getValue()).trim();
-		if(formattedTitleOfWork.isEditValid())
+		if(formattedTitleOfWork.getValue() != null)
 			title = ((String) formattedTitleOfWork.getValue()).trim();
 		if(fName.length() > 0 || lName.length() > 0 || title.length() > 0)
 			return true;

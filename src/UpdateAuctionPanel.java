@@ -447,6 +447,24 @@ public class UpdateAuctionPanel extends JPanel {
 			update.setSubject(fieldValues[9]);
 		
 	}
+	
+	/**
+	 * Desc: resets the text fields to be blank again.
+	 * Post: all the text fields have the value of being blank again.
+	 */
+	public void resetTextFields()
+	{
+		formattedFirstName.setValue(null);
+		formattedLastName.setValue(null);
+		formattedTitle.setValue(null);
+		formattedDateOfWork.setValue(null);
+		formattedDateAuction.setValue(null);
+		formattedSalePrice.setValue(null);
+		formattedHeight.setValue(null);
+		formattedWidth.setValue(null);
+		textFieldMedium.setText("");
+		textFieldSubject.setText("");
+	}
 
 	/**
 	 * Desc: Method to create a format for the strings to be entered. Taken from
