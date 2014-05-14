@@ -285,6 +285,7 @@ public class UpdateAuctionPanel extends JPanel {
 	 */
 	public void updateTableModel(AuctionPainting painting)
 	{
+		origPainting = painting;
 		Object[][] dataVector = new Object[][]{ { painting.getArtistFirstName(),
 			painting.getArtistLastName(), painting.getTitleOfWork(), painting.getDateOfWork(), 
 			painting.getDateOfSaleAuction(), painting.getSalePriceAuction(), painting.getHeightCM(),

@@ -435,6 +435,8 @@ public class MainFrame extends JFrame implements ActionListener{
 							e1.printStackTrace();
 						}
 						updateAuction.updateAuctionPainting(updatePainting);
+						System.out.println(origPainting);
+						System.out.println(updatePainting);
 						HandleAuctionPaintings.updateAuctionPainting(updatePainting, origPainting);
 						cardLayout.show(getContentPane(), AUCTION_MM);
 					}
@@ -449,7 +451,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	private void setUpUpdateInventory()
 	{
-		updateInventory = new UpdateInventoryPanel();
+		InventoryPainting stubPainting = new InventoryPainting();
+		updateInventory = new UpdateInventoryPanel(stubPainting);
 	}
 	
 	/**
