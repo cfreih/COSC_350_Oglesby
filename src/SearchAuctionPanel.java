@@ -169,15 +169,15 @@ public class SearchAuctionPanel extends JPanel {
 	public String[] getFieldValues()
 	{
 		String[] fieldValues = new String[3];
-		if(formattedFirstName.isEditValid())
+		if(formattedFirstName.getValue() != null)
 			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
 		else
 			fieldValues[0] = "";
-		if(formattedLastName.isEditValid())
+		if(formattedLastName.getValue() != null)
 			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
 		else
 			fieldValues[1] = "";
-		if(formattedTitleOfWork.isEditValid())
+		if(formattedTitleOfWork.getValue() != null)
 			fieldValues[2] = ((String) formattedTitleOfWork.getValue()).trim();
 		else
 			fieldValues[2] = "";
