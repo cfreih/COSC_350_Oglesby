@@ -1,4 +1,4 @@
-import javax.swing.JPanel;
+fimport javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
