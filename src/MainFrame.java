@@ -142,6 +142,13 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(applyArtistChanges, APPLY_ARTIST_CHANGES);
 		getContentPane().add(searchInventory, SEARCH_INVENTORY);
 		getContentPane().add(searchResultsAuction, SEARCH_RESULTS_AUCTION);
+		getContentPane().add(completeSale, COMPLETE_SALE);
+		getContentPane().add(searchPaintingSale, SEARCH_PAINTING_SALE);
+		getContentPane().add(searchArtist, SEARCH_ARTIST);
+		getContentPane().add(searchResultsArtist, SEARCH_RESULTS_ARTIST);
+		getContentPane().add(seeAllArtists, SEE_ALL_ARTISTS);
+		getContentPane().add(addPaintingInventory, ADD_PAINTING_INVENTORY);
+		getContentPane().add(seeAllInventory, SEE_ALL_INVENTORY);
 	}
 	
 	/**
