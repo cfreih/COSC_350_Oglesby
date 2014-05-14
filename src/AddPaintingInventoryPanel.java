@@ -361,7 +361,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		&& formattedWidth.isEditValid()
 		&& formattedMedium.isEditValid()
 	   );	
-		
+		return true; //feel free to edit this out. This was submitted without a return statement. As such it didn't compile.
 	}
 	
 	public static void main( String[] args )
