@@ -21,8 +21,8 @@ public class UpdateArtistPanel extends JPanel {
 	private JButton btnSelectArtist;
 	private JButton btnCancel;
 	public UpdateArtistPanel() {
-		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
-		formattedLastName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
 		
 		setUpPanel();
 	}

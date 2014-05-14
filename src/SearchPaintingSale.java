@@ -23,8 +23,8 @@ public class SearchPaintingSale extends JPanel {
 	private JButton btnCancel;
 	private JLabel lblPaintingInfo;
 	public SearchPaintingSale() {
-		formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
-		formattedLastName = new JFormattedTextField(createFormatter("H*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
 		
 		setUpPanel();
 	}

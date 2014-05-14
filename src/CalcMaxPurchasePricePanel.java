@@ -51,19 +51,19 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   gridBagLayout = new GridBagLayout();
   lblArtistinfo = new JLabel("Artist Information");
   lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-  formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
+  formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
   lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
   formattedLastName = new JFormattedTextField(
-    createFormatter("H*******************"));
+    createFormatter("A*******************"));
   lblPaintingInfo_1 = new JLabel("Painting Information");
   lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
   formattedTitle = new JFormattedTextField(
-    createFormatter("H***************************************"));
+    createFormatter("A***************************************"));
   lblDateOfWork = new JLabel("Date of Work (yyyy)");
   formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
   lblClassification = new JLabel("Classification (max 30 characters)");
   formattedClassification = new JFormattedTextField(
-    createFormatter("H*****************************"));
+    createFormatter("A*****************************"));
   lblHeightcm = new JLabel("Height (cm)");
   formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
   lblWidthcm = new JLabel("Width (cm)");
@@ -72,9 +72,9 @@ public class CalcMaxPurchasePricePanel extends JPanel {
   formattedWidth.setFont(new Font("Century", Font.PLAIN, 12));
   formattedWidth.setColumns(5);
   lblMedium = new JLabel("Medium (max 25 characters)");
-  textFieldMedium = new JFormattedTextField(createFormatter("H************************"));
+  textFieldMedium = new JFormattedTextField(createFormatter("A************************"));
   lblSubject = new JLabel("Subject (max 25 characters)");
-  textFieldSubject = new JFormattedTextField(createFormatter("H************************"));
+  textFieldSubject = new JFormattedTextField(createFormatter("A************************"));
   btnCalcMaxPrice = new JButton("Calculate Maximum Purchase Price");  
   btnCalcMaxPrice.setFont(new Font("Century", Font.PLAIN, 12));
 

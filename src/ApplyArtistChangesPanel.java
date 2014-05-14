@@ -32,9 +32,9 @@ public class ApplyArtistChangesPanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	public ApplyArtistChangesPanel() {
-		formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
 		formattedFirstName.setBounds(38, 120, 152, 20);
-		formattedLastName = new JFormattedTextField(createFormatter("H*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
 		formattedLastName.setBounds(38, 164, 152, 20);
 		formattedFashionability = new JFormattedTextField(createFormatter("#####"));
 		formattedFashionability.setBounds(38, 209, 49, 20);

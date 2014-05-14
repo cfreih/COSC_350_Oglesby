@@ -56,7 +56,7 @@ public class SearchArtistPanel extends JPanel {
 		gbc_lblFirstName.gridy = 2;
 		add(lblFirstName, gbc_lblFirstName);
 		
-		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
 		formattedFirstName.setColumns(20);
 		GridBagConstraints gbc_formattedFirstName = new GridBagConstraints();
 		gbc_formattedFirstName.insets = new Insets(0, 0, 5, 5);
@@ -73,7 +73,7 @@ public class SearchArtistPanel extends JPanel {
 		gbc_lblLastNamemax.gridy = 4;
 		add(lblLastNamemax, gbc_lblLastNamemax);
 		
-		formattedLastName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
 		formattedLastName.setColumns(20);
 		GridBagConstraints gbc_formattedLastName = new GridBagConstraints();
 		gbc_formattedLastName.insets = new Insets(0, 0, 5, 5);

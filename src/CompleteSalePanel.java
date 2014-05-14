@@ -66,7 +66,7 @@ public class CompleteSalePanel extends JPanel {
 		gbc_lblFullName.gridx = 1;
 		gbc_lblFullName.gridy = 3;
 		add(lblFullName, gbc_lblFullName);
-		formattedFullName = new JFormattedTextField(createFormatter("H*******************"));
+		formattedFullName = new JFormattedTextField(createFormatter("A*******************"));
 		
 		formattedFullName.setColumns(40);
 		GridBagConstraints gbc_formattedFullName = new GridBagConstraints();
@@ -83,7 +83,7 @@ public class CompleteSalePanel extends JPanel {
 		gbc_lblAddress.gridx = 1;
 		gbc_lblAddress.gridy = 5;
 		add(lblAddress, gbc_lblAddress);
-		formattedAddress = new JFormattedTextField(createFormatter("H*******************"));
+		formattedAddress = new JFormattedTextField(createFormatter("A*******************"));
 		
 		formattedAddress.setColumns(40);
 		GridBagConstraints gbc_formattedAddress = new GridBagConstraints();
@@ -108,7 +108,7 @@ public class CompleteSalePanel extends JPanel {
 		gbc_lblTitle.gridx = 1;
 		gbc_lblTitle.gridy = 8;
 		add(lblTitle, gbc_lblTitle);
-		formattedPrice = new JFormattedTextField(createFormatter("H***************************************"));
+		formattedPrice = new JFormattedTextField(createFormatter("A***************************************"));
 		
 		formattedPrice.setColumns(40);
 		GridBagConstraints gbc_formattedPrice = new GridBagConstraints();

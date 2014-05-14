@@ -51,7 +51,7 @@ public class CompletePurchasePanel extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 		formattedSellerName = new JFormattedTextField(
-				createFormatter("H**************************************"));
+				createFormatter("A**************************************"));
 		btnAddPaintingTo = new JButton("Complete Purchase");
 		btnAddPaintingTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -78,7 +78,7 @@ public class CompletePurchasePanel extends JPanel {
 						
 								lblSellerName.setLabelFor(formattedSellerName);
 				formattedSellerName = new JFormattedTextField(
-						createFormatter("H***************************************"));
+						createFormatter("A***************************************"));
 						
 								formattedSellerName.setFont(new Font("Century", Font.PLAIN, 12));
 								formattedSellerName.setColumns(40);
@@ -102,7 +102,7 @@ public class CompletePurchasePanel extends JPanel {
 						
 								lblSellerAddress.setLabelFor(formattedSellerAddress);
 		formattedSellerAddress = new JFormattedTextField(
-				createFormatter("H***************************************"));
+				createFormatter("A***************************************"));
 				formattedSellerAddress.setColumns(40);
 				formattedSellerAddress.setFont(new Font("Century", Font.PLAIN, 12));
 				GridBagConstraints gbc_formattedSellerAddress = new GridBagConstraints();
