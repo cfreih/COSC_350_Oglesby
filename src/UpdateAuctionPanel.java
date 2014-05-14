@@ -168,6 +168,8 @@ public class UpdateAuctionPanel extends JPanel {
 		paintingsTable.getColumnModel().getColumn(9).setResizable(false);
 		paintingsTable.setFont(new Font("Century", Font.PLAIN, 12));
 		paintingsTable.setCellSelectionEnabled(true);
+		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
 		lblArtistFirstName.setFont(new Font("Century", Font.PLAIN, 12));
 		add(lblArtistFirstName);
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
@@ -286,10 +288,7 @@ public class UpdateAuctionPanel extends JPanel {
 	public void updateTableModel(AuctionPainting painting)
 	{
 		origPainting = painting;
-		Object[][] dataVector = new Object[][]{ { painting.getArtistFirstName(),
-			painting.getArtistLastName(), painting.getTitleOfWork(), painting.getDateOfWork(), 
-			painting.getDateOfSaleAuction(), painting.getSalePriceAuction(), painting.getHeightCM(),
-			painting.getWidthCM(), painting.getMedium(), painting.getSubject() }, };
+		Object[][] dataVector = {origPainting.toTableRow()};
 		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
 				"Date of Work", "Date of Sale", "Sale Price", "Height",
 				"Width", "Medium", "Subject" };

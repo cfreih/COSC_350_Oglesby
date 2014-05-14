@@ -95,6 +95,15 @@ public class AuctionPainting extends Painting implements Cloneable {
 			throw new Error("Clont not supported");
 		}
 	}
+	
+	public Object[] toTableRow(){
+		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getTitleOfWork(), 
+							 getDateOfWork(),dateOfSaleAuction, salePriceAuction,
+							 getHeightCM(), getWidthCM(), getMedium(),getSubject()};
+		return rowData;
+	}
+		
+	
 
 	/**
 	 * Desc: Tests for AuctionPaintings. Post: Results of using methods printed
