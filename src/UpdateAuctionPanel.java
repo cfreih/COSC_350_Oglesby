@@ -110,10 +110,7 @@ public class UpdateAuctionPanel extends JPanel {
 		textFieldSubject.setBounds(27, 444, 226, 21);
 		
 		origPainting = new AuctionPainting();
-		tableModel = new DefaultTableModel(new Object[][] { { origPainting.getArtistFirstName(),
-			origPainting.getArtistLastName(), origPainting.getTitleOfWork(), origPainting.getDateOfWork(), 
-			origPainting.getDateOfSaleAuction(), origPainting.getSalePriceAuction(), origPainting.getHeightCM(),
-			origPainting.getWidthCM(), origPainting.getMedium(), origPainting.getSubject() }, },
+		tableModel = new DefaultTableModel(new Object[][] { { origPainting.toTableRow()}, },
 			new String[] { "Artist First Name", "Arist Last Name", "Title",
 					"Date of Work", "Date of Sale", "Sale Price", "Height",
 					"Width", "Medium", "Subject" }) {
