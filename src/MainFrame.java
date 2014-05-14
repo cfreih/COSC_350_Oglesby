@@ -28,7 +28,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private SeeAllAuctionPaintingsPanel seeAllAuction;
 	private UpdateAuctionPanel updateAuction;
 	
-	private ManageArtistPanel manageArtist;
+	private ManageArtistPanel artistMM;
 	private UpdateArtistPanel updateArtist;
 	private AddNewArtistPanel addArtist;
 	private SearchArtistPanel searchArtist;
@@ -58,7 +58,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	public static String SEARCH_AUCTION = "Search Auction";
 	public static String SEARCH_RESULTS_AUCTION = "Search Results Auction";
 	
-	public static String MANAGE_ARTIST = "Manage Artists";
+	public static String ARTIST_MM = "Manage Artists";
 	public static String UPDATE_ARTIST = "Update Artist";
 	public static String ADD_ARTIST = "Add New Artist";
 	public static String APPLY_ARTIST_CHANGES = "Apply Artist Changes";
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpSeeAllAuction();
 		setUpUpdateAuction();
 		
-		setUpManageArtist();
+		setUpArtistMM();
 		setUpUpdateArtist();
 		setUpAddArtist();
 		setUpApplyArtistChanges();
@@ -134,7 +134,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(searchAuction, SEARCH_AUCTION);
 		getContentPane().add(calcMaxPurchase, CALC_MAX_PURCH);
 		getContentPane().add(completePurchase, COMPLETE_PURCHASE);
-		getContentPane().add(manageArtist, MANAGE_ARTIST);
+		getContentPane().add(artistMM, ARTIST_MM);
 		getContentPane().add(manageInventoryMM, MANAGE_INVENTORY);
 		getContentPane().add(updateInventory, UPDATE_INVENTORY);
 		getContentPane().add(updateArtist, UPDATE_ARTIST);
@@ -160,12 +160,35 @@ public class MainFrame extends JFrame implements ActionListener{
 		addArtist = new AddNewArtistPanel();
 		addArtist.getBtnCancel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+				cardLayout.show(getContentPane(), ARTIST_MM);
 				addArtist.resetTextFields();
 			}
 		});
 		addArtist.getBtnAddNewArtist().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!addArtist.isInputValid())
+					JOptionPane.showMessageDialog(addArtist, "Input is invalid, make sure all fields are correct.");
+				else
+				{
+					Artist newArtist = addArtist.createNewArtist();
+					System.out.println(newArtist);
+					Artist checkDBArtist = getCheckDBArtist(newArtist);
+					Artist[] checkArtistExists = HandleArtist.retrieveArtists(checkDBArtist);
+					if(checkArtistExists.length > 0)
+						JOptionPane.showMessageDialog(addArtist, "Artist already exists.");
+					else
+					{
+						Object[] options = {"Yes", "Cancel"};
+						int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this artust?",
+								"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if(n == 0)
+						{
+							HandleArtist.createArtist(newArtist);
+							cardLayout.show(getContentPane(), ARTIST_MM);
+							addArtist.resetTextFields();
+						}
+					}
+				}
 			}
 		});
 	}
@@ -301,7 +324,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		mainMenu.getBtnManageArtists().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+				cardLayout.show(getContentPane(), ARTIST_MM);
 			}
 		});
 		mainMenu.getBtnBuyPainting().addActionListener(new ActionListener() {
@@ -330,26 +353,29 @@ public class MainFrame extends JFrame implements ActionListener{
 	 * Desc: sets up the manageArtist to be set up and used in MainFrame
 	 * Post: manageArtist and its components are able to be used in MainFrame
 	 */
-	private void setUpManageArtist()
+	private void setUpArtistMM()
 	{
-		manageArtist = new ManageArtistPanel();
-		manageArtist.getBtnBackToMain().addActionListener(new ActionListener() {
+		artistMM = new ManageArtistPanel();
+		artistMM.getBtnBackToMain().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(getContentPane(), MAIN_MENU);
 			}
 		});
-		manageArtist.getBtnAddNewArtist().addActionListener(new ActionListener() {
+		artistMM.getBtnAddNewArtist().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(getContentPane(), ADD_ARTIST);
 			}
 		});
-		manageArtist.getBtnModifyDeleteExistingArtist().addActionListener(new ActionListener() {
+		artistMM.getBtnModifyDeleteExistingArtist().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				searchArtist.resetTextFields();
 				cardLayout.show(getContentPane(), SEARCH_ARTIST);
 			}
 		});
-		manageArtist.getBtnSeeAllArtists().addActionListener(new ActionListener() {
+		artistMM.getBtnSeeAllArtists().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Artist[] allArtists = HandleArtist.retrieveArtists(new Artist());
+				seeAllArtists.updateTableModel(allArtists);
 				cardLayout.show(getContentPane(), SEE_ALL_ARTISTS);
 			}
 		});		
@@ -424,12 +450,33 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchArtist = new SearchArtistPanel();
 		searchArtist.getBtnCancel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+				cardLayout.show(getContentPane(), ARTIST_MM);
 				searchArtist.resetTextFields();
 			}
 		});
 		searchArtist.getBtnSearchForArtist().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!searchArtist.isInputValid())
+					JOptionPane.showMessageDialog(searchArtist, "Input is invalid, make sure all fields are correct");
+				else
+				{
+					String[] fieldValues = searchArtist.getFieldValues();
+					Artist searchTerms = SearchArtistPanel.createNewArtist(fieldValues);
+					Artist[] searchResults = HandleArtist.retrieveArtists(searchTerms);
+					if(searchResults.length == 0)
+						JOptionPane.showMessageDialog(searchArtist, "No results found in search");
+					else if(searchResults.length == 1)
+					{
+						//update table method for update artist
+						updateArtist.resetTextFields();
+						cardLayout.show(getContentPane(), UPDATE_ARTIST);
+					}
+					else
+					{
+						searchResultsArtist.updateTableModel(searchResults);
+						cardLayout.show(getContentPane(), SEARCH_RESULTS_ARTIST);
+					}
+				}
 			}
 		});
 	}
@@ -441,6 +488,16 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSearchResultsArtist()
 	{
 		searchResultsArtist = new SearchResultsArtistPanel();
+		searchResultsArtist.getBtnSelect().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		searchResultsArtist.getBtnBack().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEARCH_ARTIST);
+			}
+		});
 	}
 	
 	/**
@@ -477,7 +534,6 @@ public class MainFrame extends JFrame implements ActionListener{
 						updateAuction.updateTableModel(searchResults[0]);
 						updateAuction.resetTextFields();
 						cardLayout.show(getContentPane(), UPDATE_AUCTION);
-						searchAuction.resetTextFields();
 					}
 					else
 					{
@@ -550,7 +606,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		seeAllArtists = new SeeAllArtistsPanel();
 		seeAllArtists.getBtnBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+				cardLayout.show(getContentPane(), ARTIST_MM);
 			}
 		});
 	}
@@ -677,6 +733,17 @@ public class MainFrame extends JFrame implements ActionListener{
 			date = orig.getDateOfWork() + "?";
 		searchDBPainting[1].setDateOfWork(date);
 		return searchDBPainting;
+	}
+	
+	/**
+	 * 
+	 */
+	public static Artist getCheckDBArtist(Artist orig)
+	{
+		Artist checkArtist = new Artist();
+		checkArtist.setArtistFirstName(orig.getArtistFirstName());
+		checkArtist.setArtistLastName(orig.getArtistLastName());
+		return checkArtist;
 	}
 	
 	/**

@@ -1,12 +1,17 @@
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.text.NumberFormat;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 
@@ -20,10 +25,14 @@ public class AddNewArtistPanel extends JPanel {
 	private JFormattedTextField formattedFashionability;
 	private JButton btnAddNewArtist;
 	private JButton btnCancel;
+	
 	public AddNewArtistPanel() {
 		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
 		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
-		formattedFashionability = new JFormattedTextField(createFormatter("#####"));
+		NumberFormat fashFormat = NumberFormat.getIntegerInstance();
+		fashFormat.setMaximumIntegerDigits(5);
+		fashFormat.setMinimumFractionDigits(1);
+		formattedFashionability = new JFormattedTextField(fashFormat); //createFormatter("#####")
 		
 		setUpPanel();
 	}
@@ -110,9 +119,11 @@ public class AddNewArtistPanel extends JPanel {
 	}
 	public boolean isInputValid()
 	{
-		int fashionability=Integer.parseInt((String) formattedFashionability.getValue());
+		
 		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedFashionability.isEditValid())
 		{
+			//int fashionability=Integer.parseInt((String) formattedFashionability.getValue());
+			int fashionability = ((Long)formattedFashionability.getValue()).intValue();
 			if((fashionability >= 0) && (fashionability <=10000))
 				return true;
 			else
@@ -141,7 +152,7 @@ public class AddNewArtistPanel extends JPanel {
 		Artist artist=new Artist();
 		artist.setArtistFirstName((String)formattedFirstName.getValue());
 		artist.setArtistLastName((String)formattedLastName.getValue());
-		artist.setFashionabilityCoeff((Integer)formattedFashionability.getValue());
+		artist.setFashionabilityCoeff(((Long)formattedFashionability.getValue()).intValue()); //(String) formattedFashionability.getValue())
 		return artist;
 	}
 	public JButton getBtnAddNewArtist() {

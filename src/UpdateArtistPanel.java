@@ -78,10 +78,6 @@ public class UpdateArtistPanel extends JPanel {
 		add(formattedLastName, gbc_formattedLastName);
 		
 		btnSelectArtist = new JButton("Select Artist");
-		btnSelectArtist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		GridBagConstraints gbc_btnSelectArtist = new GridBagConstraints();
 		gbc_btnSelectArtist.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSelectArtist.anchor = GridBagConstraints.WEST;
