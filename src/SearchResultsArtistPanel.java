@@ -54,7 +54,7 @@ public class SearchResultsArtistPanel extends JPanel {
 		add(scrollPaneList, gbc_scrollPaneList);
 		
 		
-		scrollPaneList.setRowHeaderView(listSearchResults);		
+		scrollPaneList.setViewportView(listSearchResults);		
 		lblSearchResults.setLabelFor(listSearchResults);
 		lblSearchResults.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearchResults.setFont(new Font("Century", Font.PLAIN, 12));

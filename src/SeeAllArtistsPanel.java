@@ -13,6 +13,7 @@ import java.awt.Insets;
 import java.awt.Dimension;
 
 public class SeeAllArtistsPanel extends JPanel {
+	private JButton btnBack;
 	public SeeAllArtistsPanel() {
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
 				null, null), new TitledBorder(null, "Manage Auction Records",
@@ -38,11 +39,14 @@ public class SeeAllArtistsPanel extends JPanel {
 		listAllArtists.setSize(new Dimension(1, 3));
 		scrollPane.setViewportView(listAllArtists);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		gbc_btnBack.gridx = 1;
 		gbc_btnBack.gridy = 3;
 		add(btnBack, gbc_btnBack);
 	}
 
+	public JButton getBtnBack() {
+		return btnBack;
+	}
 }

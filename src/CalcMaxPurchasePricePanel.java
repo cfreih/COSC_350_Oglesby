@@ -410,7 +410,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 			painting.setSubject(subj);
 			return painting;
 		}
-		public JButton getBtnAddPaintingTo() {
+		public JButton getBtnCalcMaxPrice() {
 			return btnCalcMaxPrice;
 		}
 		public JButton getBtnCancel() {
