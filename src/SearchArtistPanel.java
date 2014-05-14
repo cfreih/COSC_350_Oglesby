@@ -35,10 +35,6 @@ public class SearchArtistPanel extends JPanel {
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
 		btnSearchForArtist = new JButton("Search For Artist");
-		btnSearchForArtist.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		JLabel lblArtistInfo = new JLabel("Artist Info");
 		lblArtistInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -56,7 +52,7 @@ public class SearchArtistPanel extends JPanel {
 		gbc_lblFirstName.gridy = 2;
 		add(lblFirstName, gbc_lblFirstName);
 		
-		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
 		formattedFirstName.setColumns(20);
 		GridBagConstraints gbc_formattedFirstName = new GridBagConstraints();
 		gbc_formattedFirstName.insets = new Insets(0, 0, 5, 5);
@@ -73,7 +69,7 @@ public class SearchArtistPanel extends JPanel {
 		gbc_lblLastNamemax.gridy = 4;
 		add(lblLastNamemax, gbc_lblLastNamemax);
 		
-		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("********************"));
 		formattedLastName.setColumns(20);
 		GridBagConstraints gbc_formattedLastName = new GridBagConstraints();
 		gbc_formattedLastName.insets = new Insets(0, 0, 5, 5);
@@ -112,7 +108,7 @@ public class SearchArtistPanel extends JPanel {
 		  return formatter;
 		 }
 
-		 public static void main(String[] args) {
+	 public static void main(String[] args) {
 		  JFrame f = new JFrame("test window");
 		  f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  f.setResizable(false);
@@ -121,37 +117,43 @@ public class SearchArtistPanel extends JPanel {
 		  f.setLocation(10, 10);
 		  f.getContentPane().add(new SearchArtistPanel());
 		  f.show();
+	 }
+	 public void resetTextFields()
+	 {
+			formattedFirstName.setValue(null);
+			formattedLastName.setValue(null);
+	 }
+	 public boolean isInputValid()
+	 {
+		 if(formattedFirstName.isEditValid() || formattedLastName.isEditValid() )
+		 {
+			 return true;
 		 }
-		 public void resetTextFields()
-		{
-				formattedFirstName.setValue(null);
-				formattedLastName.setValue(null);
-		}
-		 public boolean isInputValid()
-			{
-				if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() )
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				  }
-				}
-		 	public String[] getFieldValues()
-			{
-				String[] fieldValues = new String[2];
-				fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
-				fieldValues[1] = ((String) formattedLastName.getValue()).trim();
-				return fieldValues;
-			}
-		 	public static Artist createNewArtist(String[] values)
-			{
-				String fName = values[0];
-				String lName = values[1];
-				Artist artist=new Artist();
-				artist.setArtistFirstName(fName);
-				artist.setArtistLastName(lName);
-				return artist;
-			}
+		 else
+		 {
+			 return false;
+		 }
+	 }
+	 public String[] getFieldValues()
+	 {
+		 String[] fieldValues = new String[2];
+		 if(formattedFirstName.getValue() != null)
+			 fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		 else
+			 fieldValues[0] = "";
+		 if(formattedLastName.getValue() != null)
+			 fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		 else
+			 fieldValues[1] = "";
+		 return fieldValues;
+	 }
+	 public static Artist createNewArtist(String[] values)
+	 {
+		 String fName = values[0];
+		 String lName = values[1];
+		 Artist artist=new Artist();
+		 artist.setArtistFirstName(fName);
+		 artist.setArtistLastName(lName);
+		 return artist;
+	 }
 }

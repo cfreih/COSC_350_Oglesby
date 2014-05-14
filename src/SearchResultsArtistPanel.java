@@ -116,4 +116,7 @@ public class SearchResultsArtistPanel extends JPanel {
 		}
 		panel.updateTableModel(artists);
 	}
+	public JButton getBtnSelect() {
+		return btnSelect;
+	}
 }
