@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 
-public class SearchResultsAuction extends JPanel {
+public class SearchResultsAuctionPanel extends JPanel {
 	
 	private GridBagLayout gridBagLayout;
 	private JButton btnSelect;
@@ -21,7 +21,7 @@ public class SearchResultsAuction extends JPanel {
 	private JLabel lblSearchResults;
 	private AuctionPainting[] searchResults;
 	
-	public SearchResultsAuction() {
+	public SearchResultsAuctionPanel() {
 		
 		gridBagLayout = new GridBagLayout();
 		scrollPaneList = new JScrollPane();
