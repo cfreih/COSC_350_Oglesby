@@ -22,21 +22,33 @@ public class DetectTrendsReport extends FindSoldPaintings
     //Return: returns a String array with the artists names from the last year as elements
     public String[] findTrendingArtists()
     {
-        if(this.soldPaintings == null) return null;
-        HashMap<String, Integer> artistHash = new HashMap<String, Integer>();
-        for(int i = 0; i < this.soldPaintings.length; i++)
+        if(soldPaintings == null) return null;
+        HashMap<String, Integer> paintingCountHash = new HashMap<String, Integer>();
+        HashMap<String, Boolean> badArtistHash = new HashMap<String, Boolean>();
+        for(int i = 0; i < soldPaintings.length; i++)
         {
-            String key = this.soldPaintings[i].getArtistFirstName() + "\n" + this.soldPaintings[i].getArtistLastName();
-            Integer num = artistHash.get(key);
-            if(num == null) artistHash.put(key, 1);
-            else artistHash.put(key, num + 1);
+            String key = soldPaintings[i].getArtistFirstName() + "\n" + soldPaintings[i].getArtistLastName();
+            if(!badArtistHash.containsKey(key))
+            {
+                if(soldPaintings[i].getActualSellPrice() > soldPaintings[i].getTargetSellPrice())
+                {
+                    Integer num = paintingCountHash.get(key);
+                    if(num == null) paintingCountHash.put(key, 1);
+                    else paintingCountHash.put(key, num + 1);
+                }
+                else
+                {
+                    badArtistHash.put(key, true);
+                    paintingCountHash.remove(key);
+                }
+            }
         }
-        Object[] keySet = artistHash.keySet().toArray();
+        Object[] keySet = paintingCountHash.keySet().toArray();
         ArrayList<String> trendingArtists = new ArrayList<String>();
         for(int i = 0; i < keySet.length; i++)
         {
             String artistKey = (String) keySet[i];
-            if(artistHash.get(artistKey) > 1) trendingArtists.add(artistKey);
+            if(paintingCountHash.get(artistKey) > 1) trendingArtists.add(artistKey);
         }
         return Arrays.copyOf(trendingArtists.toArray(), trendingArtists.toArray().length, String[].class);
     }

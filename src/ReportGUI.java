@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.*;
 public class ReportGUI
 {
@@ -84,14 +85,14 @@ public class ReportGUI
         {
             String labelString = "Average Ratio of Actual Purchase Price to Maximum Purchase Price: ";
             PurchasedPaintingReport p = (PurchasedPaintingReport) report;
-            labelString += p.getMaxAndActualRatio();
+            labelString += new DecimalFormat("#.####").format(p.getMaxAndActualRatio());
             label.setText(labelString);
         }
         else if(lastClicked == 1)
         {
             String labelString = "Average Ratio of Actual Selling Price to Target Selling Price: ";
             SoldPaintingsReport s = (SoldPaintingsReport) report;
-            labelString += s.getTargetAndActualRatio();
+            labelString += new DecimalFormat("#.####").format(s.getTargetAndActualRatio());
             label.setText(labelString);
         }
         else if(lastClicked == 2)
@@ -352,6 +353,10 @@ public class ReportGUI
                 fields[3] = paintings[i].getTitleOfWork();
                 fields[4] = mf.format(paintings[i].getMaxPurchasePrice());
                 fields[5] = mf.format(paintings[i].getActualPurchasePrice());
+                if(paintings[i].getMaxPurchasePrice() < paintings[i].getActualPurchasePrice())
+                {
+                    fields[0] = "*" + fields[0];
+                }
                 data.add(fields);
             }
         }
@@ -366,6 +371,10 @@ public class ReportGUI
                 fields[3] = paintings[i].getTitleOfWork();
                 fields[4] = mf.format(paintings[i].getTargetSellPrice());
                 fields[5] = mf.format(paintings[i].getActualSellPrice());
+                if(paintings[i].getTargetSellPrice() >= paintings[i].getActualSellPrice() * 1.05)
+                {
+                    fields[0] = "*" + fields[0];
+                }
                 data.add(fields);
             }
         }
