@@ -15,14 +15,11 @@ public class InventoryPainting extends Painting implements Cloneable {
 	private double actualPurchasePrice;
 	private double maxAndActualRatio;
 	private double targetSellPrice;
-	//private boolean soldYesOrNo;
 	private SimpleDate dateOfSale;
 	private String buyerName;
 	private String buyerAddress;
 	private double actualSellPrice;
 	private double targetAndActualRatio;
-	//private boolean flagBoughtReport;
-	//private boolean flagSoldReport;
 	private String classification;
 
 	/**
@@ -49,7 +46,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 		//flagSoldReport = false;
 		classification = "";
 	}
-
 	/**
 	 * Desc: All arg constructor for Inventory Post: InventoryPainting is
 	 * initialized with the fields being set with the proper parameters
@@ -66,17 +62,14 @@ public class InventoryPainting extends Painting implements Cloneable {
 		dateOfPurchase = dateP;
 		maxPurchasePrice = maxPurch;
 		actualPurchasePrice = actualPurch;
-		//soldYesOrNo = soldYN;
 		dateOfSale = dateS;
 		buyerName = bName;
 		buyerAddress = bAddress;
 		actualSellPrice = actualSell;
 		classification = classif;
-
+        calcTargetSellPrice();
 		calcMaxAndActualRatio();
 		calcTargetAndActualRatio();
-		//calcFlagBoughtReport();
-		//calcFlagSoldReport();
 	}
 
 	/**
@@ -86,9 +79,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 */
 	public void setSellerName(String name) {
 		sellerName = name;
-
 	}
-
 	/**
 	 * Desc: returns the painting's sellerName Return:the painting's sellerName
 	 */
@@ -103,9 +94,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 */
 	public void setSellerAddress(String address) {
 		sellerAddress = address;
-
 	}
-
 	/**
 	 * Desc: sets the painting's MaxPurcahsePrice to mpx Post: MaxPurcahsePrice
 	 * is set to mpx
@@ -113,7 +102,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setMaxPurchasePrice(double mpx) {
 		maxPurchasePrice = mpx;
 	}
-
 	/**
 	 * Desc: returns the painting's sellerAddress Return:the painting's
 	 * sellerAddress
@@ -121,7 +109,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public String getSellerAddress() {
 		return sellerAddress;
 	}
-
 	/**
 	 * Desc: sets the painting's dateOfOurchase to datePurch Post:
 	 * dateOfPurchase is set to datePurch
@@ -129,7 +116,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setDateOfPurchase(SimpleDate datePurch) {
 		dateOfPurchase = datePurch;
 	}
-
 	/**
 	 * Desc: sets the painting's dateOfPurchase to the proper date from year,
 	 * month, and day Pre: year must be between 0 and 8099 month must be between
@@ -139,7 +125,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setDateOfPurchase(int year, int month, int day) {
 		dateOfPurchase = new SimpleDate(year, month, day);
 	}
-
 	/**
 	 * Desc: returns the painting's dateOfPurchase Return:the painting's
 	 * dateOfPurchase
@@ -147,7 +132,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public SimpleDate getDateOfPurchase() {
 		return dateOfPurchase;
 	}
-
 	/**
 	 * Desc: returns the painting's maxPurchasePrice Return:the painting's
 	 * maxPurchasePrice
@@ -155,7 +139,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public double getMaxPurchasePrice() {
 		return maxPurchasePrice;
 	}
-
 	/**
 	 * Desc: sets the painting's actualPurchasePrice to price. updates the
 	 * maxAndActualRatio and targetSellPrice. sets the flagBoughtReport to its
@@ -166,9 +149,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		actualPurchasePrice = price;
 		calcMaxAndActualRatio();
 		calcTargetSellPrice();
-		//calcFlagBoughtReport();
 	}
-
 	/**
 	 * Desc: sets the painting's actualPurchasePrice to price. updates the
 	 * maxAndActualRatio and targetSellPrice. sets the flagBoughtReport to its
@@ -178,7 +159,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setTargetSellPrice(double price) {
 		targetSellPrice = price;
 	}
-
 	/**
 	 * Desc: returns the painting's actualPurchasePrice Return:the painting's
 	 * atualPurchasePrice
@@ -186,7 +166,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public double getActualPurchasePrice() {
 		return actualPurchasePrice;
 	}
-
 	/**
 	 * Desc: Calculates a paintings maxAndActual Ratio by dividing
 	 * maxPurchasePrice from actualPurchasePrice Post: The maxAndActualRatio is
@@ -195,7 +174,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	private void calcMaxAndActualRatio() {
 		maxAndActualRatio = actualPurchasePrice / maxPurchasePrice;
 	}
-
 	/**
 	 * Desc: returns the painting's maxAndActualRatio Return:the painting's
 	 * maxAndActualRatio
@@ -203,7 +181,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public double getMaxAndActualRatio() {
 		return maxAndActualRatio;
 	}
-
 	/**
 	 * Desc: Calculates the targetSellingPrice by multiplying
 	 * actualPurcahsePirce by 2.15 Post: The targetSellPrice is properly
@@ -212,7 +189,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	private void calcTargetSellPrice() {
 		targetSellPrice = actualPurchasePrice * 2.15;
 	}
-
 	/**
 	 * Desc: returns the painting's targetSellPrice Return:the painting's
 	 * targetSellPrice
@@ -220,7 +196,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public double getTargetSellPrice() {
 		return targetSellPrice;
 	}
-
 	/**
 	 * Desc: sets the painting's dateOfSale Pre: soldYesOrNo must be set to true
 	 * to set date. Post: dateOfSale is set to date
@@ -228,7 +203,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setDateOfSale(SimpleDate date) {
 			dateOfSale = date;
 	}
-
 	/**
 	 * Desc: sets the painting's dateOfPurchase to the proper date from year,
 	 * month, and day Pre: SoldYesOrNo must be set to true to set date year must
@@ -238,7 +212,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setDateOfSale(int year, int month, int day) {
 			dateOfSale = new SimpleDate(year, month, day);
 	}
-
 	/**
 	 * Desc: returns the painting's dateOfPurchase Pre: soldYesOrNo must be true
 	 * Return:the painting's dateOfPurchase
@@ -246,7 +219,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public SimpleDate getDateOfSale() {
 			return dateOfSale;
 	}
-
 	/**
 	 * Desc: sets the painting's buyerName to name Pre: soldYesOrNo must be set
 	 * to true to set date. Post: buyerName is set to name
@@ -254,7 +226,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setBuyerName(String name) {
 			buyerName = name;
 	}
-
 	/**
 	 * Desc: returns the painting's buyerName Pre: soldYesOrNo must be true
 	 * Return:the painting's buyerName
@@ -262,7 +233,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public String getBuyerName() {
 			return buyerName;
 	}
-
 	/**
 	 * Desc: sets the painting's buyerAddress to address Pre: soldYesOrNo must
 	 * be set to true to set date. Post: buyerAddress is set to address
@@ -270,7 +240,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public void setBuyerAddress(String address) {
 			buyerAddress = address;
 	}
-
 	/**
 	 * Desc: returns the painting's buyerAddress Pre: soldYesOrNo must be true
 	 * Return:the painting's buyerAddress
@@ -278,7 +247,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public String getBuyerAddress() {
 		return buyerAddress;
 	}
-
 	/**
 	 * Desc: sets the painting's ActualSellPrice to price and calculates
 	 * targetAndActualRatio. Updates the flagSoldReport status Pre: soldYesOrNo
@@ -289,16 +257,13 @@ public class InventoryPainting extends Painting implements Cloneable {
 			actualSellPrice = price;
 			calcTargetAndActualRatio();
 	}
-
 	/**
 	 * Desc: returns the painting's actualSellPrice Pre: soldYesOrNo must be
 	 * true Return:the painting's actualSellPrice
 	 */
 	public double getActualSellPrice() {
 		return actualSellPrice;
-		
 	}
-
 	/**
 	 * Desc: Calculates a paintings targetAndActualRatio by dividing
 	 * targetSellPrice from actualSellPrice Post: The targetAndActualRatio is
@@ -307,7 +272,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	private void calcTargetAndActualRatio() {
 		targetAndActualRatio = actualPurchasePrice / targetSellPrice;
 	}
-
 	/**
 	 * Desc: returns the painting's targetAndActualRatio Return:the painting's
 	 * targetAndActualRatio
@@ -315,7 +279,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public double getTargetAndActualRatio() {
 		return targetAndActualRatio;
 	}
-
 	/**
 	 * Desc: Calculates whether the flagBoughtReport should be set or not. It
 	 * will be set for true if a painting was bought by Osbert for more than the
