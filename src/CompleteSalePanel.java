@@ -161,7 +161,7 @@ public class CompleteSalePanel extends JPanel {
 	{
 		inventoryPainting.setBuyerName((String)formattedFullName.getValue());
 		inventoryPainting.setBuyerAddress((String)formattedAddress.getValue());
-		inventoryPainting.setActualSellPrice((double)formattedPrice.getValue());
+		inventoryPainting.setActualSellPrice((Double)formattedPrice.getValue());
 		return inventoryPainting;
 	}
 	public JButton getBtnCancel() {

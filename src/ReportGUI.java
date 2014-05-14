@@ -12,11 +12,11 @@ public class ReportGUI
     protected JFrame frame;
     protected Report report;
     protected JPanel grid;
-    protected int lastClicked = -1;
+    protected int lastClicked = 0;
     //Desc: Constructor for Report
-    public ReportGUI(Report report)
+    public ReportGUI()
     {
-        this.report = report;
+        report = new PurchasedPaintingReport();
         setupFrame();
     }
     //Desc: converts a Report in a InventoryPainting[]
@@ -72,6 +72,7 @@ public class ReportGUI
         addButtons(iconPanel);
         setupGridBag(iconPanel, grid);
         setupFrameSettings();
+        displayPaintings();
     }
     //Desc: sets frame settings
     //Post: Frame has settings initialized
@@ -95,48 +96,17 @@ public class ReportGUI
     private void setupGrid(InventoryPainting[] paintings)
     {
         grid.removeAll();
-        final Pair[] columnTitles = HandleInventoryPaintings.loadMap(new InventoryPainting());
-        final ArrayList<Pair[]> pairs = new ArrayList<Pair[]>();
-        for(int i = 0; i < paintings.length; i++)
-        {
-            pairs.add(HandleInventoryPaintings.loadMap(paintings[i]));
-        }
-        JTable table = new JTable(new AbstractTableModel()
-        {
-            @Override
-            public int getRowCount()
-            {
-                return 50;
-            }
-            @Override
-            public int getColumnCount()
-            {
-                return columnTitles.length;
-            }
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex)
-            {
-                if(rowIndex < pairs.size() && columnIndex < columnTitles.length)
-                {
-                    return pairs.get(rowIndex)[columnIndex].getValue();
-                }
-                return null;
-            }
-            @Override
-            public String getColumnName(int column)
-            {
-                for(int i = 0; i < columnTitles.length; i++)
-                {
-                    if(column == i) return columnTitles[i].getKey();
-                }
-                return "?";
-            }
-        });
+        String[] columnTitles = loadTitles();
+        ArrayList<String[]> pairs = new ArrayList<String[]>();
+        loadData(paintings, pairs);
+        int rows = 20;
+        if(pairs.size() > rows) rows = pairs.size();
+        JTable table = new JTable(new ReportTableModel(rows, columnTitles.length, pairs, columnTitles));
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowHeight(22);
         table.setAutoResizeMode(0);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(730, 365));
+        scrollPane.setPreferredSize(new Dimension(810, 478));
         grid.add(scrollPane);
 
 
@@ -198,12 +168,12 @@ public class ReportGUI
                 }
             }
         });
-        purchasedButton.setFont(passiveFont);
+        purchasedButton.setFont(activeFont);
         soldButton.setFont(passiveFont);
         detectedButton.setFont(passiveFont);
-        purchasedButton.setPreferredSize(new Dimension(240, 30));
-        soldButton.setPreferredSize(new Dimension(240, 30));
-        detectedButton.setPreferredSize(new Dimension(240, 30));
+        purchasedButton.setPreferredSize(new Dimension(270, 30));
+        soldButton.setPreferredSize(new Dimension(270, 30));
+        detectedButton.setPreferredSize(new Dimension(270, 30));
         iconPanel.add(purchasedButton);
         iconPanel.add(soldButton);
         iconPanel.add(detectedButton);
@@ -223,8 +193,89 @@ public class ReportGUI
         c.gridy = 1;
         frame.add(grid,c);
     }
+    //Desc: method to load a String[] with values to assist in the creation of column headers
+    // In particular, this method assists with limiting the amount of hardcoding in the stringify
+    //Return: the fully loaded String[] is returned
+    private String[] loadTitles()
+    {
+        ArrayList<String> titles = new ArrayList<String>();
+        if(lastClicked == 0)
+        {
+            titles.add("Classification"); //4
+            titles.add("Date of Purchase"); //9
+            titles.add("Artist Last Name"); //1
+            titles.add("Painting Title"); //2
+            titles.add("Maximum Purchase Price"); //12
+            titles.add("Actual Purchase Price"); //13
+        }
+        else if(lastClicked == 1)
+        {
+            titles.add("Classification"); //4
+            titles.add("Date of Sale"); //14
+            titles.add("Artist Last Name"); //1
+            titles.add("Painting Title"); //2
+            titles.add("Target Selling Price"); //not indexed
+            titles.add("Actual Selling Price"); //17
+        }
+        else if(lastClicked == 2)
+        {
+            titles.add("Artist Last Name"); //1
+            titles.add("Date of Sale"); //14
+            titles.add("Classification"); //4
+            titles.add("Painting Title"); //2
+            titles.add("Target Selling Price"); //not indexed
+            titles.add("Actual Selling Price"); //17
+        }
+        return Arrays.copyOf(titles.toArray(), titles.toArray().length, String[].class);
+    }
+    private void loadData(InventoryPainting[] paintings, ArrayList<String[]> data)
+    {
+
+        if(lastClicked == 0)
+        {
+            for(int i = 0; i < paintings.length; i++)
+            {
+                String[] fields = new String[6];
+                fields[0] = paintings[i].getClassification();
+                fields[1] = paintings[i].getDateOfPurchase().toString();
+                fields[2] = paintings[i].getArtistLastName();
+                fields[3] = paintings[i].getTitleOfWork();
+                fields[4] = "" + paintings[i].getMaxPurchasePrice();
+                fields[5] = "" + paintings[i].getActualPurchasePrice();
+                data.add(fields);
+            }
+        }
+        else if(lastClicked == 1)
+        {
+            for(int i = 0; i < paintings.length; i++)
+            {
+                String[] fields = new String[6];
+                fields[0] = paintings[i].getClassification();
+                fields[1] = paintings[i].getDateOfSale().toString();
+                fields[2] = paintings[i].getArtistLastName();
+                fields[3] = paintings[i].getTitleOfWork();
+                fields[4] = "" + paintings[i].getTargetSellPrice();
+                fields[5] = "" + paintings[i].getActualSellPrice();
+                data.add(fields);
+            }
+        }
+        else if(lastClicked == 2)
+        {
+            for(int i = 0; i < paintings.length; i++)
+            {
+                String[] fields = new String[6];
+                fields[0] = paintings[i].getArtistLastName();
+                fields[1] = paintings[i].getDateOfSale().toString();
+                fields[2] = paintings[i].getClassification();
+                fields[3] = paintings[i].getTitleOfWork();
+                fields[4] = "" + paintings[i].getTargetSellPrice();
+                fields[5] = "" + paintings[i].getActualSellPrice();
+                data.add(fields);
+            }
+        }
+    }
     public static void main(String[] args)
     {
-        ReportGUI g = new ReportGUI(new Report());
+        ReportGUI g = new ReportGUI();
     }
 }
