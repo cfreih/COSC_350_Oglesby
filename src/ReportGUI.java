@@ -1,17 +1,20 @@
 import javax.swing.*;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.*;
 public class ReportGUI
 {
     protected JFrame frame;
     protected Report report;
     protected JPanel grid;
+    protected JTable table;
     protected int lastClicked = 0;
     //Desc: Constructor for Report
     public ReportGUI()
@@ -101,15 +104,12 @@ public class ReportGUI
         loadData(paintings, pairs);
         int rows = 20;
         if(pairs.size() > rows) rows = pairs.size();
-        JTable table = new JTable(new ReportTableModel(rows, columnTitles.length, pairs, columnTitles));
+        table = new JTable(new ReportTableModel(rows, columnTitles.length, pairs, columnTitles));
         table.getTableHeader().setReorderingAllowed(false);
         table.setRowHeight(22);
-        table.setAutoResizeMode(0);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(810, 478));
+        scrollPane.setPreferredSize(new Dimension(860, 463));
         grid.add(scrollPane);
-
-
     }
     //Desc: creates and sets up buttons
     //Post: buttons are added to the panel
@@ -118,8 +118,8 @@ public class ReportGUI
         final JButton purchasedButton = new JButton("Purchased Paintings Report");
         final JButton soldButton = new JButton("Sold Paintings Report");
         final JButton detectedButton = new JButton("Detect Trends Report");
-        final Font activeFont=new Font(purchasedButton.getFont().getName(),Font.BOLD,purchasedButton.getFont().getSize() + 2);
-        final Font passiveFont=new Font(purchasedButton.getFont().getName(),0,purchasedButton.getFont().getSize());
+        final Font activeFont=new Font(purchasedButton.getFont().getName(),Font.BOLD,purchasedButton.getFont().getSize() + 3);
+        final Font passiveFont=new Font(purchasedButton.getFont().getName(),0,purchasedButton.getFont().getSize() + 1);
         purchasedButton.addActionListener(new ActionListener()
         {
             @Override
@@ -127,12 +127,12 @@ public class ReportGUI
             {
                 if(lastClicked != 0)
                 {
+                    lastClicked = 0;
                     purchasedButton.setFont(activeFont);
                     soldButton.setFont(passiveFont);
                     detectedButton.setFont(passiveFont);
                     report = new PurchasedPaintingReport();
                     displayPaintings();
-                    lastClicked = 0;
                 }
             }
         });
@@ -143,12 +143,12 @@ public class ReportGUI
             {
                 if(lastClicked != 1)
                 {
+                    lastClicked = 1;
                     purchasedButton.setFont(passiveFont);
                     soldButton.setFont(activeFont);
                     detectedButton.setFont(passiveFont);
                     report = new SoldPaintingsReport();
                     displayPaintings();
-                    lastClicked = 1;
                 }
             }
         });
@@ -159,21 +159,21 @@ public class ReportGUI
             {
                 if(lastClicked != 2)
                 {
+                    lastClicked = 2;
                     purchasedButton.setFont(passiveFont);
                     soldButton.setFont(passiveFont);
                     detectedButton.setFont(activeFont);
                     report = new DetectTrendsReport();
                     displayPaintings();
-                    lastClicked = 2;
                 }
             }
         });
         purchasedButton.setFont(activeFont);
         soldButton.setFont(passiveFont);
         detectedButton.setFont(passiveFont);
-        purchasedButton.setPreferredSize(new Dimension(270, 30));
-        soldButton.setPreferredSize(new Dimension(270, 30));
-        detectedButton.setPreferredSize(new Dimension(270, 30));
+        purchasedButton.setPreferredSize(new Dimension(280, 30));
+        soldButton.setPreferredSize(new Dimension(280, 30));
+        detectedButton.setPreferredSize(new Dimension(280, 30));
         iconPanel.add(purchasedButton);
         iconPanel.add(soldButton);
         iconPanel.add(detectedButton);
@@ -187,7 +187,7 @@ public class ReportGUI
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        frame.add(iconPanel,c);
+        frame.add(iconPanel, c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
@@ -230,7 +230,7 @@ public class ReportGUI
     }
     private void loadData(InventoryPainting[] paintings, ArrayList<String[]> data)
     {
-
+        MoneyFormat mf = new MoneyFormat();
         if(lastClicked == 0)
         {
             for(int i = 0; i < paintings.length; i++)
@@ -240,8 +240,8 @@ public class ReportGUI
                 fields[1] = paintings[i].getDateOfPurchase().toString();
                 fields[2] = paintings[i].getArtistLastName();
                 fields[3] = paintings[i].getTitleOfWork();
-                fields[4] = "" + paintings[i].getMaxPurchasePrice();
-                fields[5] = "" + paintings[i].getActualPurchasePrice();
+                fields[4] = mf.format(paintings[i].getMaxPurchasePrice());
+                fields[5] = mf.format(paintings[i].getActualPurchasePrice());
                 data.add(fields);
             }
         }
@@ -254,8 +254,8 @@ public class ReportGUI
                 fields[1] = paintings[i].getDateOfSale().toString();
                 fields[2] = paintings[i].getArtistLastName();
                 fields[3] = paintings[i].getTitleOfWork();
-                fields[4] = "" + paintings[i].getTargetSellPrice();
-                fields[5] = "" + paintings[i].getActualSellPrice();
+                fields[4] = mf.format(paintings[i].getTargetSellPrice());
+                fields[5] = mf.format(paintings[i].getActualSellPrice());
                 data.add(fields);
             }
         }
@@ -268,8 +268,8 @@ public class ReportGUI
                 fields[1] = paintings[i].getDateOfSale().toString();
                 fields[2] = paintings[i].getClassification();
                 fields[3] = paintings[i].getTitleOfWork();
-                fields[4] = "" + paintings[i].getTargetSellPrice();
-                fields[5] = "" + paintings[i].getActualSellPrice();
+                fields[4] = mf.format(paintings[i].getTargetSellPrice());
+                fields[5] = mf.format(paintings[i].getActualSellPrice());
                 data.add(fields);
             }
         }
