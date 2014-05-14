@@ -44,7 +44,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	private JLabel lblWidthcm;
 	private JFormattedTextField formattedWidth;
 	private JLabel lblMedium;
-	private JFormattedTextField textFieldMedium;
+	private JFormattedTextField formattedMedium;
 	private JLabel lblSubject;
 	private JLabel lblDateOfPurchase;
 	private JFormattedTextField formattedDateOfPurchase;
@@ -78,35 +78,35 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		lblWarning_1 = new JLabel("( * Indicates Required Fields )");		
 		
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters) *");		
-		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters) *");
-		formattedLastName = new JFormattedTextField(createFormatter("********************"));		
+		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));		
 		lblNewPaintingInfo = new JLabel("Painting Info");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters) *");				
-		formattedTitle = new JFormattedTextField(createFormatter("****************************************"));
+		formattedTitle = new JFormattedTextField(createFormatter("A***************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy) *");		
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####'?"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		lblHeightcm = new JLabel("Height(cm) *");		
 		formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWidthcm = new JLabel("Width (cm) *");			
 		formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblMedium = new JLabel("Medium *");		
-		textFieldMedium = new JFormattedTextField(createFormatter("*************************"));
+		formattedMedium = new JFormattedTextField(createFormatter("A************************"));
 		lblSubject = new JLabel("Subject *");
-		textFieldSubject = new JFormattedTextField(createFormatter("*************************"));
+		textFieldSubject = new JFormattedTextField(createFormatter("A************************"));
 		lblDateOfPurchase = new JLabel("Date of Purchase *");
-		formattedDateOfPurchase = new JFormattedTextField();				
+		formattedDateOfPurchase = new JFormattedTextField(createFormatter("##/##/####"));				
 		lblClassification = new JLabel("Classification *");		
-		formattedClassification = new JFormattedTextField(createFormatter("******************************"));
+		formattedClassification = new JFormattedTextField(createFormatter("A*****************************"));
 		lblNameOfSeller = new JLabel("Name of Seller *");		
-		formattedNameofSeller = new JFormattedTextField(createFormatter("******************************************"));
+		formattedNameofSeller = new JFormattedTextField(createFormatter("A*****************************************"));
 		lblAddressOfSeller = new JLabel("Address of Seller *");		
-		formattedAddressOfSeller = new JFormattedTextField(createFormatter("******************************************"));
+		formattedAddressOfSeller = new JFormattedTextField(createFormatter("A*****************************************"));
 		lblActualPurchasePrice = new JLabel("Actual Purchase Price *");		
 		formattedActualPurchasePrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWarning_2 = new JLabel("( ** Must be all Provided OR all Blank )");
 		lblDateOfSale = new JLabel("Date of Sale **");
-		formattedDateOfSale = new JFormattedTextField();
+		formattedDateOfSale = new JFormattedTextField(createFormatter("##/##/####"));
 		lblNameOfBuyer = new JLabel("Name of Buyer **");		
 		formattedNameOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfBuyer = new JLabel("Address of Buyer **");		
@@ -224,11 +224,11 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		springLayout.putConstraint(SpringLayout.NORTH, lblMedium, 6, SpringLayout.SOUTH, formattedHeight);
 		updateInventoryPanel.add(lblMedium);
 					
-		textFieldMedium.setFont(new Font("Century", Font.PLAIN, 12));
-		textFieldMedium.setColumns(20);
-		springLayout.putConstraint(SpringLayout.NORTH, textFieldMedium, 5, SpringLayout.SOUTH, lblMedium);
-		springLayout.putConstraint(SpringLayout.WEST, textFieldMedium, 10, SpringLayout.WEST, lblMedium);
-		updateInventoryPanel.add(textFieldMedium);		
+		formattedMedium.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedMedium.setColumns(20);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedMedium, 5, SpringLayout.SOUTH, lblMedium);
+		springLayout.putConstraint(SpringLayout.WEST, formattedMedium, 10, SpringLayout.WEST, lblMedium);
+		updateInventoryPanel.add(formattedMedium);		
 		
 		lblSubject.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.WEST, lblSubject, 0, SpringLayout.WEST, lblArtistLastName);
@@ -241,7 +241,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		springLayout.putConstraint(SpringLayout.WEST, textFieldSubject, 10, SpringLayout.WEST, lblSubject);
 		updateInventoryPanel.add(textFieldSubject);		
 		
-		springLayout.putConstraint(SpringLayout.NORTH, lblDateOfPurchase, 5, SpringLayout.SOUTH, textFieldMedium);
+		springLayout.putConstraint(SpringLayout.NORTH, lblDateOfPurchase, 5, SpringLayout.SOUTH, formattedMedium);
 		springLayout.putConstraint(SpringLayout.WEST, lblDateOfPurchase, 15, SpringLayout.WEST, updateInventoryPanel);
 		lblDateOfPurchase.setFont(new Font("Century", Font.PLAIN, 12));
 		updateInventoryPanel.add(lblDateOfPurchase);
@@ -350,6 +350,18 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	        System.exit(-1);
 	    }
 	    return formatter;
+	}
+	
+	public boolean isInputValid(){
+	if( formattedFirstName.isEditValid()
+		&& formattedFirstName.isEditValid()
+		&& formattedTitle.isEditValid()
+		&& formattedDateOfWork.isEditValid()
+		&& formattedHeight.isEditValid()
+		&& formattedWidth.isEditValid()
+		&& formattedMedium.isEditValid()
+	   );	
+		
 	}
 	
 	public static void main( String[] args )
