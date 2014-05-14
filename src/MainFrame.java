@@ -24,7 +24,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private ManageAuctionMainMenuPanel auctionMM;
 	private AddPaintingAuctionPanel addPaintingAuction;
 	private SearchAuctionPanel searchAuction;
-	private SearchResultsAuction searchResultsAuction;
+	private SearchResultsAuctionPanel searchResultsAuction;
 	private SeeAllAuctionPaintingsPanel seeAllAuction;
 	private UpdateAuctionPanel updateAuction;
 	
@@ -158,6 +158,16 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpAddArtist()
 	{
 		addArtist = new AddNewArtistPanel();
+		addArtist.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+				addArtist.resetTextFields();
+			}
+		});
+		addArtist.getBtnAddNewArtist().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 	}
 	
 	/**
@@ -190,14 +200,21 @@ public class MainFrame extends JFrame implements ActionListener{
 				}
 				else
 				{
-					Object[] options = {"Yes", "Cancel"};
-					int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this painting?",
-							"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-					if(n == 0)
+					AuctionPainting newPainting = AddPaintingAuctionPanel.createNewAuctionPainting(addPaintingAuction.getFieldValues());
+					AuctionPainting[] checkPaintingsExists = HandleAuctionPaintings.retrieveAuctionPaintings(newPainting);
+					if(checkPaintingsExists.length > 0)
+						JOptionPane.showMessageDialog(addPaintingAuction, "Paintings Already Exists");
+					else
 					{
-						HandleAuctionPaintings.createAuctionPainting(AddPaintingAuctionPanel.createNewAuctionPainting(addPaintingAuction.getFieldValues()));
-						cardLayout.show(getContentPane(), AUCTION_MM);
-						addPaintingAuction.resetTextFields();
+						Object[] options = {"Yes", "Cancel"};
+						int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this painting?",
+								"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if(n == 0)
+						{
+							HandleAuctionPaintings.createAuctionPainting(newPainting);
+							cardLayout.show(getContentPane(), AUCTION_MM);
+							addPaintingAuction.resetTextFields();
+						}
 					}
 			
 				}
@@ -270,6 +287,11 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpMainMenu()
 	{
 		mainMenu = new MainMenuPanel();
+		mainMenu.getBtnSellPainting().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(),SEARCH_PAINTING_SALE);
+			}
+		});
 		mainMenu.getBtnManageInventory().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(getContentPane(), MANAGE_INVENTORY);
@@ -309,6 +331,26 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpManageArtist()
 	{
 		manageArtist = new ManageArtistPanel();
+		manageArtist.getBtnBackToMain().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MAIN_MENU);
+			}
+		});
+		manageArtist.getBtnAddNewArtist().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), ADD_ARTIST);
+			}
+		});
+		manageArtist.getBtnModifyDeleteExistingArtist().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEARCH_ARTIST);
+			}
+		});
+		manageArtist.getBtnSeeAllArtists().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEE_ALL_ARTISTS);
+			}
+		});		
 	}
 	
 	/**
@@ -349,6 +391,26 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpManageInventoryMM()
 	{
 		manageInventoryMM = new ManageInventoryMainMenuPanel();
+		manageInventoryMM.getReturnToMainButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MAIN_MENU);
+			}
+		});
+		manageInventoryMM.getAddNewPaintingButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), ADD_PAINTING_INVENTORY);
+			}
+		});
+		manageInventoryMM.getModifyPaintingButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEARCH_INVENTORY);
+			}
+		});
+		manageInventoryMM.getSeeAllPaintingsButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEE_ALL_INVENTORY);
+			}
+		});
 	}
 	
 	/**
@@ -358,6 +420,16 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSearchArtist()
 	{
 		searchArtist = new SearchArtistPanel();
+		searchArtist.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+				searchArtist.resetTextFields();
+			}
+		});
+		searchArtist.getBtnSearchForArtist().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 	}
 	
 	/**
@@ -424,7 +496,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	private void setUpSearchResultsAuction()
 	{
-		searchResultsAuction = new SearchResultsAuction();
+		searchResultsAuction = new SearchResultsAuctionPanel();
 		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AuctionPainting updatePainting = searchResultsAuction.getSelectedPainting();
@@ -447,6 +519,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSearchPaintingSale()
 	{
 		searchPaintingSale = new SearchPaintingSale();
+		searchPaintingSale.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MAIN_MENU);
+			}
+		});
+		searchPaintingSale.getBtnSelectPainting().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 	}
 	
 	/**
@@ -465,6 +546,11 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSeeAllArtists()
 	{
 		seeAllArtists = new SeeAllArtistsPanel();
+		seeAllArtists.getBtnBack().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_ARTIST);
+			}
+		});
 	}
 	
 	/**

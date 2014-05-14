@@ -53,14 +53,14 @@ public class AddPaintingAuctionPanel extends JPanel {
 		gridBagLayout = new GridBagLayout();
 		lblArtistinfo = new JLabel("Artist Information");
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-		formattedFirstName = new JFormattedTextField(createFormatter("?*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
 		formattedLastName = new JFormattedTextField(
-				createFormatter("?*******************"));
+				createFormatter("A*******************"));
 		lblPaintingInfo_1 = new JLabel("Painting Information");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
 		formattedTitle = new JFormattedTextField(
-				createFormatter("?***************************************"));
+				createFormatter("A***************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
 		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
