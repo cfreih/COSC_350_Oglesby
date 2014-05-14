@@ -372,12 +372,17 @@ public class AddPaintingAuctionPanel extends JPanel {
 			System.out.println((med.length() == 0) + "9");
 			System.out.println((subj.length() == 0) + "10");*/
 			String[] fieldValues = getFieldValues();
-			double dateWork = Double.parseDouble(fieldValues[3]);
-			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
+			double dateWork = 0;
+			if(fieldValues[3].contains("?"))
+				dateWork = Double.parseDouble(fieldValues[3].substring(0, fieldValues[3].length() -1));
+			else
+				dateWork = Double.parseDouble(fieldValues[3]);
+			SimpleDate dateAuction = new SimpleDate();
+			dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
 			double salePrice = Double.parseDouble(fieldValues[5]);
 			double height = Double.parseDouble(fieldValues[6]);
 			double width = Double.parseDouble(fieldValues[7]);
-			if((dateWork > 1099) && !(dateAuction.equals(new SimpleDate())) && (salePrice > 0)
+			if((dateWork > 1099) && (dateAuction.getYear() > dateWork) && (salePrice > 0)
 					&& (height > 0) && (width > 0))
 				return true;
 			else

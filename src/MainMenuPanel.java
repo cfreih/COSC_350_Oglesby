@@ -27,6 +27,10 @@ public class MainMenuPanel extends JPanel {
 	{
 		btnBuyPainting = new JButton("Buy Painting");	
 		btnSellPainting = new JButton("Sell Painting");
+		btnSellPainting.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		lblLesObjectsDorient = new JLabel("Les Objects d'Orient");
 		btnManageArtists = new JButton("Manage Artists");
 		btnManageAuctionRecords = new JButton("Manage Auction Records");
@@ -68,9 +72,10 @@ public class MainMenuPanel extends JPanel {
 		add(btnSellPainting, gbc_btnSellPainting);
 		
 		
-		lblLesObjectsDorient.setFont(new Font("Brush Script MT", Font.ITALIC, 32));
+		lblLesObjectsDorient.setFont(new Font("Dialog", Font.ITALIC, 32));
 		GridBagConstraints gbc_lblLesObjectsDorient = new GridBagConstraints();
-		gbc_lblLesObjectsDorient.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblLesObjectsDorient.gridheight = 2;
+		gbc_lblLesObjectsDorient.anchor = GridBagConstraints.WEST;
 		gbc_lblLesObjectsDorient.insets = new Insets(0, 0, 5, 0);
 		gbc_lblLesObjectsDorient.gridx = 3;
 		gbc_lblLesObjectsDorient.gridy = 3;
