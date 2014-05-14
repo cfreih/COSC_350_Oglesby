@@ -11,7 +11,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 
-public class SelectPaintingToSellPanel extends JPanel {
+public class SearchPaintingSale extends JPanel {
 	private JLabel lblArtistInfo;
 	private JLabel lblFirstName;
 	private JLabel lblLastNamemax;
@@ -22,7 +22,7 @@ public class SelectPaintingToSellPanel extends JPanel {
 	private JButton btnSelectPainting;
 	private JButton btnCancel;
 	private JLabel lblPaintingInfo;
-	public SelectPaintingToSellPanel() {
+	public SearchPaintingSale() {
 		formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
 		formattedLastName = new JFormattedTextField(createFormatter("H*******************"));
 		

@@ -18,6 +18,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	private CalcMaxPurchasePricePanel calcMaxPurchase;
 	private CompletePurchasePanel completePurchase;
 	
+	private CompleteSalePanel completeSale;
+	private SearchPaintingSale searchPaintingSale;
+	
 	private ManageAuctionMainMenuPanel auctionMM;
 	private AddPaintingAuctionPanel addPaintingAuction;
 	private SearchAuctionPanel searchAuction;
@@ -28,10 +31,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	private ManageArtistPanel manageArtist;
 	private UpdateArtistPanel updateArtist;
 	private AddNewArtistPanel addArtist;
+	private SearchArtistPanel searchArtist;
+	private SearchResultsArtistPanel searchResultsArtist;
+	private SeeAllArtistsPanel seeAllArtists;
 	private ApplyArtistChangesPanel applyArtistChanges;
 	
 	private ManageInventoryMainMenuPanel manageInventoryMM;
+	private AddPaintingInventoryPanel addPaintingInventory;
 	private UpdateInventoryPanel updateInventory;
+	private SeeAllInventoryPanel seeAllInventory;
 	private SearchInventoryPanel searchInventory;
 	
 	//constants to be used for indicating a panel
@@ -39,6 +47,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	public static String CALC_MAX_PURCH = "Calculate Max Purchase Price";
 	public static String COMPLETE_PURCHASE = "Complete Purchase";
+	
+	public static String COMPLETE_SALE = "Compete Sale";
+	public static String SEARCH_PAINTING_SALE = "Search Painting Sale";
 	
 	public static String AUCTION_MM = "Auction Main Menu";
 	public static String SEE_ALL_AUCTION = "See All Auction";
@@ -51,9 +62,14 @@ public class MainFrame extends JFrame implements ActionListener{
 	public static String UPDATE_ARTIST = "Update Artist";
 	public static String ADD_ARTIST = "Add New Artist";
 	public static String APPLY_ARTIST_CHANGES = "Apply Artist Changes";
+	public static String SEARCH_ARTIST = "Search Artist";
+	public static String SEARCH_RESULTS_ARTIST = "Search Results Artist";
+	public static String SEE_ALL_ARTISTS = "See All Artists";
 	
 	public static String MANAGE_INVENTORY = "Manage Inventory";
+	public static String ADD_PAINTING_INVENTORY = "Add Painting Inventory";
 	public static String UPDATE_INVENTORY = "Update Inventory";	
+	public static String SEE_ALL_INVENTORY = "See All Invneotry";
 	public static String SEARCH_INVENTORY = "Search Inventory Paintings";
 	
 	
@@ -66,6 +82,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpCalcMaxPurchase();
 		setUpCompletePurchase();
 		
+		setUpCompleteSale();
+		setUpSearchPaintingSale();
+		
 		setUpAuctionMM();
 		setUpAddPaintingAuction();	
 		setUpSearchAuction();
@@ -77,10 +96,15 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpUpdateArtist();
 		setUpAddArtist();
 		setUpApplyArtistChanges();
+		setUpSearchArtists();
+		setUpSearchResultsArtist();
+		setUpSeeAllArtists();
 		
 		setUpManageInventoryMM();
 		setUpUpdateInventory();	
 		setUpSearchInventory();
+		setUpAddPaintingInventory();
+		setUpSeeAllPaintingInventory();
 		
 		
 		cardLayout = new CardLayout();
@@ -205,6 +229,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
+	 * Desc: sets up the completeSale to be set up and used in MainFrame
+	 * Post: completeSale and its components are able to be used in MainFrame
+	 */
+	private void setUpCompleteSale()
+	{
+		completeSale = new CompleteSalePanel();
+	}
+	
+	/**
 	 * Desc: sets up the mainMenu to be set up and used in MainFrame
 	 * Post: mainMenu and its components are able to be used in MainFrame
 	 */
@@ -228,7 +261,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		mainMenu.getBtnReportsPopup().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReportGUI g = new ReportGUI(new Report());
+				ReportGUI g = new ReportGUI();
 			}
 		});
 		mainMenu.getBtnExit().addActionListener(new ActionListener() {
@@ -296,6 +329,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	 * Desc: sets up the searchAuction to be set up and used in MainFrame
 	 * Post: searchAuction and its components are able to be used in MainFrame
 	 */
+	private void setUpSearchArtist()
+	{
+		searchArtist = new SearchArtistPanel();
+	}
+	
+	/**
+	 * Desc: sets up the searchAuction to be set up and used in MainFrame
+	 * Post: searchAuction and its components are able to be used in MainFrame
+	 */
 	private void setUpSearchAuction()
 	{
 		searchAuction = new SearchAuctionPanel();
@@ -339,6 +381,8 @@ public class MainFrame extends JFrame implements ActionListener{
 			}
 		});
 	}
+	
+	
 	/**
 	 * Desc: sets up the searchResultsAuction to be set up and used in MainFrame
 	 * Post: searchResultsAuction and its components are able to be used in MainFrame
@@ -359,6 +403,15 @@ public class MainFrame extends JFrame implements ActionListener{
 				cardLayout.show(getContentPane(), SEARCH_AUCTION);
 			}
 		});
+	}
+	
+	/**
+	 * Desc: sets up the searchPaintingSale to be set up and used in MainFrame
+	 * Post: searchPaintingSale and its components are able to be used in MainFrame
+	 */
+	private void setUpSearchPaintingSale()
+	{
+		searchPaintingSale = new SearchPaintingSale();
 	}
 	
 	/**

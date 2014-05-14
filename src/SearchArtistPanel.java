@@ -17,12 +17,12 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ModifyDeleteArtistPanel extends JPanel {
+public class SearchArtistPanel extends JPanel {
 	private JButton btnSearchForArtist;
 	private JButton btnCancel;
 	JFormattedTextField formattedFirstName;
 	JFormattedTextField formattedLastName;
-	public ModifyDeleteArtistPanel() {
+	public SearchArtistPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 188, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -119,7 +119,7 @@ public class ModifyDeleteArtistPanel extends JPanel {
 		  f.setLocationRelativeTo(null);
 		  f.setSize(800, 600);
 		  f.setLocation(10, 10);
-		  f.getContentPane().add(new ModifyDeleteArtistPanel());
+		  f.getContentPane().add(new SearchArtistPanel());
 		  f.show();
 		 }
 		 public void resetTextFields()
