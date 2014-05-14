@@ -94,7 +94,14 @@ public class ReportGUI
     {
         if(lastClicked == 0) sortPurchasedPaintings(paintings);
         else if(lastClicked == 1) sortSoldPaintings(paintings);
-        else if(lastClicked == 2);
+        else if(lastClicked == 2) sortDetectPaintings(paintings);
+    }
+    //Desc: method to sort all detected paintings
+    //Post: all paintings will be sorted
+    private void sortDetectPaintings(InventoryPainting[] paintings)
+    {
+        Arrays.sort(paintings, new NameComparator());
+
     }
     //Desc: method to sort all purchased paintings
     //Post: all paintings will be sorted
@@ -289,7 +296,7 @@ public class ReportGUI
         }
         else if(lastClicked == 2)
         {
-            titles.add("Artist Last Name"); //1
+            titles.add("Artist Name"); //1
             titles.add("Date of Sale"); //14
             titles.add("Classification"); //4
             titles.add("Painting Title"); //2
@@ -334,7 +341,7 @@ public class ReportGUI
             for(int i = 0; i < paintings.length; i++)
             {
                 String[] fields = new String[6];
-                fields[0] = paintings[i].getArtistLastName();
+                fields[0] = paintings[i].getArtistLastName() + ", " + paintings[i].getArtistFirstName();
                 fields[1] = paintings[i].getDateOfSale().toString();
                 fields[2] = paintings[i].getClassification();
                 fields[3] = paintings[i].getTitleOfWork();
