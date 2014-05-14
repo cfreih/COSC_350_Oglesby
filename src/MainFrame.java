@@ -201,8 +201,10 @@ public class MainFrame extends JFrame implements ActionListener{
 				else
 				{
 					AuctionPainting newPainting = AddPaintingAuctionPanel.createNewAuctionPainting(addPaintingAuction.getFieldValues());
-					AuctionPainting[] checkPaintingsExists = HandleAuctionPaintings.retrieveAuctionPaintings(newPainting);
-					if(checkPaintingsExists.length > 0)
+					AuctionPainting[] searchDBPainting = getCheckDBAuctionPainting(newPainting);
+					AuctionPainting[][] checkPaintingsExists = {HandleAuctionPaintings.retrieveAuctionPaintings(searchDBPainting[0]),
+							HandleAuctionPaintings.retrieveAuctionPaintings(searchDBPainting[1]) };
+					if(checkPaintingsExists[0].length > 0 || checkPaintingsExists[1].length > 0)
 						JOptionPane.showMessageDialog(addPaintingAuction, "Paintings Already Exists");
 					else
 					{
@@ -647,6 +649,34 @@ public class MainFrame extends JFrame implements ActionListener{
 	{
 		InventoryPainting stubPainting = new InventoryPainting();
 		updateInventory = new UpdateInventoryPanel(stubPainting);
+	}
+	
+	/**
+	 * Desc: Takes an AuctionPainting and returns an AuctionPainting[2] that will
+	 * 		 be used to search for a duplicate painting.
+	 * Return: An AuctionPainting[2] with just the artistFirstName, artistLastName,
+	 * 		   titleOfWork, and dateOfWork set. Only variance between two elements
+	 * 		   is the one dateOfWork has ? and other does not.
+	 */
+	public static AuctionPainting[] getCheckDBAuctionPainting(AuctionPainting orig)
+	{
+		AuctionPainting[] searchDBPainting = new AuctionPainting[2];
+		searchDBPainting[0] = new AuctionPainting();		
+		searchDBPainting[0].setArtistFirstName(orig.getArtistFirstName());
+		searchDBPainting[0].setArtistLastName(orig.getArtistLastName());;
+		searchDBPainting[0].setTitleOfWork(orig.getTitleOfWork());
+		searchDBPainting[0].setDateOfWork(orig.getDateOfWork());
+		searchDBPainting[1] = new AuctionPainting();
+		searchDBPainting[1].setArtistFirstName(orig.getArtistFirstName());
+		searchDBPainting[1].setArtistLastName(orig.getArtistLastName());;
+		searchDBPainting[1].setTitleOfWork(orig.getTitleOfWork());
+		String date = "";
+		if(orig.getDateOfWork().contains("?"))
+			date = orig.getDateOfWork().replaceAll("\\?", "");
+		else
+			date = orig.getDateOfWork() + "?";
+		searchDBPainting[1].setDateOfWork(date);
+		return searchDBPainting;
 	}
 	
 	/**
