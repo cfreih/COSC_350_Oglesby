@@ -37,7 +37,7 @@ public class PurchasedPaintingReport extends Report
         if(paintingsBoughtInLastYear.length == 0) maxAndActualRatio = 0;
         else
         {
-            int total = 0;
+            double total = 0;
             for (int i = 0; i < paintingsBoughtInLastYear.length; i++)
             {
                 total += paintingsBoughtInLastYear[i].getMaxAndActualRatio();

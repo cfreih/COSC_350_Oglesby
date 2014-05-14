@@ -2,13 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.*;
 public class ReportGUI
 {
     protected JFrame frame;
     protected Report report;
-    protected JPanel grid;
+    protected JPanel gridPanel;
+    protected JPanel labelPanel;
     protected JTable table;
     protected int lastClicked = 0;
     //Desc: Constructor for Report
@@ -65,12 +65,45 @@ public class ReportGUI
     {
         frame = new JFrame("Report GUI");
         JPanel iconPanel = new JPanel();
-        grid = new JPanel(new FlowLayout());
+        gridPanel = new JPanel(new FlowLayout());
+        labelPanel = new JPanel();
+        setupLabel();
         setupGrid(new InventoryPainting[0]);
         addButtons(iconPanel);
-        setupGridBag(iconPanel, grid);
+        setupGridBag(iconPanel, gridPanel, labelPanel);
         setupFrameSettings();
         displayPaintings();
+    }
+    //Desc: method to setup the labels
+    //Post: the labels are setup
+    private void setupLabel()
+    {
+        labelPanel.removeAll();
+        JLabel label = new JLabel();
+        if(lastClicked == 0)
+        {
+            String labelString = "Average Ratio of Actual Purchase Price to Maximum Purchase Price: ";
+            PurchasedPaintingReport p = (PurchasedPaintingReport) report;
+            labelString += p.getMaxAndActualRatio();
+            label.setText(labelString);
+        }
+        else if(lastClicked == 1)
+        {
+            String labelString = "Average Ratio of Actual Selling Price to Target Selling Price: ";
+            SoldPaintingsReport s = (SoldPaintingsReport) report;
+            labelString += s.getTargetAndActualRatio();
+            label.setText(labelString);
+        }
+        else if(lastClicked == 2)
+        {
+            String labelString = "Number of Unique Artists: ";
+            DetectTrendsReport d = (DetectTrendsReport) report;
+            labelString += d.findTrendingArtists().length;
+            label.setText(labelString);
+        }
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
+        label.setSize(new Dimension(860, 30));
+        labelPanel.add(label);
     }
     //Desc: sets frame settings
     //Post: Frame has settings initialized
@@ -83,12 +116,13 @@ public class ReportGUI
         frame.setVisible(true);
     }
     //Desc: used to display all paintings
-    //Post: Paintings are displayed in the grid
+    //Post: Paintings are displayed in the gridPanel
     private void displayPaintings()
     {
         InventoryPainting[] paintings = convertToInventoryPainting();
         sortPaintings(paintings);
         setupGrid(paintings);
+        setupLabel();
     }
     private void sortPaintings(InventoryPainting[] paintings)
     {
@@ -101,7 +135,6 @@ public class ReportGUI
     private void sortDetectPaintings(InventoryPainting[] paintings)
     {
         Arrays.sort(paintings, new NameComparator());
-
     }
     //Desc: method to sort all purchased paintings
     //Post: all paintings will be sorted
@@ -171,11 +204,11 @@ public class ReportGUI
             count++;
         }
     }
-    //Desc: creates and sets up the grid
+    //Desc: creates and sets up the gridPanel
     //Post: the Grid is setup
     private void setupGrid(InventoryPainting[] paintings)
     {
-        grid.removeAll();
+        gridPanel.removeAll();
         String[] columnTitles = loadTitles();
         ArrayList<String[]> pairs = new ArrayList<String[]>();
         loadData(paintings, pairs);
@@ -186,7 +219,7 @@ public class ReportGUI
         table.setRowHeight(22);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(860, 463));
-        grid.add(scrollPane);
+        gridPanel.add(scrollPane);
     }
     //Desc: creates and sets up buttons
     //Post: buttons are added to the panel
@@ -257,7 +290,7 @@ public class ReportGUI
     }
     //Desc: method to setup the gridbag
     //Post: the gridbag is setup
-    private void setupGridBag(JPanel iconPanel, JPanel grid)
+    private void setupGridBag(JPanel iconPanel, JPanel grid, JPanel label)
     {
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -265,10 +298,10 @@ public class ReportGUI
         c.gridx = 0;
         c.gridy = 0;
         frame.add(iconPanel, c);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
         c.gridy = 1;
         frame.add(grid,c);
+        c.gridy = 2;
+        frame.add(label, c);
     }
     //Desc: method to load a String[] with values to assist in the creation of column headers
     // In particular, this method assists with limiting the amount of hardcoding in the stringify

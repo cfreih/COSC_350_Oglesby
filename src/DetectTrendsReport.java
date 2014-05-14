@@ -20,7 +20,7 @@ public class DetectTrendsReport extends FindSoldPaintings
     //Desc: method finds all artists who have sold more than one painting in the last year.
     //Pre: soldPaintings must be loaded from the Handler
     //Return: returns a String array with the artists names from the last year as elements
-    protected String[] findTrendingArtists()
+    public String[] findTrendingArtists()
     {
         if(this.soldPaintings == null) return null;
         HashMap<String, Integer> artistHash = new HashMap<String, Integer>();
