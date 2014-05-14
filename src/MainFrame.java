@@ -96,7 +96,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpUpdateArtist();
 		setUpAddArtist();
 		setUpApplyArtistChanges();
-		setUpSearchArtists();
+		setUpSearchArtist();
 		setUpSearchResultsArtist();
 		setUpSeeAllArtists();
 		
@@ -104,7 +104,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpUpdateInventory();	
 		setUpSearchInventory();
 		setUpAddPaintingInventory();
-		setUpSeeAllPaintingInventory();
+		setUpSeeAllInventory();
 		
 		
 		cardLayout = new CardLayout();
@@ -152,6 +152,16 @@ public class MainFrame extends JFrame implements ActionListener{
 	{
 		addArtist = new AddNewArtistPanel();
 	}
+	
+	/**
+	 * Desc: sets up the addPaintingInventory to be set up and used in MainFrame
+	 * Post: addPaintingInventory and its components are able to be used in MainFrame
+	 */
+	private void setUpAddPaintingInventory()
+	{
+		addPaintingInventory = new AddPaintingInventoryPanel();
+	}
+	
 	
 	/**
 	 * Desc: sets up the addPaintingAuction to be set up and used in MainFrame
@@ -206,7 +216,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				cardLayout.show(getContentPane(), MAIN_MENU);
 			}
 		});
-		calcMaxPurchase.getBtnAddPaintingTo().addActionListener(new ActionListener() {
+		calcMaxPurchase.getBtnCalcMaxPrice().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Check to make sure input is valid
 				//setup painting form inputted info
@@ -335,6 +345,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
+	 * Desc: sets up the searchResultsAuction to be set up and used in MainFrame
+	 * Post: searchResultsAuction and its components are able to be used in MainFrame
+	 */
+	private void setUpSearchResultsArtist()
+	{
+		searchResultsArtist = new SearchResultsArtistPanel();
+	}
+	
+	/**
 	 * Desc: sets up the searchAuction to be set up and used in MainFrame
 	 * Post: searchAuction and its components are able to be used in MainFrame
 	 */
@@ -424,6 +443,15 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
+	 * Desc: sets up the seeAllArtists to be set up and used in MainFrame
+	 * Post: seeAllArtists and its components are able to be used in MainFrame
+	 */
+	private void setUpSeeAllArtists()
+	{
+		seeAllArtists = new SeeAllArtistsPanel();
+	}
+	
+	/**
 	 * Desc: sets up the seeAllAuction to be set up and used in MainFrame
 	 * Post: seeAllAuction and its components are able to be used in MainFrame
 	 */
@@ -435,6 +463,15 @@ public class MainFrame extends JFrame implements ActionListener{
 				cardLayout.show(getContentPane(), AUCTION_MM);
 			}
 		});
+	}
+	
+	/**
+	 * Desc: sets up the seeAllAuction to be set up and used in MainFrame
+	 * Post: seeAllAuction and its components are able to be used in MainFrame
+	 */
+	private void setUpSeeAllInventory()
+	{
+		seeAllInventory = new SeeAllInventoryPanel();
 	}
 	
 	/**
