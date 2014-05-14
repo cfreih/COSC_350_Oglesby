@@ -42,6 +42,8 @@ public abstract class Calculation
         AuctionPainting paintingByArtist=new AuctionPainting();
         paintingByArtist.setArtistFirstName(painting.getArtistFirstName());
         AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(paintingByArtist);
+        if(records.length==0)
+        	return -10;
         double price = 0;
         if(painting.getClassification().toLowerCase().equals("masterpiece")) price=calcMaxMasterpiece(painting, records);
         else if (painting.getClassification().toLowerCase().equals("masterwork")) price=calcMaxMasterwork(painting, records);
@@ -84,6 +86,8 @@ public abstract class Calculation
         double area=painting.getHeightCM()*painting.getWidthCM();
         Artist artist=new Artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1);
         Artist[] artists=HandleArtist.retrieveArtists(artist);
+        if(artists.length==0)
+        	return -1;
         int fashionabilityConstant=artists[0].getFashionabilityCoeff();
         return area * fashionabilityConstant;
     }

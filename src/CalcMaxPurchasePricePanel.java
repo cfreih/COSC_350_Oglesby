@@ -389,7 +389,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 			textFieldMedium.setText("");
 			textFieldSubject.setText("");
 		}
-		public static InventoryPainting createNewInventoryPainting(String[] values)
+		public InventoryPainting createNewInventoryPainting(String[] values)
 		{
 			String fName = values[0];
 			String lName = values[1];
