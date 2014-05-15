@@ -39,7 +39,7 @@ public abstract class HandleAuctionPaintings
     // Search terms only a Date object
     // Is a special case for the FindSoldPaintings class.
     //Return: returns an InventoryPainting array, with elements matching search terms
-    public static AuctionPainting[] retrieveAuctionPaintings(SimpleDate d)
+    public static AuctionPainting[] retrieveAuctionPaintings(SimpleDate d, AuctionPainting auction)
     {
         String tableStatement = "auction_paintings";
         String orderBy = "lastName, firstName";
@@ -48,7 +48,8 @@ public abstract class HandleAuctionPaintings
         Pair[] pairs = loadMap(new AuctionPainting());
         statement += HandlerUtility.loadKeys(pairs);
         statement += " FROM " + tableStatement;
-        statement += " WHERE dateOfSale > " + date + " ";
+        statement += stringify(auction);
+        statement += " AND WHERE dateOfSale > " + date + " ";
         statement += " ORDER BY " + orderBy;
         SQLConnector connection = new SQLConnector(statement);
         Vector result = connection.executeSQL_Query();
