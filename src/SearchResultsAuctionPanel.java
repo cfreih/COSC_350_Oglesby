@@ -2,13 +2,21 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JList;
 import java.awt.GridBagConstraints;
+
 import javax.swing.JButton;
+
 import java.awt.Insets;
+
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class SearchResultsAuctionPanel extends JPanel {
@@ -17,16 +25,15 @@ public class SearchResultsAuctionPanel extends JPanel {
 	private JButton btnSelect;
 	private JButton btnCancel;
 	private JScrollPane scrollPaneList;
-	private JList<AuctionPainting> listSearchResults;
-	private JLabel lblSearchResults;
 	private AuctionPainting[] searchResults;
+	private JTable table;
+	private AuctionPainting origPainting;
+	private DefaultTableModel tableModel;
 	
 	public SearchResultsAuctionPanel() {
 		
 		gridBagLayout = new GridBagLayout();
 		scrollPaneList = new JScrollPane();
-		listSearchResults = new JList<AuctionPainting>();
-		lblSearchResults = new JLabel("Search Results");
 		btnSelect = new JButton("Select");
 		btnCancel = new JButton("Cancel");
 		
@@ -52,12 +59,37 @@ public class SearchResultsAuctionPanel extends JPanel {
 		gbc_scrollPaneList.gridy = 1;
 		add(scrollPaneList, gbc_scrollPaneList);
 		
-		
-		scrollPaneList.setViewportView(listSearchResults);		
-		lblSearchResults.setLabelFor(listSearchResults);
-		lblSearchResults.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSearchResults.setFont(new Font("Century", Font.PLAIN, 12));
-		scrollPaneList.setColumnHeaderView(lblSearchResults);
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
+		origPainting = new AuctionPainting();
+		tableModel = new DefaultTableModel(new Object[][] { origPainting.toTableRow() },
+				new String[] { "Artist First Name", "Arist Last Name", "Title",
+						"Date of Work", "Date of Sale", "Sale Price", "Height",
+						"Width", "Medium", "Subject" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class,
+					String.class, Integer.class, Object.class, Double.class,
+					Integer.class, Integer.class, String.class, String.class };
+
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+
+			boolean[] columnEditables = new boolean[] { false, false, false,
+					false, false, false, false, false, false, false };
+
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		};		
+
+		scrollPaneList.setViewportView(table);
 		
 		
 		btnSelect.setFont(new Font("Century", Font.PLAIN, 12));
@@ -77,29 +109,48 @@ public class SearchResultsAuctionPanel extends JPanel {
 		add(btnCancel, gbc_btnCancel);
 	}
 	
-	/**
-	 * Desc: Takes a searchPainting and sets the list to what that will
-	 * 		 retrieve from the auction, the search results.
-	 * Post: listSearchResults has the data of searchResults.
-	 */
-	public void updateSearchResultsList(AuctionPainting[] searchResults)
+	public void updateTableModel(AuctionPainting[] aucPaintings)
 	{
-		listSearchResults.setListData(searchResults);
+		 searchResults=aucPaintings;
+	        Object[][] dataVector= new Object[aucPaintings.length][20];
+	        for(int i=0; i <= aucPaintings.length-1; i++){
+	            dataVector[i]=aucPaintings[i].toTableRow();
+	        }
+		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
+				"Date of Work", "Date of Sale", "Sale Price", "Height",
+				"Width", "Medium", "Subject" };
+		tableModel.setDataVector(dataVector, columnNames);
+		table.setModel(tableModel);	
 	}
-	
-	/**
-	 * Desc: Gets the selected painting and returns what it is.
-	 * @return the painting selected in the listSearchResults.
-	 */
-	public AuctionPainting getSelectedPainting()
-	{
-		return listSearchResults.getSelectedValue();
-	}
-
+	public AuctionPainting getSelectedAuctionPainting()
+    {
+        int row = table.getSelectedRow();
+        if(row == -1)
+            return new AuctionPainting();
+        else
+            return searchResults[row];
+    }
 	public JButton getBtnSelect() {
 		return btnSelect;
 	}
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
+	public static void main(String[] args) {
+        JFrame f = new JFrame("test window");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setResizable(false);
+        f.setLocationRelativeTo(null);
+        f.setSize(800, 600);
+        f.setLocation(10, 10);
+        SearchResultsAuctionPanel panel =new SearchResultsAuctionPanel();
+        f.getContentPane().add(panel);
+        f.setVisible(true);
+        AuctionPainting[] invP = new AuctionPainting[25];
+        for(int i=0; i <= invP.length-1; ++i){
+
+            invP[i] = new AuctionPainting( "firstName","lastName","title","date",22.8,36.8,"med","subj",40000,new SimpleDate());
+        }
+        panel.updateTableModel(invP);
+    }
 }
