@@ -41,7 +41,11 @@ public abstract class Calculation
     {
         AuctionPainting paintingByArtist=new AuctionPainting();
         paintingByArtist.setArtistFirstName(painting.getArtistFirstName());
-        AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(paintingByArtist);
+        paintingByArtist.setArtistLastName(painting.getArtistLastName());
+        SimpleDate date = new SimpleDate(SimpleDate.TODAY);
+        if(!painting.getDateOfPurchase().equals(new SimpleDate(SimpleDate.TODAY)))
+        	date = painting.getDateOfPurchase();
+        AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(date, paintingByArtist);
         if(records.length==0)
         	return -10;
         double price = 0;
