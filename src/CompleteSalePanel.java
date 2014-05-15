@@ -50,11 +50,11 @@ public class CompleteSalePanel extends JPanel {
 		origPainting=new InventoryPainting();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 253, 108, 76, 86, 153, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		gridBagLayout.rowHeights = new int[] { 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
@@ -70,14 +70,24 @@ public class CompleteSalePanel extends JPanel {
 		add(lblPaintingInformation, gbc_lblPaintingInformation);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridwidth = 5;
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 1;
 		add(scrollPane, gbc_scrollPane);
 		
 		paintingsTable=new JTable();
+		paintingsTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+			}
+		));
 		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableModel =new DefaultTableModel(new Object[][] {origPainting.toTableRow()},
 				new String[] {
@@ -95,6 +105,7 @@ public class CompleteSalePanel extends JPanel {
 					return columnTypes[columnIndex];
 				}
 			};
+		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPane.setViewportView(paintingsTable);
 
 		lblBuyerInfo = new JLabel("Buyer Information");
@@ -113,11 +124,11 @@ public class CompleteSalePanel extends JPanel {
 		gbc_lblFullName.gridy = 3;
 		add(lblFullName, gbc_lblFullName);
 		formattedFullName = new JFormattedTextField(
-				createFormatter("A*******************"));
+				createFormatter("A***************************************"));
 
 		formattedFullName.setColumns(40);
 		GridBagConstraints gbc_formattedFullName = new GridBagConstraints();
-		gbc_formattedFullName.anchor = GridBagConstraints.WEST;
+		gbc_formattedFullName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_formattedFullName.insets = new Insets(0, 0, 5, 5);
 		gbc_formattedFullName.gridx = 1;
 		gbc_formattedFullName.gridy = 4;
@@ -131,12 +142,12 @@ public class CompleteSalePanel extends JPanel {
 		gbc_lblAddress.gridy = 5;
 		add(lblAddress, gbc_lblAddress);
 		formattedAddress = new JFormattedTextField(
-				createFormatter("A*******************"));
+				createFormatter("A***************************************"));
 
 		formattedAddress.setColumns(40);
 		GridBagConstraints gbc_formattedAddress = new GridBagConstraints();
+		gbc_formattedAddress.fill = GridBagConstraints.HORIZONTAL;
 		gbc_formattedAddress.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedAddress.anchor = GridBagConstraints.WEST;
 		gbc_formattedAddress.gridx = 1;
 		gbc_formattedAddress.gridy = 6;
 		add(formattedAddress, gbc_formattedAddress);
@@ -161,8 +172,8 @@ public class CompleteSalePanel extends JPanel {
 
 		formattedPrice.setColumns(40);
 		GridBagConstraints gbc_formattedPrice = new GridBagConstraints();
+		gbc_formattedPrice.fill = GridBagConstraints.HORIZONTAL;
 		gbc_formattedPrice.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedPrice.anchor = GridBagConstraints.WEST;
 		gbc_formattedPrice.gridx = 1;
 		gbc_formattedPrice.gridy = 9;
 		add(formattedPrice, gbc_formattedPrice);
