@@ -227,9 +227,9 @@ public class UpdateArtistPanel extends JPanel {
 		fieldValues[0] = "";
 		if(formattedFirstName.getValue() != null)
 			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
-		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[1] = "";
 		if(formattedLastName.getValue() != null)
-			fieldValues[1] = ((String) formattedFirstName.getValue()).trim();
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
 		fieldValues[2] = "";
 		if(formattedFashionability.getValue() != null)
 			fieldValues[3] = ((String) formattedFashionability.getValue()).trim();

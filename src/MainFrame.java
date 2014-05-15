@@ -168,7 +168,6 @@ public class MainFrame extends JFrame implements ActionListener{
 				else
 				{
 					Artist newArtist = addArtist.createNewArtist();
-					System.out.println(newArtist);
 					Artist checkDBArtist = getCheckDBArtist(newArtist);
 					Artist[] checkArtistExists = HandleArtist.retrieveArtists(checkDBArtist);
 					if(checkArtistExists.length > 0)
@@ -653,15 +652,21 @@ public class MainFrame extends JFrame implements ActionListener{
 					{
 						Artist origArtist = updateArtist.getOrigArtist();
 						Artist changeArtist = new Artist();
-						try {
-							changeArtist = origArtist.clone();
-						} catch (CloneNotSupportedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						Artist[] checkArtistExists = HandleArtist.retrieveArtists(origArtist);
+						if(checkArtistExists.length > 0)
+							JOptionPane.showMessageDialog(addArtist, "Artist already exists.");
+						else
+						{
+							try {
+								changeArtist = origArtist.clone();
+							} catch (CloneNotSupportedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							updateArtist.updateArtist(changeArtist);
+							HandleArtist.updateArtist(changeArtist, origArtist);
+							cardLayout.show(getContentPane(), ARTIST_MM);
 						}
-						updateArtist.updateArtist(changeArtist);
-						HandleArtist.updateArtist(changeArtist, origArtist);
-						cardLayout.show(getContentPane(), ARTIST_MM);
 					}
 				}					
 			}
