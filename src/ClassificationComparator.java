@@ -5,14 +5,32 @@ import java.util.Comparator;
  */
 public class ClassificationComparator implements Comparator<InventoryPainting>
 {
+    private boolean purchaseReport;
+    public ClassificationComparator(boolean purchaseReport)
+    {
+        this.purchaseReport = purchaseReport;
+    }
     @Override
     public int compare(InventoryPainting o1, InventoryPainting o2)
     {
-        int rank1 = rankClassification(o1.getClassification());
-        int rank2 = rankClassification(o2.getClassification());
-        if(rank1 > rank2) return -1;
-        if(rank1 == rank2) return 0;
-        return 1;
+        Integer rank1 = rankClassification(o1.getClassification());
+        Integer rank2 = rankClassification(o2.getClassification());
+        int result = rank2.compareTo(rank1);
+        if(result == 0)
+        {
+            if(purchaseReport)
+            {
+                rank1 = HandlerUtility.dateToInt(o1.getDateOfPurchase());
+                rank2 = HandlerUtility.dateToInt(o2.getDateOfPurchase());
+            }
+            else
+            {
+                rank1 = HandlerUtility.dateToInt(o1.getDateOfSale());
+                rank2 = HandlerUtility.dateToInt(o2.getDateOfSale());
+            }
+            result = rank2.compareTo(rank1);
+        }
+        return result;
     }
     public int rankClassification(String classification)
     {
