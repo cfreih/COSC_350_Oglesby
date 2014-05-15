@@ -49,7 +49,7 @@ public abstract class HandleAuctionPaintings
         statement += HandlerUtility.loadKeys(pairs);
         statement += " FROM " + tableStatement;
         statement += stringify(auction);
-        statement += " AND WHERE dateOfAuction > " + date + " ";
+        statement += " AND WHERE dateOfAuction < " + date + " ";
         statement += " ORDER BY " + orderBy;
         SQLConnector connection = new SQLConnector(statement);
         Vector result = connection.executeSQL_Query();
