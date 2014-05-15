@@ -446,9 +446,9 @@ public class UpdateAuctionPanel extends JPanel {
 		if(fieldValues[5].length() > 0)
 			update.setSalePriceAuction(Double.parseDouble(fieldValues[5]));
 		if(fieldValues[6].length() > 0)
-			update.setHeightCM(Double.parseDouble(fieldValues[7]));
+			update.setHeightCM(Double.parseDouble(fieldValues[6]));
 		if(fieldValues[7].length() > 0)
-			update.setWidthCM(Double.parseDouble(fieldValues[8]));
+			update.setWidthCM(Double.parseDouble(fieldValues[7]));
 		if(fieldValues[8].length() > 0)
 			update.setMedium(fieldValues[9]);
 		if(fieldValues[9].length() > 0)
