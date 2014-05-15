@@ -566,6 +566,19 @@ public class UpdateInventoryPanel extends JScrollPane {
 		} 
 	}	
 	
+	
+	public JButton getBtnSaveChanges() {
+		return btnSaveChanges;
+	}
+
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
+
 	public static void main( String[] args )
    	{
 		InventoryPainting paint = new InventoryPainting();
