@@ -738,6 +738,10 @@ public class MainFrame extends JFrame implements ActionListener{
 	 */
 	private void setUpUpdateInventory()
 	{
+<<<<<<< HEAD
+=======
+		InventoryPainting stubPainting = new InventoryPainting();
+>>>>>>> 36221476d14c5c643063cd3c462b6d745641fbeb
 		updateInventory = new UpdateInventoryPanel();
 	}
 	

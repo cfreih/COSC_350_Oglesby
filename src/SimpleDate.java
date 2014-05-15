@@ -295,6 +295,16 @@ public class SimpleDate {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	public static boolean dateIsTooLarge(SimpleDate maxDate, SimpleDate dateToCompare){
+		if(maxDate.getYear()<dateToCompare.getYear()){
+			if(maxDate.getMonth()<dateToCompare.getMonth()){
+				if(maxDate.getMonth()<dateToCompare.getMonth())
+					return false;
+			}			
+		}		
+		return true;
+	}	
+	
 	public String toString() {
 		String s = this.getMonth() + "/" + this.getDay() + "/"
 				+ Math.abs(this.getYear());
