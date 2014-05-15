@@ -36,7 +36,7 @@ public abstract class HandleAuctionPaintings
         return Arrays.copyOf(auctionPaintings.toArray(), auctionPaintings.toArray().length, AuctionPainting[].class);
     }
     //Desc: method searches the database and retrieves any matching records.
-    // Search terms only a Date object
+    // Search terms only a Date object, only paintings older than the date will be returned
     // Is a special case for the FindSoldPaintings class.
     //Return: returns an InventoryPainting array, with elements matching search terms
     public static AuctionPainting[] retrieveAuctionPaintings(SimpleDate d, AuctionPainting auction)
