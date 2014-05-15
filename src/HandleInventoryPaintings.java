@@ -59,6 +59,10 @@ public abstract class HandleInventoryPaintings
             statement += " OR";
             statement += stringify(inventory[i], isMultiple);
         }
+        SimpleDate d = new SimpleDate(SimpleDate.TODAY);
+        d.setYear(d.getYear() - 1);
+        int date = HandlerUtility.dateToInt(d);
+        statement += "AND dateOfSale > " + date;
         statement += " ORDER BY " + orderBy;
         SQLConnector connection = new SQLConnector(statement);
         Vector result = connection.executeSQL_Query();

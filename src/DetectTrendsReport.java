@@ -73,6 +73,7 @@ public class DetectTrendsReport extends FindSoldPaintings
     // names passed to the database
     protected InventoryPainting[] getFullTrendsReport(String[] trendingArtists)
     {
+        ArrayList<InventoryPainting> paintings = new ArrayList<InventoryPainting>();
         return HandleInventoryPaintings.retrieveInventoryPaintings(splitNames(trendingArtists));
     }
 }
