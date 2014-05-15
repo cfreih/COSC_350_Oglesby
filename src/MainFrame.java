@@ -21,6 +21,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	private CompleteSalePanel completeSale;
 	private SearchPaintingSale searchPaintingSale;
+	private SearchResultsSalePanel searchResultsSale;
 	
 	private ManageAuctionMainMenuPanel auctionMM;
 	private AddPaintingAuctionPanel addPaintingAuction;
@@ -50,6 +51,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	public static String COMPLETE_SALE = "Compete Sale";
 	public static String SEARCH_PAINTING_SALE = "Search Painting Sale";
+	public static String SEARCH_RESULTS_SALE = "Search Results Sale";
 	
 	public static String AUCTION_MM = "Auction Main Menu";
 	public static String SEE_ALL_AUCTION = "See All Auction";
@@ -84,6 +86,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		setUpCompleteSale();
 		setUpSearchPaintingSale();
+		setUpSearchResultsSale();
 		
 		setUpAuctionMM();
 		setUpAddPaintingAuction();	
@@ -147,6 +150,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(seeAllArtists, SEE_ALL_ARTISTS);
 		getContentPane().add(addPaintingInventory, ADD_PAINTING_INVENTORY);
 		getContentPane().add(seeAllInventory, SEE_ALL_INVENTORY);
+		getContentPane().add(searchResultsSale, SEARCH_RESULTS_SALE);
 	}
 	
 	/**
@@ -258,7 +262,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		calcMaxPurchase.getBtnCalcMaxPrice().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!calcMaxPurchase.isInputValid())
+				if(!calcMaxPurchase.isEditValid())
 					JOptionPane.showMessageDialog(calcMaxPurchase, "Input is invalid, make sure all fields are correct");
 				else
 				{
@@ -310,7 +314,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				cardLayout.show(getContentPane(), MAIN_MENU);
 			}
 		});
-		completePurchase.getBtnAddPaintingTo().addActionListener(new ActionListener() {
+		completePurchase.getCompletePurchase().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!completePurchase.isInputValid())
 					JOptionPane.showMessageDialog(completePurchase, "Input is invalid, make sure all fields are correct");
@@ -583,9 +587,7 @@ public class MainFrame extends JFrame implements ActionListener{
 						searchResultsAuction.updateSearchResultsList(searchResults);
 						cardLayout.show(getContentPane(), SEARCH_RESULTS_AUCTION);
 					}					
-				}
-				
-					
+				}	
 			}
 		});
 	}
@@ -627,8 +629,38 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		searchPaintingSale.getBtnSelectPainting().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!searchPaintingSale.isInputValid())
+					JOptionPane.showMessageDialog(searchPaintingSale, "Input is invalid, make sure all fields are correct");
+				else
+				{
+					InventoryPainting searchTerms = searchPaintingSale.createNewInventoryPainting();
+					InventoryPainting[] searchResults = HandleInventoryPaintings.retrieveInventoryPaintings(searchTerms);
+					if(searchResults.length == 0)
+						JOptionPane.showMessageDialog(searchPaintingSale, "No results found in search");
+					else if(searchResults.length == 1)
+					{
+						completeSale.updateTableModel(searchResults[0]);
+						completeSale.resetTextFields();
+						cardLayout.show(getContentPane(),COMPLETE_SALE);
+					}
+					else
+					{
+						searchResultsSale.updateTableModel(searchResults);
+						
+					}
+				}
+					
 			}
 		});
+	}
+	
+	/**
+	 * Desc: sets up the searchInventory to be set up and used in MainFrame
+	 * Post: searchInventory and its components are able to be used in MainFrame
+	 */
+	public void setUpSearchResultsSale()
+	{
+		searchResultsSale = new SearchResultsSalePanel();
 	}
 	
 	/**

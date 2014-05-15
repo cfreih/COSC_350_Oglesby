@@ -141,60 +141,13 @@ public class ReportGUI
     //Post: all paintings will be sorted
     private void sortPurchasedPaintings(InventoryPainting[] paintings)
     {
-        int masterpieceCount = 0;
-        int masterworkCount = 0;
-        Arrays.sort(paintings, new ClassificationComparator());
-        for(int i = 0; i < paintings.length; i++)
-        {
-            if(paintings[i].getClassification().equals("Masterpiece"))
-            {
-                masterpieceCount++;
-            }
-            if(paintings[i].getClassification().equals("Masterwork"))
-            {
-                masterworkCount++;
-            }
-        }
-        masterworkCount = masterpieceCount + masterworkCount;
-        int otherCount = masterpieceCount + masterworkCount;
-        InventoryPainting[] masterpieces = Arrays.copyOfRange(paintings, 0, masterpieceCount);
-        InventoryPainting[] masterworks = Arrays.copyOfRange(paintings, masterpieceCount, masterworkCount);
-        InventoryPainting[] others = Arrays.copyOfRange(paintings, masterworkCount, paintings.length);
-        Arrays.sort(masterpieces,new DateOfPurchaseComparator(true));
-        Arrays.sort(masterworks, new DateOfPurchaseComparator(true));
-        Arrays.sort(others, new DateOfPurchaseComparator(true));
-        if(masterpieceCount != 0)mergeArrays(0, masterpieceCount, paintings, masterpieces);
-        if(masterworkCount != 0) mergeArrays(masterpieceCount, masterworkCount, paintings, masterworks);
-        if(otherCount != paintings.length) mergeArrays(masterworkCount, paintings.length, paintings, others);
+        Arrays.sort(paintings, new ClassificationComparator(true));
     }
     //Desc: method to sort all sold paintings
     //Post: all paintings will be sorted
     private void sortSoldPaintings(InventoryPainting[] paintings)
     {
-        int masterpieceCount = 0;
-        int masterworkCount = 0;
-        Arrays.sort(paintings, new ClassificationComparator());
-        for(int i = 0; i < paintings.length; i++)
-        {
-            if(paintings[i].getClassification().equals("Masterpiece"))
-            {
-                masterpieceCount++;
-            }
-            if(paintings[i].getClassification().equals("Masterwork"))
-            {
-                masterworkCount++;
-            }
-        }
-        masterworkCount = masterpieceCount + masterworkCount;
-        InventoryPainting[] masterpieces = Arrays.copyOfRange(paintings, 0, masterpieceCount);
-        InventoryPainting[] masterworks = Arrays.copyOfRange(paintings,masterpieceCount, masterworkCount);
-        InventoryPainting[] others = Arrays.copyOfRange(paintings, masterworkCount, paintings.length );
-        Arrays.sort(masterpieces,new DateOfPurchaseComparator(false));
-        Arrays.sort(masterworks, new DateOfPurchaseComparator(false));
-        Arrays.sort(others, new DateOfPurchaseComparator(false));
-        mergeArrays(0, masterpieceCount, paintings, masterpieces);
-        mergeArrays(masterpieceCount, masterworkCount, paintings, masterworks);
-        mergeArrays(masterworkCount, paintings.length, paintings, others);
+        Arrays.sort(paintings, new ClassificationComparator(false));
     }
     private void mergeArrays(int start, int end, InventoryPainting[] arr1, InventoryPainting[] arr2)
     {

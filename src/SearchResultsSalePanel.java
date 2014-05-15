@@ -13,12 +13,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 
 public class SearchResultsSalePanel extends JPanel {
 	private JTable paintingsTable;
 	private DefaultTableModel tableModel;
 	private InventoryPainting[] searchedPaintings;
+	private JButton btnBack;
+	private JButton btnSelect;
 	
 	public SearchResultsSalePanel() {
 		
@@ -27,17 +32,22 @@ public class SearchResultsSalePanel extends JPanel {
 	}
 	public void setUpPanel(){
 		this.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Search Results", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0))));
-		SpringLayout springLayout = new SpringLayout();
-		setLayout(springLayout);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{200, 175, 0, 175, 200, 0};
+		gridBagLayout.rowHeights = new int[]{33, 464, 22, 34, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		springLayout.putConstraint(SpringLayout.NORTH, scrollPane, 15, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, scrollPane, 15, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -40, SpringLayout.SOUTH, this);
-		springLayout.putConstraint(SpringLayout.EAST, scrollPane, -15, SpringLayout.EAST, this);
-		add(scrollPane);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 5;
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 1;
+		add(scrollPane, gbc_scrollPane);
 		
-		paintingsTable = new JTable();
 		tableModel =new DefaultTableModel(
 				new Object[][] {
 						{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -47,6 +57,7 @@ public class SearchResultsSalePanel extends JPanel {
 						"Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Prucahse", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price", "New column"
 					}
 				);
+		paintingsTable = new JTable();
 		paintingsTable.setModel(tableModel);
 		paintingsTable.getColumnModel().getColumn(9).setPreferredWidth(96);
 		paintingsTable.getColumnModel().getColumn(10).setPreferredWidth(92);
@@ -56,10 +67,22 @@ public class SearchResultsSalePanel extends JPanel {
 		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPane.setViewportView(paintingsTable);
 		
-		JButton btnBack = new JButton("Back");
-		springLayout.putConstraint(SpringLayout.NORTH, btnBack, 5, SpringLayout.SOUTH, scrollPane);
-		springLayout.putConstraint(SpringLayout.WEST, btnBack, 10, SpringLayout.WEST, scrollPane);
-		add(btnBack);
+		btnSelect = new JButton("Select");
+		GridBagConstraints gbc_btnSelect = new GridBagConstraints();
+		gbc_btnSelect.fill = GridBagConstraints.BOTH;
+		gbc_btnSelect.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSelect.gridx = 1;
+		gbc_btnSelect.gridy = 3;
+		add(btnSelect, gbc_btnSelect);
+		
+		btnBack = new JButton("Back");
+		GridBagConstraints gbc_btnBack = new GridBagConstraints();
+		gbc_btnBack.insets = new Insets(0, 0, 0, 5);
+		gbc_btnBack.fill = GridBagConstraints.BOTH;
+		gbc_btnBack.gridx = 3;
+		gbc_btnBack.gridy = 3;
+		add(btnBack, gbc_btnBack);
+		
 	}
 	public void updateTableModel(InventoryPainting[] invPaintings){
 		searchedPaintings=invPaintings;
@@ -104,5 +127,11 @@ public class SearchResultsSalePanel extends JPanel {
 			return new InventoryPainting();
 		else
 			return searchedPaintings[row];
+	}
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	public JButton getBtnSelect() {
+		return btnSelect;
 	}
 }
