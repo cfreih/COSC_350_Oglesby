@@ -45,4 +45,9 @@ public class ReportTableModel extends AbstractTableModel
         }
         return "?";
     }
+    @Override
+    public boolean isCellEditable(int row, int column)
+    {
+    	return false;
+    }
 }
