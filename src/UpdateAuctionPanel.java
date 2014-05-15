@@ -70,7 +70,7 @@ public class UpdateAuctionPanel extends JPanel {
 		lblPaintingInfo.setBounds(27, 61, 119, 15);
 		paintingsTable = new JTable();
 		scrollPane = new JScrollPane(paintingsTable);
-		scrollPane.setBounds(27, 79, 696, 54);
+		scrollPane.setBounds(27, 79, 696, 57);
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
 		lblArtistFirstName.setBounds(27, 176, 215, 15);
 		formattedFirstName = new JFormattedTextField(

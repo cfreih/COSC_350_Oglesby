@@ -25,10 +25,14 @@ public class SearchResultsArtistPanel extends JPanel {
 	private JTable artistTable;
 	private DefaultTableModel tableModel;
 	private JButton btnSelect;
+	
+	private Artist[] searchedArtists;
+	
 	public SearchResultsArtistPanel() {
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
 				null, null), new TitledBorder(null, "See All Artists",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+		searchedArtists = new Artist[0];
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 150, 150, 150, 150, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
@@ -46,6 +50,7 @@ public class SearchResultsArtistPanel extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 		
 		artistTable = new JTable();
+		artistTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableModel =new DefaultTableModel(
 				new Object[][] {
 						{null, null, null},
@@ -83,11 +88,12 @@ public class SearchResultsArtistPanel extends JPanel {
 		add(btnBack, gbc_btnBack);
 	}
 	public void updateTableModel(Artist[] artists){
-		Object[][] dataVector= new Object[artists.length][20];
+		searchedArtists = artists;
+		Object[][] dataVector= new Object[artists.length][3];
 		for(int i=0; i <= artists.length-1; i++)
 			dataVector[i]=artists[i].toTableRow();
 		String[] columnNames = new String[] {
-				"Artist First Name", "Arist Last Name", "Fashionability"};
+				"Artist Last Name", "Arist First Name", "Fashionability"};
 		tableModel.setDataVector(dataVector, columnNames);
 		artistTable.setModel(tableModel);
 		artistTable.getColumnModel().getColumn(0).setMinWidth(200);
@@ -96,8 +102,21 @@ public class SearchResultsArtistPanel extends JPanel {
 		artistTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		}
 
+	public Artist getSelectedArtist()
+	{
+		int row = artistTable.getSelectedRow();
+		if(row == -1)
+			return new Artist();
+		else
+			return searchedArtists[row];
+	}
+	
 	public JButton getBtnBack() {
 		return btnBack;
+	}
+	
+	public JButton getBtnSelect() {
+		return btnSelect;
 	}
 	public static void main(String[] args) {
 		JFrame f = new JFrame("test window");
@@ -115,8 +134,5 @@ public class SearchResultsArtistPanel extends JPanel {
 			artists[i] = new Artist( "thisnameis25characterslon","lastName", 5000);
 		}
 		panel.updateTableModel(artists);
-	}
-	public JButton getBtnSelect() {
-		return btnSelect;
 	}
 }

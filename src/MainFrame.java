@@ -34,7 +34,6 @@ public class MainFrame extends JFrame implements ActionListener{
 	private SearchArtistPanel searchArtist;
 	private SearchResultsArtistPanel searchResultsArtist;
 	private SeeAllArtistsPanel seeAllArtists;
-	private ApplyArtistChangesPanel applyArtistChanges;
 	
 	private ManageInventoryMainMenuPanel manageInventoryMM;
 	private AddPaintingInventoryPanel addPaintingInventory;
@@ -95,7 +94,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpArtistMM();
 		setUpUpdateArtist();
 		setUpAddArtist();
-		setUpApplyArtistChanges();
 		setUpSearchArtist();
 		setUpSearchResultsArtist();
 		setUpSeeAllArtists();
@@ -139,7 +137,6 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(updateInventory, UPDATE_INVENTORY);
 		getContentPane().add(updateArtist, UPDATE_ARTIST);
 		getContentPane().add(addArtist, ADD_ARTIST);
-		getContentPane().add(applyArtistChanges, APPLY_ARTIST_CHANGES);
 		getContentPane().add(searchInventory, SEARCH_INVENTORY);
 		getContentPane().add(searchResultsAuction, SEARCH_RESULTS_AUCTION);
 		getContentPane().add(completeSale, COMPLETE_SALE);
@@ -245,12 +242,6 @@ public class MainFrame extends JFrame implements ActionListener{
 				}
 			}
 		});
-	}
-	
-	
-	private void setUpApplyArtistChanges()
-	{
-		applyArtistChanges = new ApplyArtistChangesPanel();
 	}
 	
 	/**
@@ -467,7 +458,7 @@ public class MainFrame extends JFrame implements ActionListener{
 						JOptionPane.showMessageDialog(searchArtist, "No results found in search");
 					else if(searchResults.length == 1)
 					{
-						//update table method for update artist
+						updateArtist.updateTableModel(searchResults[0]);
 						updateArtist.resetTextFields();
 						cardLayout.show(getContentPane(), UPDATE_ARTIST);
 					}
@@ -490,7 +481,10 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsArtist = new SearchResultsArtistPanel();
 		searchResultsArtist.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Artist selectedArtist = searchResultsArtist.getSelectedArtist();
+				updateArtist.updateTableModel(selectedArtist);
+				updateArtist.resetTextFields();
+				cardLayout.show(getContentPane(), UPDATE_ARTIST);
 			}
 		});
 		searchResultsArtist.getBtnBack().addActionListener(new ActionListener() {
@@ -641,6 +635,50 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpUpdateArtist()
 	{
 		updateArtist = new UpdateArtistPanel();
+		updateArtist.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), ARTIST_MM);
+			}
+		});
+		updateArtist.getBtnSaveChanges().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!updateArtist.isInputValid())
+					JOptionPane.showMessageDialog(updateArtist, "No fields have been updated.");
+				else
+				{
+					Object[] options = {"Yes", "Cancel"};
+					int n = JOptionPane.showOptionDialog(updateArtist, "Are you sure you want to update this artist?",
+							"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+					if(n == 1)
+					{
+						Artist origArtist = updateArtist.getOrigArtist();
+						Artist changeArtist = new Artist();
+						try {
+							changeArtist = origArtist.clone();
+						} catch (CloneNotSupportedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						updateArtist.updateArtist(changeArtist);
+						HandleArtist.updateArtist(changeArtist, origArtist);
+						cardLayout.show(getContentPane(), ARTIST_MM);
+					}
+				}					
+			}
+		});
+		updateArtist.getBtnDeleteArtist().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Object[] options = {"Yes", "Cancel"};
+				int n = JOptionPane.showOptionDialog(updateAuction, "Are you sure you want to delete this artist?",
+						"Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				if(n == 0)
+				{
+					HandleArtist.deleteArtist(updateArtist.getOrigArtist());
+					cardLayout.show(getContentPane(), ARTIST_MM);
+					
+				}
+			}
+		});
 	}
 	
 	/**
@@ -674,7 +712,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				else
 				{
 					Object[] options = {"Yes", "Cancel"};
-					int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to update this painting?",
+					int n = JOptionPane.showOptionDialog(updateAuction, "Are you sure you want to update this painting?",
 							"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 					if(n == 0)
 					{
@@ -687,8 +725,6 @@ public class MainFrame extends JFrame implements ActionListener{
 							e1.printStackTrace();
 						}
 						updateAuction.updateAuctionPainting(updatePainting);
-						System.out.println(origPainting);
-						System.out.println(updatePainting);
 						HandleAuctionPaintings.updateAuctionPainting(updatePainting, origPainting);
 						cardLayout.show(getContentPane(), AUCTION_MM);
 					}
