@@ -310,7 +310,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				cardLayout.show(getContentPane(), MAIN_MENU);
 			}
 		});
-		completePurchase.getBtnAddPaintingTo().addActionListener(new ActionListener() {
+		completePurchase.getCompletePurchase().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!completePurchase.isInputValid())
 					JOptionPane.showMessageDialog(completePurchase, "Input is invalid, make sure all fields are correct");
