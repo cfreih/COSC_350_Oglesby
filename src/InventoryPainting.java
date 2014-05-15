@@ -82,17 +82,38 @@ public class InventoryPainting extends Painting implements Cloneable {
 	public InventoryPainting(String firstName, String lastName, String title,
 			String date, double height, double width, String med, String subj,
 			String sName, String sAddress, SimpleDate dateP,
-			double maxPurch, double actualPurch,String classif) {
+			double actualPurch,String classif, SimpleDate dateS, String bName,
+			String bAddress, double actualSell) {
 		
 		super(firstName, lastName, title, date, height, width, med, subj);
 		sellerName = sName;
 		sellerAddress = sAddress;
-		dateOfPurchase = dateP;
-		maxPurchasePrice = maxPurch;
+		dateOfPurchase = dateP;		
 		actualPurchasePrice = actualPurch;		
 		classification = classif;
+		dateOfSale = dateS;
+		buyerName = bName;
+		buyerAddress = bAddress;
+		actualSellPrice = actualSell;
+		classification = classif;
 		calcTargetSellPrice();
-		calcMaxAndActualRatio();
+		calcTargetAndActualRatio();
+	}
+
+	
+	public InventoryPainting(String firstName, String lastName, String title,
+			String date, double height, double width, String med, String subj,
+			String sName, String sAddress, SimpleDate dateP,
+			double actualPurch,String classif) {
+		
+		super(firstName, lastName, title, date, height, width, med, subj);
+		sellerName = sName;
+		sellerAddress = sAddress;
+		dateOfPurchase = dateP;		
+		actualPurchasePrice = actualPurch;		
+		classification = classif;		
+		calcTargetSellPrice();	
+		
 	}
 
 	/**
