@@ -23,8 +23,8 @@ public class SearchPaintingSale extends JPanel {
 	private JButton btnCancel;
 	private JLabel lblPaintingInfo;
 	public SearchPaintingSale() {
-		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
-		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
+		formattedLastName = new JFormattedTextField(createFormatter("********************"));
 		
 		setUpPanel();
 	}
@@ -95,7 +95,7 @@ public class SearchPaintingSale extends JPanel {
 		gbc_lblTitle.gridx = 1;
 		gbc_lblTitle.gridy = 6;
 		add(lblTitle, gbc_lblTitle);
-		formattedTitle = new JFormattedTextField(createFormatter("H***************************************"));
+		formattedTitle = new JFormattedTextField(createFormatter("****************************************"));
 		
 		formattedTitle.setColumns(40);
 		GridBagConstraints gbc_formattedTitle = new GridBagConstraints();
@@ -121,7 +121,8 @@ public class SearchPaintingSale extends JPanel {
 	}
 	public boolean isInputValid()
 	{
-		if(formattedFirstName.isEditValid() && formattedLastName.isEditValid() && formattedTitle.isEditValid())
+		if(formattedFirstName.getValue() != null || formattedLastName.getValue() != null 
+				|| formattedTitle.getValue() != null)
 		{
 				return true;
 		}
