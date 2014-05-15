@@ -21,7 +21,7 @@ import java.text.NumberFormat;
 
 
 public class UpdateInventoryPanel extends JScrollPane {
-	private InventoryPainting paintingToModify;
+	private InventoryPainting origPainting;
 	
 	private JPanel updateInventoryPanel; 
 	private SpringLayout springLayout; 
@@ -67,11 +67,13 @@ public class UpdateInventoryPanel extends JScrollPane {
 	private JButton btnDelete;
 	private JButton btnCancel;
 	
+	private DefaultTableModel tableModel;
+
 
 	
-	public UpdateInventoryPanel(InventoryPainting invPainting ){
-		paintingToModify = invPainting;
+	public UpdateInventoryPanel(){
 		
+		origPainting =new InventoryPainting();
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);		
 		updateInventoryPanel = new JPanel();
 		springLayout = new SpringLayout();
@@ -82,13 +84,13 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		lblArtistinfo = new JLabel("Artist Info");		
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-		formattedFirstName = new JFormattedTextField(createFormatter("H*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
-		formattedLastName = new JFormattedTextField(createFormatter("H*******************"));
+		formattedLastName = new JFormattedTextField(createFormatter("********************"));
 		
 		lblNewPaintingInfo = new JLabel("Painting Info");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
-		formattedTitle = new JFormattedTextField(createFormatter("H***************************************"));
+		formattedTitle = new JFormattedTextField(createFormatter("****************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");		
 		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		lblHeightcm = new JLabel("Height(cm)");
@@ -96,21 +98,21 @@ public class UpdateInventoryPanel extends JScrollPane {
 		lblWidthcm = new JLabel("Width (cm)");
 		formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblMedium = new JLabel("Medium");
-		textFieldMedium = new JFormattedTextField(createFormatter("H************************"));
+		textFieldMedium = new JFormattedTextField(createFormatter("*************************"));
 		lblSubject = new JLabel("Subject");
-		textFieldSubject = new JFormattedTextField(createFormatter("H************************"));
+		textFieldSubject = new JFormattedTextField(createFormatter("*************************"));
 		lblClassification = new JLabel("Classification");
-		formattedClassification = new JFormattedTextField(createFormatter("H*****************************"));
+		formattedClassification = new JFormattedTextField(createFormatter("******************************"));
 		lblNameOfSeller = new JLabel("Name of Seller");
-		formattedNameofSeller = new JFormattedTextField(createFormatter("H*****************************************"));
+		formattedNameofSeller = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfSeller = new JLabel("Address of Seller");
-		formattedAddressOfSeller = new JFormattedTextField(createFormatter("H*****************************************"));
+		formattedAddressOfSeller = new JFormattedTextField(createFormatter("******************************************"));
 		lblActualPurchasePrice = new JLabel("Actual Purchase Price");
 		formattedActualPurchasePrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblNameOfBuyer = new JLabel("Name of Buyer");
-		formattedNameOfBuyer = new JFormattedTextField(createFormatter("H*****************************************"));
+		formattedNameOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfBuyer = new JLabel("Address of Buyer");
-		formattedAddressOfBuyer = new JFormattedTextField(createFormatter("H*****************************************"));
+		formattedAddressOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
 		lblActualSellingPrice = new JLabel("Actual Selling Price");
 		formattedActualSellingPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		btnSaveChanges = new JButton("Save Changes");
@@ -144,19 +146,24 @@ public class UpdateInventoryPanel extends JScrollPane {
 		 * Need to get a painting and make that the Object[][] array that will be the one row in the table.
 		 */
 		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		paintingsTable.setModel(new DefaultTableModel(
-			new Object[][] {paintingToModify.toTableRow()},
-			new String[] {
-				"Artist First Name", "Arist Last Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Purchase", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, Integer.class, Object.class, Integer.class, Integer.class, String.class, String.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+		tableModel =new DefaultTableModel(new Object[][] {origPainting.toTableRow()},
+				new String[] {
+					"Artist First Name", "Arist Last Name", "Title", "Date of Work",
+					"Classification", "Height", "Width", "Medium", "Subject",
+					"Date of Purchase", "Name of Seller", "Address of Seller",
+					"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
+					"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					String.class, String.class, String.class, Integer.class, Object.class, Integer.class, Integer.class, String.class, String.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
 			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+				
+		paintingsTable.setModel(tableModel);
 		paintingsTable.getColumnModel().getColumn(0).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(0).setPreferredWidth(155);
 		paintingsTable.getColumnModel().getColumn(0).setMinWidth(155);
@@ -383,6 +390,19 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		setViewportView(updateInventoryPanel);
 	}	
+	
+	public void updateTableModel(InventoryPainting invPainting){
+		Object[][] dataVector= {invPainting.toTableRow()};		
+		String[] columnNames = new String[] {
+				"Artist First Name", "Arist Last Name", "Title", "Date of Work",
+				"Classification", "Height", "Width", "Medium", "Subject",
+				"Date of Purchase", "Name of Seller", "Address of Seller",
+				"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
+				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
+		tableModel.setDataVector(dataVector, columnNames);
+		paintingsTable.setModel(tableModel);
+	}
+	
 	protected MaskFormatter createFormatter(String s) {
 	    MaskFormatter formatter = null;
 	    try {
@@ -401,7 +421,9 @@ public class UpdateInventoryPanel extends JScrollPane {
 		paint.setArtistFirstName("Micahel");
 		paint.setArtistLastName("LeVan");
 		paint.setTitleOfWork("Test1");
-		UpdateInventoryPanel IP = new UpdateInventoryPanel(paint);		
+		
+		UpdateInventoryPanel IP = new UpdateInventoryPanel();
+		IP.updateTableModel(paint);
 		JFrame frame =new JFrame("Test");		
 		frame.getContentPane().add(IP , BorderLayout.CENTER);
 		frame.setSize(800, 600);
