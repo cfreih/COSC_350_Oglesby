@@ -391,13 +391,9 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		} else return false;
 		
 		String[] fieldValues = getFieldValues();
-		if(		fieldValues[3].charAt(fieldValues[3].length()-1)=='?')
-		{
-			fieldValues[3] = fieldValues[3].replace(fieldValues[3].substring(fieldValues[3].length()-1), "");		    
-		}
+		String fName = "";
 		if(formattedFirstName.getValue() != null)
-		{
-			String fName = "";
+		{			
 			fName = ((String) formattedFirstName.getValue()).trim();
 			if(fName.length()==21)
 				if(fName.charAt(20)!='?')
