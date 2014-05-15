@@ -91,7 +91,8 @@ public class InventoryPainting extends Painting implements Cloneable {
 		maxPurchasePrice = maxPurch;
 		actualPurchasePrice = actualPurch;		
 		classification = classif;
-		
+		calcTargetSellPrice();
+		calcMaxAndActualRatio();
 	}
 
 	/**
