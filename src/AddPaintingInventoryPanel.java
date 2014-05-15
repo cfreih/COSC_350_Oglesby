@@ -395,7 +395,39 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		{
 			fieldValues[3] = fieldValues[3].replace(fieldValues[3].substring(fieldValues[3].length()-1), "");		    
 		}
-		double dateOfWork = Double.parseDouble(fieldValues[3]);
+		if(formattedFirstName.getValue() != null)
+		{
+			String fName = "";
+			fName = ((String) formattedFirstName.getValue()).trim();
+			if(fName.length()==21)
+				if(fName.charAt(20)!='?')
+					return false;
+		}
+		String lName = "";
+		if(formattedLastName.getValue() != null)
+		{
+			lName = ((String) formattedLastName.getValue()).trim();
+			if(lName.length()==21)
+				if(lName.charAt(20)!='?')
+					return false;
+		}
+		String title = "";
+		if(formattedTitle.getValue() != null)
+		{
+			title = ((String) formattedTitle.getValue()).trim();
+			if(title.length()==41)
+				if(title.charAt(40)!='?')
+					return false;
+		}
+		String dateOfWork = "";
+		if(formattedDateOfWork.getValue() != null)
+		{
+			dateOfWork = ((String) formattedDateOfWork.getValue()).trim();
+			if(dateOfWork.length()==5)
+				if(dateOfWork.charAt(4)!='?')
+					return false;
+		}
+		int dateWork = Integer.parseInt(fieldValues[3]);
 		double height = Double.parseDouble(fieldValues[5]);
 		double width = Double.parseDouble(fieldValues[6]);
 		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(fieldValues[9]);
@@ -404,8 +436,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		double actualSellPrice = Double.parseDouble(fieldValues[16]);
 		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 		
-		if(		dateOfWork > 1099
-				&& dateOfWork <= today.getYear()
+		if(		dateWork > 1099
+				&& dateWork <= today.getYear()
 				&& height > 0
 				&& width > 0
 				&& !dateOfPurchase.equals(new SimpleDate())
@@ -476,7 +508,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		formattedBuyerAddress.setValue(null);		
 		formattedActualSellingPrice.setValue(null);
 	}
-	public InventoryPainting createNewAuctionPainting(String[] values)
+	public InventoryPainting createNewInventoryPainting(String[] values)
 	{
 		InventoryPainting newIPainting;
 		String fName = values[0];

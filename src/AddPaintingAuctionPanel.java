@@ -382,12 +382,12 @@ public class AddPaintingAuctionPanel extends JPanel {
 			 */
 			String[] fieldValues = getFieldValues();
 			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
-			double dateWork = 0;
+			int dateWork = -1;
 			if (fieldValues[3].contains("?"))
-				dateWork = Double.parseDouble(fieldValues[3].substring(0,
+				dateWork = Integer.parseInt(fieldValues[3].substring(0,
 						fieldValues[3].length() - 1));
 			else
-				dateWork = Double.parseDouble(fieldValues[3]);
+				dateWork = Integer.parseInt(fieldValues[3]);
 			SimpleDate dateAuction = new SimpleDate();
 			dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
 			double salePrice = Double.parseDouble(fieldValues[5]);

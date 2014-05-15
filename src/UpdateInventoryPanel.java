@@ -442,14 +442,10 @@ public class UpdateInventoryPanel extends JScrollPane {
 					return false;
 				}	
 			}
-			double dateOfWork = Double.parseDouble(fieldValues[3]);
+			int dateOfWork = Integer.parseInt(fieldValues[3]);
 			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 			if(dateOfWork < 1100 || dateOfWork > today.getYear())
 				return false;
-		}
-		if(fieldValues[4] != ""){
-			
-			
 		}
 		if(fieldValues[5] != ""){
 			double height = Double.parseDouble(fieldValues[5]);
@@ -459,23 +455,10 @@ public class UpdateInventoryPanel extends JScrollPane {
 			double width = Double.parseDouble(fieldValues[6]);
 			if(width<0) return false;
 		}
-		if(fieldValues[7] != ""){
-			
-		}
-		if(fieldValues[8] != ""){
-			
-		}
-		if(fieldValues[9] != ""){
-			
-		}
-		if(fieldValues[10] != ""){
-						
-		}
 		if(fieldValues[11] != ""){
 			double actualPurchasePrice = Double.parseDouble(fieldValues[11]);
 			if(actualPurchasePrice<0) return false;
-		}
-				
+		}				
 		if(formattedActualSellingPrice.isEnabled()){
 			if(fieldValues[14] != ""){
 				double actualPurchasePrice = Double.parseDouble(fieldValues[14]);
@@ -535,6 +518,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 		formattedBuyerAddress.setValue(null);		
 		formattedActualSellingPrice.setValue(null);
 	}
+	
 	public void updateInventoryPainting(InventoryPainting update)
 	{
 		String[] fieldValues = getFieldValues();
@@ -580,8 +564,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 			formattedBuyerAddress.setEnabled(false);
 			formattedActualSellingPrice.setEnabled(false);			
 		} 
-	}
-	
+	}	
 	
 	public static void main( String[] args )
    	{
@@ -599,7 +582,6 @@ public class UpdateInventoryPanel extends JScrollPane {
 		frame.setSize(800, 600);
 		frame.setMaximumSize(new Dimension(800, 600));
 		frame.setMinimumSize(new Dimension(800, 600));
-		frame.setVisible(true);
-		
+		frame.setVisible(true);	
 	}
 }
