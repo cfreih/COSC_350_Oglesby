@@ -64,6 +64,23 @@ public class Artist implements Cloneable{
 	public void setFashionabilityCoeff(int fCoeff){
 		fashionabilityCoeff=fCoeff;
 	}
+	
+	/**
+	 * Desc: Compares two Artists and says if they are equal or not.
+	 * Return: True if artistFirstName and artistLastName of the two 
+	 * 		   Artists are equal, false otherwise.
+	 */
+	public boolean equals(Artist artist)
+	{
+		String thisFName = this.getArtistFirstName().toLowerCase();
+		String thisLName = this.getArtistLastName().toLowerCase();
+		String artistFName = artist.getArtistFirstName().toLowerCase();
+		String artistLName = artist.getArtistLastName().toLowerCase();
+		if(thisFName.equals(artistFName) && thisLName.equals(artistLName))
+			return true;
+		else
+			return false;
+	}
 
 	
 	/*

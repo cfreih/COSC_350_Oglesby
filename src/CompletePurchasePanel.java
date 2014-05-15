@@ -1,4 +1,5 @@
 import java.text.NumberFormat;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,8 +8,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -29,9 +33,12 @@ public class CompletePurchasePanel extends JPanel {
 	private JFormattedTextField formattedBuyPrice;
 	private JButton btnCompletePurchase;
 	private JButton btnCancel;
+	
+	private InventoryPainting boughtPainting;
 
 	public CompletePurchasePanel() {
 		gridBagLayout = new GridBagLayout();
+		boughtPainting = new InventoryPainting();
 
 		setUpPanel();
 	}
@@ -157,9 +164,9 @@ public class CompletePurchasePanel extends JPanel {
 	}
 
 	public boolean isInputValid() {
-		if (formattedSellerName.isEditValid()
-				&& formattedSellerAddress.isEditValid()
-				&& formattedBuyPrice.isEditValid())
+		if (formattedSellerName.getValue() != null
+				&& formattedSellerAddress.getValue() != null
+				&& formattedBuyPrice.getValue() != null)
 			return true;
 		else
 			return false;
@@ -194,11 +201,13 @@ public class CompletePurchasePanel extends JPanel {
 		return btnCompletePurchase;
 	}
 
-	public InventoryPainting updateInventoryPainting(InventoryPainting painting) {
-		painting.setSellerName((String) formattedSellerName.getValue());
-		painting.setSellerAddress((String) formattedSellerAddress.getValue());
-		painting.setActualPurchasePrice((Double) formattedBuyPrice.getValue());
-		return painting;
+	public void updateInventoryPainting() {
+		boughtPainting.setSellerName((String) formattedSellerName.getValue());
+		boughtPainting.setSellerAddress((String) formattedSellerAddress.getValue());
+		if(formattedBuyPrice.getValue() instanceof Double)
+			boughtPainting.setActualPurchasePrice((Double) formattedBuyPrice.getValue());
+		else
+			boughtPainting.setActualPurchasePrice(((Long) formattedBuyPrice.getValue()).doubleValue());
 	}
 
 	public JButton getBtnCancel() {
@@ -213,6 +222,14 @@ public class CompletePurchasePanel extends JPanel {
 		f.setSize(800, 600);
 		f.setLocation(10, 10);
 		f.getContentPane().add(new CompletePurchasePanel());
-		f.show();
+		f.setVisible(true);
+	}
+
+	public InventoryPainting getBoughtPainting() {
+		return boughtPainting;
+	}
+
+	public void setBoughtPainting(InventoryPainting boughtPainting) {
+		this.boughtPainting = boughtPainting;
 	}
 }

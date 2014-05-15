@@ -48,19 +48,19 @@ public class UpdateInventoryPanel extends JScrollPane {
 	private JLabel lblWidthcm;
 	private JFormattedTextField formattedWidth;
 	private JLabel lblMedium;
-	private JFormattedTextField textFieldMedium;
+	private JFormattedTextField formattedMedium;
 	private JLabel lblSubject;
-	private JFormattedTextField textFieldSubject;
+	private JFormattedTextField formattedSubject;
 	private JLabel lblNameOfSeller;
-	private JFormattedTextField formattedNameofSeller;
+	private JFormattedTextField formattedSellerName;
 	private JLabel lblAddressOfSeller;
-	private JFormattedTextField formattedAddressOfSeller;
+	private JFormattedTextField formattedSellerAddress;
 	private JLabel lblActualPurchasePrice;
 	private JFormattedTextField formattedActualPurchasePrice;
 	private JLabel lblNameOfBuyer;
-	private JFormattedTextField formattedNameOfBuyer;
+	private JFormattedTextField formattedBuyerName;
 	private JLabel lblAddressOfBuyer;
-	private JFormattedTextField formattedAddressOfBuyer;
+	private JFormattedTextField formattedBuyerAddress;
 	private JLabel lblActualSellingPrice;
 	private JFormattedTextField formattedActualSellingPrice;
 	private JButton btnSaveChanges;
@@ -84,9 +84,9 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		lblArtistinfo = new JLabel("Artist Info");		
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("*****************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
-		formattedLastName = new JFormattedTextField(createFormatter("********************"));
+		formattedLastName = new JFormattedTextField(createFormatter("*****************"));
 		
 		lblNewPaintingInfo = new JLabel("Painting Info");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
@@ -98,21 +98,21 @@ public class UpdateInventoryPanel extends JScrollPane {
 		lblWidthcm = new JLabel("Width (cm)");
 		formattedWidth = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblMedium = new JLabel("Medium");
-		textFieldMedium = new JFormattedTextField(createFormatter("*************************"));
+		formattedMedium = new JFormattedTextField(createFormatter("*************************"));
 		lblSubject = new JLabel("Subject");
-		textFieldSubject = new JFormattedTextField(createFormatter("*************************"));
+		formattedSubject = new JFormattedTextField(createFormatter("*************************"));
 		lblClassification = new JLabel("Classification");
 		formattedClassification = new JFormattedTextField(createFormatter("******************************"));
 		lblNameOfSeller = new JLabel("Name of Seller");
-		formattedNameofSeller = new JFormattedTextField(createFormatter("******************************************"));
+		formattedSellerName = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfSeller = new JLabel("Address of Seller");
-		formattedAddressOfSeller = new JFormattedTextField(createFormatter("******************************************"));
+		formattedSellerAddress = new JFormattedTextField(createFormatter("******************************************"));
 		lblActualPurchasePrice = new JLabel("Actual Purchase Price");
 		formattedActualPurchasePrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblNameOfBuyer = new JLabel("Name of Buyer");
-		formattedNameOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
+		formattedBuyerName = new JFormattedTextField(createFormatter("******************************************"));
 		lblAddressOfBuyer = new JLabel("Address of Buyer");
-		formattedAddressOfBuyer = new JFormattedTextField(createFormatter("******************************************"));
+		formattedBuyerAddress = new JFormattedTextField(createFormatter("******************************************"));
 		lblActualSellingPrice = new JLabel("Actual Selling Price");
 		formattedActualSellingPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		btnSaveChanges = new JButton("Save Changes");
@@ -128,7 +128,9 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		updateInventoryPanel.setLayout(springLayout);
 		updateInventoryPanel.setPreferredSize(new Dimension(765, 750));		
-		updateInventoryPanel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new TitledBorder(null, "Manage Inventory Paintings", TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+		updateInventoryPanel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
+									   null, null), new TitledBorder(null, "Manage Inventory Paintings",
+									   TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
 		lblPaintingInfo.setFont(new Font("Century", Font.BOLD, 12));
 		springLayout.putConstraint(SpringLayout.NORTH, lblPaintingInfo, 0, SpringLayout.NORTH, updateInventoryPanel);
@@ -252,7 +254,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 		formattedDateOfWork.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.NORTH, formattedDateOfWork, 5, SpringLayout.SOUTH, lblDateOfWork);
 		springLayout.putConstraint(SpringLayout.WEST, formattedDateOfWork, 10, SpringLayout.WEST, lblDateOfWork);		
-		formattedDateOfWork.setColumns(10);
+		formattedDateOfWork.setColumns(5);
 		updateInventoryPanel.add(formattedDateOfWork);
 		
 		lblClassification.setFont(new Font("Century", Font.PLAIN, 12));
@@ -293,48 +295,48 @@ public class UpdateInventoryPanel extends JScrollPane {
 		springLayout.putConstraint(SpringLayout.NORTH, lblMedium, 6, SpringLayout.SOUTH, formattedHeight);
 		updateInventoryPanel.add(lblMedium);
 					
-		textFieldMedium.setFont(new Font("Century", Font.PLAIN, 12));
-		textFieldMedium.setColumns(20);
-		springLayout.putConstraint(SpringLayout.NORTH, textFieldMedium, 5, SpringLayout.SOUTH, lblMedium);
-		springLayout.putConstraint(SpringLayout.WEST, textFieldMedium, 10, SpringLayout.WEST, lblMedium);
-		updateInventoryPanel.add(textFieldMedium);		
+		formattedMedium.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedMedium.setColumns(20);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedMedium, 5, SpringLayout.SOUTH, lblMedium);
+		springLayout.putConstraint(SpringLayout.WEST, formattedMedium, 10, SpringLayout.WEST, lblMedium);
+		updateInventoryPanel.add(formattedMedium);		
 		
 		lblSubject.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.WEST, lblSubject, 0, SpringLayout.WEST, lblArtistLastName);
 		springLayout.putConstraint(SpringLayout.NORTH, lblSubject, 0, SpringLayout.NORTH, lblMedium);
 		updateInventoryPanel.add(lblSubject);
 				
-		textFieldSubject.setFont(new Font("Century", Font.PLAIN, 12));
-		textFieldSubject.setColumns(20);
-		springLayout.putConstraint(SpringLayout.NORTH, textFieldSubject, 5, SpringLayout.SOUTH, lblSubject);
-		springLayout.putConstraint(SpringLayout.WEST, textFieldSubject, 10, SpringLayout.WEST, lblSubject);
-		updateInventoryPanel.add(textFieldSubject);
+		formattedSubject.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedSubject.setColumns(20);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedSubject, 5, SpringLayout.SOUTH, lblSubject);
+		springLayout.putConstraint(SpringLayout.WEST, formattedSubject, 10, SpringLayout.WEST, lblSubject);
+		updateInventoryPanel.add(formattedSubject);
 						
 		lblNameOfSeller.setFont(new Font("Century", Font.PLAIN, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblNameOfSeller, 5, SpringLayout.SOUTH, textFieldMedium);
+		springLayout.putConstraint(SpringLayout.NORTH, lblNameOfSeller, 5, SpringLayout.SOUTH, formattedMedium);
 		springLayout.putConstraint(SpringLayout.WEST, lblNameOfSeller, 15, SpringLayout.WEST, lblPaintingInfo);
 		updateInventoryPanel.add(lblNameOfSeller);
 				
-		formattedNameofSeller.setFont(new Font("Century", Font.PLAIN, 12));
-		formattedNameofSeller.setColumns(42);
-		springLayout.putConstraint(SpringLayout.WEST, formattedNameofSeller, 10, SpringLayout.WEST, lblNameOfSeller);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedNameofSeller, 5, SpringLayout.SOUTH, lblNameOfSeller);
-		updateInventoryPanel.add(formattedNameofSeller);
+		formattedSellerName.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedSellerName.setColumns(42);
+		springLayout.putConstraint(SpringLayout.WEST, formattedSellerName, 10, SpringLayout.WEST, lblNameOfSeller);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedSellerName, 5, SpringLayout.SOUTH, lblNameOfSeller);
+		updateInventoryPanel.add(formattedSellerName);
 				
 		lblAddressOfSeller.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.WEST, lblAddressOfSeller, 15, SpringLayout.WEST, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.NORTH, lblAddressOfSeller, 8, SpringLayout.SOUTH, formattedNameofSeller);
+		springLayout.putConstraint(SpringLayout.NORTH, lblAddressOfSeller, 8, SpringLayout.SOUTH, formattedSellerName);
 		updateInventoryPanel.add(lblAddressOfSeller);
 		
-		formattedAddressOfSeller.setFont(new Font("Century", Font.PLAIN, 12));
-		formattedAddressOfSeller.setColumns(42);
-		springLayout.putConstraint(SpringLayout.WEST, formattedAddressOfSeller, 10, SpringLayout.WEST, lblAddressOfSeller);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedAddressOfSeller, 5, SpringLayout.SOUTH, lblAddressOfSeller);
-		updateInventoryPanel.add(formattedAddressOfSeller);
+		formattedSellerAddress.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedSellerAddress.setColumns(42);
+		springLayout.putConstraint(SpringLayout.WEST, formattedSellerAddress, 10, SpringLayout.WEST, lblAddressOfSeller);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedSellerAddress, 5, SpringLayout.SOUTH, lblAddressOfSeller);
+		updateInventoryPanel.add(formattedSellerAddress);
 				
 		lblActualPurchasePrice.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.WEST, lblActualPurchasePrice, 15, SpringLayout.WEST, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.NORTH, lblActualPurchasePrice, 5, SpringLayout.SOUTH, formattedAddressOfSeller);
+		springLayout.putConstraint(SpringLayout.NORTH, lblActualPurchasePrice, 5, SpringLayout.SOUTH, formattedSellerAddress);
 		updateInventoryPanel.add(lblActualPurchasePrice);
 				
 		formattedActualPurchasePrice.setFont(new Font("Century", Font.PLAIN, 12));
@@ -348,26 +350,26 @@ public class UpdateInventoryPanel extends JScrollPane {
 		springLayout.putConstraint(SpringLayout.NORTH, lblNameOfBuyer, 5, SpringLayout.SOUTH, formattedActualPurchasePrice);
 		updateInventoryPanel.add(lblNameOfBuyer);
 	
-		formattedNameOfBuyer.setFont(new Font("Century", Font.PLAIN, 12));
-		formattedNameOfBuyer.setColumns(42);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedNameOfBuyer, 5, SpringLayout.SOUTH, lblNameOfBuyer);
-		springLayout.putConstraint(SpringLayout.WEST, formattedNameOfBuyer, 10, SpringLayout.WEST, lblNameOfBuyer);
-		updateInventoryPanel.add(formattedNameOfBuyer);
+		formattedBuyerName.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedBuyerName.setColumns(42);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedBuyerName, 5, SpringLayout.SOUTH, lblNameOfBuyer);
+		springLayout.putConstraint(SpringLayout.WEST, formattedBuyerName, 10, SpringLayout.WEST, lblNameOfBuyer);
+		updateInventoryPanel.add(formattedBuyerName);
 		
 		lblAddressOfBuyer.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.WEST, lblAddressOfBuyer, 15, SpringLayout.WEST, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.NORTH, lblAddressOfBuyer, 5, SpringLayout.SOUTH, formattedNameOfBuyer);
+		springLayout.putConstraint(SpringLayout.NORTH, lblAddressOfBuyer, 5, SpringLayout.SOUTH, formattedBuyerName);
 		updateInventoryPanel.add(lblAddressOfBuyer);
 						
-		formattedAddressOfBuyer.setFont(new Font("Century", Font.PLAIN, 12));
-		formattedAddressOfBuyer.setColumns(42);
-		springLayout.putConstraint(SpringLayout.WEST, formattedAddressOfBuyer, 10, SpringLayout.WEST, lblAddressOfBuyer);
-		springLayout.putConstraint(SpringLayout.NORTH, formattedAddressOfBuyer, 5, SpringLayout.SOUTH, lblAddressOfBuyer);
-		updateInventoryPanel.add(formattedAddressOfBuyer);
+		formattedBuyerAddress.setFont(new Font("Century", Font.PLAIN, 12));
+		formattedBuyerAddress.setColumns(42);
+		springLayout.putConstraint(SpringLayout.WEST, formattedBuyerAddress, 10, SpringLayout.WEST, lblAddressOfBuyer);
+		springLayout.putConstraint(SpringLayout.NORTH, formattedBuyerAddress, 5, SpringLayout.SOUTH, lblAddressOfBuyer);
+		updateInventoryPanel.add(formattedBuyerAddress);
 				
 		lblActualSellingPrice.setFont(new Font("Century", Font.PLAIN, 12));
 		springLayout.putConstraint(SpringLayout.WEST, lblActualSellingPrice, 15, SpringLayout.WEST, lblPaintingInfo);
-		springLayout.putConstraint(SpringLayout.NORTH, lblActualSellingPrice, 5, SpringLayout.SOUTH, formattedAddressOfBuyer);
+		springLayout.putConstraint(SpringLayout.NORTH, lblActualSellingPrice, 5, SpringLayout.SOUTH, formattedBuyerAddress);
 		updateInventoryPanel.add(lblActualSellingPrice);
 			
 		formattedActualSellingPrice.setFont(new Font("Century", Font.PLAIN, 12));
@@ -414,6 +416,163 @@ public class UpdateInventoryPanel extends JScrollPane {
 	    return formatter;
 	}
 	
+	public boolean isInputValid(){
+		boolean isValid =false;
+		String[] fieldValues = getFieldValues();
+		if(fieldValues[0] != "")
+		if( fieldValues[0] != ""
+			|| fieldValues[1] != ""
+			|| fieldValues[2] != ""
+			|| fieldValues[3] != ""
+			|| fieldValues[4] != ""
+			|| fieldValues[5] != ""
+			|| fieldValues[6] != ""
+			|| fieldValues[7] != ""
+			|| fieldValues[8] != ""
+			|| fieldValues[9] != ""
+			|| fieldValues[10] != ""
+			|| fieldValues[11] != ""
+			)isValid = true;
+		else return false;
+		if(formattedBuyerName.isEnabled()){
+			if( fieldValues[12] != ""
+				|| fieldValues[13] != ""
+				|| fieldValues[14] != ""
+			)isValid = true;
+			else return false;
+		}
+		if(		fieldValues[3].charAt(fieldValues[3].length()-1)=='?')
+		{
+			fieldValues[3] = fieldValues[3].replace(fieldValues[3].substring(fieldValues[3].length()-1), "");		    
+		}
+		double dateOfWork = Double.parseDouble(fieldValues[3]);
+		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+		if(		dateOfWork > 1099 && dateOfWork <= today.getYear());
+		double height = Double.parseDouble(fieldValues[5]);
+		double width = Double.parseDouble(fieldValues[6]);
+		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(fieldValues[9]);
+		double actualPurcahsePrice = Double.parseDouble(fieldValues[12]);
+		SimpleDate dateOfSale = SimpleDate.parseSimpleDate(fieldValues[13]);
+		double actualSellPrice = Double.parseDouble(fieldValues[16]);
+		
+		
+		
+				&& height > 0
+				&& width > 0
+				&& !dateOfPurchase.equals(new SimpleDate())
+				&& SimpleDate.dateIsTooLarge(today , dateOfPurchase)
+				&& actualPurcahsePrice >0				
+			)	isValid = true;
+		else return false;
+		
+		if(isSaleInfoComplete && actualSellPrice > 0)
+			isValid = true;
+		else return false;		
+		return isValid;
+		return isValid;
+	}
+	
+	public String[] getFieldValues()
+	{
+		String[] fieldValues = new String[15];
+		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		fieldValues[4] = ((String) formattedClassification.getValue()).trim();
+		
+		if(formattedHeight.getValue() instanceof Long)
+			fieldValues[5] = Long.toString((Long) formattedHeight.getValue());
+		else
+			fieldValues[5] = Double.toString((Double) formattedHeight.getValue());
+		if(formattedWidth.getValue() instanceof Long)
+			fieldValues[6] = Long.toString((Long) formattedWidth.getValue());
+		else
+			fieldValues[6] = Double.toString((Double) formattedWidth.getValue());
+		
+		fieldValues[7] = ((String) formattedMedium.getValue()).trim();
+		fieldValues[8] = ((String) formattedSubject.getValue()).trim();
+		fieldValues[10] = ((String) formattedSellerName.getValue()).trim();
+		fieldValues[11] = ((String) formattedSellerAddress.getValue()).trim();
+		if(formattedBuyerName.isEnabled()){
+			fieldValues[14] = ((String) formattedBuyerName.getValue()).trim();
+			fieldValues[15] = ((String) formattedBuyerAddress.getValue()).trim();
+			if(formattedActualPurchasePrice.getValue() instanceof Long)
+				fieldValues[12] = Long.toString((Long) formattedActualPurchasePrice.getValue());
+			else
+				fieldValues[12] = Double.toString((Double) formattedActualPurchasePrice.getValue());
+		}		
+		return fieldValues;
+	}
+	
+	public void resetTextFields(){
+		formattedFirstName.setValue(null);
+		formattedLastName.setValue(null);
+		formattedTitle.setValue(null);
+		formattedDateOfWork.setValue(null);
+		formattedHeight.setValue(null);
+		formattedWidth.setValue(null);
+		formattedMedium.setValue(null);
+		formattedSubject.setValue(null);		
+		formattedClassification.setValue(null);
+		formattedSellerName.setValue(null);
+		formattedSellerAddress.setValue(null);
+		formattedActualPurchasePrice.setValue(null);		
+		formattedBuyerName.setValue(null);		
+		formattedBuyerAddress.setValue(null);		
+		formattedActualSellingPrice.setValue(null);
+	}
+	public InventoryPainting createNewAuctionPainting(String[] values)
+	{
+		InventoryPainting newIPainting;
+		String fName = values[0];
+		String lName = values[1];
+		String title = values[2];
+		String dateWork = values[3];
+		String classfi = values[4];
+		double height = Double.parseDouble(values[5]);
+		double width = Double.parseDouble(values[6]);
+		String med = values[7];
+		String subj = values[8];
+		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(values[9]);
+		String sellerN = values[10];
+		String sellerA = values[11];
+		double purchasePrice = Double.parseDouble(values[12]);
+		if(		formattedBuyerName.isEditValid() 
+				&& formattedBuyerAddress.isEditValid()
+				&& formattedActualSellingPrice.isEditValid()
+				){
+					SimpleDate dateOfSell = SimpleDate.parseSimpleDate(values[13]);
+					String buyerN = values[14];
+					String buyerA = values[15];
+					double sellPrice = Double.parseDouble(values[16]);
+					newIPainting = new InventoryPainting(fName,lName,title,dateWork,
+														 height,width,med,subj,sellerN,
+														 sellerA,dateOfPurchase,purchasePrice,
+														 classfi,dateOfSell,buyerN,buyerA,sellPrice);
+					newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
+					return newIPainting;
+				}
+				
+		newIPainting = new InventoryPainting(fName,lName,title,dateWork,
+											 height,width,med,subj,sellerN,
+											 sellerA,dateOfPurchase,purchasePrice,
+											 classfi);
+		newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
+		return newIPainting;
+		
+		
+		//return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,salePrice,dateAuction);
+	}
+	
+	public void enable_DisableSellFields(InventoryPainting invPainting){
+		if( invPainting.getDateOfSale().equals(new SimpleDate(SimpleDate.DEFAULT)) ){
+			formattedBuyerName.setEnabled(false);
+			formattedBuyerAddress.setEnabled(false);
+			formattedActualSellingPrice.setEnabled(false);			
+		} 
+	}
+	
 	
 	public static void main( String[] args )
    	{
@@ -421,9 +580,11 @@ public class UpdateInventoryPanel extends JScrollPane {
 		paint.setArtistFirstName("Micahel");
 		paint.setArtistLastName("LeVan");
 		paint.setTitleOfWork("Test1");
+		//paint.setDateOfSale(1992, 07, 22);	
 		
 		UpdateInventoryPanel IP = new UpdateInventoryPanel();
 		IP.updateTableModel(paint);
+		IP.enable_DisableSellFields(paint);
 		JFrame frame =new JFrame("Test");		
 		frame.getContentPane().add(IP , BorderLayout.CENTER);
 		frame.setSize(800, 600);

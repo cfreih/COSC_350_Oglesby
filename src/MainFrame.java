@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Window.Type;
 import java.awt.Font;
+import java.text.NumberFormat;
 
 public class MainFrame extends JFrame implements ActionListener{
 
@@ -257,19 +258,39 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		calcMaxPurchase.getBtnCalcMaxPrice().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Check to make sure input is valid
-				calcMaxPurchase.isInputValid();
-				//setup painting form input info
-				InventoryPainting painting=calcMaxPurchase.createNewInventoryPainting(calcMaxPurchase.getFieldValues());
-				//double maxPurch = Calculations.calcMaxPurchasePrice(new painting);
-				double maxPrice=Calculation.calcMaxPrice(painting);
-				//if maxPurch = -1 don't allow to buy
-				if(maxPrice<-5)
-					JOptionPane.showMessageDialog(calcMaxPurchase, "No similar paintings do not buy");
-				else if(maxPrice<0)
-					JOptionPane.showMessageDialog(calcMaxPurchase, "No artist fashionability do not buy");
+				if(!calcMaxPurchase.isEditValid())
+					JOptionPane.showMessageDialog(calcMaxPurchase, "Input is invalid, make sure all fields are correct");
 				else
-					JOptionPane.showMessageDialog(calcMaxPurchase, "Max Price: "+maxPrice);
+				{
+					InventoryPainting painting=calcMaxPurchase.createNewInventoryPainting(calcMaxPurchase.getFieldValues());
+					painting.setDateOfPurchase(new SimpleDate(SimpleDate.TODAY));
+					double maxPrice=Calculation.calcMaxPrice(painting);
+					InventoryPainting[] searchDBPainting = getCheckDBInventoryPainting(painting);
+					InventoryPainting[][] checkPaintingExists = {HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[0]),
+							HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[1])};
+					if(checkPaintingExists[0].length > 0 || checkPaintingExists[1].length > 0)
+						JOptionPane.showMessageDialog(addPaintingAuction, "Paintings Already Exists");
+					else if(maxPrice<-5)
+						JOptionPane.showMessageDialog(calcMaxPurchase, "No similar paintings do not buy");
+					else if(maxPrice<0)
+						JOptionPane.showMessageDialog(calcMaxPurchase, "No artist fashionability do not buy");
+					else
+					{
+						String currencyString = NumberFormat.getCurrencyInstance().format(maxPrice);
+						//Handle the weird exception of formatting whole dollar amounts with no decimal
+						//currencyString = currencyString.replaceAll("\\.00", "");
+						Object[] options = {"Yes", "Cancel"};
+						int n = JOptionPane.showOptionDialog(addPaintingAuction, "Max Buy Price Suggestion: " + currencyString + "\n Would you like to buy?",
+							"Purchase Painting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if(n == 0)
+						{
+							painting.setMaxPurchasePrice(maxPrice);
+							completePurchase.setBoughtPainting(painting);
+							completePurchase.resetTextFields();
+							cardLayout.show(getContentPane(), COMPLETE_PURCHASE);
+						}
+					}
+				}
 				//else JOptionPane.show.....
 				//if yes goto completePurchase
 				//else stay at buy panel.
@@ -284,6 +305,29 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpCompletePurchase()
 	{
 		completePurchase = new CompletePurchasePanel();
+		completePurchase.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MAIN_MENU);
+			}
+		});
+		completePurchase.getCompletePurchase().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!completePurchase.isInputValid())
+					JOptionPane.showMessageDialog(completePurchase, "Input is invalid, make sure all fields are correct");
+				else
+				{
+					Object[] options = {"Yes", "Cancel"};
+					int n = JOptionPane.showOptionDialog(completePurchase, "Confirm Pruchase?",
+							"Purchase Painting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+					if(n == 0)
+					{
+						completePurchase.updateInventoryPainting();
+						HandleInventoryPaintings.createInventoryPainting(completePurchase.getBoughtPainting());
+						cardLayout.show(getContentPane(), MAIN_MENU);
+					}
+				}
+			}
+		});
 	}
 	
 	/**
@@ -319,6 +363,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		mainMenu.getBtnBuyPainting().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				calcMaxPurchase.resetTextFields();
 				cardLayout.show(getContentPane(), CALC_MAX_PURCH);
 			}
 		});
@@ -481,9 +526,14 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsArtist.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Artist selectedArtist = searchResultsArtist.getSelectedArtist();
-				updateArtist.updateTableModel(selectedArtist);
-				updateArtist.resetTextFields();
-				cardLayout.show(getContentPane(), UPDATE_ARTIST);
+				if(selectedArtist.equals(new Artist()))
+					JOptionPane.showMessageDialog(searchResultsArtist, "Select an Artist");
+				else
+				{
+					updateArtist.updateTableModel(selectedArtist);
+					updateArtist.resetTextFields();
+					cardLayout.show(getContentPane(), UPDATE_ARTIST);
+				}
 			}
 		});
 		searchResultsArtist.getBtnBack().addActionListener(new ActionListener() {
@@ -777,7 +827,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * 
+	 * Desc: Creates an artist that can be used to check the Artist DB
+	 * Return: An Artist with just artistFirstName and artistLastName set.
 	 */
 	public static Artist getCheckDBArtist(Artist orig)
 	{
@@ -785,6 +836,30 @@ public class MainFrame extends JFrame implements ActionListener{
 		checkArtist.setArtistFirstName(orig.getArtistFirstName());
 		checkArtist.setArtistLastName(orig.getArtistLastName());
 		return checkArtist;
+	}
+	
+	/**
+	 * Desc:
+	 */
+	public static InventoryPainting[] getCheckDBInventoryPainting(InventoryPainting orig)
+	{
+		InventoryPainting[] searchDBPainting = new InventoryPainting[2];
+		searchDBPainting[0] = new InventoryPainting();		
+		searchDBPainting[0].setArtistFirstName(orig.getArtistFirstName());
+		searchDBPainting[0].setArtistLastName(orig.getArtistLastName());;
+		searchDBPainting[0].setTitleOfWork(orig.getTitleOfWork());
+		searchDBPainting[0].setDateOfWork(orig.getDateOfWork());
+		searchDBPainting[1] = new InventoryPainting();
+		searchDBPainting[1].setArtistFirstName(orig.getArtistFirstName());
+		searchDBPainting[1].setArtistLastName(orig.getArtistLastName());;
+		searchDBPainting[1].setTitleOfWork(orig.getTitleOfWork());
+		String date = "";
+		if(orig.getDateOfWork().contains("?"))
+			date = orig.getDateOfWork().replaceAll("\\?", "");
+		else
+			date = orig.getDateOfWork() + "?";
+		searchDBPainting[1].setDateOfWork(date);
+		return searchDBPainting;
 	}
 	
 	/**
