@@ -258,7 +258,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		calcMaxPurchase.getBtnCalcMaxPrice().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!calcMaxPurchase.isInputValid())
+				if(!calcMaxPurchase.isEditValid())
 					JOptionPane.showMessageDialog(calcMaxPurchase, "Input is invalid, make sure all fields are correct");
 				else
 				{

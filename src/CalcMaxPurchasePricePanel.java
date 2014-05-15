@@ -491,6 +491,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		formattedLastName.setValue(null);
 		formattedTitle.setValue(null);
 		formattedDateOfWork.setValue(null);
+		formattedClassification.setValue(null);
 		formattedHeight.setValue(null);
 		formattedWidth.setValue(null);
 		textFieldMedium.setText("");
