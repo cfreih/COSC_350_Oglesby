@@ -165,31 +165,42 @@ public class UpdateInventoryPanel extends JScrollPane {
 				}
 			};
 				
-		paintingsTable.setModel(tableModel);
-		paintingsTable.getColumnModel().getColumn(0).setResizable(false);
+		paintingsTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"", "", "", "", "", new Double(-1.0), new Double(-1.0), "", "", null, "", "", new Double(-1.0), new Double(-1.0), "-1/-1/1 B.C.E.", "", "", new Double(-1.0), null},
+			},
+			new String[] {
+				"Artist First Name", "Arist Last Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Purchase", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, Integer.class, Object.class, Integer.class, Integer.class, String.class, String.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		paintingsTable.getColumnModel().getColumn(0).setPreferredWidth(155);
 		paintingsTable.getColumnModel().getColumn(0).setMinWidth(155);
 		paintingsTable.getColumnModel().getColumn(0).setMaxWidth(155);
-		paintingsTable.getColumnModel().getColumn(1).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(1).setPreferredWidth(155);
 		paintingsTable.getColumnModel().getColumn(1).setMinWidth(155);
 		paintingsTable.getColumnModel().getColumn(1).setMaxWidth(155);
-		paintingsTable.getColumnModel().getColumn(2).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(2).setPreferredWidth(155);
 		paintingsTable.getColumnModel().getColumn(2).setMinWidth(155);
 		paintingsTable.getColumnModel().getColumn(2).setMaxWidth(155);
-		paintingsTable.getColumnModel().getColumn(3).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(3).setPreferredWidth(155);
 		paintingsTable.getColumnModel().getColumn(3).setMinWidth(155);
 		paintingsTable.getColumnModel().getColumn(3).setMaxWidth(155);
-		paintingsTable.getColumnModel().getColumn(4).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(4).setPreferredWidth(155);
 		paintingsTable.getColumnModel().getColumn(4).setMinWidth(155);
 		paintingsTable.getColumnModel().getColumn(4).setMaxWidth(155);
-		paintingsTable.getColumnModel().getColumn(5).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(6).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(7).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(8).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(9).setPreferredWidth(107);
 		paintingsTable.getColumnModel().getColumn(10).setPreferredWidth(83);
 		paintingsTable.getColumnModel().getColumn(12).setPreferredWidth(134);

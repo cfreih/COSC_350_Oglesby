@@ -67,7 +67,14 @@ public class SearchResultsAuctionPanel extends JPanel {
 			new String[] {
 				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		origPainting = new AuctionPainting();
 		tableModel = new DefaultTableModel(new Object[][] { origPainting.toTableRow() },
 				new String[] { "Artist First Name", "Arist Last Name", "Title",

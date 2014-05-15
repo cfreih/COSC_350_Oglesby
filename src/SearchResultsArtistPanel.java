@@ -68,7 +68,14 @@ public class SearchResultsArtistPanel extends JPanel {
 			new String[] {
 				"Last Name", "First Name", "Fashionability"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		scrollPane.setViewportView(artistTable);
 		
 		btnSelect = new JButton("Select");

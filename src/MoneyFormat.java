@@ -7,7 +7,7 @@ public class MoneyFormat extends DecimalFormat
 {
     public MoneyFormat()
     {
-        super("$");
+        super("$#,###,###,##0.00");
         this.setMinimumFractionDigits(2);
         this.setMaximumFractionDigits(2);
         this.setMinimumIntegerDigits(1);

@@ -178,8 +178,8 @@ public class AddNewArtistPanel extends JPanel {
 
 	public Artist createNewArtist() {
 		Artist artist = new Artist();
-		artist.setArtistFirstName((String) formattedFirstName.getValue());
-		artist.setArtistLastName((String) formattedLastName.getValue());
+		artist.setArtistFirstName(((String) formattedFirstName.getValue()).trim());
+		artist.setArtistLastName(((String) formattedLastName.getValue()).trim());
 		artist.setFashionabilityCoeff(((Long) formattedFashionability
 				.getValue()).intValue()); // (String)
 											// formattedFashionability.getValue())

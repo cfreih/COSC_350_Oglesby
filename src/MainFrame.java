@@ -341,6 +341,30 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpCompleteSale()
 	{
 		completeSale = new CompleteSalePanel();
+		completeSale.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MAIN_MENU);
+			}
+		});
+		completeSale.getBtnCompleteSale().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!completeSale.isInputValid())
+					JOptionPane.showMessageDialog(completeSale, "Input is invalid, make sure all fields are correct");
+				else
+				{
+					Object[] options = {"Yes", "Cancel"};
+					int n = JOptionPane.showOptionDialog(completePurchase, "Confirm Sale?",
+							"Sell Painting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+					if(n == 0)
+					{
+						InventoryPainting origPainting = completeSale.getInventoryPainting();
+						InventoryPainting soldPainting = completeSale.updateInventoryPainting();
+						HandleInventoryPaintings.updateInventoryPainting(soldPainting, origPainting);
+						cardLayout.show(getContentPane(), MAIN_MENU);
+					}
+				}
+			}
+		});
 	}
 	
 	/**
@@ -352,6 +376,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		mainMenu = new MainMenuPanel();
 		mainMenu.getBtnSellPainting().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				searchPaintingSale.resetTextFields();
 				cardLayout.show(getContentPane(),SEARCH_PAINTING_SALE);
 			}
 		});
@@ -641,6 +666,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					else if(searchResults.length == 1)
 					{
 						completeSale.updateTableModel(searchResults[0]);
+						completeSale.updateTargetLabel();
 						completeSale.resetTextFields();
 						cardLayout.show(getContentPane(),COMPLETE_SALE);
 					}
@@ -675,6 +701,8 @@ public class MainFrame extends JFrame implements ActionListener{
 				else
 				{
 					completeSale.updateTableModel(selected);
+					completeSale.updateTargetLabel();
+					completeSale.resetTextFields();
 					cardLayout.show(getContentPane(), COMPLETE_SALE);
 				}
 			}
@@ -760,7 +788,6 @@ public class MainFrame extends JFrame implements ActionListener{
 						try {
 							changeArtist = origArtist.clone();
 						} catch (CloneNotSupportedException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						updateArtist.updateArtist(changeArtist);
@@ -831,7 +858,6 @@ public class MainFrame extends JFrame implements ActionListener{
 						try {
 							updatePainting = origPainting.clone();
 						} catch (CloneNotSupportedException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						updateAuction.updateAuctionPainting(updatePainting);
@@ -947,7 +973,6 @@ public class MainFrame extends JFrame implements ActionListener{
 
 	
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 

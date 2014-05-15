@@ -61,7 +61,14 @@ public class SeeAllArtistsPanel extends JPanel {
 			new String[] {
 				"Last Name", "First Name", "Fashionability"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		scrollPane.setViewportView(artistTable);
 		
 		btnBack = new JButton("Back");

@@ -148,21 +148,31 @@ public class UpdateAuctionPanel extends JPanel {
 		 * be the one row in the table.
 		 */
 		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		paintingsTable.setModel(tableModel);
-		paintingsTable.getColumnModel().getColumn(0).setResizable(false);
+		paintingsTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"", "", "", "", null, new Double(-1.0), new Double(-1.0), new Double(-1.0), "", ""},
+			},
+			new String[] {
+				"Artist First Name", "Arist Last Name", "Title", "Date of Work", "Date of Sale", "Sale Price", "Height", "Width", "Medium", "Subject"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, Integer.class, Object.class, Double.class, Integer.class, Integer.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		paintingsTable.getColumnModel().getColumn(0).setPreferredWidth(90);
-		paintingsTable.getColumnModel().getColumn(1).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(1).setPreferredWidth(90);
-		paintingsTable.getColumnModel().getColumn(2).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(2).setPreferredWidth(180);
-		paintingsTable.getColumnModel().getColumn(3).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(4).setResizable(false);
 		paintingsTable.getColumnModel().getColumn(4).setPreferredWidth(90);
-		paintingsTable.getColumnModel().getColumn(5).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(6).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(7).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(8).setResizable(false);
-		paintingsTable.getColumnModel().getColumn(9).setResizable(false);
 		paintingsTable.setFont(new Font("Century", Font.PLAIN, 12));
 		paintingsTable.setCellSelectionEnabled(true);
 		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

@@ -202,8 +202,8 @@ public class CompletePurchasePanel extends JPanel {
 	}
 
 	public void updateInventoryPainting() {
-		boughtPainting.setSellerName((String) formattedSellerName.getValue());
-		boughtPainting.setSellerAddress((String) formattedSellerAddress.getValue());
+		boughtPainting.setSellerName(((String) formattedSellerName.getValue()).trim());
+		boughtPainting.setSellerAddress(((String) formattedSellerAddress.getValue()).trim());
 		if(formattedBuyPrice.getValue() instanceof Double)
 			boughtPainting.setActualPurchasePrice((Double) formattedBuyPrice.getValue());
 		else

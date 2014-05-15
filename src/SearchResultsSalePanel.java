@@ -58,7 +58,22 @@ public class SearchResultsSalePanel extends JPanel {
 					}
 				);
 		paintingsTable = new JTable();
-		paintingsTable.setModel(tableModel);
+		paintingsTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Prucahse", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price", "New column"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		paintingsTable.getColumnModel().getColumn(9).setPreferredWidth(96);
 		paintingsTable.getColumnModel().getColumn(10).setPreferredWidth(92);
 		paintingsTable.getColumnModel().getColumn(11).setPreferredWidth(95);

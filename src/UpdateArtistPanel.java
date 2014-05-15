@@ -88,7 +88,14 @@ public class UpdateArtistPanel extends JPanel {
 			new String[] {
 				"Last Name", "First Name", "Fashionability"
 			}
-		));
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		scrollPane.setViewportView(artistTable);
 		
 		lblNewArtistInfo = new JLabel("New Artist Info (Values left blank will not be modified)");

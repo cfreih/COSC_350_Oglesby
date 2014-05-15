@@ -23,6 +23,7 @@ import java.awt.Insets;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class CompleteSalePanel extends JPanel {
@@ -41,6 +42,10 @@ public class CompleteSalePanel extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable paintingsTable;
 	private DefaultTableModel tableModel;
+	
+	private InventoryPainting inventoryPainting;
+	private JLabel lblTargetSellPrice;
+	private JLabel lblTarget;
 
 	public CompleteSalePanel() {
 		setUpPanel();
@@ -62,7 +67,7 @@ public class CompleteSalePanel extends JPanel {
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 
 		lblPaintingInformation = new JLabel("Painting Information");
-		lblPaintingInformation.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblPaintingInformation.setFont(new Font("Cambria", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblPaintingInformation = new GridBagConstraints();
 		gbc_lblPaintingInformation.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPaintingInformation.gridx = 1;
@@ -72,7 +77,7 @@ public class CompleteSalePanel extends JPanel {
 		scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridwidth = 5;
 		gbc_scrollPane.gridx = 1;
@@ -80,6 +85,7 @@ public class CompleteSalePanel extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 		
 		paintingsTable=new JTable();
+		paintingsTable.setFont(new Font("Cambria", Font.PLAIN, 12));
 		paintingsTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -109,14 +115,33 @@ public class CompleteSalePanel extends JPanel {
 		scrollPane.setViewportView(paintingsTable);
 
 		lblBuyerInfo = new JLabel("Buyer Information");
-		lblBuyerInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblBuyerInfo.setFont(new Font("Cambria", Font.ITALIC, 12));
 		GridBagConstraints gbc_lblBuyerInfo = new GridBagConstraints();
+		gbc_lblBuyerInfo.anchor = GridBagConstraints.WEST;
 		gbc_lblBuyerInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBuyerInfo.gridx = 1;
 		gbc_lblBuyerInfo.gridy = 2;
 		add(lblBuyerInfo, gbc_lblBuyerInfo);
+		
+		lblTargetSellPrice = new JLabel("Target Sell Price:");
+		lblTargetSellPrice.setFont(new Font("Cambria", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblTargetSellPrice = new GridBagConstraints();
+		gbc_lblTargetSellPrice.anchor = GridBagConstraints.WEST;
+		gbc_lblTargetSellPrice.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTargetSellPrice.gridx = 2;
+		gbc_lblTargetSellPrice.gridy = 2;
+		add(lblTargetSellPrice, gbc_lblTargetSellPrice);
+		
+		lblTarget = new JLabel("Price");
+		GridBagConstraints gbc_lblTarget = new GridBagConstraints();
+		gbc_lblTarget.anchor = GridBagConstraints.WEST;
+		gbc_lblTarget.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTarget.gridx = 3;
+		gbc_lblTarget.gridy = 2;
+		add(lblTarget, gbc_lblTarget);
 
 		lblFullName = new JLabel("Full Name (max 40 characters)");
+		lblFullName.setFont(new Font("Cambria", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblFullName = new GridBagConstraints();
 		gbc_lblFullName.anchor = GridBagConstraints.WEST;
 		gbc_lblFullName.insets = new Insets(0, 0, 5, 5);
@@ -125,6 +150,7 @@ public class CompleteSalePanel extends JPanel {
 		add(lblFullName, gbc_lblFullName);
 		formattedFullName = new JFormattedTextField(
 				createFormatter("A***************************************"));
+		formattedFullName.setFont(new Font("Cambria", Font.PLAIN, 12));
 
 		formattedFullName.setColumns(40);
 		GridBagConstraints gbc_formattedFullName = new GridBagConstraints();
@@ -135,6 +161,7 @@ public class CompleteSalePanel extends JPanel {
 		add(formattedFullName, gbc_formattedFullName);
 
 		lblAddress = new JLabel("Address (max 40 characters)");
+		lblAddress.setFont(new Font("Cambria", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblAddress = new GridBagConstraints();
 		gbc_lblAddress.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAddress.anchor = GridBagConstraints.WEST;
@@ -143,6 +170,7 @@ public class CompleteSalePanel extends JPanel {
 		add(lblAddress, gbc_lblAddress);
 		formattedAddress = new JFormattedTextField(
 				createFormatter("A***************************************"));
+		formattedAddress.setFont(new Font("Cambria", Font.PLAIN, 12));
 
 		formattedAddress.setColumns(40);
 		GridBagConstraints gbc_formattedAddress = new GridBagConstraints();
@@ -153,22 +181,24 @@ public class CompleteSalePanel extends JPanel {
 		add(formattedAddress, gbc_formattedAddress);
 
 		lblSaleInfo = new JLabel("Sale Information");
-		lblSaleInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblSaleInfo.setFont(new Font("Cambria", Font.ITALIC, 12));
 		GridBagConstraints gbc_lblSaleInfo = new GridBagConstraints();
+		gbc_lblSaleInfo.anchor = GridBagConstraints.WEST;
 		gbc_lblSaleInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSaleInfo.gridx = 1;
 		gbc_lblSaleInfo.gridy = 7;
 		add(lblSaleInfo, gbc_lblSaleInfo);
 
 		lblTitle = new JLabel("Sale Price");
+		lblTitle.setFont(new Font("Cambria", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTitle.anchor = GridBagConstraints.WEST;
 		gbc_lblTitle.gridx = 1;
 		gbc_lblTitle.gridy = 8;
 		add(lblTitle, gbc_lblTitle);
-		formattedPrice = new JFormattedTextField(
-				createFormatter("A***************************************"));
+		formattedPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
+		formattedPrice.setFont(new Font("Cambria", Font.PLAIN, 12));
 
 		formattedPrice.setColumns(40);
 		GridBagConstraints gbc_formattedPrice = new GridBagConstraints();
@@ -179,6 +209,7 @@ public class CompleteSalePanel extends JPanel {
 		add(formattedPrice, gbc_formattedPrice);
 
 		btnCompleteSale = new JButton("Complete Sale");
+		btnCompleteSale.setFont(new Font("Cambria", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnCompleteSale = new GridBagConstraints();
 		gbc_btnCompleteSale.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCompleteSale.anchor = GridBagConstraints.WEST;
@@ -187,6 +218,7 @@ public class CompleteSalePanel extends JPanel {
 		add(btnCompleteSale, gbc_btnCompleteSale);
 
 		btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.gridx = 2;
@@ -197,13 +229,12 @@ public class CompleteSalePanel extends JPanel {
 	public boolean isInputValid() {
 		if (formattedFullName.isEditValid() && formattedAddress.isEditValid()
 				&& formattedPrice.isEditValid()) {
-			if (formattedPrice.getValue() instanceof Long
-					|| formattedPrice.getValue() instanceof Double)
 				return true;
 		}
 		return false;
 	}
 	public void updateTableModel(InventoryPainting invPainting){
+		inventoryPainting = invPainting;
 		Object[][] dataVector= {invPainting.toTableRow()};		
 		String[] columnNames = new String[] {
 				"Artist First Name", "Arist Last Name", "Title", "Date of Work",
@@ -213,6 +244,15 @@ public class CompleteSalePanel extends JPanel {
 				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
 		tableModel.setDataVector(dataVector, columnNames);
 		paintingsTable.setModel(tableModel);
+	}
+	
+	public void updateTargetLabel()
+	{
+		//MoneyFormat money = new MoneyFormat();
+		DecimalFormat money = new DecimalFormat("###,###,##0.00");
+		String targetPrice = money.format(inventoryPainting.getTargetSellPrice());
+		//lblTarget.setText("$"+inventoryPainting.getTargetSellPrice());
+		lblTarget.setText("$" + targetPrice);
 	}
 
 	protected MaskFormatter createFormatter(String s) {
@@ -232,12 +272,13 @@ public class CompleteSalePanel extends JPanel {
 		formattedPrice.setValue(null);
 	}
 
-	public InventoryPainting undateInventoryPainting(
-			InventoryPainting inventoryPainting) {
+	public InventoryPainting updateInventoryPainting() {
 		inventoryPainting.setBuyerName((String) formattedFullName.getValue());
 		inventoryPainting.setBuyerAddress((String) formattedAddress.getValue());
-		inventoryPainting
-				.setActualSellPrice((Double) formattedPrice.getValue());
+		if(formattedPrice.getValue() instanceof Double)
+			inventoryPainting.setActualSellPrice((Double) formattedPrice.getValue());
+		else
+			inventoryPainting.setActualSellPrice((Long) formattedPrice.getValue());
 		return inventoryPainting;
 	}
 
@@ -247,6 +288,9 @@ public class CompleteSalePanel extends JPanel {
 
 	public JButton getBtnCompleteSale() {
 		return btnCompleteSale;
+	}
+	public InventoryPainting getInventoryPainting() {
+		return inventoryPainting;
 	}
 	public static void main( String[] args )
    	{
@@ -265,4 +309,6 @@ public class CompleteSalePanel extends JPanel {
 		frame.setVisible(true);
 		
 	}
+
+	
 }
