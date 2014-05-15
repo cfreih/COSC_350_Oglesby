@@ -15,6 +15,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
 
 public class CompletePurchasePanel extends JPanel {
 
@@ -26,7 +27,7 @@ public class CompletePurchasePanel extends JPanel {
 	private JFormattedTextField formattedSellerAddress;
 	private JLabel lblPriceBoughtAt;
 	private JFormattedTextField formattedBuyPrice;
-	private JButton btnAddPaintingTo;
+	private JButton btnCompletePurchase;
 	private JButton btnCancel;
 
 	public CompletePurchasePanel() {
@@ -51,8 +52,8 @@ public class CompletePurchasePanel extends JPanel {
 		setLayout(gridBagLayout);
 		formattedSellerName = new JFormattedTextField(
 				createFormatter("A**************************************"));
-		btnAddPaintingTo = new JButton("Complete Purchase");
-		btnAddPaintingTo.addActionListener(new ActionListener() {
+		btnCompletePurchase = new JButton("Complete Purchase");
+		btnCompletePurchase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
@@ -132,16 +133,16 @@ public class CompletePurchasePanel extends JPanel {
 		gbc_formattedBuyPrice.gridx = 1;
 		gbc_formattedBuyPrice.gridy = 7;
 		add(formattedBuyPrice, gbc_formattedBuyPrice);
-		btnAddPaintingTo.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCompletePurchase.setFont(new Font("Cambria", Font.PLAIN, 12));
 
-		btnAddPaintingTo.setPreferredSize(new Dimension(200, 20));
-		btnAddPaintingTo.setMnemonic('A');
-		GridBagConstraints gbc_btnAddPaintingTo = new GridBagConstraints();
-		gbc_btnAddPaintingTo.fill = GridBagConstraints.BOTH;
-		gbc_btnAddPaintingTo.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAddPaintingTo.gridx = 1;
-		gbc_btnAddPaintingTo.gridy = 9;
-		add(btnAddPaintingTo, gbc_btnAddPaintingTo);
+		btnCompletePurchase.setPreferredSize(new Dimension(200, 20));
+		btnCompletePurchase.setMnemonic('A');
+		GridBagConstraints gbc_btnCompletePurchase = new GridBagConstraints();
+		gbc_btnCompletePurchase.fill = GridBagConstraints.BOTH;
+		gbc_btnCompletePurchase.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCompletePurchase.gridx = 1;
+		gbc_btnCompletePurchase.gridy = 9;
+		add(btnCompletePurchase, gbc_btnCompletePurchase);
 		btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
 
@@ -189,8 +190,8 @@ public class CompletePurchasePanel extends JPanel {
 		formattedBuyPrice.setValue(null);
 	}
 
-	public JButton getBtnAddPaintingTo() {
-		return btnAddPaintingTo;
+	public JButton getCompletePurchase() {
+		return btnCompletePurchase;
 	}
 
 	public InventoryPainting updateInventoryPainting(InventoryPainting painting) {
