@@ -335,20 +335,18 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 	public boolean isInputValid() {
 		String med = textFieldMedium.getText().trim();
 		String subj = textFieldSubject.getText().trim();
-		if (formattedFirstName.isEditValid() && formattedLastName.isEditValid()
-				&& formattedTitle.isEditValid()
-				&& formattedDateOfWork.isEditValid()
+		if (formattedFirstName.getValue() != null && formattedLastName.getValue() != null
+				&& formattedTitle.getValue() != null
+				&& formattedDateOfWork.getValue() != null && formattedClassification.getValue() != null
 				&& !(formattedHeight.getValue() == null)
 				&& !(formattedWidth.getValue() == null) && !(med.length() == 0)
 				&& !(subj.length() == 0)) {
 			String[] fieldValues = getFieldValues();
+			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 			double dateWork = Double.parseDouble(fieldValues[3]);
-			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
-			double salePrice = Double.parseDouble(fieldValues[5]);
-			double height = Double.parseDouble(fieldValues[6]);
-			double width = Double.parseDouble(fieldValues[7]);
-			if ((dateWork > 1099) && !(dateAuction.equals(new SimpleDate()))
-					&& (salePrice > 0) && (height > 0) && (width > 0))
+			double height = Double.parseDouble(fieldValues[4]);
+			double width = Double.parseDouble(fieldValues[5]);
+			if ( (dateWork > 1099) &&  dateWork < today.getYear() && (height > 0) && (width > 0))
 				return true;
 			else
 				return false;
@@ -358,23 +356,36 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 	}
 
 	public String[] getFieldValues() {
-		String[] fieldValues = new String[10];
-		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
-		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
-		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
-		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
-		if (formattedHeight.getValue() instanceof Long)
-			fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
-		else
-			fieldValues[6] = Double.toString((Double) formattedHeight
-					.getValue());
-		if (formattedWidth.getValue() instanceof Long)
-			fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
-		else
-			fieldValues[7] = Double
-					.toString((Double) formattedWidth.getValue());
-		fieldValues[8] = textFieldMedium.getText();
-		fieldValues[9] = textFieldSubject.getText();
+		String[] fieldValues = new String[8];
+		fieldValues[0] = "";
+		if(formattedFirstName.getValue() != null)
+			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = "";
+		if(formattedLastName.getValue() != null)
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = "";
+		if(formattedTitle.getValue() != null)
+			fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = "";
+		if(formattedDateOfWork.getValue() != null)
+			fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		if(formattedHeight.getValue() != null)
+		{
+			if (formattedHeight.getValue() instanceof Long)
+				fieldValues[4] = Long.toString((Long) formattedHeight.getValue());
+			else
+				fieldValues[4] = Double.toString((Double) formattedHeight.getValue());
+		}
+		if(formattedWidth.getValue() != null)
+		{
+			if (formattedWidth.getValue() instanceof Long)
+				fieldValues[5] = Long.toString((Long) formattedWidth.getValue());
+			else
+				fieldValues[5] = Double
+						.toString((Double) formattedWidth.getValue());
+		}
+		fieldValues[6] = textFieldMedium.getText();
+		fieldValues[7] = textFieldSubject.getText();
 
 		return fieldValues;
 	}
@@ -395,10 +406,10 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		String lName = values[1];
 		String title = values[2];
 		String dateWork = values[3];
-		double height = Double.parseDouble(values[6]);
-		double width = Double.parseDouble(values[7]);
-		String med = values[8];
-		String subj = values[9];
+		double height = Double.parseDouble(values[4]);
+		double width = Double.parseDouble(values[5]);
+		String med = values[6];
+		String subj = values[7];
 		InventoryPainting painting = new InventoryPainting();
 		painting.setArtistFirstName(fName);
 		painting.setArtistLastName(lName);

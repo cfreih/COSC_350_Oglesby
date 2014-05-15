@@ -362,7 +362,7 @@ public class UpdateAuctionPanel extends JPanel {
 				if(width <= 0)
 					return false;
 			if(formattedDateAuction.getValue() != null)
-				if(dateAuction.equals(new AuctionPainting()) || dateAuction.getYear() < dateWork 
+				if(dateAuction.equals(new SimpleDate()) || dateAuction.getYear() < dateWork 
 						|| SimpleDate.dateIsTooLarge(today, dateAuction))
 					return false;
 			return true;
