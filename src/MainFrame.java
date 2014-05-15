@@ -660,6 +660,8 @@ public class MainFrame extends JFrame implements ActionListener{
 							e1.printStackTrace();
 						}
 						updateArtist.updateArtist(changeArtist);
+						HandleArtist.updateArtist(changeArtist, origArtist);
+						cardLayout.show(getContentPane(), ARTIST_MM);
 					}
 				}					
 			}
@@ -672,7 +674,8 @@ public class MainFrame extends JFrame implements ActionListener{
 				if(n == 0)
 				{
 					HandleArtist.deleteArtist(updateArtist.getOrigArtist());
-					cardLayout.show(getContentPane(), ARTIST_MM);					
+					cardLayout.show(getContentPane(), ARTIST_MM);
+					
 				}
 			}
 		});
@@ -722,8 +725,6 @@ public class MainFrame extends JFrame implements ActionListener{
 							e1.printStackTrace();
 						}
 						updateAuction.updateAuctionPainting(updatePainting);
-						System.out.println(origPainting);
-						System.out.println(updatePainting);
 						HandleAuctionPaintings.updateAuctionPainting(updatePainting, origPainting);
 						cardLayout.show(getContentPane(), AUCTION_MM);
 					}

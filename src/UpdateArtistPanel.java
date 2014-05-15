@@ -246,7 +246,10 @@ public class UpdateArtistPanel extends JPanel {
 		String[] values = getFieldValues();
 		if(values[0].length() > 0)
 			artist.setArtistFirstName(values[0]);
-		
+		if(values[1].length() > 0)
+			artist.setArtistLastName(values[1]);
+		if(values[2].length() > 0)
+			artist.setFashionabilityCoeff(Integer.parseInt(values[2]));
 	}
 	public JButton getBtnSaveChanges() {
 		return btnSaveChanges;
