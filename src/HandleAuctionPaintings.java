@@ -139,11 +139,9 @@ public abstract class HandleAuctionPaintings
         SQLConnector connection = new SQLConnector(statement);
         connection.executeSQL_Update();
     }
-
 }
 class HandleAuctionPaintingsTest
 {
-
     //Desc: method to run unit tests for all methods
     //Output: prints the results of unit tests
     public static Pair[] runTests()

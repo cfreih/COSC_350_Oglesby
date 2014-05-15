@@ -1,5 +1,4 @@
 import java.util.*;
-import java.math.BigDecimal;
 public abstract class HandleArtist
 {
   //Desc: method creates an Artist in the database
@@ -128,10 +127,12 @@ class HandleArtistTest extends HandleArtist
     }
     public static boolean createArtistTest()
     {
-        Artist[] testArtists = {
-                new Artist("Fred", "Phelps", 1),
-                new Artist("Lergan", "Berlock", 999),
-                new Artist("Brendel", "the Destroyer", 532)};
+        Artist[] testArtists =
+                {
+                        new Artist("Fred", "Phelps", 1),
+                        new Artist("Lergan", "Berlock", 999),
+                        new Artist("Brendel", "the Destroyer", 532)
+                };
         for(int i = 0; i < testArtists.length; i++)
         {
             HandleArtist.createArtist(testArtists[i]);

@@ -2,7 +2,6 @@ import java.util.*;
 public class DetectTrendsReport extends FindSoldPaintings
 {
     private InventoryPainting[] reportPaintings;
-
     //Desc: constructor for DetectTrendReports
     //Post: reportPaintings is initialized to correct values
     public DetectTrendsReport()
