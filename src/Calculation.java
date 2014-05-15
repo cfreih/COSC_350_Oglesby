@@ -48,7 +48,7 @@ public abstract class Calculation
         AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(date, paintingByArtist);
         if(records.length==0)
         	return -10;
-        double price = 0;
+        double price;
         if(painting.getClassification().toLowerCase().equals("masterpiece")) price=calcMaxMasterpiece(painting, records);
         else if (painting.getClassification().toLowerCase().equals("masterwork")) price=calcMaxMasterwork(painting, records);
         else price = calcMaxOther(painting, records);

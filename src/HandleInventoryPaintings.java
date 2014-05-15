@@ -281,7 +281,6 @@ class HandleInventoryPaintingsTest
         testPainting = result[0];
         result = HandleInventoryPaintings.retrieveInventoryPaintings(testPainting);
         if(result.length < 1) return false;
-        InventoryPainting temp = result[0];
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
                 && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())

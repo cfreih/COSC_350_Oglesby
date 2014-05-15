@@ -176,7 +176,7 @@ class HandleAuctionPaintingsTest
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
                 && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())
-                && result[0].getDateOfWork() == testPainting.getDateOfWork()) return false;
+                && result[0].getDateOfWork().equals(testPainting.getDateOfWork())) return false;
         testPainting = new AuctionPainting("Earl", "Chuck", "Beauty and the Beautier",
                 "1273", 23, 56, "Paint", "Me, Myself, and I",
                 3.50, new SimpleDate(1999,12,31));
@@ -186,7 +186,7 @@ class HandleAuctionPaintingsTest
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
                 && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())
-                && result[0].getDateOfWork() == testPainting.getDateOfWork()) return false;
+                && result[0].getDateOfWork().equals(testPainting.getDateOfWork())) return false;
         return true;
     }
     public static boolean retrieveAuctionPaintingTest()
@@ -202,7 +202,7 @@ class HandleAuctionPaintingsTest
         if(!result[0].getArtistFirstName().equals(testPainting.getArtistFirstName())
                 && result[0].getArtistLastName().equals(testPainting.getArtistLastName())
                 && result[0].getTitleOfWork().equals(testPainting.getTitleOfWork())
-                && result[0].getDateOfWork() == testPainting.getDateOfWork()) return false;
+                && result[0].getDateOfWork().equals(testPainting.getDateOfWork())) return false;
         //Test for getting a specific InventoryPainting with some fields initialized
         testPainting = new AuctionPainting();
         testPainting.setArtistFirstName("Sam");

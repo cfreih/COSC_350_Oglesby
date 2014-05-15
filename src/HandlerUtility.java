@@ -72,7 +72,7 @@ public abstract class HandlerUtility
       else
       {
           if(comma) statement += ",";
-          statement += " " + (String)pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
+          statement += " " + pairs[i].getKey() + "='" + pairs[i].getValue() + "'";
           comma = true;
       }
     }

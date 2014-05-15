@@ -180,7 +180,6 @@ class HandleArtistTest extends HandleArtist
         Artist testArtist = new Artist("Tim","Burwitz", 6000);
         createArtist(testArtist);
         Artist[] correctnessTest = HandleArtist.retrieveArtists(testArtist);
-        Artist temp = correctnessTest[0];
         deleteArtist(testArtist);
         correctnessTest = retrieveArtists(testArtist);
         if(correctnessTest.length != 0) return false;
