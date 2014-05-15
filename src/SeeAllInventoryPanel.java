@@ -18,6 +18,7 @@ import javax.swing.JButton;
 public class SeeAllInventoryPanel extends JPanel {
 	private JTable paintingsTable;
 	private DefaultTableModel tableModel;
+	private JButton btnBack;
 	
 	public SeeAllInventoryPanel() {
 		
@@ -55,7 +56,7 @@ public class SeeAllInventoryPanel extends JPanel {
 		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPane.setViewportView(paintingsTable);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		springLayout.putConstraint(SpringLayout.NORTH, btnBack, 5, SpringLayout.SOUTH, scrollPane);
 		springLayout.putConstraint(SpringLayout.WEST, btnBack, 10, SpringLayout.WEST, scrollPane);
 		add(btnBack);
@@ -98,5 +99,8 @@ public class SeeAllInventoryPanel extends JPanel {
 					"classif");			
 		}
 		panel.updateTableModel(invP);
+	}
+	public JButton getBtnBack() {
+		return btnBack;
 	}
 }

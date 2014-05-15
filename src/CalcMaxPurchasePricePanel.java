@@ -386,7 +386,6 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 					formatted = formatted.substring(0, 4);
 				dateWork = Integer.parseInt(formatted);
 			}
-			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 			SimpleDate dateAuction = new SimpleDate();
 			double height = 0;
 			if(!fieldValues[6].equals(""))

@@ -475,6 +475,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		manageInventoryMM.getSeeAllPaintingsButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				seeAllInventory.updateTableModel(HandleInventoryPaintings.retrieveInventoryPaintings(new InventoryPainting()));
 				cardLayout.show(getContentPane(), SEE_ALL_INVENTORY);
 			}
 		});
@@ -584,7 +585,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					}
 					else
 					{
-						searchResultsAuction.updateSearchResultsList(searchResults);
+						searchResultsAuction.updateTableModel(searchResults);
 						cardLayout.show(getContentPane(), SEARCH_RESULTS_AUCTION);
 					}					
 				}	
@@ -602,7 +603,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsAuction = new SearchResultsAuctionPanel();
 		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AuctionPainting updatePainting = searchResultsAuction.getSelectedPainting();
+				AuctionPainting updatePainting = searchResultsAuction.getSelectedAuctionPainting();
 				updateAuction.updateTableModel(updatePainting);
 				updateAuction.resetTextFields();
 				cardLayout.show(getContentPane(), UPDATE_AUCTION);
@@ -658,7 +659,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	 * Desc: sets up the searchInventory to be set up and used in MainFrame
 	 * Post: searchInventory and its components are able to be used in MainFrame
 	 */
-	public void setUpSearchResultsSale()
+	private void setUpSearchResultsSale()
 	{
 		searchResultsSale = new SearchResultsSalePanel();
 	}
@@ -707,6 +708,11 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSeeAllInventory()
 	{
 		seeAllInventory = new SeeAllInventoryPanel();
+		seeAllInventory.getBtnBack().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+			}
+		});
 	}
 	
 	/**
