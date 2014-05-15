@@ -704,7 +704,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpUpdateInventory()
 	{
 		InventoryPainting stubPainting = new InventoryPainting();
-		updateInventory = new UpdateInventoryPanel(stubPainting);
+		updateInventory = new UpdateInventoryPanel();
 	}
 	
 	/**

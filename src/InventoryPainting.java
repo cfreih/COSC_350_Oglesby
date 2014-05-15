@@ -72,7 +72,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 		buyerAddress = bAddress;
 		actualSellPrice = actualSell;
 		classification = classif;
-
+        calcTargetSellPrice();
 		calcMaxAndActualRatio();
 		calcTargetAndActualRatio();
 		//calcFlagBoughtReport();
