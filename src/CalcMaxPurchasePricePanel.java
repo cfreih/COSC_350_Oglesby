@@ -404,13 +404,35 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 					return false;
 			return true;
 		}
-		else
+		/*if (formattedFirstName.getValue() != null && formattedLastName.getValue() != null
+				&& formattedTitle.getValue() != null
+				&& formattedDateOfWork.getValue() != null && formattedClassification.getValue() != null
+				&& !(formattedHeight.getValue() == null)
+				&& !(formattedWidth.getValue() == null) && !(med.length() == 0)
+				&& !(subj.length() == 0)) {
+			String[] fieldValues = getFieldValues();
+			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+			double dateWork = Double.parseDouble(fieldValues[3]);
+			double height = Double.parseDouble(fieldValues[4]);
+			double width = Double.parseDouble(fieldValues[5]);
+			if ( (dateWork > 1099) &&  dateWork < today.getYear() && (height > 0) && (width > 0))
+				return true;
+			else
+				return false;
+		} else {
 			return false;
+
+		}
+		else
+			return false;*/
+		return true;
 	}
 
-	public String[] getFieldValues()
-	{
-		String[] fieldValues = new String[10];
+
+
+	public String[] getFieldValues() {
+		String[] fieldValues = new String[8];
+
 		fieldValues[0] = "";
 		if(formattedFirstName.getValue() != null)
 			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
@@ -444,7 +466,23 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		}
 		fieldValues[8] = textFieldMedium.getText();
 		fieldValues[9] = textFieldSubject.getText();
-		
+		if(formattedHeight.getValue() != null)
+		{
+			if (formattedHeight.getValue() instanceof Long)
+				fieldValues[4] = Long.toString((Long) formattedHeight.getValue());
+			else
+				fieldValues[4] = Double.toString((Double) formattedHeight.getValue());
+		}
+		if(formattedWidth.getValue() != null)
+		{
+			if (formattedWidth.getValue() instanceof Long)
+				fieldValues[5] = Long.toString((Long) formattedWidth.getValue());
+			else
+				fieldValues[5] = Double
+						.toString((Double) formattedWidth.getValue());
+		}
+		fieldValues[6] = textFieldMedium.getText();
+		fieldValues[7] = textFieldSubject.getText();
 		return fieldValues;
 	}
 
@@ -465,10 +503,14 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		String title = values[2];
 		String dateWork = values[3];
 		String classification = values[4];
-		double height = Double.parseDouble(values[6]);
+		/*double height = Double.parseDouble(values[6]);
 		double width = Double.parseDouble(values[7]);
 		String med = values[8];
-		String subj = values[9];
+		String subj = values[9];*/
+		double height = Double.parseDouble(values[4]);
+		double width = Double.parseDouble(values[5]);
+		String med = values[6];
+		String subj = values[7];
 		InventoryPainting painting = new InventoryPainting();
 		painting.setArtistFirstName(fName);
 		painting.setArtistLastName(lName);
