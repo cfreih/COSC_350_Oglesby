@@ -648,24 +648,24 @@ public class MainFrame extends JFrame implements ActionListener{
 					Object[] options = {"Yes", "Cancel"};
 					int n = JOptionPane.showOptionDialog(updateArtist, "Are you sure you want to update this artist?",
 							"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-					if(n == 1)
+					if(n == 0)
 					{
 						Artist origArtist = updateArtist.getOrigArtist();
-						Artist changeArtist = new Artist();
-						Artist[] checkArtistExists = HandleArtist.retrieveArtists(origArtist);
+						Artist changeArtist = new Artist();						
+						try {
+							changeArtist = origArtist.clone();
+						} catch (CloneNotSupportedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						updateArtist.updateArtist(changeArtist);
+						Artist[] checkArtistExists = HandleArtist.retrieveArtists(changeArtist);
 						if(checkArtistExists.length > 0)
 							JOptionPane.showMessageDialog(addArtist, "Artist already exists.");
 						else
 						{
-							try {
-								changeArtist = origArtist.clone();
-							} catch (CloneNotSupportedException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							updateArtist.updateArtist(changeArtist);
-							HandleArtist.updateArtist(changeArtist, origArtist);
-							cardLayout.show(getContentPane(), ARTIST_MM);
+						HandleArtist.updateArtist(changeArtist, origArtist);
+						cardLayout.show(getContentPane(), ARTIST_MM);
 						}
 					}
 				}					

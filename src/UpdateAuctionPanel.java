@@ -327,6 +327,16 @@ public class UpdateAuctionPanel extends JPanel {
 					formatted = formatted.substring(0, 4);
 				dateWork = Integer.parseInt(formatted);
 			}
+			else
+			{
+				String date = origPainting.getDateOfWork();
+				if(date.contains("?"));
+					date = date.substring(0,date.length()-1);
+				int newDate = Integer.parseInt(date);
+				dateWork = newDate;
+			}
+			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+			System.out.println(today);
 			SimpleDate dateAuction = new SimpleDate();
 			if(!fieldValues[4].equals(""))
 				dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
@@ -340,7 +350,7 @@ public class UpdateAuctionPanel extends JPanel {
 			if(!fieldValues[7].equals(""))
 				width = Double.parseDouble(fieldValues[7]);
 			if(dateOfWork.length() > 0)
-				if(dateWork < 1100)
+				if(dateWork < 1100 || dateWork > today.getYear())
 					return false;
 			if(!(formattedSalePrice.getValue() == null))
 				if(salePrice <= 0)
@@ -352,7 +362,8 @@ public class UpdateAuctionPanel extends JPanel {
 				if(width <= 0)
 					return false;
 			if(formattedDateAuction.getValue() != null)
-				if(dateAuction.equals(new AuctionPainting()) || dateAuction.getYear() < dateWork)
+				if(dateAuction.equals(new AuctionPainting()) || dateAuction.getYear() < dateWork 
+						|| SimpleDate.dateIsTooLarge(today, dateAuction))
 					return false;
 			return true;
 		}
