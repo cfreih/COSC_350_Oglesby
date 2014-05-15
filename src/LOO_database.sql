@@ -9,8 +9,8 @@ DROP TABLE IF EXISTS inventory_paintings;
 
 CREATE TABLE artists (
 	artistID INT NOT NULL AUTO_INCREMENT,
-	firstName varchar (20),
-	lastName varchar (20),
+	firstName varchar (21),
+	lastName varchar (21),
 	fashionability INT,
 	PRIMARY KEY(artistID)
 )	
@@ -18,9 +18,9 @@ CREATE TABLE artists (
 
 CREATE TABLE auction_paintings (	
 	auctionPaintingID INT NOT NULL AUTO_INCREMENT,
-	firstName varchar (20),
-	lastName varchar (20),
-	title varchar (40),
+	firstName varchar (21),
+	lastName varchar (21),
+	title varchar (41),
 	dateOfWork varchar (5),
 	dateOfAuction INT(18),
 	salePrice DECIMAL(18,2),
@@ -36,9 +36,9 @@ CREATE TABLE auction_paintings (
 
 CREATE TABLE inventory_paintings (
 	inventoryPaintingID INT NOT NULL AUTO_INCREMENT,
-	firstName varchar (20),
-	lastName varchar (20),
-	title varchar (40),
+	firstName varchar (21),
+	lastName varchar (21),
+	title varchar (41),
 	dateOfWork varchar (5),
 	classification varchar(30),
 	height DECIMAL(10,2),
