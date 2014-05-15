@@ -1,4 +1,3 @@
-
 import java.text.NumberFormat;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -57,109 +56,112 @@ public class CompletePurchasePanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-						
-								lblSellerinfo = new JLabel("Seller Information");
-								lblSellerinfo.setFont(new Font("Century", Font.PLAIN, 12));
-								GridBagConstraints gbc_lblSellerinfo = new GridBagConstraints();
-								gbc_lblSellerinfo.anchor = GridBagConstraints.SOUTHWEST;
-								gbc_lblSellerinfo.insets = new Insets(0, 0, 5, 5);
-								gbc_lblSellerinfo.gridx = 1;
-								gbc_lblSellerinfo.gridy = 1;
-								add(lblSellerinfo, gbc_lblSellerinfo);
-				
-						lblSellerName = new JLabel("Seller Name (max 40 characters)");
-						lblSellerName.setFont(new Font("Century", Font.PLAIN, 12));
-						GridBagConstraints gbc_lblSellerName = new GridBagConstraints();
-						gbc_lblSellerName.anchor = GridBagConstraints.NORTHWEST;
-						gbc_lblSellerName.insets = new Insets(0, 0, 5, 5);
-						gbc_lblSellerName.gridx = 1;
-						gbc_lblSellerName.gridy = 2;
-						add(lblSellerName, gbc_lblSellerName);
-						
-								lblSellerName.setLabelFor(formattedSellerName);
-				formattedSellerName = new JFormattedTextField(
-						createFormatter("A***************************************"));
-						
-								formattedSellerName.setFont(new Font("Century", Font.PLAIN, 12));
-								formattedSellerName.setColumns(40);
-								GridBagConstraints gbc_formattedSellerName = new GridBagConstraints();
-								gbc_formattedSellerName.anchor = GridBagConstraints.NORTHWEST;
-								gbc_formattedSellerName.insets = new Insets(0, 0, 5, 0);
-								gbc_formattedSellerName.gridwidth = 2;
-								gbc_formattedSellerName.gridx = 1;
-								gbc_formattedSellerName.gridy = 3;
-								add(formattedSellerName, gbc_formattedSellerName);
-		
-				lblSellerAddress = new JLabel("Seller Address (max 40 characters)");
-				
-						lblSellerAddress.setFont(new Font("Century", Font.PLAIN, 12));
-						GridBagConstraints gbc_lblSellerAddress = new GridBagConstraints();
-						gbc_lblSellerAddress.anchor = GridBagConstraints.NORTHWEST;
-						gbc_lblSellerAddress.insets = new Insets(0, 0, 5, 5);
-						gbc_lblSellerAddress.gridx = 1;
-						gbc_lblSellerAddress.gridy = 4;
-						add(lblSellerAddress, gbc_lblSellerAddress);
-						
-								lblSellerAddress.setLabelFor(formattedSellerAddress);
+
+		lblSellerinfo = new JLabel("Seller Information");
+		lblSellerinfo.setFont(new Font("Cambria", Font.ITALIC, 12));
+		GridBagConstraints gbc_lblSellerinfo = new GridBagConstraints();
+		gbc_lblSellerinfo.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_lblSellerinfo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSellerinfo.gridx = 1;
+		gbc_lblSellerinfo.gridy = 1;
+		add(lblSellerinfo, gbc_lblSellerinfo);
+
+		lblSellerName = new JLabel("Seller Name (max 40 characters)");
+		lblSellerName.setFont(new Font("Cambria", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblSellerName = new GridBagConstraints();
+		gbc_lblSellerName.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblSellerName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSellerName.gridx = 1;
+		gbc_lblSellerName.gridy = 2;
+		add(lblSellerName, gbc_lblSellerName);
+
+		lblSellerName.setLabelFor(formattedSellerName);
+		formattedSellerName = new JFormattedTextField(
+				createFormatter("A***************************************"));
+
+		formattedSellerName.setFont(new Font("Cambria", Font.PLAIN, 12));
+		formattedSellerName.setColumns(40);
+		GridBagConstraints gbc_formattedSellerName = new GridBagConstraints();
+		gbc_formattedSellerName.anchor = GridBagConstraints.NORTHWEST;
+		gbc_formattedSellerName.insets = new Insets(0, 0, 5, 0);
+		gbc_formattedSellerName.gridwidth = 2;
+		gbc_formattedSellerName.gridx = 1;
+		gbc_formattedSellerName.gridy = 3;
+		add(formattedSellerName, gbc_formattedSellerName);
+
+		lblSellerAddress = new JLabel("Seller Address (max 40 characters)");
+
+		lblSellerAddress.setFont(new Font("Cambria", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblSellerAddress = new GridBagConstraints();
+		gbc_lblSellerAddress.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblSellerAddress.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSellerAddress.gridx = 1;
+		gbc_lblSellerAddress.gridy = 4;
+		add(lblSellerAddress, gbc_lblSellerAddress);
+
+		lblSellerAddress.setLabelFor(formattedSellerAddress);
 		formattedSellerAddress = new JFormattedTextField(
 				createFormatter("A***************************************"));
-				formattedSellerAddress.setColumns(40);
-				formattedSellerAddress.setFont(new Font("Century", Font.PLAIN, 12));
-				GridBagConstraints gbc_formattedSellerAddress = new GridBagConstraints();
-				gbc_formattedSellerAddress.anchor = GridBagConstraints.NORTHWEST;
-				gbc_formattedSellerAddress.insets = new Insets(0, 0, 5, 0);
-				gbc_formattedSellerAddress.gridwidth = 2;
-				gbc_formattedSellerAddress.gridx = 1;
-				gbc_formattedSellerAddress.gridy = 5;
-				add(formattedSellerAddress, gbc_formattedSellerAddress);
+		formattedSellerAddress.setColumns(40);
+		formattedSellerAddress.setFont(new Font("Cambria", Font.PLAIN, 12));
+		GridBagConstraints gbc_formattedSellerAddress = new GridBagConstraints();
+		gbc_formattedSellerAddress.anchor = GridBagConstraints.NORTHWEST;
+		gbc_formattedSellerAddress.insets = new Insets(0, 0, 5, 0);
+		gbc_formattedSellerAddress.gridwidth = 2;
+		gbc_formattedSellerAddress.gridx = 1;
+		gbc_formattedSellerAddress.gridy = 5;
+		add(formattedSellerAddress, gbc_formattedSellerAddress);
 		lblPriceBoughtAt = new JLabel("Actual Purchase Price");
-		
-				lblPriceBoughtAt.setFont(new Font("Century", Font.PLAIN, 12));
-				GridBagConstraints gbc_lblPriceBoughtAt = new GridBagConstraints();
-				gbc_lblPriceBoughtAt.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblPriceBoughtAt.insets = new Insets(0, 0, 5, 5);
-				gbc_lblPriceBoughtAt.gridx = 1;
-				gbc_lblPriceBoughtAt.gridy = 6;
-				add(lblPriceBoughtAt, gbc_lblPriceBoughtAt);
-				
-						lblPriceBoughtAt.setLabelFor(formattedBuyPrice);
+
+		lblPriceBoughtAt.setFont(new Font("Cambria", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblPriceBoughtAt = new GridBagConstraints();
+		gbc_lblPriceBoughtAt.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblPriceBoughtAt.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPriceBoughtAt.gridx = 1;
+		gbc_lblPriceBoughtAt.gridy = 6;
+		add(lblPriceBoughtAt, gbc_lblPriceBoughtAt);
+
+		lblPriceBoughtAt.setLabelFor(formattedBuyPrice);
 		formattedBuyPrice = new JFormattedTextField(
 				NumberFormat.getNumberInstance());
-				formattedBuyPrice.setColumns(20);
-				formattedBuyPrice.setFont(new Font("Century", Font.PLAIN, 12));
-				GridBagConstraints gbc_formattedBuyPrice = new GridBagConstraints();
-				gbc_formattedBuyPrice.anchor = GridBagConstraints.NORTHWEST;
-				gbc_formattedBuyPrice.insets = new Insets(0, 0, 5, 5);
-				gbc_formattedBuyPrice.gridx = 1;
-				gbc_formattedBuyPrice.gridy = 7;
-				add(formattedBuyPrice, gbc_formattedBuyPrice);
-		btnAddPaintingTo.setFont(new Font("Century", Font.PLAIN, 12));
-		
-				btnAddPaintingTo.setPreferredSize(new Dimension(200, 20));
-				btnAddPaintingTo.setMnemonic('A');
-				GridBagConstraints gbc_btnAddPaintingTo = new GridBagConstraints();
-				gbc_btnAddPaintingTo.fill = GridBagConstraints.BOTH;
-				gbc_btnAddPaintingTo.insets = new Insets(0, 0, 5, 5);
-				gbc_btnAddPaintingTo.gridx = 1;
-				gbc_btnAddPaintingTo.gridy = 9;
-				add(btnAddPaintingTo, gbc_btnAddPaintingTo);
+		formattedBuyPrice.setColumns(20);
+		formattedBuyPrice.setFont(new Font("Cambria", Font.PLAIN, 12));
+		GridBagConstraints gbc_formattedBuyPrice = new GridBagConstraints();
+		gbc_formattedBuyPrice.anchor = GridBagConstraints.NORTHWEST;
+		gbc_formattedBuyPrice.insets = new Insets(0, 0, 5, 5);
+		gbc_formattedBuyPrice.gridx = 1;
+		gbc_formattedBuyPrice.gridy = 7;
+		add(formattedBuyPrice, gbc_formattedBuyPrice);
+		btnAddPaintingTo.setFont(new Font("Cambria", Font.PLAIN, 12));
+
+		btnAddPaintingTo.setPreferredSize(new Dimension(200, 20));
+		btnAddPaintingTo.setMnemonic('A');
+		GridBagConstraints gbc_btnAddPaintingTo = new GridBagConstraints();
+		gbc_btnAddPaintingTo.fill = GridBagConstraints.BOTH;
+		gbc_btnAddPaintingTo.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAddPaintingTo.gridx = 1;
+		gbc_btnAddPaintingTo.gridy = 9;
+		add(btnAddPaintingTo, gbc_btnAddPaintingTo);
 		btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Century", Font.PLAIN, 12));
-		
-				btnCancel.setPreferredSize(new Dimension(200, 20));
-				btnCancel.setMnemonic('C');
-				GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-				gbc_btnCancel.insets = new Insets(0, 0, 5, 0);
-				gbc_btnCancel.fill = GridBagConstraints.VERTICAL;
-				gbc_btnCancel.gridx = 2;
-				gbc_btnCancel.gridy = 9;
-				add(btnCancel, gbc_btnCancel);
+		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
+
+		btnCancel.setPreferredSize(new Dimension(200, 20));
+		btnCancel.setMnemonic('C');
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCancel.fill = GridBagConstraints.VERTICAL;
+		gbc_btnCancel.gridx = 2;
+		gbc_btnCancel.gridy = 9;
+		add(btnCancel, gbc_btnCancel);
 	}
-	public boolean isInputValid()
-	{
-		if(formattedSellerName.isEditValid() && formattedSellerAddress.isEditValid() && formattedBuyPrice.isEditValid())
+
+	public boolean isInputValid() {
+		if (formattedSellerName.isEditValid()
+				&& formattedSellerAddress.isEditValid()
+				&& formattedBuyPrice.isEditValid())
 			return true;
-		else return false;
+		else
+			return false;
 	}
 
 	/**
@@ -180,27 +182,29 @@ public class CompletePurchasePanel extends JPanel {
 		}
 		return formatter;
 	}
-	public void resetTextFields()
-	{
+
+	public void resetTextFields() {
 		formattedSellerName.setValue(null);
 		formattedSellerAddress.setValue(null);
 		formattedBuyPrice.setValue(null);
 	}
+
 	public JButton getBtnAddPaintingTo() {
 		return btnAddPaintingTo;
 	}
-	public InventoryPainting updateInventoryPainting(InventoryPainting painting)
-	{
-		painting.setSellerName((String)formattedSellerName.getValue());
-		painting.setSellerAddress((String)formattedSellerAddress.getValue());
-		painting.setActualPurchasePrice((Double)formattedBuyPrice.getValue());
+
+	public InventoryPainting updateInventoryPainting(InventoryPainting painting) {
+		painting.setSellerName((String) formattedSellerName.getValue());
+		painting.setSellerAddress((String) formattedSellerAddress.getValue());
+		painting.setActualPurchasePrice((Double) formattedBuyPrice.getValue());
 		return painting;
 	}
+
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
-	public static void main(String args[])
-	{
+
+	public static void main(String args[]) {
 		JFrame f = new JFrame("test window");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setResizable(false);
