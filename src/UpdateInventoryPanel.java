@@ -84,9 +84,9 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		lblArtistinfo = new JLabel("Artist Info");		
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
-		formattedFirstName = new JFormattedTextField(createFormatter("********************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("*****************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
-		formattedLastName = new JFormattedTextField(createFormatter("********************"));
+		formattedLastName = new JFormattedTextField(createFormatter("*****************"));
 		
 		lblNewPaintingInfo = new JLabel("Painting Info");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
@@ -128,7 +128,9 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		updateInventoryPanel.setLayout(springLayout);
 		updateInventoryPanel.setPreferredSize(new Dimension(765, 750));		
-		updateInventoryPanel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new TitledBorder(null, "Manage Inventory Paintings", TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+		updateInventoryPanel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
+									   null, null), new TitledBorder(null, "Manage Inventory Paintings",
+									   TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
 		lblPaintingInfo.setFont(new Font("Century", Font.BOLD, 12));
 		springLayout.putConstraint(SpringLayout.NORTH, lblPaintingInfo, 0, SpringLayout.NORTH, updateInventoryPanel);
@@ -415,55 +417,46 @@ public class UpdateInventoryPanel extends JScrollPane {
 	}
 	
 	public boolean isInputValid(){
-		boolean isValid=false;
-		boolean isSaleInfoNull = false;
-		boolean isSaleInfoComplete = false;
-				
-		if( 	formattedFirstName.isEditValid()
-				&& formattedLastName.isEditValid()
-				&& formattedTitle.isEditValid()
-				&& formattedDateOfWork.isEditValid()
-				&& formattedClassification.isEditValid()
-				&& formattedHeight.isEditValid()
-				&& formattedWidth.isEditValid()
-				&& formattedMedium.isEditValid()
-				&& formattedSubject.isEditValid()				
-				&& formattedSellerName.isEditValid()
-				&& formattedSellerAddress.isEditValid()				
-				)isValid=true;
-		else return false;
-		
-		
-		if(		formattedBuyerName==null 
-				&& formattedBuyerAddress==null
-				&& formattedActualSellingPrice==null
-				)isSaleInfoNull = true;
-		
-		else if(formattedBuyerName.isEditValid() 
-				&& formattedBuyerAddress.isEditValid()
-				&& formattedActualSellingPrice.isEditValid()
-				)isSaleInfoComplete = true;
-		
-		if(		isSaleInfoNull||isSaleInfoComplete ){
-				isValid=true;
-		} else return false;
-		
+		boolean isValid =false;
 		String[] fieldValues = getFieldValues();
+		if(fieldValues[0] != "")
+		if( fieldValues[0] != ""
+			|| fieldValues[1] != ""
+			|| fieldValues[2] != ""
+			|| fieldValues[3] != ""
+			|| fieldValues[4] != ""
+			|| fieldValues[5] != ""
+			|| fieldValues[6] != ""
+			|| fieldValues[7] != ""
+			|| fieldValues[8] != ""
+			|| fieldValues[9] != ""
+			|| fieldValues[10] != ""
+			|| fieldValues[11] != ""
+			)isValid = true;
+		else return false;
+		if(formattedBuyerName.isEnabled()){
+			if( fieldValues[12] != ""
+				|| fieldValues[13] != ""
+				|| fieldValues[14] != ""
+			)isValid = true;
+			else return false;
+		}
 		if(		fieldValues[3].charAt(fieldValues[3].length()-1)=='?')
 		{
 			fieldValues[3] = fieldValues[3].replace(fieldValues[3].substring(fieldValues[3].length()-1), "");		    
 		}
 		double dateOfWork = Double.parseDouble(fieldValues[3]);
+		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+		if(		dateOfWork > 1099 && dateOfWork <= today.getYear());
 		double height = Double.parseDouble(fieldValues[5]);
 		double width = Double.parseDouble(fieldValues[6]);
 		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(fieldValues[9]);
 		double actualPurcahsePrice = Double.parseDouble(fieldValues[12]);
 		SimpleDate dateOfSale = SimpleDate.parseSimpleDate(fieldValues[13]);
 		double actualSellPrice = Double.parseDouble(fieldValues[16]);
-		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 		
-		if(		dateOfWork > 1099
-				&& dateOfWork <= today.getYear()
+		
+		
 				&& height > 0
 				&& width > 0
 				&& !dateOfPurchase.equals(new SimpleDate())
@@ -475,12 +468,13 @@ public class UpdateInventoryPanel extends JScrollPane {
 		if(isSaleInfoComplete && actualSellPrice > 0)
 			isValid = true;
 		else return false;		
-		return isValid;		
+		return isValid;
+		return isValid;
 	}
 	
 	public String[] getFieldValues()
 	{
-		String[] fieldValues = new String[17];
+		String[] fieldValues = new String[15];
 		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
 		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
 		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
@@ -500,15 +494,14 @@ public class UpdateInventoryPanel extends JScrollPane {
 		fieldValues[8] = ((String) formattedSubject.getValue()).trim();
 		fieldValues[10] = ((String) formattedSellerName.getValue()).trim();
 		fieldValues[11] = ((String) formattedSellerAddress.getValue()).trim();
-		
-		if(formattedActualPurchasePrice.getValue() instanceof Long)
-			fieldValues[12] = Long.toString((Long) formattedActualPurchasePrice.getValue());
-		else
-			fieldValues[12] = Double.toString((Double) formattedActualPurchasePrice.getValue());		
-		fieldValues[14] = ((String) formattedBuyerName.getValue()).trim();
-		fieldValues[15] = ((String) formattedBuyerAddress.getValue()).trim();
-			
-		
+		if(formattedBuyerName.isEnabled()){
+			fieldValues[14] = ((String) formattedBuyerName.getValue()).trim();
+			fieldValues[15] = ((String) formattedBuyerAddress.getValue()).trim();
+			if(formattedActualPurchasePrice.getValue() instanceof Long)
+				fieldValues[12] = Long.toString((Long) formattedActualPurchasePrice.getValue());
+			else
+				fieldValues[12] = Double.toString((Double) formattedActualPurchasePrice.getValue());
+		}		
 		return fieldValues;
 	}
 	
@@ -572,6 +565,14 @@ public class UpdateInventoryPanel extends JScrollPane {
 		//return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,salePrice,dateAuction);
 	}
 	
+	public void enable_DisableSellFields(InventoryPainting invPainting){
+		if( invPainting.getDateOfSale().equals(new SimpleDate(SimpleDate.DEFAULT)) ){
+			formattedBuyerName.setEnabled(false);
+			formattedBuyerAddress.setEnabled(false);
+			formattedActualSellingPrice.setEnabled(false);			
+		} 
+	}
+	
 	
 	public static void main( String[] args )
    	{
@@ -579,9 +580,11 @@ public class UpdateInventoryPanel extends JScrollPane {
 		paint.setArtistFirstName("Micahel");
 		paint.setArtistLastName("LeVan");
 		paint.setTitleOfWork("Test1");
+		//paint.setDateOfSale(1992, 07, 22);	
 		
 		UpdateInventoryPanel IP = new UpdateInventoryPanel();
 		IP.updateTableModel(paint);
+		IP.enable_DisableSellFields(paint);
 		JFrame frame =new JFrame("Test");		
 		frame.getContentPane().add(IP , BorderLayout.CENTER);
 		frame.setSize(800, 600);

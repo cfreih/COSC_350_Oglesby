@@ -85,7 +85,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters) *");				
 		formattedTitle = new JFormattedTextField(createFormatter("A***************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy) *");		
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
 		lblHeightcm = new JLabel("Height(cm) *");		
 		formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWidthcm = new JLabel("Width (cm) *");			
@@ -520,6 +520,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		//return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,salePrice,dateAuction);
 	}
 	
+	
+	
 	public JButton getBtnSaveNew() {
 		return btnSaveNew;
 	}
@@ -532,10 +534,10 @@ public class AddPaintingInventoryPanel extends JScrollPane {
    	{
 		AddPaintingInventoryPanel IP = new AddPaintingInventoryPanel();		
 		JFrame frame =new JFrame("Test");		
-		frame.getContentPane().add(IP , BorderLayout.CENTER);
+		frame.getContentPane().add(IP , BorderLayout.CENTER);		
 		frame.setSize(800, 600);
 		frame.setMaximumSize(new Dimension(800, 600));
-		frame.setMinimumSize(new Dimension(800, 600));
+		frame.setMinimumSize(new Dimension(800, 600));				
 		frame.setVisible(true);
 		
 	}
