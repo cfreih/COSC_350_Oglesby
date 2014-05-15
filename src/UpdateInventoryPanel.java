@@ -417,58 +417,71 @@ public class UpdateInventoryPanel extends JScrollPane {
 	}
 	
 	public boolean isInputValid(){
-		boolean isValid =false;
+		boolean isValid =true;
 		String[] fieldValues = getFieldValues();
-		if(fieldValues[0] != "")
-		if( fieldValues[0] != ""
-			|| fieldValues[1] != ""
-			|| fieldValues[2] != ""
-			|| fieldValues[3] != ""
-			|| fieldValues[4] != ""
-			|| fieldValues[5] != ""
-			|| fieldValues[6] != ""
-			|| fieldValues[7] != ""
-			|| fieldValues[8] != ""
-			|| fieldValues[9] != ""
-			|| fieldValues[10] != ""
-			|| fieldValues[11] != ""
-			)isValid = true;
-		else return false;
-		if(formattedBuyerName.isEnabled()){
-			if( fieldValues[12] != ""
-				|| fieldValues[13] != ""
-				|| fieldValues[14] != ""
-			)isValid = true;
-			else return false;
+		
+		if(fieldValues[0] != ""){
+			if(fieldValues[0].length()==21)
+				if(fieldValues[0].charAt(20)!='?')
+					return false;
 		}
-		if(		fieldValues[3].charAt(fieldValues[3].length()-1)=='?')
-		{
-			fieldValues[3] = fieldValues[3].replace(fieldValues[3].substring(fieldValues[3].length()-1), "");		    
+		if(fieldValues[1] != ""){
+			if(fieldValues[1].length()==21)
+				if(fieldValues[1].charAt(20)!='?')
+					return false;			
 		}
-		double dateOfWork = Double.parseDouble(fieldValues[3]);
-		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
-		if(		dateOfWork > 1099 && dateOfWork <= today.getYear());
-		double height = Double.parseDouble(fieldValues[5]);
-		double width = Double.parseDouble(fieldValues[6]);
-		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(fieldValues[9]);
-		double actualPurcahsePrice = Double.parseDouble(fieldValues[12]);
-		SimpleDate dateOfSale = SimpleDate.parseSimpleDate(fieldValues[13]);
-		double actualSellPrice = Double.parseDouble(fieldValues[16]);
-		
-		
-		
-				&& height > 0
-				&& width > 0
-				&& !dateOfPurchase.equals(new SimpleDate())
-				&& SimpleDate.dateIsTooLarge(today , dateOfPurchase)
-				&& actualPurcahsePrice >0				
-			)	isValid = true;
-		else return false;
-		
-		if(isSaleInfoComplete && actualSellPrice > 0)
-			isValid = true;
-		else return false;		
-		return isValid;
+		if(fieldValues[2] != ""){
+			if(fieldValues[2].length()==41)
+				if(fieldValues[2].charAt(40)!='?')
+					return false;			
+		}
+		if(fieldValues[3] != ""){
+			if(fieldValues[3].length()==5){
+				if(fieldValues[3].charAt(4)!='?'){
+					fieldValues[3] = fieldValues[3].replace(fieldValues[3].substring(fieldValues[3].length()-1), "");
+					return false;
+				}	
+			}
+			double dateOfWork = Double.parseDouble(fieldValues[3]);
+			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+			if(dateOfWork < 1100 || dateOfWork > today.getYear())
+				return false;
+		}
+		if(fieldValues[4] != ""){
+			
+			
+		}
+		if(fieldValues[5] != ""){
+			double height = Double.parseDouble(fieldValues[5]);
+			if(height<0) return false;
+		}
+		if(fieldValues[6] != ""){
+			double width = Double.parseDouble(fieldValues[6]);
+			if(width<0) return false;
+		}
+		if(fieldValues[7] != ""){
+			
+		}
+		if(fieldValues[8] != ""){
+			
+		}
+		if(fieldValues[9] != ""){
+			
+		}
+		if(fieldValues[10] != ""){
+						
+		}
+		if(fieldValues[11] != ""){
+			double actualPurchasePrice = Double.parseDouble(fieldValues[11]);
+			if(actualPurchasePrice<0) return false;
+		}
+				
+		if(formattedActualSellingPrice.isEnabled()){
+			if(fieldValues[14] != ""){
+				double actualPurchasePrice = Double.parseDouble(fieldValues[14]);
+				if(actualPurchasePrice<0) return false;
+			}
+		}
 		return isValid;
 	}
 	
@@ -522,47 +535,43 @@ public class UpdateInventoryPanel extends JScrollPane {
 		formattedBuyerAddress.setValue(null);		
 		formattedActualSellingPrice.setValue(null);
 	}
-	public InventoryPainting createNewAuctionPainting(String[] values)
+	public void updateInventoryPainting(InventoryPainting update)
 	{
-		InventoryPainting newIPainting;
-		String fName = values[0];
-		String lName = values[1];
-		String title = values[2];
-		String dateWork = values[3];
-		String classfi = values[4];
-		double height = Double.parseDouble(values[5]);
-		double width = Double.parseDouble(values[6]);
-		String med = values[7];
-		String subj = values[8];
-		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(values[9]);
-		String sellerN = values[10];
-		String sellerA = values[11];
-		double purchasePrice = Double.parseDouble(values[12]);
-		if(		formattedBuyerName.isEditValid() 
-				&& formattedBuyerAddress.isEditValid()
-				&& formattedActualSellingPrice.isEditValid()
-				){
-					SimpleDate dateOfSell = SimpleDate.parseSimpleDate(values[13]);
-					String buyerN = values[14];
-					String buyerA = values[15];
-					double sellPrice = Double.parseDouble(values[16]);
-					newIPainting = new InventoryPainting(fName,lName,title,dateWork,
-														 height,width,med,subj,sellerN,
-														 sellerA,dateOfPurchase,purchasePrice,
-														 classfi,dateOfSell,buyerN,buyerA,sellPrice);
-					newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
-					return newIPainting;
-				}
-				
-		newIPainting = new InventoryPainting(fName,lName,title,dateWork,
-											 height,width,med,subj,sellerN,
-											 sellerA,dateOfPurchase,purchasePrice,
-											 classfi);
-		newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
-		return newIPainting;
+		String[] fieldValues = getFieldValues();
+		if(fieldValues[0].length() > 0)
+			update.setArtistFirstName(fieldValues[0]);
+		if(fieldValues[1].length() > 0)
+			update.setArtistLastName(fieldValues[1]);
+		if(fieldValues[2].length() > 0)
+			update.setTitleOfWork(fieldValues[2]);
+		if(fieldValues[3].length() > 0)
+			update.setDateOfWork(fieldValues[3]);
+		if(fieldValues[4].length() > 0)
+			update.setClassification(fieldValues[4]);
+		if(fieldValues[5].length() > 0)
+			update.setHeightCM(Double.parseDouble(fieldValues[5]));
+		if(fieldValues[6].length() > 0)
+			update.setWidthCM(Double.parseDouble(fieldValues[6]));
+		if(fieldValues[7].length() > 0)
+			update.setMedium(fieldValues[8]);
+		if(fieldValues[8].length() > 0)
+			update.setSubject(fieldValues[9]);
+		if(fieldValues[9].length() > 0)
+			update.setSellerName(fieldValues[9]);
+		if(fieldValues[10].length() > 0)
+			update.setSellerAddress(fieldValues[10]);
+		if(fieldValues[11].length() > 0)
+			update.setActualPurchasePrice(Double.parseDouble(fieldValues[11]));
 		
-		
-		//return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,salePrice,dateAuction);
+		if(formattedBuyerName.isEnabled()){
+			if(fieldValues[12].length() > 0)
+				update.setBuyerName(fieldValues[12]);
+			if(fieldValues[13].length() > 0)
+				update.setBuyerAddress(fieldValues[13]);
+			if(fieldValues[14].length() > 0)
+				update.setActualSellPrice(Double.parseDouble(fieldValues[14]));			
+		}		
+					
 	}
 	
 	public void enable_DisableSellFields(InventoryPainting invPainting){
