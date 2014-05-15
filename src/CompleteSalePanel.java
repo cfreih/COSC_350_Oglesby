@@ -2,21 +2,31 @@ import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SpringLayout;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
-import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
-import javax.swing.JFormattedTextField;
-import javax.swing.JButton;
-
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.text.NumberFormat;
 
 public class CompleteSalePanel extends JPanel {
+	private InventoryPainting origPainting;
 	private JLabel lblBuyerInfo;
 	private JLabel lblFullName;
 	private JLabel lblAddress;
@@ -28,19 +38,23 @@ public class CompleteSalePanel extends JPanel {
 	private JButton btnCancel;
 	private JLabel lblSaleInfo;
 	private JLabel lblPaintingInformation;
+	private JScrollPane scrollPane;
+	private JTable paintingsTable;
+	private DefaultTableModel tableModel;
 
 	public CompleteSalePanel() {
 		setUpPanel();
 	}
 
 	public void setUpPanel() {
+		origPainting=new InventoryPainting();
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 253, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 0, 253, 108, 76, 86, 153, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
@@ -54,6 +68,34 @@ public class CompleteSalePanel extends JPanel {
 		gbc_lblPaintingInformation.gridx = 1;
 		gbc_lblPaintingInformation.gridy = 0;
 		add(lblPaintingInformation, gbc_lblPaintingInformation);
+		
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 1;
+		add(scrollPane, gbc_scrollPane);
+		
+		paintingsTable=new JTable();
+		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableModel =new DefaultTableModel(new Object[][] {origPainting.toTableRow()},
+				new String[] {
+					"Artist First Name", "Arist Last Name", "Title", "Date of Work",
+					"Classification", "Height", "Width", "Medium", "Subject",
+					"Date of Purchase", "Name of Seller", "Address of Seller",
+					"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
+					"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					String.class, String.class, String.class, Integer.class, Object.class, Integer.class, Integer.class, String.class, String.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			};
+		scrollPane.setViewportView(paintingsTable);
 
 		lblBuyerInfo = new JLabel("Buyer Information");
 		lblBuyerInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -75,8 +117,8 @@ public class CompleteSalePanel extends JPanel {
 
 		formattedFullName.setColumns(40);
 		GridBagConstraints gbc_formattedFullName = new GridBagConstraints();
-		gbc_formattedFullName.insets = new Insets(0, 0, 5, 5);
 		gbc_formattedFullName.anchor = GridBagConstraints.WEST;
+		gbc_formattedFullName.insets = new Insets(0, 0, 5, 5);
 		gbc_formattedFullName.gridx = 1;
 		gbc_formattedFullName.gridy = 4;
 		add(formattedFullName, gbc_formattedFullName);
@@ -135,6 +177,7 @@ public class CompleteSalePanel extends JPanel {
 
 		btnCancel = new JButton("Cancel");
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 10;
 		add(btnCancel, gbc_btnCancel);
@@ -148,6 +191,17 @@ public class CompleteSalePanel extends JPanel {
 				return true;
 		}
 		return false;
+	}
+	public void updateTableModel(InventoryPainting invPainting){
+		Object[][] dataVector= {invPainting.toTableRow()};		
+		String[] columnNames = new String[] {
+				"Artist First Name", "Arist Last Name", "Title", "Date of Work",
+				"Classification", "Height", "Width", "Medium", "Subject",
+				"Date of Purchase", "Name of Seller", "Address of Seller",
+				"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
+				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
+		tableModel.setDataVector(dataVector, columnNames);
+		paintingsTable.setModel(tableModel);
 	}
 
 	protected MaskFormatter createFormatter(String s) {
@@ -182,5 +236,22 @@ public class CompleteSalePanel extends JPanel {
 
 	public JButton getBtnCompleteSale() {
 		return btnCompleteSale;
+	}
+	public static void main( String[] args )
+   	{
+		InventoryPainting paint = new InventoryPainting();
+		paint.setArtistFirstName("Micahel");
+		paint.setArtistLastName("LeVan");
+		paint.setTitleOfWork("Test1");
+		
+		CompleteSalePanel IP = new CompleteSalePanel();
+		IP.updateTableModel(paint);
+		JFrame frame =new JFrame("Test");		
+		frame.getContentPane().add(IP , BorderLayout.CENTER);
+		frame.setSize(800, 600);
+		frame.setMaximumSize(new Dimension(800, 600));
+		frame.setMinimumSize(new Dimension(800, 600));
+		frame.setVisible(true);
+		
 	}
 }
