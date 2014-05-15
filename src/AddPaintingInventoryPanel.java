@@ -78,14 +78,14 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		lblWarning_1 = new JLabel("( * Indicates Required Fields )");		
 		
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters) *");		
-		formattedFirstName = new JFormattedTextField(createFormatter("A*******************"));
+		formattedFirstName = new JFormattedTextField(createFormatter("A********************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters) *");
-		formattedLastName = new JFormattedTextField(createFormatter("A*******************"));		
+		formattedLastName = new JFormattedTextField(createFormatter("A********************"));		
 		lblNewPaintingInfo = new JLabel("Painting Info");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters) *");				
-		formattedTitle = new JFormattedTextField(createFormatter("A***************************************"));
+		formattedTitle = new JFormattedTextField(createFormatter("A****************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy) *");		
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		lblHeightcm = new JLabel("Height(cm) *");		
 		formattedHeight = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWidthcm = new JLabel("Width (cm) *");			
@@ -108,9 +108,9 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		lblDateOfSale = new JLabel("Date of Sale **");
 		formattedDateOfSale = new JFormattedTextField(createFormatter("##/##/####"));
 		lblBuyerName = new JLabel("Name of Buyer **");		
-		formattedBuyerName = new JFormattedTextField(createFormatter("******************************************"));
+		formattedBuyerName = new JFormattedTextField(createFormatter("****************************************"));
 		lblBuyerAddress = new JLabel("Address of Buyer **");		
-		formattedBuyerAddress = new JFormattedTextField(createFormatter("******************************************"));
+		formattedBuyerAddress = new JFormattedTextField(createFormatter("****************************************"));
 		lblActualSellingPrice = new JLabel("Actual Selling Price **");		
 		formattedActualSellingPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		btnSaveNew = new JButton("Save New Painting");		
