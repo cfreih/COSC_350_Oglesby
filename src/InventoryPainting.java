@@ -449,12 +449,18 @@ public class InventoryPainting extends Painting implements Cloneable {
 				+ getActualPurchasePrice() + " " + getDateOfSale() + " " + getBuyerName() + " " 
 				+ getBuyerAddress()+ " " + getActualSellPrice();
 	}
+	/**
+	 * Desc: Creates a String array of all the attributes of Inventory to
+	 * 		 Used to display in a JTable
+	 * Return: The string containing all fields of the InventoryPainting
+	 */
 
 	public Object[] toTableRow(){
-		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getTitleOfWork(), getDateOfWork(),
-							 classification, getHeightCM(), getWidthCM(), getMedium(),getSubject(), dateOfPurchase, 
-							 sellerName, sellerAddress, maxPurchasePrice, actualPurchasePrice, dateOfSale.toString(),
-							 buyerName, buyerAddress, actualSellPrice};
+							
+		Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
+							classification,getHeightCM(),getWidthCM(),getMedium(),getSubject(),dateOfPurchase,
+							sellerName,sellerAddress, maxPurchasePrice,actualPurchasePrice, targetSellPrice,
+							dateOfSale.toString(), buyerName, buyerAddress, actualSellPrice};
 		return rowData;
 		
 	}

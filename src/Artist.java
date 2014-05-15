@@ -102,6 +102,12 @@ public class Artist implements Cloneable{
 	{
 		return (Artist) super.clone();
 	}
+	
+	/**
+	 * Desc: Creates a String array of all the attributes of Artist to
+	 * 		 Used to display in a JTable
+	 * Return: The string containing all fields of the Artist Painting
+	 */	
 	public Object[] toTableRow(){
 		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getFashionabilityCoeff()};
 		return rowData;

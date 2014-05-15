@@ -95,7 +95,11 @@ public class AuctionPainting extends Painting implements Cloneable {
 			throw new Error("Clont not supported");
 		}
 	}
-	
+	/**
+	 * Desc: Creates a String array of all the attributes of Auction to
+	 * 		 Used to display in a JTable
+	 * Return: The string containing all fields of the Auction Painting
+	 */
 	public Object[] toTableRow(){
 		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getTitleOfWork(), 
 							 getDateOfWork(),dateOfSaleAuction, salePriceAuction,
