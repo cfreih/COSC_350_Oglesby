@@ -134,6 +134,68 @@ public class SearchInventoryPanel extends JPanel {
 		add(btnCancel, gbc_btnCancel);
 
 	}
+    /**
+     * Desc: Checks to see if the input is valid so that the search can be done.
+     * @return true if the input is valid (any field has input), false if it is not.
+     */
+    public boolean isInputValid()
+    {
+        String fName = "";
+        String lName = "";
+        String title = "";
+        if(formattedFirstName.getValue() != null)
+            fName = ((String) formattedFirstName.getValue()).trim();
+        if(formattedLastName.getValue() != null)
+            lName = ((String) formattedLastName.getValue()).trim();
+        if(formattedTitleOfWork.getValue() != null)
+            title = ((String) formattedTitleOfWork.getValue()).trim();
+        if(fName.length() > 0 || lName.length() > 0 || title.length() > 0)
+            return true;
+        else
+            return false;
+    }
+    /**
+     * Desc: resets the text fields to be blank again.
+     * Post: all the text fields have the value of being blank again.
+     */
+    public void resetTextFields()
+    {
+        formattedFirstName.setValue(null);
+        formattedLastName.setValue(null);
+        formattedTitleOfWork.setValue(null);
+    }
+
+    public static InventoryPainting createNewInventoryPainting(String[] fieldValues)
+    {
+        InventoryPainting search = new InventoryPainting();
+        search.setArtistFirstName(fieldValues[0]);
+        search.setArtistLastName(fieldValues[1]);
+        search.setTitleOfWork(fieldValues[2]);
+        return search;
+    }
+
+    /**
+     * Desc: gets the field values in this panel and creates the String[]
+     * 		 in the order of firstName [0], lastName [1], and title [2].
+     * Return: String[] in the above order.
+     */
+    public String[] getFieldValues()
+    {
+        String[] fieldValues = new String[3];
+        if(formattedFirstName.getValue() != null)
+            fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+        else
+            fieldValues[0] = "";
+        if(formattedLastName.getValue() != null)
+            fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+        else
+            fieldValues[1] = "";
+        if(formattedTitleOfWork.getValue() != null)
+            fieldValues[2] = ((String) formattedTitleOfWork.getValue()).trim();
+        else
+            fieldValues[2] = "";
+        return fieldValues;
+    }
 
 	/**
 	 * Desc: Method to create a format for the strings to be entered. Taken from
