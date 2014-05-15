@@ -388,11 +388,11 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 			}
 			SimpleDate dateAuction = new SimpleDate();
 			double height = 0;
-			if(!fieldValues[6].equals(""))
-				height = Double.parseDouble(fieldValues[6]);
+			if(!fieldValues[5].equals(""))
+				height = Double.parseDouble(fieldValues[5]);
 			double width = 0;
-			if(!fieldValues[7].equals(""))
-				width = Double.parseDouble(fieldValues[7]);
+			if(!fieldValues[6].equals(""))
+				width = Double.parseDouble(fieldValues[6]);
 			if(dateOfWork.length() > 0)
 				if(dateWork < 1100 || dateWork > today.getYear())
 					return false;
@@ -410,7 +410,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 
 	public String[] getFieldValues()
 	{
-		String[] fieldValues = new String[10];
+		String[] fieldValues = new String[9];
 		fieldValues[0] = "";
 		if(formattedFirstName.getValue() != null)
 			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
@@ -426,24 +426,24 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		fieldValues[4] = "";
 		if(formattedClassification.getValue() != null)
 			fieldValues[4] = ((String) formattedClassification.getValue()).trim();
-		fieldValues[6] = "";
+		fieldValues[5] = "";
 		if(formattedHeight.getValue() != null)
 		{
 			if(formattedHeight.getValue() instanceof Long)
-				fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+				fieldValues[5] = Long.toString((Long) formattedHeight.getValue());
 			else
-				fieldValues[6] = Double.toString((Double) formattedHeight.getValue());
+				fieldValues[5] = Double.toString((Double) formattedHeight.getValue());
 		}
-		fieldValues[7] = "";
+		fieldValues[6] = "";
 		if(formattedWidth.getValue() != null)
 		{
 			if(formattedWidth.getValue() instanceof Long)
-				fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
+				fieldValues[6] = Long.toString((Long) formattedWidth.getValue());
 			else
-				fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
+				fieldValues[6] = Double.toString((Double) formattedWidth.getValue());
 		}
-		fieldValues[8] = textFieldMedium.getText();
-		fieldValues[9] = textFieldSubject.getText();
+		fieldValues[7] = textFieldMedium.getText();
+		fieldValues[8] = textFieldSubject.getText();
 		
 		return fieldValues;
 	}
@@ -466,10 +466,10 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		String title = values[2];
 		String dateWork = values[3];
 		String classification = values[4];
-		double height = Double.parseDouble(values[4]);
-		double width = Double.parseDouble(values[5]);
-		String med = values[6];
-		String subj = values[7];
+		double height = Double.parseDouble(values[5]);
+		double width = Double.parseDouble(values[6]);
+		String med = values[7];
+		String subj = values[8];
 		InventoryPainting painting = new InventoryPainting();
 		painting.setArtistFirstName(fName);
 		painting.setArtistLastName(lName);
