@@ -51,16 +51,16 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		lblArtistinfo = new JLabel("Artist Information");
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters)");
 		formattedFirstName = new JFormattedTextField(
-				createFormatter("A*******************"));
+				createFormatter("A********************"));
 		lblArtistLastName = new JLabel("Artist Last Name (max 20 characters)");
 		formattedLastName = new JFormattedTextField(
-				createFormatter("A*******************"));
+				createFormatter("A********************"));
 		lblPaintingInfo_1 = new JLabel("Painting Information");
 		lblTitleOfWork = new JLabel("Title of Work (max 40 characters)");
 		formattedTitle = new JFormattedTextField(
-				createFormatter("A***************************************"));
+				createFormatter("A****************************************"));
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
 		lblClassification = new JLabel("Classification (max 30 characters)");
 		formattedClassification = new JFormattedTextField(
 				createFormatter("A*****************************"));
@@ -332,50 +332,119 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		f.show();
 	}
 
-	public boolean isInputValid() {
+	public boolean isEditValid()
+	{
 		String med = textFieldMedium.getText().trim();
 		String subj = textFieldSubject.getText().trim();
-		if (formattedFirstName.isEditValid() && formattedLastName.isEditValid()
-				&& formattedTitle.isEditValid()
-				&& formattedDateOfWork.isEditValid()
-				&& !(formattedHeight.getValue() == null)
-				&& !(formattedWidth.getValue() == null) && !(med.length() == 0)
-				&& !(subj.length() == 0)) {
-			String[] fieldValues = getFieldValues();
-			double dateWork = Double.parseDouble(fieldValues[3]);
-			SimpleDate dateAuction = SimpleDate.parseSimpleDate(fieldValues[4]);
-			double salePrice = Double.parseDouble(fieldValues[5]);
-			double height = Double.parseDouble(fieldValues[6]);
-			double width = Double.parseDouble(fieldValues[7]);
-			if ((dateWork > 1099) && !(dateAuction.equals(new SimpleDate()))
-					&& (salePrice > 0) && (height > 0) && (width > 0))
-				return true;
-			else
-				return false;
-		} else {
-			return false;
+		String fName = "";
+		if(formattedFirstName.getValue() != null)
+		{
+			fName = ((String) formattedFirstName.getValue()).trim();
+			if(fName.length()==21)
+				if(fName.charAt(20)!='?')
+					return false;
 		}
+		String lName = "";
+		if(formattedLastName.getValue() != null)
+		{
+			lName = ((String) formattedLastName.getValue()).trim();
+			if(lName.length()==21)
+				if(lName.charAt(20)!='?')
+					return false;
+		}
+		String title = "";
+		if(formattedTitle.getValue() != null)
+		{
+			title = ((String) formattedTitle.getValue()).trim();
+			if(title.length()==41)
+				if(title.charAt(40)!='?')
+					return false;
+		}
+		String dateOfWork = "";
+		if(formattedDateOfWork.getValue() != null)
+		{
+			dateOfWork = ((String) formattedDateOfWork.getValue()).trim();
+			if(dateOfWork.length()==5)
+				if(dateOfWork.charAt(4)!='?')
+					return false;
+		}
+		String classification="";
+		if(formattedClassification.getValue() != null)
+			classification= ((String) formattedClassification.getValue()).trim();
+		
+		if(fName.length() > 0 || lName.length() > 0 || title.length() > 0 || dateOfWork.length() > 0 
+				|| !(formattedHeight.getValue() == null) || !(formattedWidth.getValue() == null) || !(med.length() == 0)
+				|| !(subj.length() == 0) )
+		{
+			String[] fieldValues = getFieldValues();
+			int dateWork = -1;
+			if(!fieldValues[3].equals(""))
+			{
+				String formatted = fieldValues[3];
+				if(formatted.length() > 4)
+					formatted = formatted.substring(0, 4);
+				dateWork = Integer.parseInt(formatted);
+			}
+			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+			SimpleDate dateAuction = new SimpleDate();
+			double height = 0;
+			if(!fieldValues[6].equals(""))
+				height = Double.parseDouble(fieldValues[6]);
+			double width = 0;
+			if(!fieldValues[7].equals(""))
+				width = Double.parseDouble(fieldValues[7]);
+			if(dateOfWork.length() > 0)
+				if(dateWork < 1100 || dateWork > today.getYear())
+					return false;
+			if(!(formattedHeight.getValue() == null))
+				if(height <= 0)
+					return false;
+			if(!(formattedWidth.getValue() == null))
+				if(width <= 0)
+					return false;
+			return true;
+		}
+		else
+			return false;
 	}
 
-	public String[] getFieldValues() {
+	public String[] getFieldValues()
+	{
 		String[] fieldValues = new String[10];
-		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
-		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
-		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
-		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
-		if (formattedHeight.getValue() instanceof Long)
-			fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
-		else
-			fieldValues[6] = Double.toString((Double) formattedHeight
-					.getValue());
-		if (formattedWidth.getValue() instanceof Long)
-			fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
-		else
-			fieldValues[7] = Double
-					.toString((Double) formattedWidth.getValue());
+		fieldValues[0] = "";
+		if(formattedFirstName.getValue() != null)
+			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = "";
+		if(formattedLastName.getValue() != null)
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = "";
+		if(formattedTitle.getValue() != null)
+			fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = "";
+		if(formattedDateOfWork.getValue() != null)
+			fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		fieldValues[4] = "";
+		if(formattedClassification.getValue() != null)
+			fieldValues[4] = ((String) formattedClassification.getValue()).trim();
+		fieldValues[6] = "";
+		if(formattedHeight.getValue() != null)
+		{
+			if(formattedHeight.getValue() instanceof Long)
+				fieldValues[6] = Long.toString((Long) formattedHeight.getValue());
+			else
+				fieldValues[6] = Double.toString((Double) formattedHeight.getValue());
+		}
+		fieldValues[7] = "";
+		if(formattedWidth.getValue() != null)
+		{
+			if(formattedWidth.getValue() instanceof Long)
+				fieldValues[7] = Long.toString((Long) formattedWidth.getValue());
+			else
+				fieldValues[7] = Double.toString((Double) formattedWidth.getValue());
+		}
 		fieldValues[8] = textFieldMedium.getText();
 		fieldValues[9] = textFieldSubject.getText();
-
+		
 		return fieldValues;
 	}
 
@@ -395,6 +464,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		String lName = values[1];
 		String title = values[2];
 		String dateWork = values[3];
+		String classification = values[4];
 		double height = Double.parseDouble(values[6]);
 		double width = Double.parseDouble(values[7]);
 		String med = values[8];
@@ -408,6 +478,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		painting.setWidthCM(width);
 		painting.setMedium(med);
 		painting.setSubject(subj);
+		painting.setClassification(classification);
 		return painting;
 	}
 
