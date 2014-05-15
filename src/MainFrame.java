@@ -647,7 +647,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					else
 					{
 						searchResultsSale.updateTableModel(searchResults);
-						
+						cardLayout.show(getContentPane(), SEARCH_RESULTS_SALE);
 					}
 				}
 					
@@ -662,6 +662,23 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSearchResultsSale()
 	{
 		searchResultsSale = new SearchResultsSalePanel();
+		searchResultsSale.getBtnBack().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEARCH_PAINTING_SALE);
+			}
+		});
+		searchResultsSale.getBtnSelect().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InventoryPainting selected = searchResultsSale.getSelectedSalePainting();
+				if(selected.equals(new InventoryPainting()))
+					JOptionPane.showMessageDialog(searchResultsSale, "Select a painting.");
+				else
+				{
+					completeSale.updateTableModel(selected);
+					cardLayout.show(getContentPane(), COMPLETE_SALE);
+				}
+			}
+		});
 	}
 	
 	/**
