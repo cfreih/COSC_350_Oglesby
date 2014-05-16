@@ -780,7 +780,8 @@ public class MainFrame extends JFrame implements ActionListener{
 					}
 					else
 					{
-						
+						searchResultsInventory.updateTableModel(searchResults);
+						cardLayout.show(getContentPane(), SEARCH_RESULTS_INVENTORY);
 					}
 				}
 			}

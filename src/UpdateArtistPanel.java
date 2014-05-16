@@ -2,14 +2,19 @@
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.text.NumberFormat;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -155,7 +160,7 @@ public class UpdateArtistPanel extends JPanel {
 		gbc_lblFashionabilityCoefficient.gridx = 1;
 		gbc_lblFashionabilityCoefficient.gridy = 7;
 		add(lblFashionabilityCoefficient, gbc_lblFashionabilityCoefficient);
-		formattedFashionability = new JFormattedTextField(createFormatter("#####"));
+		formattedFashionability = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		
 		formattedFashionability.setColumns(5);
 		GridBagConstraints gbc_formattedFashionability = new GridBagConstraints();
@@ -239,7 +244,7 @@ public class UpdateArtistPanel extends JPanel {
 			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
 		fieldValues[2] = "";
 		if(formattedFashionability.getValue() != null)
-			fieldValues[3] = ((String) formattedFashionability.getValue()).trim();
+			fieldValues[2] = Long.toString((Long) formattedFashionability.getValue());
 		return fieldValues;
 	}
 	public void resetTextFields()
