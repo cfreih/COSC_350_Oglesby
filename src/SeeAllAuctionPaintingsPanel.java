@@ -9,6 +9,8 @@ import javax.swing.SpringLayout;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 
@@ -16,6 +18,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Dimension;
+
+import javax.swing.JTable;
 
 /**
 
@@ -28,12 +32,11 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 	//private JTable paintingsTable;
 	private SpringLayout springLayout;
 	private JButton btnBack;
-	//private JScrollPane scrollPane;
-	private JList listAllAP;
 	private JScrollPane listScroll;
 	private GridBagLayout gridBagLayout;
 	
 	AuctionPainting[] allAP;
+	private JTable table;
 
 	
 	public SeeAllAuctionPaintingsPanel() {
@@ -41,8 +44,7 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		springLayout = new SpringLayout();
 		scrollPane = new JScrollPane(paintingsTable);*/
 		allAP = HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting());
-		listAllAP = new JList<Object>(allAP);
-		listScroll = new JScrollPane(listAllAP);		
+		listScroll = new JScrollPane();		
 		btnBack = new JButton("Back");
 		gridBagLayout = new GridBagLayout();
 
@@ -59,11 +61,6 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
-		listAllAP.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listAllAP.setVisibleRowCount(40);
-		listAllAP.setSize(new Dimension(1, 40));
-		listAllAP.setFont(new Font("Century", Font.PLAIN, 12));
 		GridBagConstraints gbc_listAllAP = new GridBagConstraints();
 		gbc_listAllAP.gridwidth = 2;
 		gbc_listAllAP.fill = GridBagConstraints.BOTH;
@@ -71,6 +68,9 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 		gbc_listAllAP.gridx = 1;
 		gbc_listAllAP.gridy = 1;
 		add(listScroll, gbc_listAllAP);
+		
+		table = new JTable();
+		listScroll.setViewportView(table);
 
 		btnBack.setSize(new Dimension(150, 35));
 		btnBack.setMnemonic('B');
@@ -88,10 +88,25 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 	 * Desc: Updates the list to include all elements.
 	 * Post: listAllAP contains all elements of the auction records.
 	 */
-	public void updateList()
-	{
-		allAP = HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting());
-		listAllAP.setListData(allAP);
+	public void updateTableModel(AuctionPainting[] aucPaintings)
+	{		 
+	        Object[][] dataVector= new Object[aucPaintings.length][20];
+	        for(int i=0; i <= aucPaintings.length-1; i++){
+	            dataVector[i]=aucPaintings[i].toTableRow();
+	        }
+		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
+				"Date of Work", "Date of Sale", "Sale Price", "Height",
+				"Width", "Medium", "Subject" };
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setModel(model);	
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 
 	public static void main(String[] args) {

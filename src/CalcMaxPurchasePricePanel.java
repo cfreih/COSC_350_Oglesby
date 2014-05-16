@@ -372,9 +372,9 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		if(formattedClassification.getValue() != null)
 			classification= ((String) formattedClassification.getValue()).trim();
 		
-		if(fName.length() > 0 || lName.length() > 0 || title.length() > 0 || dateOfWork.length() > 0 
-				|| !(formattedHeight.getValue() == null) || !(formattedWidth.getValue() == null) || !(med.length() == 0)
-				|| !(subj.length() == 0) )
+		if(fName.length() > 0 && lName.length() > 0 && title.length() > 0 && dateOfWork.length() > 0 
+				&& !(formattedHeight.getValue() == null) && !(formattedWidth.getValue() == null) && !(med.length() == 0)
+				&& !(subj.length() == 0) )
 		{
 			String[] fieldValues = getFieldValues();
 			SimpleDate today = new SimpleDate(SimpleDate.TODAY);

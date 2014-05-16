@@ -8,10 +8,12 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JButton;
 
 
@@ -19,6 +21,8 @@ public class SearchResultsInventoryPanel extends JPanel {
     private JTable paintingsTable;
     private DefaultTableModel tableModel;
     private InventoryPainting[] searchedPaintings;
+    private JButton btnBack;
+    private JButton btnSelect;
 
     public SearchResultsInventoryPanel() {
 
@@ -46,7 +50,11 @@ public class SearchResultsInventoryPanel extends JPanel {
                 new String[] {
                         "Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Purchase", "Name of Seller", "Address of Seller", "Maximum Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price", "New column"
                 }
-        );
+        ){
+        	public boolean isCellEditable(int row, int column) {
+        		return false;
+        	}
+        };
         paintingsTable.setModel(new DefaultTableModel(
         	new Object[][] {
         		{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -60,7 +68,7 @@ public class SearchResultsInventoryPanel extends JPanel {
         		false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
         	};
         	public boolean isCellEditable(int row, int column) {
-        		return columnEditables[column];
+        		return false;
         	}
         });
         paintingsTable.getColumnModel().getColumn(9).setPreferredWidth(96);
@@ -71,10 +79,15 @@ public class SearchResultsInventoryPanel extends JPanel {
         paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scrollPane.setViewportView(paintingsTable);
 
-        JButton btnBack = new JButton("Back");
+        btnBack = new JButton("Back");
         springLayout.putConstraint(SpringLayout.NORTH, btnBack, 5, SpringLayout.SOUTH, scrollPane);
         springLayout.putConstraint(SpringLayout.WEST, btnBack, 10, SpringLayout.WEST, scrollPane);
         add(btnBack);
+        
+        btnSelect = new JButton("Select");
+        springLayout.putConstraint(SpringLayout.SOUTH, btnSelect, 0, SpringLayout.SOUTH, btnBack);
+        springLayout.putConstraint(SpringLayout.EAST, btnSelect, 0, SpringLayout.EAST, scrollPane);
+        add(btnSelect);
     }
     public void updateTableModel(InventoryPainting[] invPaintings){
         searchedPaintings=invPaintings;
@@ -90,8 +103,16 @@ public class SearchResultsInventoryPanel extends JPanel {
                 "Date of Purchase", "Name of Seller", "Address of Seller",
                 "Maximum Purchase Price", "Actual Purchase Price", "Target Selling Price",
                 "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
-        tableModel.setDataVector(dataVector, columnNames);
-        paintingsTable.setModel(tableModel);
+        TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		paintingsTable.setModel(model);	
+		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);       
     }
 
     public static void main(String[] args) {
@@ -112,7 +133,7 @@ public class SearchResultsInventoryPanel extends JPanel {
         }
         panel.updateTableModel(invP);
     }
-    public InventoryPainting getSelectedSalePainting()
+    public InventoryPainting getSelectedInventoryPainting()
     {
         int row = paintingsTable.getSelectedRow();
         if(row == -1)
@@ -120,4 +141,10 @@ public class SearchResultsInventoryPanel extends JPanel {
         else
             return searchedPaintings[row];
     }
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	public JButton getBtnSelect() {
+		return btnSelect;
+	}
 }

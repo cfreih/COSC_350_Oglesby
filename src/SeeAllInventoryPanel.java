@@ -8,10 +8,12 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JButton;
 
 
@@ -49,25 +51,20 @@ public class SeeAllInventoryPanel extends JPanel {
 				);
 		paintingsTable.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Prucahse", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price", "New column"
+				"Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Prucahse", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		paintingsTable.getColumnModel().getColumn(9).setPreferredWidth(96);
-		paintingsTable.getColumnModel().getColumn(10).setPreferredWidth(92);
-		paintingsTable.getColumnModel().getColumn(11).setPreferredWidth(95);
-		paintingsTable.getColumnModel().getColumn(12).setPreferredWidth(139);
-		paintingsTable.getColumnModel().getColumn(13).setPreferredWidth(122);
 		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPane.setViewportView(paintingsTable);
 		
@@ -77,8 +74,7 @@ public class SeeAllInventoryPanel extends JPanel {
 		add(btnBack);
 	}
 	public void updateTableModel(InventoryPainting[] invPainintgs){
-		
-		Object[][] dataVector= new Object[invPainintgs.length][20];
+		Object[][] dataVector= new Object[invPainintgs.length][19];
 		
 		for(int i=0; i <= invPainintgs.length-1; i++){
 		
@@ -93,8 +89,36 @@ public class SeeAllInventoryPanel extends JPanel {
 				"Date of Purchase", "Name of Seller", "Address of Seller",
 				"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
 				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
-		tableModel.setDataVector(dataVector, columnNames);
-		paintingsTable.setModel(tableModel);
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		paintingsTable.setModel(model);	
+		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		paintingsTable.setModel(model);
+		paintingsTable.getColumnModel().getColumn(0).setMinWidth(100);
+		paintingsTable.getColumnModel().getColumn(1).setMinWidth(100);
+		paintingsTable.getColumnModel().getColumn(2).setMinWidth(150);
+		paintingsTable.getColumnModel().getColumn(3).setMinWidth(75);
+		paintingsTable.getColumnModel().getColumn(4).setMinWidth(75);
+		paintingsTable.getColumnModel().getColumn(5).setMinWidth(75);
+		paintingsTable.getColumnModel().getColumn(6).setMinWidth(75);
+		paintingsTable.getColumnModel().getColumn(7).setMinWidth(100);
+		paintingsTable.getColumnModel().getColumn(8).setMinWidth(100);		
+		paintingsTable.getColumnModel().getColumn(9).setMinWidth(96);
+		paintingsTable.getColumnModel().getColumn(10).setMinWidth(92);
+		paintingsTable.getColumnModel().getColumn(11).setMinWidth(95);
+		paintingsTable.getColumnModel().getColumn(12).setMinWidth(139);
+		paintingsTable.getColumnModel().getColumn(13).setMinWidth(122);
+		paintingsTable.getColumnModel().getColumn(14).setMinWidth(105);
+		paintingsTable.getColumnModel().getColumn(15).setMinWidth(75);
+		paintingsTable.getColumnModel().getColumn(16).setMinWidth(89);
+		paintingsTable.getColumnModel().getColumn(17).setMinWidth(101);
+		paintingsTable.getColumnModel().getColumn(18).setMinWidth(105);		
 	}
 	
 	public static void main(String[] args) {

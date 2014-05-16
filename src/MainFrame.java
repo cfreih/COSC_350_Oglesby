@@ -504,7 +504,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		auctionMM.getSeeAllPaintingsButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				seeAllAuction.updateList();
+				AuctionPainting[] allPaintings = HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting());
+				seeAllAuction.updateTableModel(allPaintings);
 				cardLayout.show(getContentPane(), SEE_ALL_AUCTION);
 			}
 		});
@@ -796,6 +797,19 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSearchResultsInventory()
 	{
 		searchResultsInventory = new SearchResultsInventoryPanel();
+		searchResultsInventory.getBtnBack().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), SEARCH_INVENTORY);
+			}
+		});
+		searchResultsInventory.getBtnSelect().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InventoryPainting updatePainting = searchResultsInventory.getSelectedInventoryPainting();
+				updateInventory.updateTableModel(updatePainting);
+				updateInventory.resetTextFields();
+				cardLayout.show(getContentPane(), UPDATE_INVENTORY);
+			}
+		});
 	}
 	
 	/**
