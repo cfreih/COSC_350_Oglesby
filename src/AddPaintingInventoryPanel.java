@@ -96,7 +96,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		formattedMedium = new JFormattedTextField(createFormatter("A************************"));
 		lblSubject = new JLabel("Subject *");
 		formattedSubject = new JFormattedTextField(createFormatter("A************************"));
-		lblDateOfPurchase = new JLabel("Date of Purchase *");
+		lblDateOfPurchase = new JLabel("Date of Purchase (mm/dd/yyyy) *");
 		formattedDateOfPurchase = new JFormattedTextField(createFormatter("##/##/####"));				
 		lblClassification = new JLabel("Classification *");		
 		formattedClassification = new JFormattedTextField(createFormatter("A*****************************"));
@@ -107,7 +107,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		lblActualPurchasePrice = new JLabel("Actual Purchase Price *");		
 		formattedActualPurchasePrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		lblWarning_2 = new JLabel("( ** Must be all Provided OR all Blank )");
-		lblDateOfSale = new JLabel("Date of Sale **");
+		lblDateOfSale = new JLabel("Date of Sale (mm/dd/yyyy)**");
 		formattedDateOfSale = new JFormattedTextField(createFormatter("##/##/####"));
 		lblBuyerName = new JLabel("Name of Buyer **");		
 		formattedBuyerName = new JFormattedTextField(createFormatter("****************************************"));
@@ -372,7 +372,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 				values[12].length() == 0)
 			return false;
 		System.out.println("1");
-		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+		
 		int dateWork = -1;
 		if (values[3].contains("?"))
 			dateWork = Integer.parseInt(values[3].substring(0,
@@ -383,6 +383,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		double actualPurchPrice = Double.parseDouble(values[12]);
 		double height = Double.parseDouble(values[5]);
 		double width = Double.parseDouble(values[6]);
+		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
+		SimpleDate dateOfProgramInstalation= new SimpleDate(5,17,2014);
 		if(dateWork < 1100 || dateWork > today.getYear() || height <= 0 || width <= 0
 				|| datePurch.getYear() < dateWork || SimpleDate.dateIsTooLarge(datePurch, today)
 				|| actualPurchPrice <= 0)
