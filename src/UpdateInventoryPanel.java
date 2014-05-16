@@ -117,7 +117,10 @@ public class UpdateInventoryPanel extends JScrollPane {
 		formattedActualSellingPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		btnSaveChanges = new JButton("Save Changes");
 		btnDelete = new JButton("Delete");
-		btnCancel = new JButton("Cancel");		
+		btnCancel = new JButton("Cancel");
+        btnSaveChanges.setFont(new Font("Cambria", Font.BOLD, 12));
+        btnDelete.setFont(new Font("Cambria", Font.BOLD, 12));
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		setUpPanel();
 	}
 	

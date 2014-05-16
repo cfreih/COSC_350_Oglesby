@@ -5,7 +5,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
@@ -50,25 +50,29 @@ public class SeeAllInventoryPanel extends JPanel {
 					}
 				);
 		paintingsTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Prucahse", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+                new Object[][]{
+                        {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                },
+                new String[]{
+                        "Last Name", "First Name", "Title", "Date of Work", "Classification", "Height", "Width", "Medium", "Subject", "Date of Prucahse", "Name of Seller", "Address of Seller", "Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price", "Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"
+                }
+        )
+        {
+            boolean[] columnEditables = new boolean[]{
+                    false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int row, int column)
+            {
+                return columnEditables[column];
+            }
+        });
 		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPane.setViewportView(paintingsTable);
 		
 		btnBack = new JButton("Back");
+        btnBack.setFont(new Font("Cambria", Font.BOLD, 12));
 		springLayout.putConstraint(SpringLayout.NORTH, btnBack, 5, SpringLayout.SOUTH, scrollPane);
 		springLayout.putConstraint(SpringLayout.WEST, btnBack, 10, SpringLayout.WEST, scrollPane);
 		add(btnBack);

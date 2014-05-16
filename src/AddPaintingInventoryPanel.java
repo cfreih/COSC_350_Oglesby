@@ -117,6 +117,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		formattedActualSellingPrice = new JFormattedTextField(NumberFormat.getNumberInstance());
 		btnSaveNew = new JButton("Save New Painting");		
 		btnCancel = new JButton("Cancel");
+        btnSaveNew.setFont(new Font("Cambria", Font.BOLD, 12));
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		
 		setUpPanel();
 	}

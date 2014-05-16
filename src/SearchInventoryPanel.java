@@ -118,7 +118,7 @@ public class SearchInventoryPanel extends JPanel {
 		add(formattedTitleOfWork, gbc_formattedTitleOfWork);
 
 		btnSearch.setMnemonic('S');
-		btnSearch.setFont(new Font("Century", Font.PLAIN, 12));
+		btnSearch.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.fill = GridBagConstraints.BOTH;
 		gbc_btnSearch.insets = new Insets(0, 0, 0, 5);
@@ -127,6 +127,7 @@ public class SearchInventoryPanel extends JPanel {
 		add(btnSearch, gbc_btnSearch);
 
 		btnCancel.setMnemonic('C');
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.fill = GridBagConstraints.BOTH;
 		gbc_btnCancel.gridx = 3;
