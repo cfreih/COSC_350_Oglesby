@@ -136,6 +136,7 @@ public abstract class HandleAuctionPaintings
         String tableStatement = "auction_paintings";
         String statement = "DELETE FROM " + tableStatement;
         statement += stringify(auction);
+        statement += "LIMIT 1";
         SQLConnector connection = new SQLConnector(statement);
         connection.executeSQL_Update();
     }

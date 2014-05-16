@@ -98,6 +98,7 @@ public abstract class HandleArtist
     String tableStatement = "artists";
     String statement = "DELETE FROM " + tableStatement;
     statement += stringify(artist);
+    statement += "LIMIT 1";
     SQLConnector connection = new SQLConnector(statement);
     connection.executeSQL_Update();
   }

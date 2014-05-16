@@ -210,6 +210,7 @@ public abstract class HandleInventoryPaintings
         String tableStatement = "inventory_paintings";
         String statement = "DELETE FROM " + tableStatement;
         statement += stringify(inventory, 1);
+        statement += "LIMIT 1";
         SQLConnector connection = new SQLConnector(statement);
         connection.executeSQL_Update();
     }
