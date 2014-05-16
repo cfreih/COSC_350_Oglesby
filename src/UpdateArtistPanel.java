@@ -3,7 +3,7 @@
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
-import java.awt.GridBagLayout;
+import java.awt.*;
 
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
@@ -11,8 +11,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
@@ -173,6 +171,7 @@ public class UpdateArtistPanel extends JPanel {
 		add(formattedFashionability, gbc_formattedFashionability);
 		
 		btnDeleteArtist = new JButton("Delete Artist");
+        btnDeleteArtist.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnDeleteArtist = new GridBagConstraints();
 		gbc_btnDeleteArtist.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnDeleteArtist.insets = new Insets(0, 0, 5, 5);
@@ -181,6 +180,7 @@ public class UpdateArtistPanel extends JPanel {
 		add(btnDeleteArtist, gbc_btnDeleteArtist);
 		
 		btnSaveChanges = new JButton("Save Changes");
+        btnSaveChanges.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnSaveChanges = new GridBagConstraints();
 		gbc_btnSaveChanges.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnSaveChanges.insets = new Insets(0, 0, 0, 5);
@@ -197,6 +197,7 @@ public class UpdateArtistPanel extends JPanel {
 				);
 		
 		btnCancel = new JButton("Cancel");
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.anchor = GridBagConstraints.NORTH;

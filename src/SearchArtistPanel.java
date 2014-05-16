@@ -24,8 +24,8 @@ public class SearchArtistPanel extends JPanel {
 	JFormattedTextField formattedLastName;
 	public SearchArtistPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 188, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{260, 188, 0, 0};
+		gridBagLayout.rowHeights = new int[]{180, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -35,6 +35,7 @@ public class SearchArtistPanel extends JPanel {
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
 		btnSearchForArtist = new JButton("Search For Artist");
+        btnSearchForArtist.setFont(new Font("Cambria", Font.BOLD, 12));
 		
 		JLabel lblArtistInfo = new JLabel("Artist Info");
 		lblArtistInfo.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -85,6 +86,7 @@ public class SearchArtistPanel extends JPanel {
 		add(btnSearchForArtist, gbc_btnSearchForArtist);
 		
 		btnCancel = new JButton("Cancel");
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 6;

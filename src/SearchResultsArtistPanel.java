@@ -80,6 +80,7 @@ public class SearchResultsArtistPanel extends JPanel {
 		scrollPane.setViewportView(artistTable);
 		
 		btnSelect = new JButton("Select");
+        btnSelect.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnSelect = new GridBagConstraints();
 		gbc_btnSelect.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnSelect.insets = new Insets(0, 0, 5, 5);
@@ -88,6 +89,7 @@ public class SearchResultsArtistPanel extends JPanel {
 		add(btnSelect, gbc_btnSelect);
 		
 		btnBack = new JButton("Back");
+        btnBack.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		gbc_btnBack.fill = GridBagConstraints.BOTH;
 		gbc_btnBack.insets = new Insets(0, 0, 5, 5);

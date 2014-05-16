@@ -73,6 +73,7 @@ public class SeeAllArtistsPanel extends JPanel {
 		scrollPane.setViewportView(artistTable);
 		
 		btnBack = new JButton("Back");
+        btnBack.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		gbc_btnBack.gridx = 1;
 		gbc_btnBack.gridy = 3;
