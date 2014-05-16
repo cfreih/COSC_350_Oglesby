@@ -34,12 +34,12 @@ public class ClassificationComparator implements Comparator<InventoryPainting>
     }
     public int rankClassification(String classification)
     {
-        String[] rank = {"Other", "Masterwork", "Masterpiece"};
+        String[] rank = {"Masterwork", "Masterpiece"};
         for(int i = 0; i < rank.length; i++)
         {
-            if(rank[i].equals(classification)) return i;
+            if(rank[i].equals(classification)) return i + 1;
         }
-        return -1;
+        return 0;
     }
     @Override
     public boolean equals(Object object)
