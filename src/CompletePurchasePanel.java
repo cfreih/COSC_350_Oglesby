@@ -48,8 +48,8 @@ public class CompletePurchasePanel extends JPanel {
 				null, null), new TitledBorder(null, "Complete Purchase",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 
-		gridBagLayout.columnWidths = new int[] { 0, 29, 200, 0 };
-		gridBagLayout.rowHeights = new int[] { 30, 15, 21, 30, 21, 15, 21, 16,
+		gridBagLayout.columnWidths = new int[] { 180, 29, 200, 0 };
+		gridBagLayout.rowHeights = new int[] { 125, 15, 21, 30, 21, 15, 21, 16,
 				33, 33, 21, 16, 22, 15, 21, 15, 21, 27, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -140,7 +140,7 @@ public class CompletePurchasePanel extends JPanel {
 		gbc_formattedBuyPrice.gridx = 1;
 		gbc_formattedBuyPrice.gridy = 7;
 		add(formattedBuyPrice, gbc_formattedBuyPrice);
-		btnCompletePurchase.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCompletePurchase.setFont(new Font("Cambria", Font.BOLD, 12));
 
 		btnCompletePurchase.setPreferredSize(new Dimension(200, 20));
 		btnCompletePurchase.setMnemonic('A');
@@ -151,7 +151,7 @@ public class CompletePurchasePanel extends JPanel {
 		gbc_btnCompletePurchase.gridy = 9;
 		add(btnCompletePurchase, gbc_btnCompletePurchase);
 		btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 
 		btnCancel.setPreferredSize(new Dimension(200, 20));
 		btnCancel.setMnemonic('C');

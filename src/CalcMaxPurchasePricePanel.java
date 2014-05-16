@@ -79,7 +79,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		textFieldSubject = new JFormattedTextField(
 				createFormatter("A************************"));
 		btnCalcMaxPrice = new JButton("Calculate Maximum Purchase Price");
-		btnCalcMaxPrice.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCalcMaxPrice.setFont(new Font("Cambria", Font.BOLD, 12));
 
 		setUpPanel();
 	}
@@ -290,7 +290,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		gbc_btnCalcMaxPrice.gridy = 17;
 		add(btnCalcMaxPrice, gbc_btnCalcMaxPrice);
 		btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 
 		btnCancel.setPreferredSize(new Dimension(200, 20));
 		btnCancel.setMnemonic('C');
