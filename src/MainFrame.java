@@ -201,6 +201,37 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpAddPaintingInventory()
 	{
 		addPaintingInventory = new AddPaintingInventoryPanel();
+		addPaintingInventory.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+			}
+		});
+		addPaintingInventory.getBtnSaveNew().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!addPaintingInventory.isInputValid())
+					JOptionPane.showMessageDialog(addPaintingInventory, "Input is invalid, make sure all fields are correct");
+				else
+				{
+					InventoryPainting newPainting = addPaintingInventory.createNewInventoryPainting(addPaintingInventory.getFieldValues());
+					InventoryPainting[] searchDBPainting = MainFrame.getCheckDBInventoryPainting(newPainting);
+					InventoryPainting[][] checkPaintingExists = {HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[0]),
+							HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[1])};
+					if(checkPaintingExists[0].length > 0 || checkPaintingExists[1].length > 0)
+						JOptionPane.showMessageDialog(addPaintingInventory, "Paintings Already Exists");
+					else
+					{
+						Object[] options = {"Yes", "Cancel"};
+						int n = JOptionPane.showOptionDialog(addPaintingInventory, "Are you sure you want to add this painting?",
+								"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if(n == 0)
+						{
+							HandleInventoryPaintings.createInventoryPainting(newPainting);
+							cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+						}
+					}
+				}
+			}
+		});
 	}
 	
 	
@@ -490,6 +521,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		manageInventoryMM.getAddNewPaintingButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				addPaintingInventory.resetTextFields();
 				cardLayout.show(getContentPane(), ADD_PAINTING_INVENTORY);
 			}
 		});
@@ -556,7 +588,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsArtist.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Artist selectedArtist = searchResultsArtist.getSelectedArtist();
-				if(selectedArtist.equals(new Artist()))
+				if(selectedArtist == null)
 					JOptionPane.showMessageDialog(searchResultsArtist, "Select an Artist");
 				else
 				{
@@ -629,9 +661,14 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AuctionPainting updatePainting = searchResultsAuction.getSelectedAuctionPainting();
-				updateAuction.updateTableModel(updatePainting);
-				updateAuction.resetTextFields();
-				cardLayout.show(getContentPane(), UPDATE_AUCTION);
+				if(updatePainting == null)
+					JOptionPane.showMessageDialog(searchResultsAuction, "Please select a row to continue");
+				else
+				{
+					updateAuction.updateTableModel(updatePainting);
+					updateAuction.resetTextFields();
+					cardLayout.show(getContentPane(), UPDATE_AUCTION);
+				}
 			}
 		});
 		searchResultsAuction.getBtnCancel().addActionListener(new ActionListener() {
@@ -696,7 +733,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsSale.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InventoryPainting selected = searchResultsSale.getSelectedSalePainting();
-				if(selected.equals(new InventoryPainting()))
+				if(selected == null)
 					JOptionPane.showMessageDialog(searchResultsSale, "Select a painting.");
 				else
 				{

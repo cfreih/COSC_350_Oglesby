@@ -95,7 +95,6 @@ public class InventoryPainting extends Painting implements Cloneable {
 		buyerName = bName;
 		buyerAddress = bAddress;
 		actualSellPrice = actualSell;
-		classification = classif;
 		calcTargetSellPrice();
 		calcTargetAndActualRatio();
 	}
@@ -113,7 +112,10 @@ public class InventoryPainting extends Painting implements Cloneable {
 		actualPurchasePrice = actualPurch;		
 		classification = classif;		
 		calcTargetSellPrice();	
-		
+		dateOfSale = new SimpleDate();
+		buyerName = "";
+		buyerAddress = "";
+		actualSellPrice = 0;
 	}
 
 	/**
