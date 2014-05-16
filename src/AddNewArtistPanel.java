@@ -44,6 +44,7 @@ public class AddNewArtistPanel extends JPanel {
 		lblFashionabilityCoefficient = new JLabel("Fashionability Coefficient");
 		formattedFashionability = new JFormattedTextField(fashFormat); // createFormatter("#####")
 		btnAddNewArtist = new JButton("Add New Artist");
+        btnAddNewArtist.setFont(new Font("Cambria", Font.BOLD, 12));
 		btnCancel = new JButton("Cancel");
 
 		setUpPanel();
@@ -51,8 +52,8 @@ public class AddNewArtistPanel extends JPanel {
 
 	public void setUpPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 35, 170, 0, 0, 170, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		gridBagLayout.columnWidths = new int[] { 200, 170, 0, 0, 170, 0 };
+		gridBagLayout.rowHeights = new int[] { 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -66,10 +67,11 @@ public class AddNewArtistPanel extends JPanel {
 
 		lblArtistInfo.setFont(new Font("Cambria", Font.ITALIC, 12));
 		GridBagConstraints gbc_lblArtistInfo = new GridBagConstraints();
-		gbc_lblArtistInfo.anchor = GridBagConstraints.WEST;
+		gbc_lblArtistInfo.anchor = GridBagConstraints.SOUTH;
 		gbc_lblArtistInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblArtistInfo.gridx = 1;
 		gbc_lblArtistInfo.gridy = 0;
+
 		add(lblArtistInfo, gbc_lblArtistInfo);
 
 		lblFirstName.setFont(new Font("Cambria", Font.PLAIN, 12));
@@ -135,6 +137,7 @@ public class AddNewArtistPanel extends JPanel {
 		add(btnAddNewArtist, gbc_btnAddNewArtist);
 
 		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnCancel.insets = new Insets(0, 0, 5, 0);
