@@ -625,11 +625,11 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		searchAuction.getBtnSearch().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!searchAuction.isInputValid())
-				{
-					JOptionPane.showMessageDialog(searchAuction, "Input is invalid, make sure all fields are correct");
-				}
-				else
+				//if(!searchAuction.isInputValid())
+				//{
+				//	JOptionPane.showMessageDialog(searchAuction, "Input is invalid, make sure all fields are correct");
+				//}
+				//else
 				{
 					//if searchResults > 1 go straight to update screen
 					String[] fieldValues = searchAuction.getFieldValues();
@@ -666,9 +666,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AuctionPainting updatePainting = searchResultsAuction.getSelectedAuctionPainting();
-				//if(updatePainting == null)
-				//	JOptionPane.showMessageDialog(searchResultsAuction, "Please select a row to continue");
-				//else
+				if(updatePainting == null)
+					JOptionPane.showMessageDialog(searchResultsAuction, "Please select a row to continue");
+				else
 				{
 					updateAuction.updateTableModel(updatePainting);
 					updateAuction.resetTextFields();
