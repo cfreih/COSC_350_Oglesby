@@ -68,7 +68,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 	private JButton btnCancel;
 	
 	private DefaultTableModel tableModel;
-
+	private InventoryPainting update;
 
 	
 	public UpdateInventoryPanel(){
@@ -405,6 +405,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 	}	
 	
 	public void updateTableModel(InventoryPainting invPainting){
+		update = invPainting;
 		Object[][] dataVector= {invPainting.toTableRow()};		
 		String[] columnNames = new String[] {
 				"Artist First Name", "Arist Last Name", "Title", "Date of Work",
@@ -530,7 +531,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 		formattedActualSellingPrice.setValue(null);
 	}
 	
-	public void updateInventoryPainting(InventoryPainting update)
+	public void updateInventoryPainting()
 	{
 		String[] fieldValues = getFieldValues();
 		if(fieldValues[0].length() > 0)

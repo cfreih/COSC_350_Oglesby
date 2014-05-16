@@ -140,16 +140,8 @@ public class SearchInventoryPanel extends JPanel {
      */
     public boolean isInputValid()
     {
-        String fName = "";
-        String lName = "";
-        String title = "";
-        if(formattedFirstName.getValue() != null)
-            fName = ((String) formattedFirstName.getValue()).trim();
-        if(formattedLastName.getValue() != null)
-            lName = ((String) formattedLastName.getValue()).trim();
-        if(formattedTitleOfWork.getValue() != null)
-            title = ((String) formattedTitleOfWork.getValue()).trim();
-        if(fName.length() > 0 || lName.length() > 0 || title.length() > 0)
+        String[] values = getFieldValues();
+        if(values[0].length() > 0 || values[1].length() > 0 || values[2].length() > 0)
             return true;
         else
             return false;

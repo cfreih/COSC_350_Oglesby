@@ -530,6 +530,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		manageInventoryMM.getModifyPaintingButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				searchInventory.resetTextFields();
 				cardLayout.show(getContentPane(), SEARCH_INVENTORY);
 			}
 		});
@@ -758,11 +759,30 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchInventory = new SearchInventoryPanel();
 		searchInventory.getBtnCancel().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), AUCTION_MM);
 			}
 		});
 		searchInventory.getBtnSearch().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(getContentPane(), AUCTION_MM);
+				if(!searchInventory.isInputValid())
+					JOptionPane.showMessageDialog(searchInventory, "Input is invalid, make sure all fields are correct");
+				else
+				{
+					InventoryPainting searchTerms = SearchInventoryPanel.createNewInventoryPainting(searchInventory.getFieldValues());
+					InventoryPainting[] searchResults = HandleInventoryPaintings.retrieveInventoryPaintings(searchTerms);
+					if(searchResults.length == 0)
+						JOptionPane.showMessageDialog(searchPaintingSale, "No results found in search");
+					else if(searchResults.length == 1)
+					{
+						updateInventory.updateTableModel(searchResults[0]);
+						updateInventory.resetTextFields();
+						cardLayout.show(getContentPane(), UPDATE_INVENTORY);
+					}
+					else
+					{
+						
+					}
+				}
 			}
 		});
 		
