@@ -90,8 +90,8 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 				"Calculate Maximum Purchase Price", TitledBorder.CENTER,
 				TitledBorder.TOP, null, null)));
 
-		gridBagLayout.columnWidths = new int[] { 0, 246, 200, 0 };
-		gridBagLayout.rowHeights = new int[] { 30, 15, 21, 30, 21, 15, 21, 15,
+		gridBagLayout.columnWidths = new int[] { 150, 250, 200, 150 };
+		gridBagLayout.rowHeights = new int[] { 60, 15, 21, 30, 21, 15, 21, 15,
 				21, 15, 21, 16, 22, 15, 21, 15, 21, 27, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
