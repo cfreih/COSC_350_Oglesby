@@ -42,6 +42,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	private UpdateInventoryPanel updateInventory;
 	private SeeAllInventoryPanel seeAllInventory;
 	private SearchInventoryPanel searchInventory;
+	private SearchResultsInventoryPanel searchResultsInventory;
 	
 	//constants to be used for indicating a panel
 	public static String MAIN_MENU = "Main Menu";
@@ -73,6 +74,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	public static String UPDATE_INVENTORY = "Update Inventory";	
 	public static String SEE_ALL_INVENTORY = "See All Invneotry";
 	public static String SEARCH_INVENTORY = "Search Inventory Paintings";
+	public static String SEARCH_RESULTS_INVENTORY = "Search Results Inventory";
 	
 	
 	/*
@@ -107,7 +109,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		setUpSearchInventory();
 		setUpAddPaintingInventory();
 		setUpSeeAllInventory();
-		
+		setUpSearchResultsInventory();
 		
 		cardLayout = new CardLayout();
 
@@ -151,6 +153,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		getContentPane().add(addPaintingInventory, ADD_PAINTING_INVENTORY);
 		getContentPane().add(seeAllInventory, SEE_ALL_INVENTORY);
 		getContentPane().add(searchResultsSale, SEARCH_RESULTS_SALE);
+		getContentPane().add(searchResultsInventory, SEARCH_RESULTS_INVENTORY);
 	}
 	
 	/**
@@ -753,6 +756,25 @@ public class MainFrame extends JFrame implements ActionListener{
 	private void setUpSearchInventory()
 	{
 		searchInventory = new SearchInventoryPanel();
+		searchInventory.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		searchInventory.getBtnSearch().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), AUCTION_MM);
+			}
+		});
+		
+	}
+	
+	/**
+	 * Desc: sets up the searchResultsInventory to be set up and used in MainFrame
+	 * Post: searchResultsInventory and its components are able to be used in MainFrame
+	 */
+	private void setUpSearchResultsInventory()
+	{
+		searchResultsInventory = new SearchResultsInventoryPanel();
 	}
 	
 	/**
