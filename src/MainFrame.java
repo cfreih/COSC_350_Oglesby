@@ -738,7 +738,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsSale.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InventoryPainting selected = searchResultsSale.getSelectedSalePainting();
-				if(selected == null)
+				if(selected.equals(new InventoryPainting()))
 					JOptionPane.showMessageDialog(searchResultsSale, "Select a painting.");
 				else
 				{
