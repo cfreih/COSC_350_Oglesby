@@ -300,7 +300,7 @@ public class UpdateAuctionPanel extends JPanel {
 		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
 				"Date of Work", "Date of Sale", "Sale Price", "Height",
 				"Width", "Medium", "Subject" };
-		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		DefaultTableModel model = new DefaultTableModel(dataVector, columnNames)
 		{
 		    public boolean isCellEditable(int row, int column)
 		    {
