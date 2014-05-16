@@ -273,15 +273,18 @@ public class UpdateAuctionPanel extends JPanel {
 		add(textFieldSubject);
 		textFieldSubject.setColumns(20);
 		btnSaveChanges = new JButton("Save Changes");
+        btnSaveChanges.setFont(new Font("Cambria", Font.BOLD, 12));
 		btnSaveChanges.setBounds(31, 518, 150, 40);
 		btnSaveChanges.setPreferredSize(new Dimension(150, 40));
 		btnSaveChanges.setMnemonic('S');
 		add(btnSaveChanges);
 		btnDelete = new JButton("Delete Painting");
 		btnDelete.setBounds(264, 518, 132, 40);
+        btnDelete.setFont(new Font("Cambria", Font.BOLD, 12));
 		btnDelete.setMnemonic('D');
 		add(btnDelete);
 		btnCancel = new JButton("Cancel");
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		btnCancel.setBounds(615, 518, 106, 40);
 		btnCancel.setMnemonic('C');
 		add(btnCancel);

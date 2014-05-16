@@ -55,10 +55,10 @@ public class SearchAuctionPanel extends JPanel {
 	 */
 	public void setUpPanel() {
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
-				null, null), new TitledBorder(null, "Manage Auction Records",
+				null, null), new TitledBorder(null, "Search Auction Paintings",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 
-		gridBagLayout.columnWidths = new int[] { 48, 215, 228, 150, 0 };
+		gridBagLayout.columnWidths = new int[] { 60, 215, 215, 150, 0 };
 		gridBagLayout.rowHeights = new int[] { 70, 15, 21, 57, 15, 21, 58, 15,
 				21, 85, 39, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
@@ -123,7 +123,7 @@ public class SearchAuctionPanel extends JPanel {
 		add(formattedTitleOfWork, gbc_formattedTitleOfWork);
 
 		btnSearch.setMnemonic('S');
-		btnSearch.setFont(new Font("Century", Font.PLAIN, 12));
+		btnSearch.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.fill = GridBagConstraints.BOTH;
 		gbc_btnSearch.insets = new Insets(0, 0, 0, 5);
@@ -132,6 +132,7 @@ public class SearchAuctionPanel extends JPanel {
 		add(btnSearch, gbc_btnSearch);
 
 		btnCancel.setMnemonic('C');
+        btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.fill = GridBagConstraints.BOTH;
 		gbc_btnCancel.gridx = 3;
