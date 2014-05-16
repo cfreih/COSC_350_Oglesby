@@ -81,7 +81,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		textFieldMedium = new JTextField();
 		lblSubject = new JLabel("Subject");
 		textFieldSubject = new JTextField();
-		btnAddPaintingTo = new JButton("Add Painting to Auction Records");
+		btnAddPaintingTo = new JButton("Add Painting to Auction Paintings");
 		btnAddPaintingTo.setFont(new Font("Cambria", Font.PLAIN, 12));
 
 		setUpPanel();
@@ -94,8 +94,8 @@ public class AddPaintingAuctionPanel extends JPanel {
 				"Manage Auction Paintings", TitledBorder.CENTER,
 				TitledBorder.TOP, null, null)));
 
-		gridBagLayout.columnWidths = new int[] { 0, 29, 200, 0 };
-		gridBagLayout.rowHeights = new int[] { 30, 15, 21, 30, 21, 15, 21, 15,
+		gridBagLayout.columnWidths = new int[] { 170, 29, 200, 0 };
+		gridBagLayout.rowHeights = new int[] { 70, 15, 21, 30, 21, 15, 21, 15,
 				21, 15, 21, 16, 22, 15, 21, 15, 21, 27, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -307,6 +307,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 
 		btnAddPaintingTo.setPreferredSize(new Dimension(200, 20));
 		btnAddPaintingTo.setMnemonic('A');
+        btnAddPaintingTo.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnAddPaintingTo = new GridBagConstraints();
 		gbc_btnAddPaintingTo.fill = GridBagConstraints.BOTH;
 		gbc_btnAddPaintingTo.insets = new Insets(0, 0, 0, 5);
@@ -314,7 +315,7 @@ public class AddPaintingAuctionPanel extends JPanel {
 		gbc_btnAddPaintingTo.gridy = 17;
 		add(btnAddPaintingTo, gbc_btnAddPaintingTo);
 		btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 
 		btnCancel.setPreferredSize(new Dimension(200, 20));
 		btnCancel.setMnemonic('C');
