@@ -504,7 +504,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		auctionMM.getSeeAllPaintingsButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				seeAllAuction.updateList();
+				AuctionPainting[] allPaintings = HandleAuctionPaintings.retrieveAuctionPaintings(new AuctionPainting());
+				seeAllAuction.updateTableModel(allPaintings);
 				cardLayout.show(getContentPane(), SEE_ALL_AUCTION);
 			}
 		});
