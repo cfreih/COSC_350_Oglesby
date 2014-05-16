@@ -1,5 +1,4 @@
 import java.lang.String;
-import java.util.*;
 public abstract class Calculation
 {
     //Desc: Calculates the similarity between this painting and the auction record provided.
@@ -32,6 +31,8 @@ public abstract class Calculation
                 mostSimilar=records[i];
             }
         }
+        if(!(max<=0))
+        	return null;
         return mostSimilar;
     }
     //Desc: Calculates the maximum price the user should pay for the painting entered.
@@ -61,9 +62,11 @@ public abstract class Calculation
     private static double calcMaxMasterpiece(InventoryPainting painting, AuctionPainting[] records)
     {
         AuctionPainting mostSimilar=findMostSimilarPainting(painting, records);
+        if(mostSimilar==null)
+        	return -10;
         double maxBuyPrice=mostSimilar.getSalePriceAuction();
-        Date currentDate= new Date();
-        int yearsBetween= mostSimilar.getDateOfSaleAuction().getYear()-currentDate.getYear();
+        SimpleDate date = new SimpleDate(SimpleDate.TODAY);
+        int yearsBetween= mostSimilar.getDateOfSaleAuction().getYear()-date.getYear();
         for(int i=0;i<=yearsBetween;i++)
         {
             maxBuyPrice=maxBuyPrice*1.085;
@@ -76,6 +79,8 @@ public abstract class Calculation
     private static double calcMaxMasterwork(InventoryPainting painting, AuctionPainting[] records)
     {
         double maxBuyPrice=calcMaxMasterpiece(painting,  records);
+        if(maxBuyPrice<0)
+        	return maxBuyPrice;
         String dateOfWork = painting.getDateOfWork();
         int date = Integer.parseInt(dateOfWork.substring(0,3));
         if(date>2000) maxBuyPrice=maxBuyPrice*0.25;
