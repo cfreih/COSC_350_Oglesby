@@ -458,12 +458,23 @@ public class InventoryPainting extends Painting implements Cloneable {
 	 */
 
 	public Object[] toTableRow(){
-							
-		Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
+		SimpleDate default_date = new SimpleDate(SimpleDate.DEFAULT);
+		
+		if(!dateOfSale.equals(default_date)){
+			Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
 							classification,getHeightCM(),getWidthCM(),getMedium(),getSubject(),dateOfPurchase,
 							sellerName,sellerAddress, maxPurchasePrice,actualPurchasePrice, targetSellPrice,
 							dateOfSale.toString(), buyerName, buyerAddress, actualSellPrice};
-		return rowData;
+			return rowData;
+		}
+		else{
+			Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
+					classification,getHeightCM(),getWidthCM(),getMedium(),getSubject(),dateOfPurchase,
+					sellerName,sellerAddress, maxPurchasePrice,actualPurchasePrice, targetSellPrice,
+					"", "", "", ""};
+			return rowData;
+		}		
+		
 		
 	}
 	/*
