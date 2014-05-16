@@ -68,7 +68,6 @@ public class UpdateInventoryPanel extends JScrollPane {
 	private JButton btnCancel;
 	
 	private DefaultTableModel tableModel;
-	private InventoryPainting update;
 
 	
 	public UpdateInventoryPanel(){
@@ -163,6 +162,9 @@ public class UpdateInventoryPanel extends JScrollPane {
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
 			};
 				
 		paintingsTable.setModel(new DefaultTableModel(
@@ -179,11 +181,8 @@ public class UpdateInventoryPanel extends JScrollPane {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
-			};
 			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
+				return false;
 			}
 		});
 		paintingsTable.getColumnModel().getColumn(0).setPreferredWidth(155);
@@ -405,7 +404,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 	}	
 	
 	public void updateTableModel(InventoryPainting invPainting){
-		update = invPainting;
+		origPainting = invPainting;
 		Object[][] dataVector= {invPainting.toTableRow()};		
 		String[] columnNames = new String[] {
 				"Artist First Name", "Arist Last Name", "Title", "Date of Work",
@@ -415,6 +414,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
 		tableModel.setDataVector(dataVector, columnNames);
 		paintingsTable.setModel(tableModel);
+		enable_DisableSellFields();
 	}
 	
 	protected MaskFormatter createFormatter(String s) {
@@ -483,33 +483,63 @@ public class UpdateInventoryPanel extends JScrollPane {
 	public String[] getFieldValues()
 	{
 		String[] fieldValues = new String[15];
-		fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
-		fieldValues[1] = ((String) formattedLastName.getValue()).trim();
-		fieldValues[2] = ((String) formattedTitle.getValue()).trim();
-		fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
-		fieldValues[4] = ((String) formattedClassification.getValue()).trim();
-		
-		if(formattedHeight.getValue() instanceof Long)
-			fieldValues[5] = Long.toString((Long) formattedHeight.getValue());
-		else
-			fieldValues[5] = Double.toString((Double) formattedHeight.getValue());
-		if(formattedWidth.getValue() instanceof Long)
-			fieldValues[6] = Long.toString((Long) formattedWidth.getValue());
-		else
-			fieldValues[6] = Double.toString((Double) formattedWidth.getValue());
-		
-		fieldValues[7] = ((String) formattedMedium.getValue()).trim();
-		fieldValues[8] = ((String) formattedSubject.getValue()).trim();
-		fieldValues[10] = ((String) formattedSellerName.getValue()).trim();
-		fieldValues[11] = ((String) formattedSellerAddress.getValue()).trim();
-		if(formattedBuyerName.isEnabled()){
-			fieldValues[14] = ((String) formattedBuyerName.getValue()).trim();
-			fieldValues[15] = ((String) formattedBuyerAddress.getValue()).trim();
-			if(formattedActualPurchasePrice.getValue() instanceof Long)
-				fieldValues[12] = Long.toString((Long) formattedActualPurchasePrice.getValue());
+		fieldValues[0] = "";
+		if(formattedFirstName.getValue() != null)
+			fieldValues[0] = ((String) formattedFirstName.getValue()).trim();
+		fieldValues[1] = "";
+		if(formattedLastName.getValue() != null)
+			fieldValues[1] = ((String) formattedLastName.getValue()).trim();
+		fieldValues[2] = "";
+		if(formattedTitle.getValue() != null)
+			fieldValues[2] = ((String) formattedTitle.getValue()).trim();
+		fieldValues[3] = "";
+		if(formattedDateOfWork.getValue() != null)
+			fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		fieldValues[4] = "";
+		if(formattedClassification.getValue() != null)
+			fieldValues[4] = ((String) formattedClassification.getValue()).trim();
+		fieldValues[5] = "";
+		if(formattedHeight.getValue() != null)
+			if(formattedHeight.getValue() instanceof Long)
+				fieldValues[5] = Long.toString((Long) formattedHeight.getValue());
 			else
-				fieldValues[12] = Double.toString((Double) formattedActualPurchasePrice.getValue());
-		}		
+				fieldValues[5] = Double.toString((Double) formattedHeight.getValue());
+		fieldValues[6] = "";
+		if(formattedWidth.getValue() != null)
+			if(formattedWidth.getValue() instanceof Long)
+				fieldValues[6] = Long.toString((Long) formattedWidth.getValue());
+			else
+				fieldValues[6] = Double.toString((Double) formattedWidth.getValue());
+		fieldValues[7] = "";
+		if(formattedMedium.getValue() != null)	
+			fieldValues[7] = ((String) formattedMedium.getValue()).trim();
+		fieldValues[8] = "";
+		if(formattedSubject.getValue() != null)
+			fieldValues[8] = ((String) formattedSubject.getValue()).trim();
+		fieldValues[9] = "";
+		if(formattedSellerName.getValue() != null)
+			fieldValues[9] = ((String) formattedSellerName.getValue()).trim();
+		fieldValues[10] = "";
+		if(formattedSellerAddress.getValue() != null)
+			fieldValues[10] = ((String) formattedSellerAddress.getValue()).trim();
+		fieldValues[11] = "";
+		if(formattedActualPurchasePrice.getValue() != null)
+			if(formattedActualPurchasePrice.getValue() instanceof Long)
+				fieldValues[11] = Long.toString((Long) formattedActualPurchasePrice.getValue());
+			else
+				fieldValues[11] = Double.toString((Double) formattedActualPurchasePrice.getValue()); 
+		fieldValues[12] = "";
+		if(formattedBuyerName.getValue() != null)
+			fieldValues[12] = ((String) formattedBuyerName.getValue()).trim();
+		fieldValues[13] = "";
+		if(formattedBuyerAddress.getValue() != null)
+			fieldValues[13] = ((String) formattedBuyerAddress.getValue()).trim();
+		fieldValues[14] = "";
+		if(formattedActualPurchasePrice.getValue() != null)
+			if(formattedActualPurchasePrice.getValue() instanceof Long)
+				fieldValues[14] = Long.toString((Long) formattedActualPurchasePrice.getValue());
+			else
+				fieldValues[14] = Double.toString((Double) formattedActualPurchasePrice.getValue());	
 		return fieldValues;
 	}
 	
@@ -531,7 +561,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 		formattedActualSellingPrice.setValue(null);
 	}
 	
-	public void updateInventoryPainting()
+	public void updateInventoryPainting(InventoryPainting update)
 	{
 		String[] fieldValues = getFieldValues();
 		if(fieldValues[0].length() > 0)
@@ -570,12 +600,18 @@ public class UpdateInventoryPanel extends JScrollPane {
 					
 	}
 	
-	public void enable_DisableSellFields(InventoryPainting invPainting){
-		if( invPainting.getDateOfSale().equals(new SimpleDate(SimpleDate.DEFAULT)) ){
+	public void enable_DisableSellFields(){
+		if( origPainting.getDateOfSale().equals(new SimpleDate(SimpleDate.DEFAULT)) ){
 			formattedBuyerName.setEnabled(false);
 			formattedBuyerAddress.setEnabled(false);
 			formattedActualSellingPrice.setEnabled(false);			
 		} 
+		else
+		{
+			formattedBuyerName.setEnabled(true);
+			formattedBuyerAddress.setEnabled(true);
+			formattedActualSellingPrice.setEnabled(true);	
+		}
 	}	
 	
 	
@@ -601,12 +637,16 @@ public class UpdateInventoryPanel extends JScrollPane {
 		
 		UpdateInventoryPanel IP = new UpdateInventoryPanel();
 		IP.updateTableModel(paint);
-		IP.enable_DisableSellFields(paint);
+		IP.enable_DisableSellFields();
 		JFrame frame =new JFrame("Test");		
 		frame.getContentPane().add(IP , BorderLayout.CENTER);
 		frame.setSize(800, 600);
 		frame.setMaximumSize(new Dimension(800, 600));
 		frame.setMinimumSize(new Dimension(800, 600));
 		frame.setVisible(true);	
+	}
+
+	public InventoryPainting getOrigPainting() {
+		return origPainting;
 	}
 }

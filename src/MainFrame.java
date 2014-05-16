@@ -957,6 +957,48 @@ public class MainFrame extends JFrame implements ActionListener{
 	{
 		InventoryPainting stubPainting = new InventoryPainting();
 		updateInventory = new UpdateInventoryPanel();
+		updateInventory.getBtnCancel().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+			}
+		});
+		updateInventory.getBtnDelete().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object[] options = {"Yes", "Cancel"};
+				int n = JOptionPane.showOptionDialog(updateInventory, "Are you sure you want to delete this painting?",
+						"Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				if(n == 0)
+				{
+					HandleInventoryPaintings.deleteInventoryPainting(updateInventory.getOrigPainting());
+					cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+				}
+			}
+		});
+		updateInventory.getBtnSaveChanges().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!updateInventory.isInputValid())
+					JOptionPane.showMessageDialog(updateInventory, "No fields have been updated.");
+				else
+				{
+					Object[] options = {"Yes", "Cancel"};
+					int n = JOptionPane.showOptionDialog(updateAuction, "Are you sure you want to update this painting?",
+							"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+					if(n == 0)
+					{
+						InventoryPainting origPainting = updateInventory.getOrigPainting();
+						InventoryPainting updatePainting = new InventoryPainting();
+						try {
+							updatePainting = origPainting.clone();
+						} catch (CloneNotSupportedException e1) {
+							e1.printStackTrace();
+						}
+						updateInventory.updateInventoryPainting(updatePainting);
+						HandleInventoryPaintings.updateInventoryPainting(updatePainting, origPainting);
+						cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+					}
+				}
+			}
+		});
 	}
 	
 	/**
