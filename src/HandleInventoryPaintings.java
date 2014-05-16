@@ -215,14 +215,16 @@ public abstract class HandleInventoryPaintings
         connection.executeSQL_Update();
     }
 	public static boolean artistHasMasterpiece(InventoryPainting inventory){
-		String statement= "SELECT classification FROM inventory_paintings WHERE firstName = \'"
-				+inventory.getArtistFirstName()+"\' and lastName = \'"+inventory.getArtistLastName()+						
-				"\' and classification = \'"+inventory.getClassification()+"\'";
-		System.out.println(statement);
-		SQLConnector connection = new SQLConnector(statement);
-        Vector queryResult = connection.executeSQL_Query();		
-		if(queryResult.size()>0)return true;
-		else return false;
+		if(inventory.getClassification().toLowerCase().equals("masterpiece"))
+		{
+			String statement= "SELECT classification FROM inventory_paintings WHERE firstName = \'"
+					+inventory.getArtistFirstName()+"\' and lastName = \'"+inventory.getArtistLastName()+						
+					"\' and classification = \'"+inventory.getClassification()+"\'";
+			SQLConnector connection = new SQLConnector(statement);
+	        Vector queryResult = connection.executeSQL_Query();		
+			if(queryResult.size()>0)return true;
+		}
+		return false;
 	}		
 }
 class HandleInventoryPaintingsTest

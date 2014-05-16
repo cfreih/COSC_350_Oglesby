@@ -216,20 +216,28 @@ public class MainFrame extends JFrame implements ActionListener{
 				else
 				{
 					InventoryPainting newPainting = addPaintingInventory.createNewInventoryPainting(addPaintingInventory.getFieldValues());
-					InventoryPainting[] searchDBPainting = MainFrame.getCheckDBInventoryPainting(newPainting);
-					InventoryPainting[][] checkPaintingExists = {HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[0]),
-							HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[1])};
-					if(checkPaintingExists[0].length > 0 || checkPaintingExists[1].length > 0)
-						JOptionPane.showMessageDialog(addPaintingInventory, "Paintings Already Exists");
+					boolean masterExist=HandleInventoryPaintings.artistHasMasterpiece(newPainting);
+					if(masterExist)
+					{
+						JOptionPane.showMessageDialog(addPaintingInventory, "Artist already has masterpiece");
+					}
 					else
 					{
-						Object[] options = {"Yes", "Cancel"};
-						int n = JOptionPane.showOptionDialog(addPaintingInventory, "Are you sure you want to add this painting?",
-								"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-						if(n == 0)
+						InventoryPainting[] searchDBPainting = MainFrame.getCheckDBInventoryPainting(newPainting);
+						InventoryPainting[][] checkPaintingExists = {HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[0]),
+								HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[1])};
+						if(checkPaintingExists[0].length > 0 || checkPaintingExists[1].length > 0)
+							JOptionPane.showMessageDialog(addPaintingInventory, "Paintings Already Exists");
+						else
 						{
-							HandleInventoryPaintings.createInventoryPainting(newPainting);
-							cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+							Object[] options = {"Yes", "Cancel"};
+							int n = JOptionPane.showOptionDialog(addPaintingInventory, "Are you sure you want to add this painting?",
+									"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+							if(n == 0)
+							{
+								HandleInventoryPaintings.createInventoryPainting(newPainting);
+								cardLayout.show(getContentPane(), MANAGE_INVENTORY);
+							}
 						}
 					}
 				}
@@ -300,32 +308,41 @@ public class MainFrame extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(calcMaxPurchase, "Input is invalid, make sure all fields are correct");
 				else
 				{
-					InventoryPainting painting=calcMaxPurchase.createNewInventoryPainting(calcMaxPurchase.getFieldValues());
-					painting.setDateOfPurchase(new SimpleDate(SimpleDate.TODAY));
-					double maxPrice=Calculation.calcMaxPrice(painting);
-					InventoryPainting[] searchDBPainting = getCheckDBInventoryPainting(painting);
-					InventoryPainting[][] checkPaintingExists = {HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[0]),
-							HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[1])};
-					if(checkPaintingExists[0].length > 0 || checkPaintingExists[1].length > 0)
-						JOptionPane.showMessageDialog(addPaintingAuction, "Paintings Already Exists");
-					else if(maxPrice<-5)
-						JOptionPane.showMessageDialog(calcMaxPurchase, "No similar paintings do not buy");
-					else if(maxPrice<0)
-						JOptionPane.showMessageDialog(calcMaxPurchase, "No artist fashionability do not buy");
+					InventoryPainting newPainting = calcMaxPurchase.createNewInventoryPainting(calcMaxPurchase.getFieldValues());
+					boolean masterExist=HandleInventoryPaintings.artistHasMasterpiece(newPainting);
+					if(masterExist)
+					{
+						JOptionPane.showMessageDialog(addPaintingInventory, "Artist already has masterpiece");
+					}
 					else
 					{
-						String currencyString = NumberFormat.getCurrencyInstance().format(maxPrice);
-						//Handle the weird exception of formatting whole dollar amounts with no decimal
-						//currencyString = currencyString.replaceAll("\\.00", "");
-						Object[] options = {"Yes", "Cancel"};
-						int n = JOptionPane.showOptionDialog(addPaintingAuction, "Max Buy Price Suggestion: " + currencyString + "\n Would you like to buy?",
-							"Purchase Painting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-						if(n == 0)
+						InventoryPainting painting=calcMaxPurchase.createNewInventoryPainting(calcMaxPurchase.getFieldValues());
+						painting.setDateOfPurchase(new SimpleDate(SimpleDate.TODAY));
+						double maxPrice=Calculation.calcMaxPrice(painting);
+						InventoryPainting[] searchDBPainting = getCheckDBInventoryPainting(painting);
+						InventoryPainting[][] checkPaintingExists = {HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[0]),
+								HandleInventoryPaintings.retrieveInventoryPaintings(searchDBPainting[1])};
+						if(checkPaintingExists[0].length > 0 || checkPaintingExists[1].length > 0)
+							JOptionPane.showMessageDialog(addPaintingAuction, "Paintings Already Exists");
+						else if(maxPrice<-5)
+							JOptionPane.showMessageDialog(calcMaxPurchase, "No similar paintings do not buy");
+						else if(maxPrice<0)
+							JOptionPane.showMessageDialog(calcMaxPurchase, "No artist fashionability do not buy");
+						else
 						{
-							painting.setMaxPurchasePrice(maxPrice);
-							completePurchase.setBoughtPainting(painting);
-							completePurchase.resetTextFields();
-							cardLayout.show(getContentPane(), COMPLETE_PURCHASE);
+							String currencyString = NumberFormat.getCurrencyInstance().format(maxPrice);
+							//Handle the weird exception of formatting whole dollar amounts with no decimal
+							//currencyString = currencyString.replaceAll("\\.00", "");
+							Object[] options = {"Yes", "Cancel"};
+							int n = JOptionPane.showOptionDialog(addPaintingAuction, "Max Buy Price Suggestion: " + currencyString + "\n Would you like to buy?",
+								"Purchase Painting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+							if(n == 0)
+							{
+								painting.setMaxPurchasePrice(maxPrice);
+								completePurchase.setBoughtPainting(painting);
+								completePurchase.resetTextFields();
+								cardLayout.show(getContentPane(), COMPLETE_PURCHASE);
+							}
 						}
 					}
 				}
@@ -593,7 +610,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsArtist.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Artist selectedArtist = searchResultsArtist.getSelectedArtist();
-				if(selectedArtist == null)
+				if(selectedArtist.equals(new Artist()))
 					JOptionPane.showMessageDialog(searchResultsArtist, "Select an Artist");
 				else
 				{
@@ -666,7 +683,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AuctionPainting updatePainting = searchResultsAuction.getSelectedAuctionPainting();
-				if(updatePainting == null)
+				if(updatePainting.equals(new AuctionPainting()))
 					JOptionPane.showMessageDialog(searchResultsAuction, "Please select a row to continue");
 				else
 				{
@@ -805,9 +822,14 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsInventory.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InventoryPainting updatePainting = searchResultsInventory.getSelectedInventoryPainting();
-				updateInventory.updateTableModel(updatePainting);
-				updateInventory.resetTextFields();
-				cardLayout.show(getContentPane(), UPDATE_INVENTORY);
+				if(updatePainting.equals(new InventoryPainting()))
+					JOptionPane.showMessageDialog(searchResultsInventory,"Select a painting!");
+				else
+				{
+					updateInventory.updateTableModel(updatePainting);
+					updateInventory.resetTextFields();
+					cardLayout.show(getContentPane(), UPDATE_INVENTORY);
+				}
 			}
 		});
 	}
@@ -995,21 +1017,29 @@ public class MainFrame extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(updateInventory, "No fields have been updated.");
 				else
 				{
-					Object[] options = {"Yes", "Cancel"};
-					int n = JOptionPane.showOptionDialog(updateAuction, "Are you sure you want to update this painting?",
-							"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-					if(n == 0)
+					InventoryPainting origPainting = updateInventory.getOrigPainting();
+					InventoryPainting updatePainting = new InventoryPainting();
+					try {
+						updatePainting = origPainting.clone();
+					} catch (CloneNotSupportedException e1) {
+						e1.printStackTrace();
+					}
+					updateInventory.updateInventoryPainting(updatePainting);
+					boolean masterExist=HandleInventoryPaintings.artistHasMasterpiece(updatePainting);
+					if(masterExist)
 					{
-						InventoryPainting origPainting = updateInventory.getOrigPainting();
-						InventoryPainting updatePainting = new InventoryPainting();
-						try {
-							updatePainting = origPainting.clone();
-						} catch (CloneNotSupportedException e1) {
-							e1.printStackTrace();
+						JOptionPane.showMessageDialog(addPaintingInventory, "Artist already has masterpiece");
+					}
+					else
+					{
+						Object[] options = {"Yes", "Cancel"};
+						int n = JOptionPane.showOptionDialog(updateAuction, "Are you sure you want to update this painting?",
+								"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+						if(n == 0)
+						{
+							HandleInventoryPaintings.updateInventoryPainting(updatePainting, origPainting);
+							cardLayout.show(getContentPane(), MANAGE_INVENTORY);
 						}
-						updateInventory.updateInventoryPainting(updatePainting);
-						HandleInventoryPaintings.updateInventoryPainting(updatePainting, origPainting);
-						cardLayout.show(getContentPane(), MANAGE_INVENTORY);
 					}
 				}
 			}
