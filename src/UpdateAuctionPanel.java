@@ -299,9 +299,16 @@ public class UpdateAuctionPanel extends JPanel {
 		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
 				"Date of Work", "Date of Sale", "Sale Price", "Height",
 				"Width", "Medium", "Subject" };
-		tableModel.setDataVector(dataVector, columnNames);
-		paintingsTable.setModel(tableModel);
-		
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		paintingsTable.setModel(model);	
+		paintingsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);		
 	}
 	
 	/**

@@ -18,7 +18,9 @@ import java.text.NumberFormat;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
@@ -281,8 +283,15 @@ public class UpdateArtistPanel extends JPanel {
 		dataVector[0]=artist.toTableRow();
 		String[] columnNames = new String[] {
 				"Artist Last Name", "Arist First Name", "Fashionability"};
-		tableModel.setDataVector(dataVector, columnNames);
-		artistTable.setModel(tableModel);
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		artistTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		artistTable.setModel(model);		
 		artistTable.getColumnModel().getColumn(0).setMinWidth(200);
 		artistTable.getColumnModel().getColumn(1).setMinWidth(200);
 		artistTable.getColumnModel().getColumn(2).setMinWidth(100);

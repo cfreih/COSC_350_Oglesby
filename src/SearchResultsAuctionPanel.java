@@ -140,6 +140,7 @@ public class SearchResultsAuctionPanel extends JPanel {
 		};		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(model);	
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 	public AuctionPainting getSelectedAuctionPainting()
     {
