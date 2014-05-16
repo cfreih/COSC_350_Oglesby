@@ -5,7 +5,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import java.awt.*;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
@@ -80,13 +80,11 @@ public class SearchResultsInventoryPanel extends JPanel {
         scrollPane.setViewportView(paintingsTable);
 
         btnBack = new JButton("Back");
-        btnBack.setFont(new Font("Cambria", Font.BOLD, 12));
         springLayout.putConstraint(SpringLayout.NORTH, btnBack, 5, SpringLayout.SOUTH, scrollPane);
-        springLayout.putConstraint(SpringLayout.WEST, btnBack, 10, SpringLayout.WEST, scrollPane);
+        springLayout.putConstraint(SpringLayout.WEST, btnBack, 0, SpringLayout.WEST, scrollPane);
         add(btnBack);
         
         btnSelect = new JButton("Select");
-        btnSelect.setFont(new Font("Cambria", Font.BOLD, 12));
         springLayout.putConstraint(SpringLayout.SOUTH, btnSelect, 0, SpringLayout.SOUTH, btnBack);
         springLayout.putConstraint(SpringLayout.EAST, btnSelect, 0, SpringLayout.EAST, scrollPane);
         add(btnSelect);
