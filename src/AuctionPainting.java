@@ -101,8 +101,10 @@ public class AuctionPainting extends Painting implements Cloneable {
 	 * Return: The string containing all fields of the Auction Painting
 	 */
 	public Object[] toTableRow(){
+		MoneyFormat mf = new MoneyFormat();
+		String spa = mf.format( salePriceAuction );
 		Object[] rowData = { getArtistLastName(), getArtistFirstName(), getTitleOfWork(), 
-							 getDateOfWork(),dateOfSaleAuction, salePriceAuction,
+							 getDateOfWork(),dateOfSaleAuction, spa,
 							 getHeightCM(), getWidthCM(), getMedium(),getSubject()};
 		return rowData;
 	}

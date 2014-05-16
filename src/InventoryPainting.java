@@ -459,18 +459,25 @@ public class InventoryPainting extends Painting implements Cloneable {
 
 	public Object[] toTableRow(){
 		SimpleDate default_date = new SimpleDate(SimpleDate.DEFAULT);
-		
-		if(!dateOfSale.equals(default_date)){
+		MoneyFormat mf = new MoneyFormat();
+		if(!dateOfSale.equals(default_date)){			
+			String mpp =mf.format(maxPurchasePrice);
+			String app =mf.format(actualPurchasePrice);
+			String tsp =mf.format(targetSellPrice);
+			String asp =mf.format(actualPurchasePrice);
 			Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
 							classification,getHeightCM(),getWidthCM(),getMedium(),getSubject(),dateOfPurchase,
-							sellerName,sellerAddress, maxPurchasePrice,actualPurchasePrice, targetSellPrice,
-							dateOfSale.toString(), buyerName, buyerAddress, actualSellPrice};
+							sellerName,sellerAddress, mpp,app, tsp,
+							dateOfSale.toString(), buyerName, buyerAddress, asp};
 			return rowData;
 		}
 		else{
+			String mpp =mf.format(maxPurchasePrice);
+			String app =mf.format(actualPurchasePrice);
+			String tsp =mf.format(targetSellPrice);
 			Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
 					classification,getHeightCM(),getWidthCM(),getMedium(),getSubject(),dateOfPurchase,
-					sellerName,sellerAddress, maxPurchasePrice,actualPurchasePrice, targetSellPrice,
+					sellerName,sellerAddress, mpp,app, tsp,
 					"", "", "", ""};
 			return rowData;
 		}		
