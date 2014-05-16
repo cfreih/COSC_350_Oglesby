@@ -45,9 +45,8 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 				"Manage Inventory Records", TitledBorder.CENTER,
 				TitledBorder.ABOVE_TOP, null, null)));
 
-		gridBagLayout.columnWidths = new int[] { 37, 250, 0 };
-		gridBagLayout.rowHeights = new int[] { 95, 50, 74, 51, 74, 50, 74, 50,
-				0 };
+        gridBagLayout.columnWidths = new int[]{225, 171, 0};
+        gridBagLayout.rowHeights = new int[]{100, 50, 40, 50, 40, 50, 40, 50, 40, 0};
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, Double.MIN_VALUE };
@@ -59,7 +58,7 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 		gbc_SeeAllPaintingsButton.gridx = 1;
 		gbc_SeeAllPaintingsButton.gridy = 1;
 		add(SeeAllPaintingsButton, gbc_SeeAllPaintingsButton);
-		SeeAllPaintingsButton.setFont(new Font("Century", Font.PLAIN, 12));
+		SeeAllPaintingsButton.setFont(new Font("Cambria", Font.BOLD, 12));
 		SeeAllPaintingsButton.setMnemonic('S');
 
 		GridBagConstraints gbc_ModifyPaintingButton = new GridBagConstraints();
@@ -68,7 +67,7 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 		gbc_ModifyPaintingButton.gridx = 1;
 		gbc_ModifyPaintingButton.gridy = 3;
 		add(ModifyPaintingButton, gbc_ModifyPaintingButton);
-		ModifyPaintingButton.setFont(new Font("Century", Font.PLAIN, 12));
+		ModifyPaintingButton.setFont(new Font("Cambria", Font.BOLD, 12));
 		ModifyPaintingButton.setMnemonic('M');
 
 		GridBagConstraints gbc_AddNewPaintingButton = new GridBagConstraints();
@@ -77,7 +76,7 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 		gbc_AddNewPaintingButton.gridx = 1;
 		gbc_AddNewPaintingButton.gridy = 5;
 		add(AddNewPaintingButton, gbc_AddNewPaintingButton);
-		AddNewPaintingButton.setFont(new Font("Century", Font.PLAIN, 12));
+		AddNewPaintingButton.setFont(new Font("Cambria", Font.BOLD, 12));
 		AddNewPaintingButton.setMnemonic('A');
 
 		GridBagConstraints gbc_ReturnToMainButton = new GridBagConstraints();
@@ -85,7 +84,7 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 		gbc_ReturnToMainButton.gridx = 1;
 		gbc_ReturnToMainButton.gridy = 7;
 		add(ReturnToMainButton, gbc_ReturnToMainButton);
-		ReturnToMainButton.setFont(new Font("Century", Font.PLAIN, 12));
+		ReturnToMainButton.setFont(new Font("Cambria", Font.BOLD, 12));
 		ReturnToMainButton.setMnemonic('R');
 	}
 	public JButton getSeeAllPaintingsButton() {
