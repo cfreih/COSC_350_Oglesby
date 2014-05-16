@@ -28,11 +28,11 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 	public ManageInventoryMainMenuPanel() {
 		gridBagLayout = new GridBagLayout();
 		SeeAllPaintingsButton = new JButton(
-				"See All Paintings in Inventory Record");
+				"See All Paintings in Inventory Paintings");
 		ModifyPaintingButton = new JButton(
-				"Modify/Delete Existing Painting in Inventory Records");
+				"Modify/Delete Existing Painting in Inventory Paintings");
 		AddNewPaintingButton = new JButton(
-				"Add New Painting to Inventory Records");
+				"Add New Painting to Inventory Paintings");
 		ReturnToMainButton = new JButton("Return to Main Menu");
 
 		setUpPanel();
