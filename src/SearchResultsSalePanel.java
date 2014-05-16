@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.Vector;
 
 
 public class SearchResultsSalePanel extends JPanel {
@@ -103,10 +104,18 @@ public class SearchResultsSalePanel extends JPanel {
 		
 	}
 	public void updateTableModel(InventoryPainting[] invPaintings){
-		searchedPaintings=invPaintings;
-		Object[][] dataVector= new Object[invPaintings.length][20];
-		for(int i=0; i <= invPaintings.length-1; i++){
-			dataVector[i]=invPaintings[i].toTableRow();
+		Vector<InventoryPainting> finalResults = new Vector<InventoryPainting>();
+		for(int i = 0; i < invPaintings.length; i++)
+		{
+			if(invPaintings[i].getDateOfSale().equals(new SimpleDate()))
+				finalResults.add(invPaintings[i]);
+		}
+		searchedPaintings = new InventoryPainting[finalResults.size()];
+		for(int i = 0; i < finalResults.size(); i++)
+			searchedPaintings[i] = finalResults.get(i);
+		Object[][] dataVector= new Object[searchedPaintings.length][20];
+		for(int i=0; i <= searchedPaintings.length-1; i++){
+			dataVector[i]=searchedPaintings[i].toTableRow();
 		}		
 		//Object[][] dataVector = {invPainintgs[0].toTableRow(),invPainintgs[1].toTableRow(),invPainintgs[2].toTableRow(),invPainintgs[3].toTableRow(),invPainintgs[4].toTableRow()};
 		

@@ -409,7 +409,13 @@ public class MainFrame extends JFrame implements ActionListener{
 					if(n == 0)
 					{
 						InventoryPainting origPainting = completeSale.getInventoryPainting();
-						InventoryPainting soldPainting = completeSale.updateInventoryPainting();
+						InventoryPainting soldPainting = new InventoryPainting();
+						try {
+							soldPainting = completeSale.updateInventoryPainting();
+						} catch (CloneNotSupportedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						HandleInventoryPaintings.updateInventoryPainting(soldPainting, origPainting);
 						cardLayout.show(getContentPane(), MAIN_MENU);
 					}

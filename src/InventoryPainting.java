@@ -464,7 +464,7 @@ public class InventoryPainting extends Painting implements Cloneable {
 			String mpp =mf.format(maxPurchasePrice);
 			String app =mf.format(actualPurchasePrice);
 			String tsp =mf.format(targetSellPrice);
-			String asp =mf.format(actualPurchasePrice);
+			String asp =mf.format(actualSellPrice);
 			Object[] rowData = {getArtistFirstName(),getArtistLastName(),getTitleOfWork(),getDateOfWork(),
 							classification,getHeightCM(),getWidthCM(),getMedium(),getSubject(),dateOfPurchase,
 							sellerName,sellerAddress, mpp,app, tsp,

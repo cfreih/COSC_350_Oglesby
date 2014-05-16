@@ -281,14 +281,16 @@ public class CompleteSalePanel extends JPanel {
 		formattedPrice.setValue(null);
 	}
 
-	public InventoryPainting updateInventoryPainting() {
-		inventoryPainting.setBuyerName((String) formattedFullName.getValue());
-		inventoryPainting.setBuyerAddress((String) formattedAddress.getValue());
+	public InventoryPainting updateInventoryPainting() throws CloneNotSupportedException {
+		InventoryPainting updateSale = inventoryPainting.clone();
+		updateSale.setBuyerName(((String) formattedFullName.getValue()).trim());
+		updateSale.setBuyerAddress(((String) formattedAddress.getValue()).trim());
 		if(formattedPrice.getValue() instanceof Double)
-			inventoryPainting.setActualSellPrice((Double) formattedPrice.getValue());
+			updateSale.setActualSellPrice((Double) formattedPrice.getValue());
 		else
-			inventoryPainting.setActualSellPrice((Long) formattedPrice.getValue());
-		return inventoryPainting;
+			updateSale.setActualSellPrice((Long) formattedPrice.getValue());
+		updateSale.setDateOfSale(new SimpleDate(SimpleDate.TODAY));
+		return updateSale;
 	}
 
 	public JButton getBtnCancel() {

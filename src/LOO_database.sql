@@ -110,7 +110,7 @@ values ('Clint','Freiheit', 'Painting1-3', '1985', '20020322', 5000000.55, 23.10
 
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
-values ('Sam', 'Bock', 'TestPainting-1', '1825', 'Masterpiece', 12.0, 34.0, 'Oil', 'computers', 20140122, 'Steve Shum', 'GSC', 100000, 50600, 20140128, 'Jessica Spalding', 'Costelo', 400000.54);
+values ('Sam', 'Bock', 'TestPainting-1', '1825', 'Masterwork', 12.0, 34.0, 'Oil', 'computers', 20140122, 'Steve Shum', 'GSC', 100000, 50600, 20140128, 'Jessica Spalding', 'Costelo', 400000.54);
 
 insert into inventory_paintings (firstName, lastName, title, dateOfWork, classification, height, width, medium, subject, dateOfPurchase, nameOfSeller, addressOfSeller, maximumPurchasePrice, actualPurchasePrice, dateOfSale, nameOfBuyer, addressOfBuyer, actualSellingPrice)
 values ('Sam','Bock', 'TestPainting-2', '2004',     'Masterwork',  12.0,     34.0,   'Oil',   'computers', 20140123,         'Steve Shum', 'GSC',           90000,                80000,               20140129,   'Jessica Spalding', 'Costelo',      4000000.54);

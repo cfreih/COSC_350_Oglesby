@@ -443,8 +443,8 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 			else
 				fieldValues[6] = Double.toString((Double) formattedWidth.getValue());
 		}
-		fieldValues[7] = textFieldMedium.getText();
-		fieldValues[8] = textFieldSubject.getText();
+		fieldValues[7] = textFieldMedium.getText().trim();
+		fieldValues[8] = textFieldSubject.getText().trim();
 		
 		return fieldValues;
 	}
