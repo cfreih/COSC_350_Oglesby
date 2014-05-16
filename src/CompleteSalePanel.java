@@ -16,6 +16,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 
 import java.awt.GridBagConstraints;
@@ -242,8 +243,16 @@ public class CompleteSalePanel extends JPanel {
 				"Date of Purchase", "Name of Seller", "Address of Seller",
 				"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
 				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
-		tableModel.setDataVector(dataVector, columnNames);
-		paintingsTable.setModel(tableModel);
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		 };		
+		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		paintingsTable.setModel(model);		
+		paintingsTable.setModel(model);
 	}
 	
 	public void updateTargetLabel()
