@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class SeeAllArtistsPanel extends JPanel {
 	private JButton btnBack;
@@ -83,8 +84,15 @@ public class SeeAllArtistsPanel extends JPanel {
 			dataVector[i]=artists[i].toTableRow();
 		String[] columnNames = new String[] {
 				"Artist First Name", "Arist Last Name", "Fashionability"};
-		tableModel.setDataVector(dataVector, columnNames);
-		artistTable.setModel(tableModel);
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		 };		
+		//tableModel.setDataVector(dataVector, columnNames);
+		artistTable.setModel(model);
 		artistTable.getColumnModel().getColumn(0).setMinWidth(200);
 		artistTable.getColumnModel().getColumn(1).setMinWidth(200);
 		artistTable.getColumnModel().getColumn(2).setMinWidth(100);
