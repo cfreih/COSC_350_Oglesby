@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class SearchResultsArtistPanel extends JPanel {
 	private JButton btnBack;
@@ -101,13 +102,20 @@ public class SearchResultsArtistPanel extends JPanel {
 			dataVector[i]=artists[i].toTableRow();
 		String[] columnNames = new String[] {
 				"Artist Last Name", "Arist First Name", "Fashionability"};
-		tableModel.setDataVector(dataVector, columnNames);
-		artistTable.setModel(tableModel);
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		artistTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		artistTable.getColumnModel().getColumn(0).setMinWidth(200);
 		artistTable.getColumnModel().getColumn(1).setMinWidth(200);
 		artistTable.getColumnModel().getColumn(2).setMinWidth(100);
-		artistTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		}
+		artistTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);	
+		artistTable.setModel(model);
+	}	
 
 	public Artist getSelectedArtist()
 	{

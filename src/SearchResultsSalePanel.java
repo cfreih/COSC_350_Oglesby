@@ -8,11 +8,14 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JButton;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -113,8 +116,15 @@ public class SearchResultsSalePanel extends JPanel {
 				"Date of Purchase", "Name of Seller", "Address of Seller",
 				"Maximun Purchase Price", "Actual Purchase Price", "Target Selling Price",
 				"Date of Sale", "Name of Buyer", "Address of Buyer", "Actual Selling Price"};
-		tableModel.setDataVector(dataVector, columnNames);
-		paintingsTable.setModel(tableModel);
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		paintingsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		paintingsTable.setModel(model);
 	}
 	
 	public static void main(String[] args) {

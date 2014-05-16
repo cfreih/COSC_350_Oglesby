@@ -1,6 +1,9 @@
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JList;
+
 import java.awt.GridBagConstraints;
 
 import javax.swing.JButton;
@@ -10,6 +13,7 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
 
 import java.awt.Font;
 
@@ -17,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 public class SearchResultsAuctionPanel extends JPanel {
@@ -126,8 +131,15 @@ public class SearchResultsAuctionPanel extends JPanel {
 		String[] columnNames = new String[] { "Artist First Name", "Arist Last Name", "Title",
 				"Date of Work", "Date of Sale", "Sale Price", "Height",
 				"Width", "Medium", "Subject" };
-		tableModel.setDataVector(dataVector, columnNames);
-		table.setModel(tableModel);	
+		TableModel model = new DefaultTableModel(dataVector, columnNames)
+		{
+		    public boolean isCellEditable(int row, int column)
+		    {
+		      return false;//This causes all cells to be not editable
+		    }
+		};		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setModel(model);	
 	}
 	public AuctionPainting getSelectedAuctionPainting()
     {
