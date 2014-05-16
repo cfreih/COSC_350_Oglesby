@@ -401,102 +401,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 				return false;
 		}
 		System.out.println("3");
-		return true;
-		
-		
-		
-		
-		
-		/*if( 	formattedFirstName.isEditValid()
-				&& formattedLastName.isEditValid()
-				&& formattedTitle.isEditValid()
-				&& formattedDateOfWork.isEditValid()
-				&& formattedClassification.isEditValid()
-				&& formattedHeight.isEditValid()
-				&& formattedWidth.isEditValid()
-				&& formattedMedium.isEditValid()
-				&& formattedSubject.isEditValid()
-				&& formattedDateOfPurchase.isEditValid()
-				&& formattedDateOfPurchase.isEditValid()
-				&& formattedSellerName.isEditValid()
-				&& formattedSellerAddress.isEditValid()				
-				)isValid=true;
-		else return false;
-		System.out.println("1");
-		
-		if(		formattedDateOfSale.getValue()==null 
-				&& formattedBuyerName.getValue()==null 
-				&& formattedBuyerAddress.getValue()==null
-				&& formattedActualSellingPrice.getValue()==null
-				)isSaleInfoNull = true;
-		
-		else if(formattedDateOfSale.isEditValid()				
-				&& formattedBuyerName.isEditValid() 
-				&& formattedBuyerAddress.isEditValid()
-				&& formattedActualSellingPrice.isEditValid()
-				)isSaleInfoComplete = true;
-		
-		if(		isSaleInfoNull||isSaleInfoComplete ){
-				isValid=true;
-		} else return false;
-		System.out.println("2");
-		
-		String[] fieldValues = getFieldValues();
-		String fName = "";
-		if(formattedFirstName.getValue() != null)
-		{			
-			fName = ((String) formattedFirstName.getValue()).trim();
-			if(fName.length()==21)
-				if(fName.charAt(20)!='?')
-					return false;
-		}
-		String lName = "";
-		if(formattedLastName.getValue() != null)
-		{
-			lName = ((String) formattedLastName.getValue()).trim();
-			if(lName.length()==21)
-				if(lName.charAt(20)!='?')
-					return false;
-		}
-		String title = "";
-		if(formattedTitle.getValue() != null)
-		{
-			title = ((String) formattedTitle.getValue()).trim();
-			if(title.length()==41)
-				if(title.charAt(40)!='?')
-					return false;
-		}
-		String dateOfWork = "";
-		if(formattedDateOfWork.getValue() != null)
-		{
-			dateOfWork = ((String) formattedDateOfWork.getValue()).trim();
-			if(dateOfWork.length()==5)
-				if(dateOfWork.charAt(4)!='?')
-					return false;
-		}
-		int dateWork = Integer.parseInt(fieldValues[3]);
-		double height = Double.parseDouble(fieldValues[5]);
-		double width = Double.parseDouble(fieldValues[6]);
-		SimpleDate dateOfPurchase = SimpleDate.parseSimpleDate(fieldValues[9]);
-		double actualPurcahsePrice = Double.parseDouble(fieldValues[12]);
-		SimpleDate dateOfSale = SimpleDate.parseSimpleDate(fieldValues[13]);
-		double actualSellPrice = Double.parseDouble(fieldValues[16]);
-		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
-		
-		if(		dateWork > 1099
-				&& dateWork <= today.getYear()
-				&& height > 0
-				&& width > 0
-				&& !dateOfPurchase.equals(new SimpleDate())
-				&& SimpleDate.dateIsTooLarge(today , dateOfPurchase)
-				&& actualPurcahsePrice >0				
-			)	isValid = true;
-		else return false;
-		
-		if(isSaleInfoComplete && actualSellPrice > 0)
-			isValid = true;
-		else return false;		
-		return isValid;		*/
+		return true;		
 	}
 	
 	public String[] getFieldValues()
@@ -625,13 +530,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 											 sellerA,dateOfPurchase,purchasePrice,
 											 classif);
 		newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
-		return newIPainting;
-		
-		
-		//return new AuctionPainting(fName,lName,title,dateWork,height,width,med,subj,salePrice,dateAuction);
+		return newIPainting;		
 	}
-	
-	
 	
 	public JButton getBtnSaveNew() {
 		return btnSaveNew;
@@ -639,17 +539,5 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 
 	public JButton getBtnCancel() {
 		return btnCancel;
-	}
-	
-	public static void main( String[] args )
-   	{
-		AddPaintingInventoryPanel IP = new AddPaintingInventoryPanel();		
-		JFrame frame =new JFrame("Test");		
-		frame.getContentPane().add(IP , BorderLayout.CENTER);		
-		frame.setSize(800, 600);
-		frame.setMaximumSize(new Dimension(800, 600));
-		frame.setMinimumSize(new Dimension(800, 600));				
-		frame.setVisible(true);
-		
-	}
+	}	
 }
