@@ -424,6 +424,7 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 		fieldValues[3] = "";
 		if(formattedDateOfWork.getValue() != null)
 			fieldValues[3] = ((String) formattedDateOfWork.getValue()).trim();
+		System.out.println(fieldValues[3]);
 		fieldValues[4] = "";
 		if(formattedClassification.getValue() != null)
 			fieldValues[4] = ((String) formattedClassification.getValue()).trim();

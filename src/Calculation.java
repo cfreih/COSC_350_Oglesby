@@ -9,8 +9,8 @@ public abstract class Calculation
         double similarity=0;
         double areaPainting=painting.getHeightCM()*painting.getWidthCM();
         double areaRecord=record.getHeightCM()*record.getWidthCM();
-        if(painting.getMedium().toLowerCase().equals(record.getMedium().toLowerCase())) similarity++;
-        if(painting.getSubject().toLowerCase().equals(record.getSubject().toLowerCase())) similarity++;
+        if(painting.getMedium().toLowerCase().trim().equals(record.getMedium().toLowerCase())) similarity++;
+        if(painting.getSubject().toLowerCase().trim().equals(record.getSubject().toLowerCase())) similarity++;
         if(areaPainting<areaRecord) similarity= (similarity * areaPainting)/areaRecord;
         else similarity= (similarity * areaRecord)/areaPainting;
         return similarity;
@@ -25,13 +25,15 @@ public abstract class Calculation
         for(int i=0; i<records.length;i++)
         {
             double temp=calcSimilarity(painting, records[i]);
+            System.out.println(temp);
             if(temp>max)
             {
                 max=temp;
                 mostSimilar=records[i];
             }
         }
-        if(!(max<=0))
+        System.out.println(max);
+        if((max<=0))
         	return null;
         return mostSimilar;
     }
@@ -46,9 +48,7 @@ public abstract class Calculation
         SimpleDate date = new SimpleDate(SimpleDate.TODAY);
         if(!painting.getDateOfPurchase().equals(new SimpleDate(SimpleDate.TODAY)))
         	date = painting.getDateOfPurchase();
-        AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(date, paintingByArtist);
-        if(records.length==0)
-        	return -10;
+        AuctionPainting[] records = HandleAuctionPaintings.retrieveAuctionPaintings(paintingByArtist);      
         double price;
         if(painting.getClassification().toLowerCase().equals("masterpiece")) price=calcMaxMasterpiece(painting, records);
         else if (painting.getClassification().toLowerCase().equals("masterwork")) price=calcMaxMasterwork(painting, records);
@@ -82,9 +82,15 @@ public abstract class Calculation
         if(maxBuyPrice<0)
         	return maxBuyPrice;
         String dateOfWork = painting.getDateOfWork();
-        int date = Integer.parseInt(dateOfWork.substring(0,3));
-        if(date>2000) maxBuyPrice=maxBuyPrice*0.25;
-        else maxBuyPrice=maxBuyPrice*((2100-date)/(2200-date));
+        int date = Integer.parseInt(dateOfWork.substring(0,4));
+        if(date>2000) maxBuyPrice=maxBuyPrice*0.25;       
+        
+        else{
+        	date=date/100;
+        	maxBuyPrice=maxBuyPrice*((21.00-date)/(22-date));}
+        System.out.println((2100-date)/(2200-date));
+        System.out.println(date);
+        if(maxBuyPrice<=0) return -10;
         return maxBuyPrice;
     }
     //Desc: Calculates the max buy price if the painting is neither a masterpiece or a masterwork.
@@ -95,6 +101,7 @@ public abstract class Calculation
         double area=painting.getHeightCM()*painting.getWidthCM();
         Artist artist=new Artist(painting.getArtistFirstName(),painting.getArtistLastName(),-1);
         Artist[] artists=HandleArtist.retrieveArtists(artist);
+       // System.out.printLn(artists[0].getFashionabilityCoeff());
         if(artists.length==0)
         	return -1;
         int fashionabilityConstant=artists[0].getFashionabilityCoeff();
