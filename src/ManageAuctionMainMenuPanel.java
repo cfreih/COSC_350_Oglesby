@@ -31,11 +31,11 @@ public class ManageAuctionMainMenuPanel extends JPanel {
 	public ManageAuctionMainMenuPanel() {
 		gridBagLayout = new GridBagLayout();
 		SeeAllPaintingsButton = new JButton(
-				"See All Paintings in Auction Record");
+				"See All Paintings in Auction Paintings");
 		ModifyPaintingButton = new JButton(
-				"Modify/Delete Existing Painting in Auction Records");
+				"Modify/Delete Existing Painting in Auction Paintings");
 		AddNewPaintingButton = new JButton(
-				"Add New Painting to Auction Records");
+				"Add New Painting to Auction Paintings");
 		ReturnToMainButton = new JButton("Return to Main Menu");
 
 		setUpPanel();
@@ -45,7 +45,7 @@ public class ManageAuctionMainMenuPanel extends JPanel {
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.RAISED,
 				null, null), new TitledBorder(
 				UIManager.getBorder("TitledBorder.border"),
-				"Manage Auction Records", TitledBorder.CENTER,
+				"Manage Auction Paintings", TitledBorder.CENTER,
 				TitledBorder.ABOVE_TOP, null, null)));
 
         gridBagLayout.columnWidths = new int[]{230, 171, 0};
