@@ -666,9 +666,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		searchResultsAuction.getBtnSelect().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AuctionPainting updatePainting = searchResultsAuction.getSelectedAuctionPainting();
-				if(updatePainting == null)
-					JOptionPane.showMessageDialog(searchResultsAuction, "Please select a row to continue");
-				else
+				//if(updatePainting == null)
+				//	JOptionPane.showMessageDialog(searchResultsAuction, "Please select a row to continue");
+				//else
 				{
 					updateAuction.updateTableModel(updatePainting);
 					updateAuction.resetTextFields();
@@ -697,10 +697,10 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		searchPaintingSale.getBtnSelectPainting().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!searchPaintingSale.isInputValid())
-					JOptionPane.showMessageDialog(searchPaintingSale, "Input is invalid, make sure all fields are correct");
-				else
-				{
+			/**	if(!searchPaintingSale.isInputValid())
+			*		JOptionPane.showMessageDialog(searchPaintingSale, "Input is invalid, make sure all fields are correct");
+			*	else
+			*/	{
 					InventoryPainting searchTerms = searchPaintingSale.createNewInventoryPainting();
 					InventoryPainting[] searchResults = HandleInventoryPaintings.retrieveInventoryPaintings(searchTerms);
 					if(searchResults.length == 0)
@@ -765,9 +765,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		searchInventory.getBtnSearch().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!searchInventory.isInputValid())
-					JOptionPane.showMessageDialog(searchInventory, "Input is invalid, make sure all fields are correct");
-				else
+				//if(!searchInventory.isInputValid())
+				//	JOptionPane.showMessageDialog(searchInventory, "Input is invalid, make sure all fields are correct");
+				//else
 				{
 					InventoryPainting searchTerms = SearchInventoryPanel.createNewInventoryPainting(searchInventory.getFieldValues());
 					InventoryPainting[] searchResults = HandleInventoryPaintings.retrieveInventoryPaintings(searchTerms);
