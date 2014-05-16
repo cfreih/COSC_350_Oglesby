@@ -100,4 +100,15 @@ public abstract class Calculation
         int fashionabilityConstant=artists[0].getFashionabilityCoeff();
         return area * fashionabilityConstant;
     }
+    //Desc: ensures that the amount of money is within the allotted size
+    //Return: true if it is allowed, false if not
+    public static boolean isNumberValid(Number num)
+    {
+        long value = (long) num.doubleValue() * 100;
+        if(value >= 0 && value < 999999999999l)
+        {
+            return true;
+        }
+        return false;
+    }
 }
