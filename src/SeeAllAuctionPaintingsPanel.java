@@ -53,7 +53,7 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 
 	public void setUpPanel() {
 		setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED,
-				null, null), new TitledBorder(null, "Manage Auction Records",
+				null, null), new TitledBorder(null, "See All Auction Paintings",
 				TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		gridBagLayout.columnWidths = new int[] { 34, 355, 355, 0 };
 		gridBagLayout.rowHeights = new int[] { 45, 425, 43, 35, 0 };
@@ -74,7 +74,7 @@ public class SeeAllAuctionPaintingsPanel extends JPanel {
 
 		btnBack.setSize(new Dimension(150, 35));
 		btnBack.setMnemonic('B');
-		btnBack.setFont(new Font("Century", Font.PLAIN, 12));
+		btnBack.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnBack = new GridBagConstraints();
 		gbc_btnBack.anchor = GridBagConstraints.WEST;
 		gbc_btnBack.insets = new Insets(0, 0, 0, 5);
