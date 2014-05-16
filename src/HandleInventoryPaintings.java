@@ -39,7 +39,7 @@ public abstract class HandleInventoryPaintings
         return Arrays.copyOf(inventoryPaintings.toArray(), inventoryPaintings.toArray().length, InventoryPainting[].class);
     }
     //Desc: method searches the database and retrieves any matching records.
-    // Search terms are passed in as an InventoryPainting array with fields intialized if they are search terms
+    // Search terms are passed in as an InventoryPainting array with fields initialized if they are search terms
     // Is a special case for the DetectTrendsReport class.
     //Return: returns an InventoryPainting array, with elements matching search terms
     public static InventoryPainting[] retrieveInventoryPaintings(InventoryPainting[] inventory)
@@ -213,6 +213,16 @@ public abstract class HandleInventoryPaintings
         SQLConnector connection = new SQLConnector(statement);
         connection.executeSQL_Update();
     }
+	public static boolean artistHasMasterpiece(InventoryPainting inventory){
+		String statement= "SELECT classification FROM inventory_paintings WHERE firstName = \'"
+				+inventory.getArtistFirstName()+"\' and lastName = \'"+inventory.getArtistLastName()+						
+				"\' and classification = \'"+inventory.getClassification()+"\'";
+		System.out.println(statement);
+		SQLConnector connection = new SQLConnector(statement);
+        Vector queryResult = connection.executeSQL_Query();		
+		if(queryResult.size()>0)return true;
+		else return false;
+	}		
 }
 class HandleInventoryPaintingsTest
 {
