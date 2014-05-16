@@ -183,7 +183,7 @@ public class MainFrame extends JFrame implements ActionListener{
 					else
 					{
 						Object[] options = {"Yes", "Cancel"};
-						int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this artust?",
+						int n = JOptionPane.showOptionDialog(addPaintingAuction, "Are you sure you want to add this artist?",
 								"Confirm Addition", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 						if(n == 0)
 						{
@@ -835,6 +835,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		seeAllInventory = new SeeAllInventoryPanel();
 		seeAllInventory.getBtnBack().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				seeAllInventory.updateTableModel(HandleInventoryPaintings.retrieveInventoryPaintings(new InventoryPainting()));
 				cardLayout.show(getContentPane(), MANAGE_INVENTORY);
 			}
 		});
