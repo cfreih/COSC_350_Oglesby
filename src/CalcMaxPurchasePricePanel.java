@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -396,10 +395,10 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 			if(dateOfWork.length() > 0)
 				if(dateWork < 1100 || dateWork > today.getYear())
 					return false;
-			if(!(formattedHeight.getValue() == null))
+			if(!Calculation.isNumberValid(height))
 				if(height <= 0)
 					return false;
-			if(!(formattedWidth.getValue() == null))
+			if(!Calculation.isNumberValid(width))
 				if(width <= 0)
 					return false;
 			return true;
