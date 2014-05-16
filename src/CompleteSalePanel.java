@@ -210,7 +210,7 @@ public class CompleteSalePanel extends JPanel {
 		add(formattedPrice, gbc_formattedPrice);
 
 		btnCompleteSale = new JButton("Complete Sale");
-		btnCompleteSale.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCompleteSale.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCompleteSale = new GridBagConstraints();
 		gbc_btnCompleteSale.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCompleteSale.anchor = GridBagConstraints.WEST;
@@ -219,7 +219,7 @@ public class CompleteSalePanel extends JPanel {
 		add(btnCompleteSale, gbc_btnCompleteSale);
 
 		btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Cambria", Font.PLAIN, 12));
+		btnCancel.setFont(new Font("Cambria", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.gridx = 2;
