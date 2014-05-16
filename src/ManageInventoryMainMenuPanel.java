@@ -30,7 +30,7 @@ public class ManageInventoryMainMenuPanel extends JPanel{
 		SeeAllPaintingsButton = new JButton(
 				"See All Paintings in Inventory Record");
 		ModifyPaintingButton = new JButton(
-				"Modify/Update Existing Painting in Inventory Records");
+				"Modify/Delete Existing Painting in Inventory Records");
 		AddNewPaintingButton = new JButton(
 				"Add New Painting to Inventory Records");
 		ReturnToMainButton = new JButton("Return to Main Menu");

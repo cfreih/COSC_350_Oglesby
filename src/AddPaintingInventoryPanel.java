@@ -18,6 +18,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import javax.swing.UIManager;
 
 
 public class AddPaintingInventoryPanel extends JScrollPane {
@@ -75,7 +76,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		springLayout = new SpringLayout();
 		
 		lblArtistinfo = new JLabel("Artist Info");
-		lblWarning_1 = new JLabel("( * Indicates Required Fields )");		
+		springLayout.putConstraint(SpringLayout.NORTH, lblArtistinfo, 25, SpringLayout.NORTH, updateInventoryPanel);
+		lblWarning_1 = new JLabel("( * Indicates Required Fields ) ");		
 		
 		lblArtistFirstName = new JLabel("Artist First Name (max 20 characters) *");		
 		formattedFirstName = new JFormattedTextField(createFormatter("A********************"));
@@ -125,11 +127,10 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		setPreferredSize(new Dimension(800, 600));
 		
 		updateInventoryPanel.setLayout(springLayout);
-		updateInventoryPanel.setPreferredSize(new Dimension(765, 750));		
-		updateInventoryPanel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new TitledBorder(null, "Manage Inventory Paintings", TitledBorder.CENTER, TitledBorder.TOP, null, null)));
+		updateInventoryPanel.setPreferredSize(new Dimension(765, 770));		
+		updateInventoryPanel.setBorder(new CompoundBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Add Inventory Painting", TitledBorder.CENTER, TitledBorder.TOP, null, null)));
 		
 		lblArtistinfo.setFont(new Font("Century", Font.BOLD, 12));
-		springLayout.putConstraint(SpringLayout.NORTH, lblArtistinfo, 5, SpringLayout.NORTH, updateInventoryPanel);
 		springLayout.putConstraint(SpringLayout.WEST, lblArtistinfo, 10, SpringLayout.WEST, updateInventoryPanel);
 		updateInventoryPanel.add(lblArtistinfo);		
 		
@@ -340,6 +341,12 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		updateInventoryPanel.add(btnCancel);		
 		
 		setViewportView(updateInventoryPanel);
+		
+		JLabel lblThisFunctionalityIs = new JLabel("THIS FUNCTIONALITY IS ONLY FOR PAINTINGS BOUGHT BEFORE THIS PROGRAM WAS IMPLEMENTED (5/17/2014)");
+		lblThisFunctionalityIs.setFont(new Font("Tahoma", Font.BOLD, 13));
+		springLayout.putConstraint(SpringLayout.NORTH, lblThisFunctionalityIs, 0, SpringLayout.NORTH, updateInventoryPanel);
+		springLayout.putConstraint(SpringLayout.WEST, lblThisFunctionalityIs, 10, SpringLayout.WEST, updateInventoryPanel);
+		updateInventoryPanel.add(lblThisFunctionalityIs);
 	}	
 	protected MaskFormatter createFormatter(String s) {
 	    MaskFormatter formatter = null;

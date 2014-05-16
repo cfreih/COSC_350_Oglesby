@@ -6,6 +6,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 

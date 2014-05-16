@@ -33,7 +33,7 @@ public class ManageAuctionMainMenuPanel extends JPanel {
 		SeeAllPaintingsButton = new JButton(
 				"See All Paintings in Auction Record");
 		ModifyPaintingButton = new JButton(
-				"Modify/Update Existing Painting in Auction Records");
+				"Modify/Delete Existing Painting in Auction Records");
 		AddNewPaintingButton = new JButton(
 				"Add New Painting to Auction Records");
 		ReturnToMainButton = new JButton("Return to Main Menu");
