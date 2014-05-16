@@ -362,8 +362,6 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	}
 	
 	public boolean isInputValid(){
-		System.out.println(1);
-		
 		String[] values = getFieldValues();
 		if( values[0].length() == 0 || values[1].length() == 0 || values[2].length() == 0 ||
 				values[3].length() == 0 || values[4].length() == 0 || values[5].length() == 0 ||
@@ -388,8 +386,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		
 		
 		
-		SimpleDate dateOfProgramInstalation= new SimpleDate(2014,5,15);
-		System.out.println(SimpleDate.is_DateTooLarge(dateOfProgramInstalation , datePurch));
+		SimpleDate dateOfProgramInstalation= new SimpleDate(2014,5,15);		
 		if(		dateWork < 1100 
 				|| dateWork > today.getYear() 
 				|| height <= 0 
@@ -397,9 +394,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 				|| datePurch.getYear() < dateWork 
 				|| SimpleDate.is_DateTooLarge(dateOfProgramInstalation, datePurch)
 				|| actualPurchPrice <= 0)
-			return false;
-		System.out.println(3);
-		
+			return false;		
 		if(values[13].length() > 0 || values[14].length() > 0 || values[15].length() > 0 || values[16].length() > 0)
 		{
 			if(values[13].length() == 0 || values[14].length() == 0 || values[15].length() == 0 || values[16].length() == 0)
@@ -408,8 +403,10 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 			double actualSellPrice = Double.parseDouble(values[16]);
 			if(SimpleDate.is_DateTooLarge(dateSale,datePurch) || actualSellPrice <= 0)
 				return false;
+			dateOfProgramInstalation= new SimpleDate(2014,5,16);
+			if(SimpleDate.is_DateTooLarge(dateOfProgramInstalation,dateSale)) return false;
 		}		
-		System.out.println(4);
+		
 		return true;		
 	}
 	
@@ -543,12 +540,14 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 					return newIPainting;
 				}
 				
-		newIPainting = new InventoryPainting(fName,lName,title,dateWork,
+				newIPainting = new InventoryPainting(fName,lName,title,dateWork,
 											 height,width,med,subj,sellerN,
 											 sellerA,dateOfPurchase,purchasePrice,
 											 classif);
-		newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
-		return newIPainting;		
+				newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
+				if(Calculation.calcMaxPrice(newIPainting)<0)newIPainting.setMaxPurchasePrice(0);
+				else newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
+				return newIPainting;				
 	}
 	
 	public JButton getBtnSaveNew() {
