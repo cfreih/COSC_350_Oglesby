@@ -1017,15 +1017,11 @@ public class MainFrame extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(updateInventory, "No fields have been updated.");
 				else
 				{
-					InventoryPainting origPainting = updateInventory.getOrigPainting();
-					InventoryPainting updatePainting = new InventoryPainting();
-					try {
-						updatePainting = origPainting.clone();
-					} catch (CloneNotSupportedException e1) {
-						e1.printStackTrace();
-					}
-					updateInventory.updateInventoryPainting(updatePainting);
-					boolean masterExist=HandleInventoryPaintings.artistHasMasterpiece(updatePainting);
+					InventoryPainting testPainting = new InventoryPainting();
+					testPainting.setArtistFirstName(updateInventory.getOrigPainting().getArtistFirstName());
+					testPainting.setArtistLastName(updateInventory.getOrigPainting().getArtistLastName());
+					updateInventory.updateInventoryPainting(testPainting);
+					boolean masterExist=HandleInventoryPaintings.artistHasMasterpiece(testPainting);
 					if(masterExist)
 					{
 						JOptionPane.showMessageDialog(addPaintingInventory, "Artist already has masterpiece");
@@ -1037,6 +1033,14 @@ public class MainFrame extends JFrame implements ActionListener{
 								"Confirm Update", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 						if(n == 0)
 						{
+							InventoryPainting origPainting = updateInventory.getOrigPainting();
+							InventoryPainting updatePainting = new InventoryPainting();
+							try {
+								updatePainting = origPainting.clone();
+							} catch (CloneNotSupportedException e1) {
+								e1.printStackTrace();
+							}
+							updateInventory.updateInventoryPainting(updatePainting);
 							HandleInventoryPaintings.updateInventoryPainting(updatePainting, origPainting);
 							cardLayout.show(getContentPane(), MANAGE_INVENTORY);
 						}
