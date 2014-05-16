@@ -362,18 +362,13 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	}
 	
 	public boolean isInputValid(){
-		/*boolean isValid=false;
-		boolean isSaleInfoNull = false;
-		boolean isSaleInfoComplete = false;*/
-		
 		String[] values = getFieldValues();
 		if( values[0].length() == 0 || values[1].length() == 0 || values[2].length() == 0 ||
 				values[3].length() == 0 || values[4].length() == 0 || values[5].length() == 0 ||
 				values[6].length() == 0 || values[7].length() == 0 || values[8].length() == 0 ||
 				values[9].length() == 0 || values[10].length() == 0 || values[11].length() == 0 ||
 				values[12].length() == 0)
-			return false;
-		System.out.println("1");
+			return false;		
 		
 		int dateWork = -1;
 		if (values[3].contains("?"))
@@ -391,18 +386,16 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 				|| datePurch.getYear() < dateWork || SimpleDate.dateIsTooLarge(datePurch, today)
 				|| actualPurchPrice <= 0)
 			return false;
-		System.out.println("2");
+		
 		if(values[13].length() > 0 || values[14].length() > 0 || values[15].length() > 0 || values[16].length() > 0)
 		{
 			if(values[13].length() == 0 || values[14].length() == 0 || values[15].length() == 0 || values[16].length() == 0)
-				return false;
-			System.out.println("22");
+				return false;			
 			SimpleDate dateSale = SimpleDate.parseSimpleDate(values[13]);
 			double actualSellPrice = Double.parseDouble(values[16]);
 			if(SimpleDate.dateIsTooLarge(dateSale, today) || SimpleDate.dateIsTooLarge(datePurch, dateSale) || actualSellPrice <= 0)
 				return false;
-		}
-		System.out.println("3");
+		}		
 		return true;		
 	}
 	
