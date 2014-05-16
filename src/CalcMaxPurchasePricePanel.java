@@ -396,10 +396,12 @@ public class CalcMaxPurchasePricePanel extends JPanel {
 				if(dateWork < 1100 || dateWork > today.getYear())
 					return false;
 			if(!Calculation.isNumberValid(height))
-				if(height <= 0)
+				return false;
+			if(height <= 0)
 					return false;
 			if(!Calculation.isNumberValid(width))
-				if(width <= 0)
+				return false;
+			if(width <= 0)
 					return false;
 			return true;
 		}
