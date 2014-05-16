@@ -510,6 +510,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		auctionMM.getAddNewPaintingButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				addPaintingAuction.resetTextFields();
 				cardLayout.show(getContentPane(), ADD_PAINTING_AUCTION);
 			}
 		});
@@ -892,7 +893,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		updateArtist.getBtnSaveChanges().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!updateArtist.isInputValid())
-					JOptionPane.showMessageDialog(updateArtist, "No fields have been updated.");
+					JOptionPane.showMessageDialog(updateArtist, "Input is invalid, make sure new values are correct");
 				else
 				{
 					Object[] options = {"Yes", "Cancel"};
@@ -962,7 +963,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		updateAuction.getBtnSaveChanges().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!updateAuction.isEditValid())
-					JOptionPane.showMessageDialog(updateAuction, "No fields have been updated.");
+					JOptionPane.showMessageDialog(updateAuction, "Input is invalid, make sure new values are correct");
 				else
 				{
 					Object[] options = {"Yes", "Cancel"};
@@ -1013,8 +1014,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		});
 		updateInventory.getBtnSaveChanges().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!updateInventory.isInputValid())
-					JOptionPane.showMessageDialog(updateInventory, "No fields have been updated.");
+				if(!updateInventory.isEditValid())
+					JOptionPane.showMessageDialog(updateInventory, "Input is invalid, make sure new values are correct");
 				else
 				{
 					InventoryPainting testPainting = new InventoryPainting();

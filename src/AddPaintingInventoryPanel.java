@@ -344,7 +344,7 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		
 		setViewportView(updateInventoryPanel);
 		
-		JLabel lblThisFunctionalityIs = new JLabel("THIS FUNCTIONALITY IS ONLY FOR PAINTINGS BOUGHT BEFORE THIS PROGRAM WAS IMPLEMENTED (5/17/2014)");
+		JLabel lblThisFunctionalityIs = new JLabel("THIS FUNCTIONALITY IS ONLY FOR PAINTINGS BOUGHT BEFORE THIS PROGRAM WAS IMPLEMENTED (5/16/2014)");
 		lblThisFunctionalityIs.setFont(new Font("Tahoma", Font.BOLD, 13));
 		springLayout.putConstraint(SpringLayout.NORTH, lblThisFunctionalityIs, 0, SpringLayout.NORTH, updateInventoryPanel);
 		springLayout.putConstraint(SpringLayout.WEST, lblThisFunctionalityIs, 10, SpringLayout.WEST, updateInventoryPanel);
@@ -362,13 +362,17 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 	}
 	
 	public boolean isInputValid(){
+		System.out.println(1);
+		
 		String[] values = getFieldValues();
 		if( values[0].length() == 0 || values[1].length() == 0 || values[2].length() == 0 ||
 				values[3].length() == 0 || values[4].length() == 0 || values[5].length() == 0 ||
 				values[6].length() == 0 || values[7].length() == 0 || values[8].length() == 0 ||
 				values[9].length() == 0 || values[10].length() == 0 || values[11].length() == 0 ||
 				values[12].length() == 0)
-			return false;		
+			return false;
+		
+		System.out.println(2);
 		
 		int dateWork = -1;
 		if (values[3].contains("?"))
@@ -381,11 +385,20 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		double height = Double.parseDouble(values[5]);
 		double width = Double.parseDouble(values[6]);
 		SimpleDate today = new SimpleDate(SimpleDate.TODAY);
-		SimpleDate dateOfProgramInstalation= new SimpleDate(5,17,2014);
-		if(dateWork < 1100 || dateWork > today.getYear() || height <= 0 || width <= 0
-				|| datePurch.getYear() < dateWork || SimpleDate.dateIsTooLarge(datePurch, today)
+		
+		
+		
+		SimpleDate dateOfProgramInstalation= new SimpleDate(2014,5,15);
+		System.out.println(SimpleDate.is_DateTooLarge(dateOfProgramInstalation , datePurch));
+		if(		dateWork < 1100 
+				|| dateWork > today.getYear() 
+				|| height <= 0 
+				|| width <= 0
+				|| datePurch.getYear() < dateWork 
+				|| SimpleDate.is_DateTooLarge(dateOfProgramInstalation, datePurch)
 				|| actualPurchPrice <= 0)
 			return false;
+		System.out.println(3);
 		
 		if(values[13].length() > 0 || values[14].length() > 0 || values[15].length() > 0 || values[16].length() > 0)
 		{
@@ -393,9 +406,10 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 				return false;			
 			SimpleDate dateSale = SimpleDate.parseSimpleDate(values[13]);
 			double actualSellPrice = Double.parseDouble(values[16]);
-			if(SimpleDate.dateIsTooLarge(dateSale, today) || SimpleDate.dateIsTooLarge(datePurch, dateSale) || actualSellPrice <= 0)
+			if(SimpleDate.is_DateTooLarge(dateSale,datePurch) || actualSellPrice <= 0)
 				return false;
 		}		
+		System.out.println(4);
 		return true;		
 	}
 	
@@ -419,16 +433,20 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 			fieldValues[4] = ((String) formattedClassification.getValue()).trim();
 		fieldValues[5] = "";
 		if(formattedHeight.getValue() != null)
+		{
 			if(formattedHeight.getValue() instanceof Long)
 				fieldValues[5] = Long.toString((Long) formattedHeight.getValue());
 			else
 				fieldValues[5] = Double.toString((Double) formattedHeight.getValue());
+		}
 		fieldValues[6] = "";
 		if(formattedLastName.getValue() != null)
+		{
 			if(formattedWidth.getValue() instanceof Long)
 				fieldValues[6] = Long.toString((Long) formattedWidth.getValue());
 			else
 				fieldValues[6] = Double.toString((Double) formattedWidth.getValue());
+		}
 		fieldValues[7] = "";
 		if(formattedMedium.getValue() != null)
 			fieldValues[7] = ((String) formattedMedium.getValue()).trim();
@@ -445,11 +463,13 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 		if(formattedSellerAddress.getValue() != null)
 			fieldValues[11] = ((String) formattedSellerAddress.getValue()).trim();
 		fieldValues[12] = "";
-		if(formattedLastName.getValue() != null)
+		if(formattedActualPurchasePrice.getValue() != null)
+		{
 			if(formattedActualPurchasePrice.getValue() instanceof Long)
 				fieldValues[12] = Long.toString((Long) formattedActualPurchasePrice.getValue());
 			else
 				fieldValues[12] = Double.toString((Double) formattedActualPurchasePrice.getValue());
+		}
 		fieldValues[13] = "";
 		if(formattedDateOfSale.getValue() != null)
 			fieldValues[13] = ((String) formattedDateOfSale.getValue()).trim();
@@ -461,10 +481,12 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 			fieldValues[15] = ((String) formattedBuyerAddress.getValue()).trim();
 		fieldValues[16] = "";
 		if(formattedActualSellingPrice.getValue() != null)
+		{
 			if(formattedActualSellingPrice.getValue() instanceof Double)
 				fieldValues[16] = Double.toString((Double) formattedActualSellingPrice.getValue());	
 			else
 				fieldValues[16] = Long.toString((Long) formattedActualSellingPrice.getValue());
+		}
 		return fieldValues;
 	}
 	
@@ -516,7 +538,8 @@ public class AddPaintingInventoryPanel extends JScrollPane {
 														 height,width,med,subj,sellerN,
 														 sellerA,dateOfPurchase,purchasePrice,
 														 classif,dateOfSell,buyerN,buyerA,sellPrice);
-					newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
+					if(Calculation.calcMaxPrice(newIPainting)<0)newIPainting.setMaxPurchasePrice(0);
+					else newIPainting.setMaxPurchasePrice(Calculation.calcMaxPrice(newIPainting));
 					return newIPainting;
 				}
 				

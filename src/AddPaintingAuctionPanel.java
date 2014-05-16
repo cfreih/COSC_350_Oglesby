@@ -358,29 +358,11 @@ public class AddPaintingAuctionPanel extends JPanel {
 				&& formattedTitle.isEditValid()
 				&& formattedDateOfWork.isEditValid()
 				&& formattedDateAuction.isEditValid()
-				&& !(formattedSalePrice.getValue() == null)
-				&& !(formattedHeight.getValue() == null)
-				&& !(formattedWidth.getValue() == null) && !(med.length() == 0)
-				&& !(subj.length() == 0)) {
-			/*
-			 * System.out.println((formattedFirstName.isEditValid() &&
-			 * formattedLastName.isEditValid() && formattedTitle.isEditValid()
-			 * && formattedDateOfWork.isEditValid() &&
-			 * formattedDateAuction.isEditValid() &&
-			 * formattedSalePrice.isEditValid() && formattedHeight.isEditValid()
-			 * && formattedWidth.isEditValid() && !(med.length() == 0) &&
-			 * !(subj.length() == 0)) + "00");
-			 * System.out.println(formattedFirstName.isEditValid() + "1");
-			 * System.out.println(formattedLastName.isEditValid() + "2");
-			 * System.out.println(formattedTitle.isEditValid() + "3");
-			 * System.out.println(formattedDateOfWork.isEditValid() + "4");
-			 * System.out.println(formattedDateAuction.isEditValid() + "5");
-			 * System.out.println((formattedSalePrice.getValue() == null) +
-			 * "6"); System.out.println((formattedHeight.getValue() == null) +
-			 * "7"); System.out.println((formattedHeight.getValue() == null) +
-			 * "8"); System.out.println((med.length() == 0) + "9");
-			 * System.out.println((subj.length() == 0) + "10");
-			 */
+				&& formattedSalePrice.getValue() != null
+				&& formattedHeight.getValue() != null
+				&& formattedWidth.getValue() != null && med.length() != 0
+				&& med.length() < 26
+				&& subj.length() != 0 && subj.length() < 26) {
 			String[] fieldValues = getFieldValues();
 			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 			int dateWork = -1;
@@ -394,33 +376,14 @@ public class AddPaintingAuctionPanel extends JPanel {
 			double salePrice = Double.parseDouble(fieldValues[5]);
 			double height = Double.parseDouble(fieldValues[6]);
 			double width = Double.parseDouble(fieldValues[7]);
-			if ((dateWork > 1099) && (dateAuction.getYear() > dateWork) && SimpleDate.dateIsTooLarge(today, dateAuction)
+			if ((dateWork > 1099) && (dateAuction.getYear() >= dateWork) && !SimpleDate.is_DateTooLarge(today, dateAuction)
 					&& (salePrice > 0) && (height > 0) && (width > 0))
 				return true;
 			else
 				return false;
-		} else {
-			/*
-			 * System.out.println((formattedFirstName.isEditValid() &&
-			 * formattedLastName.isEditValid() && formattedTitle.isEditValid()
-			 * && formattedDateOfWork.isEditValid() &&
-			 * formattedDateAuction.isEditValid() &&
-			 * formattedSalePrice.isEditValid() && formattedHeight.isEditValid()
-			 * && formattedWidth.isEditValid() && !(med.length() == 0) &&
-			 * !(subj.length() == 0)) + "01");
-			 * System.out.println(formattedFirstName.isEditValid() + "1");
-			 * System.out.println(formattedLastName.isEditValid() + "2");
-			 * System.out.println(formattedTitle.isEditValid() + "3");
-			 * System.out.println(formattedDateOfWork.isEditValid() + "4");
-			 * System.out.println(formattedDateAuction.isEditValid() + "5");
-			 * System.out.println((formattedSalePrice.getValue() == null) +
-			 * "6"); System.out.println((formattedHeight.getValue() == null) +
-			 * "7"); System.out.println((formattedHeight.getValue() == null) +
-			 * "8"); System.out.println((med.length() == 0) + "9");
-			 * System.out.println((subj.length() == 0) + "10");
-			 */
+		} 
+		else 
 			return false;
-		}
 	}
 
 	/**

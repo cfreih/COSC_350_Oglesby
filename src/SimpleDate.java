@@ -290,15 +290,22 @@ public class SimpleDate {
 	}
 
 	
-	public static boolean dateIsTooLarge(SimpleDate maxDate, SimpleDate dateToCompare){
-		if(maxDate.getYear()>=dateToCompare.getYear()){
-			if(maxDate.getMonth()>=dateToCompare.getMonth()){
-				if(maxDate.getDay()>=dateToCompare.getDay())
-					return true;
-			}			
-		}		
+	public static boolean is_DateTooLarge(SimpleDate maxDate, SimpleDate dateToCompare){
+		int iMaxDate = maxDate.getYear()*1000+maxDate.getMonth()*100+maxDate.getDay();
+		int iDateToCompare = dateToCompare.getYear()*1000+dateToCompare.getMonth()*100+dateToCompare.getDay();
+		if(iMaxDate<iDateToCompare) return true;
 		return false;
 	}	
+	
+	public int compareTo(SimpleDate date)
+	{
+		if(this.equals(date))
+			return 0;
+		else if(this.getYear() > date.getYear() && this.getMonth() > date.getMonth() && this.getDay() > date.getDay())
+			return 1;
+		else
+			return -1;
+	}
 	/*
 	 * Desc: Returns a String in the form "month/day/year" 
 	 * Returns: the string of this date in the above format

@@ -440,7 +440,7 @@ public class UpdateInventoryPanel extends JScrollPane {
 	    return formatter;
 	}
 	
-	public boolean isInputValid(){
+	public boolean isEditValid(){
 		boolean isValid =true;
 		String[] fieldValues = getFieldValues();
 		
@@ -469,6 +469,8 @@ public class UpdateInventoryPanel extends JScrollPane {
 			int dateOfWork = Integer.parseInt(fieldValues[3]);
 			SimpleDate today = new SimpleDate(SimpleDate.TODAY);
 			if(dateOfWork < 1100 || dateOfWork > today.getYear())
+				return false;
+			if(dateOfWork>origPainting.getDateOfPurchase().getYear())
 				return false;
 		}
 		if(fieldValues[5] != ""){

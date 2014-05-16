@@ -152,8 +152,9 @@ public class AddNewArtistPanel extends JPanel {
 				&& formattedFashionability.isEditValid()) {
 			// int fashionability=Integer.parseInt((String)
 			// formattedFashionability.getValue());
-			int fashionability = ((Long) formattedFashionability.getValue())
-					.intValue();
+			int fashionability = -1;
+			if(formattedFashionability.getValue() != null)
+				fashionability = (((Long) formattedFashionability.getValue()).intValue());
 			if ((fashionability >= 0) && (fashionability <= 10000))
 				return true;
 			else

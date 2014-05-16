@@ -65,6 +65,7 @@ public class UpdateAuctionPanel extends JPanel {
 	
 	private DefaultTableModel tableModel;
 	private AuctionPainting origPainting;
+	private JLabel lblblanckFieldsWill;
 
 	public UpdateAuctionPanel() {
 		lblPaintingInfo = new JLabel("Current Painting Info");
@@ -84,7 +85,7 @@ public class UpdateAuctionPanel extends JPanel {
 		formattedTitle.setBounds(27, 276, 446, 21);
 		lblDateOfWork = new JLabel("Date of Work (yyyy)");
 		lblDateOfWork.setBounds(27, 300, 108, 15);
-		formattedDateOfWork = new JFormattedTextField(createFormatter("####*"));
+		formattedDateOfWork = new JFormattedTextField(createFormatter("####"));
 		formattedDateOfWork.setBounds(27, 318, 116, 21);
 		lblDateSoldAt = new JLabel("Date Sold at Auction (mm/dd/yyyy)");
 		lblDateSoldAt.setBounds(186, 300, 193, 15);
@@ -288,6 +289,10 @@ public class UpdateAuctionPanel extends JPanel {
 		btnCancel.setBounds(615, 518, 106, 40);
 		btnCancel.setMnemonic('C');
 		add(btnCancel);
+		
+		lblblanckFieldsWill = new JLabel("( Blanck fields will not be updated )");
+		lblblanckFieldsWill.setBounds(149, 147, 230, 14);
+		add(lblblanckFieldsWill);
 
 	}
 	
@@ -352,8 +357,8 @@ public class UpdateAuctionPanel extends JPanel {
 			else
 			{
 				String date = origPainting.getDateOfWork();
-				if(date.contains("?"));
-					date = date.substring(0,date.length()-1);
+				//if(date.contains("?"));
+					//date = date.substring(0,date.length()-1);
 				int newDate = Integer.parseInt(date);
 				dateWork = newDate;
 			}
@@ -371,8 +376,16 @@ public class UpdateAuctionPanel extends JPanel {
 			double width = 0;
 			if(!fieldValues[7].equals(""))
 				width = Double.parseDouble(fieldValues[7]);
+			int orignalYearAuction =origPainting.getDateOfSaleAuction().getYear();
+			if(formattedDateAuction.getValue() != null){
+				if(dateAuction.equals(new SimpleDate()) || dateAuction.getYear() < dateWork)
+					return false;
+				if(SimpleDate.is_DateTooLarge(today, dateAuction))
+					 return false;
+				orignalYearAuction = dateAuction.getYear();
+			}
 			if(dateOfWork.length() > 0)
-				if(dateWork < 1100 || dateWork > today.getYear())
+				if(dateWork < 1100 || dateWork > today.getYear() || dateWork>orignalYearAuction)
 					return false;
 			if(!(formattedSalePrice.getValue() == null))
 				if(salePrice <= 0)
@@ -383,10 +396,7 @@ public class UpdateAuctionPanel extends JPanel {
 			if(!(formattedWidth.getValue() == null))
 				if(width <= 0)
 					return false;
-			if(formattedDateAuction.getValue() != null)
-				if(dateAuction.equals(new SimpleDate()) || dateAuction.getYear() < dateWork 
-						|| SimpleDate.dateIsTooLarge(today, dateAuction))
-					return false;
+			
 			return true;
 		}
 		else
