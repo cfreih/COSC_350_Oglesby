@@ -300,6 +300,7 @@ public class UpdateAuctionPanel extends JPanel {
 				"Date of Work", "Date of Sale", "Sale Price", "Height",
 				"Width", "Medium", "Subject" };
 		tableModel.setDataVector(dataVector, columnNames);
+		paintingsTable.setModel(tableModel);
 		
 	}
 	
