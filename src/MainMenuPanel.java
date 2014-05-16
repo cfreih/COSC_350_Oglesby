@@ -45,7 +45,7 @@ public class MainMenuPanel extends JPanel {
 	{
 		setBorder(new TitledBorder(null, "Main Menu", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{46, 171, 149, 212, 0};
+		gridBagLayout.columnWidths = new int[]{125, 171, 149, 212, 0};
 		gridBagLayout.rowHeights = new int[]{30, 40, 33, 40, 32, 40, 33, 40, 33, 40, 33, 40, 61, 40, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};

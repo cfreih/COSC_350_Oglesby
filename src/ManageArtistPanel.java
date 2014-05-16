@@ -18,8 +18,8 @@ public class ManageArtistPanel extends JPanel {
 	private JButton btnBackToMain;
 	public ManageArtistPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{64, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 75, 49, 76, 50, 75, 50, 75, 0};
+		gridBagLayout.columnWidths = new int[]{64, 171, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 40, 49, 40, 50, 40, 50, 40, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
